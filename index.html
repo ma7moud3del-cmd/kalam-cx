@@ -1,0 +1,328 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Kalam CX Excel Academy</title><meta name="description" content="Excel training for Kalam CX service delivery teams: session videos, slides, tests and a final exam.">
+<link rel="icon" href="img/kalam-mark.png"><meta name="robots" content="noindex">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@500;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>/* Layout: sticky plum top bar, one centred column (max 1180px); each section is a "page" switched by the URL hash. */
+:root{
+  --plum:#2B0E2C;--plum2:#5E2A63;--violet:#9A6FCF;--gold:#D9A21B;--green:#1F9D73;--red:#D93D63;
+  --bg:#FBF8FC;--surface:#FFFFFF;--soft:#F4EAF6;--line:#E6D3EA;--ink:#2B1A2D;--mute:#6E5F72;--accent:#5E2A63;
+  --ok-bg:#E6F5EF;--ok-fg:#0F5A40;--no-bg:#FCE7EC;--no-fg:#8A1F3A;
+  --head:"Plus Jakarta Sans","Segoe UI",Arial,sans-serif;--body:Inter,"Segoe UI",Arial,sans-serif;
+  color-scheme:light}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--bg:#170A18;--surface:#211022;--soft:#2E1630;--line:#3F2342;--ink:#F1E6F3;--mute:#B9A8BD;--accent:#CDA8E8;--ok-bg:#12352A;--ok-fg:#9BE3C6;--no-bg:#3D1522;--no-fg:#F5B3C4;color-scheme:dark}}
+:root[data-theme=dark]{--bg:#170A18;--surface:#211022;--soft:#2E1630;--line:#3F2342;--ink:#F1E6F3;--mute:#B9A8BD;--accent:#CDA8E8;--ok-bg:#12352A;--ok-fg:#9BE3C6;--no-bg:#3D1522;--no-fg:#F5B3C4;color-scheme:dark}
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 var(--body)}
+a{color:var(--accent)}
+header{position:sticky;top:0;z-index:20;background:var(--plum);color:#fff;padding-top:env(safe-area-inset-top,0px)}
+header .in{max-width:1180px;margin:0 auto;display:flex;align-items:center;gap:20px;padding:10px max(16px,env(safe-area-inset-right,0px)) 10px max(16px,env(safe-area-inset-left,0px));flex-wrap:wrap}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;text-decoration:none;font:800 17px var(--head)}
+.brand img{height:30px;background:#fff;border-radius:6px;padding:3px 6px}
+.brand span{color:#E6B84A}
+nav{display:flex;gap:4px;flex-wrap:wrap;margin-left:auto}
+nav a{color:#E6D3EA;text-decoration:none;padding:7px 12px;border-radius:999px;font:600 14px var(--head)}
+nav a:hover{color:#fff;background:rgba(255,255,255,.08)}nav a.on{background:#fff;color:var(--plum)}
+#theme{border:1px solid rgba(255,255,255,.3);background:transparent;color:#fff;border-radius:999px;width:36px;height:36px;cursor:pointer;font-size:16px}
+main{max-width:1180px;margin:0 auto;padding:28px max(16px,env(safe-area-inset-right,0px)) 60px max(16px,env(safe-area-inset-left,0px))}
+.page{display:none}.page.on{display:block;animation:in .25s ease-out}
+@keyframes in{from{opacity:.4;transform:translateY(6px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.page.on{animation:none}html{scroll-behavior:auto}}
+h1,h2,h3{font-family:var(--head);color:var(--ink);text-wrap:balance;line-height:1.2}
+h1{font-size:clamp(28px,4vw,40px);margin:6px 0 20px;font-weight:800}
+h2{font-size:22px;margin:40px 0 8px;scroll-margin-top:90px}h2 small{font:400 14px var(--body);color:var(--mute);margin-left:8px}
+h3{font-size:16px;margin:0 0 10px}
+.eyebrow{font:700 12px var(--head);letter-spacing:.18em;text-transform:uppercase;color:var(--accent);display:flex;align-items:center;gap:10px}
+.eyebrow.light{color:#E6B84A}
+.num{background:var(--gold);color:var(--plum);border-radius:6px;padding:1px 8px;letter-spacing:0}
+.lead{font-size:17px;max-width:70ch}.hint{color:var(--mute);margin:0 0 6px}
+/* hero */
+.hero{background:linear-gradient(135deg,#2B0E2C 0%,#4B154A 60%,#5E2A63 100%);color:#fff;border-radius:22px;padding:36px;display:grid;grid-template-columns:1.5fr 1fr;gap:32px;align-items:center}
+.hero h1{color:#fff;margin:10px 0 12px}.hero p{color:#E6D3EA;max-width:58ch;margin:0}
+.stats{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.stats div{background:rgba(255,255,255,.07);border:1px solid rgba(255,255,255,.14);border-radius:14px;padding:14px 16px}
+.stats b{display:block;font:800 30px var(--head);color:#E6B84A;font-variant-numeric:tabular-nums}.stats span{color:#E6D3EA;font-size:14px}
+.btns{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.btn{display:inline-block;border:0;background:var(--plum2);color:#fff;border-radius:999px;padding:10px 20px;font:700 14px var(--head);cursor:pointer;text-decoration:none}
+.btn:hover{filter:brightness(1.12)}.btn:focus-visible,a:focus-visible,button:focus-visible{outline:3px solid var(--gold);outline-offset:2px}
+.btn.ghost{background:var(--soft);color:var(--accent)}.btn.gold{background:var(--gold);color:var(--plum)}.btn.line{background:transparent;border:1px solid rgba(255,255,255,.5)}
+.steps{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:14px}
+.step{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:18px;text-decoration:none;color:var(--ink);display:flex;flex-direction:column;gap:6px;transition:border-color .15s,transform .15s}
+.step:hover{border-color:var(--violet);transform:translateY(-2px)}
+.sn{font:800 26px var(--head);color:var(--gold)}.step b{font:700 16px var(--head)}.step small{color:var(--mute)}
+.step.exam{background:var(--soft)}
+.pbar{display:block;height:6px;border-radius:3px;background:var(--line);overflow:hidden;margin-top:auto}.pbar i{display:block;height:100%;width:0;background:linear-gradient(90deg,var(--violet),var(--green))}
+.flow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.flow div{border-top:3px solid var(--gold);background:var(--surface);border-radius:0 0 12px 12px;padding:14px;color:var(--mute);font-size:15px}.flow b{display:block;color:var(--ink);font:700 16px var(--head);margin-bottom:4px}
+/* player */
+.player{display:grid;grid-template-columns:minmax(0,1fr) 340px;gap:16px;align-items:start}
+.screen{background:#000;border-radius:16px;overflow:hidden}.screen video{width:100%;aspect-ratio:16/9;display:block;background:#000}
+.list{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:12px;max-height:min(560px,70vh);overflow:auto}
+.lh{font:700 14px var(--head);padding:4px 6px 10px}.lh small{color:var(--mute);font-weight:500;margin-left:6px}
+.list ol{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.list li button{width:100%;text-align:left;border:1px solid transparent;background:transparent;color:var(--ink);border-radius:10px;padding:9px 10px;cursor:pointer;display:grid;grid-template-columns:28px minmax(0,1fr) auto;gap:8px;align-items:center;font:inherit;font-size:14px}
+.list li button:hover{background:var(--soft)}.list li.on button{background:var(--soft);border-color:var(--violet)}
+.list .ix{width:26px;height:26px;border-radius:7px;background:var(--soft);display:grid;place-items:center;font:700 12px var(--head);color:var(--accent)}
+.list li.on .ix{background:var(--plum2);color:#fff}.list li.done .ix{background:var(--green);color:#fff}
+.list .tt b{display:block;font-weight:600;line-height:1.3}.list .tt small{color:var(--mute);font-size:12px}
+.list .mn{color:var(--mute);font-size:12px;font-variant-numeric:tabular-nums}
+.soon{color:var(--mute);font-size:13px;margin:10px 6px 2px;padding-top:10px;border-top:1px dashed var(--line)}
+.nowbar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;margin:12px 2px 0}
+.nowbar .lbl{display:block;font:700 11px var(--head);letter-spacing:.14em;text-transform:uppercase;color:var(--accent)}.nowbar b{font:700 18px var(--head)}
+.auto{color:var(--mute);font-size:14px;display:flex;gap:6px;align-items:center;cursor:pointer}
+.cols{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:16px;margin-top:24px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:20px}
+.box ul{margin:0;padding-left:20px}.box li{margin:4px 0}
+/* quiz */
+.q{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:16px;margin:12px 0}
+.q .qn{display:inline-block;background:var(--plum2);color:#fff;border-radius:6px;padding:0 8px;font:700 12px var(--head);margin-right:8px}
+.q .qt{font-weight:600}
+.q button.o{display:block;width:100%;text-align:left;margin:7px 0 0;padding:10px 12px;border-radius:10px;border:1px solid var(--line);background:var(--bg);color:var(--ink);font:inherit;font-size:15px;cursor:pointer}
+.q button.o:hover:not(:disabled){border-color:var(--violet)}
+.q button.ok{background:var(--ok-bg);border-color:var(--green);color:var(--ok-fg)}.q button.no{background:var(--no-bg);border-color:var(--red);color:var(--no-fg)}
+.q button:disabled{cursor:default}
+.q .ex{margin-top:8px;font-size:14px;color:var(--mute)}
+.score{font:800 20px var(--head);margin:14px 0 8px}.score .pass{color:var(--green)}.score .fail{color:var(--red)}
+/* exam + library */
+.exam h3{color:var(--accent);margin-top:18px}.exam ol{padding-left:22px}
+.key{margin-top:12px}
+.tw{overflow-x:auto}table{width:100%;border-collapse:collapse;font-size:14px;margin:10px 0}th{background:var(--plum2);color:#fff;text-align:left;padding:8px}td{padding:7px 8px;border-top:1px solid var(--line);vertical-align:top}
+.links{list-style:none;padding:0!important}.links li{padding:9px 0;border-bottom:1px solid var(--line)}.links li:last-child{border:0}.links small{display:block;color:var(--mute)}
+footer{text-align:center;color:var(--mute);font-size:13px;padding:24px 16px calc(24px + env(safe-area-inset-bottom,0px))}
+@media (max-width:900px){.player{grid-template-columns:1fr}.list{max-height:none}.hero{grid-template-columns:1fr;padding:24px}.steps,.flow{grid-template-columns:1fr 1fr}.cols{grid-template-columns:1fr}nav{margin-left:0;order:3;width:100%}#theme{margin-left:auto}}
+@media (max-width:520px){.steps,.flow{grid-template-columns:1fr}nav a{padding:6px 10px;font-size:13px}}
+</style></head><body>
+<header><div class="in"><a class="brand" href="#home"><img src="img/kalam-logo.png" alt="Kalam CX"><span>Excel Academy</span></a><nav id="nav"><a href="#home" data-s="home">Home</a><a href="#session-1" data-s="session-1">Session 1</a><a href="#session-2" data-s="session-2">Session 2</a><a href="#session-3" data-s="session-3">Session 3</a><a href="#exam" data-s="exam">Final exam</a><a href="#library" data-s="library">Library</a></nav><button id="theme" aria-label="Switch light or dark">◐</button></div></header>
+<main><section id="p-home" class="page">
+<div class="hero"><div><div class="eyebrow light">Kalam CX · Learning & Development</div><h1>Excel for Service Delivery</h1>
+<p>Three recorded sessions taught by our WFM trainer on real call-center data, with slides, self-marking tests and a final practical exam. Videos are in Egyptian Arabic with English Excel terms.</p>
+<div class="btns"><a class="btn gold" href="#session-1">Start Session 1</a><a class="btn line" href="#exam">See the final exam</a></div></div>
+<div class="stats"><div><b>3</b><span>sessions</span></div><div><b>14</b><span>videos</span></div><div><b>2.8</b><span>hours</span></div><div><b>54</b><span>test questions</span></div></div></div>
+<h2>Your path</h2><div class="steps"><a class="step" href="#session-1"><span class="sn">01</span><b>Reading Data, Functions &amp; Time</b><small>12 videos · 136 min · 18-question test</small><i class="pbar"><i id="hp1"></i></i></a><a class="step" href="#session-2"><span class="sn">02</span><b>Errors, Logic, Lookups &amp; Cleaning</b><small>1 video · 10 min · 18-question test</small><i class="pbar"><i id="hp2"></i></i></a><a class="step" href="#session-3"><span class="sn">03</span><b>PivotTables, Charts &amp; Dashboard</b><small>1 video · 21 min · 18-question test</small><i class="pbar"><i id="hp3"></i></i></a><a class="step exam" href="#exam"><span class="sn">✓</span><b>Final practical exam</b><small>20 hands-on tasks in Excel · pass 16/20</small></a></div>
+<h2>How to study each session</h2>
+<div class="flow"><div><b>Watch</b>Start with the quick video, then the trainer's chapters.</div><div><b>Practise</b>Repeat each step yourself in the Activities Workbook.</div><div><b>Test</b>Take the session test here. Your progress is saved in this browser.</div><div><b>Review</b>Re-watch the chapter for any question you missed.</div></div></section><section id="p-session-1" class="page" data-session="1">
+<div class="eyebrow"><span class="num">01</span>Session 1</div><h1>Reading Data, Functions &amp; Time</h1>
+<div class="player"><div class="screen"><video id="v1" controls playsinline preload="metadata"></video></div>
+<div class="list"><div class="lh">Videos <small>12 · 136 min</small></div><ol id="pl1"></ol></div></div>
+<div class="nowbar"><div><span class="lbl" id="nk1"></span><b id="nt1"></b></div><label class="auto"><input type="checkbox" id="auto1" checked> Play next automatically</label></div>
+<div class="cols"><div class="box"><h3>You will learn to</h3><ul><li>Read an export: header row, data range, column types</li><li>The Big Five: SUM, AVERAGE, COUNT, MAX, MIN</li><li>Conditions: COUNTIF(S), SUMIF(S), AVERAGEIF(S), MAXIFS</li><li>Relative vs absolute references ($ and F4)</li><li>Dates &amp; times: YEAR, MONTH, WEEKDAY, WEEKNUM, FLOOR</li></ul></div>
+<div class="box"><h3>Practise and review</h3><p>Open the <a href="files/activities-workbook.xlsx">Activities Workbook</a> and do tabs <b>S1_Basics, S2_Formulas</b>.</p>
+<div class="btns"><a class="btn" href="docs/session-1-slides.pdf" target="_blank" rel="noopener">Open slides (PDF)</a><a class="btn ghost" href="docs/session-1-test.pdf" target="_blank" rel="noopener">Printable test</a></div></div></div>
+<h2 id="test-1">Session 1 test <small>18 questions · pass mark 14</small></h2>
+<p class="hint">Pick an answer and you'll see right away if it's correct, with the reason.</p>
+<div class="quiz" data-s="Session 1"></div><div class="score" id="score-1"></div><button class="btn ghost" onclick="resetQuiz('Session 1')">Restart test</button></section><section id="p-session-2" class="page" data-session="2">
+<div class="eyebrow"><span class="num">02</span>Session 2</div><h1>Errors, Logic, Lookups &amp; Cleaning</h1>
+<div class="player"><div class="screen"><video id="v2" controls playsinline preload="metadata"></video></div>
+<div class="list"><div class="lh">Videos <small>1 · 10 min</small></div><ol id="pl2"></ol><p class="soon">Trainer demo chapters for this session are being edited and will appear here.</p></div></div>
+<div class="nowbar"><div><span class="lbl" id="nk2"></span><b id="nt2"></b></div><label class="auto"><input type="checkbox" id="auto2" checked> Play next automatically</label></div>
+<div class="cols"><div class="box"><h3>You will learn to</h3><ul><li>Error messages: #DIV/0!, #REF!, #VALUE!, #NAME?, #N/A</li><li>IF, nested IF, AND, OR, IFERROR</li><li>VLOOKUP, HLOOKUP and XLOOKUP</li><li>Cleaning: Remove Duplicates, TRIM, PROPER, Text to Columns</li><li>Splitting IDs: LEFT, RIGHT, MID, VALUE · Data Validation</li></ul></div>
+<div class="box"><h3>Practise and review</h3><p>Open the <a href="files/activities-workbook.xlsx">Activities Workbook</a> and do tabs <b>S3_Logic_Lookup, S4_Cleaning</b>.</p>
+<div class="btns"><a class="btn" href="docs/session-2-slides.pdf" target="_blank" rel="noopener">Open slides (PDF)</a><a class="btn ghost" href="docs/session-2-test.pdf" target="_blank" rel="noopener">Printable test</a></div></div></div>
+<h2 id="test-2">Session 2 test <small>18 questions · pass mark 14</small></h2>
+<p class="hint">Pick an answer and you'll see right away if it's correct, with the reason.</p>
+<div class="quiz" data-s="Session 2"></div><div class="score" id="score-2"></div><button class="btn ghost" onclick="resetQuiz('Session 2')">Restart test</button></section><section id="p-session-3" class="page" data-session="3">
+<div class="eyebrow"><span class="num">03</span>Session 3</div><h1>PivotTables, Charts &amp; Dashboard</h1>
+<div class="player"><div class="screen"><video id="v3" controls playsinline preload="metadata"></video></div>
+<div class="list"><div class="lh">Videos <small>1 · 21 min</small></div><ol id="pl3"></ol><p class="soon">Trainer demo chapters for this session are being edited and will appear here.</p></div></div>
+<div class="nowbar"><div><span class="lbl" id="nk3"></span><b id="nt3"></b></div><label class="auto"><input type="checkbox" id="auto3" checked> Play next automatically</label></div>
+<div class="cols"><div class="box"><h3>You will learn to</h3><ul><li>Turn a manager&#x27;s question into Rows / Columns / Values / Filters</li><li>Refresh (Alt+F5) · Group by month · % of Grand Total</li><li>The average-of-averages trap: true AHT</li><li>Pick the right chart and give it a title that states the message</li><li>Build a one-page dashboard and present it in 5 minutes</li></ul></div>
+<div class="box"><h3>Practise and review</h3><p>Open the <a href="files/activities-workbook.xlsx">Activities Workbook</a> and do tabs <b>S5_Pivot, S6_Dashboard</b>.</p>
+<div class="btns"><a class="btn" href="docs/session-3-slides.pdf" target="_blank" rel="noopener">Open slides (PDF)</a><a class="btn ghost" href="docs/session-3-test.pdf" target="_blank" rel="noopener">Printable test</a></div></div></div>
+<h2 id="test-3">Session 3 test <small>18 questions · pass mark 14</small></h2>
+<p class="hint">Pick an answer and you'll see right away if it's correct, with the reason.</p>
+<div class="quiz" data-s="Session 3"></div><div class="score" id="score-3"></div><button class="btn ghost" onclick="resetQuiz('Session 3')">Restart test</button></section><section id="p-exam" class="page"><div class="eyebrow">Final assessment</div><h1>Final practical exam</h1>
+<p class="lead">Open the <a href="files/activities-workbook.xlsx">Activities Workbook</a>, build every answer in Excel, then reveal the key. 60 minutes · pass mark 16 / 20.</p>
+<div class="btns"><a class="btn" href="docs/final-practical-exam.pdf" target="_blank" rel="noopener">Printable exam (PDF)</a></div>
+<div class="box exam"><p>Open your copy of <strong>Activities Workbook .xlsx</strong> and build every answer in Excel. Write the formula you used and the result. Time: 60 minutes. Pass mark: 16 / 20 tasks correct. The answer key is in Part 2: check it only after you finish.</p>
+<h3>A. Reading &amp; formulas (tab S1_Basics / S2_Formulas)</h3>
+<ol>
+<li>In the Weekly Attendance Export (S1_Basics Part B), write the header row number, the data range and the type of each column.</li>
+<li>Hours worked for Dina Gamal (18:14 → 03:20). Show the formula.</li>
+<li>Total calls offered by the team (S2_Formulas Part B, rows 53-72).</li>
+<li>Longest AHT in the team.</li>
+<li>Lowest Service Level %.</li>
+<li>For how many agents is a Service Level recorded?</li>
+<li>True team AHT = total THT / total calls answered (to 1 decimal).</li>
+<li>How many Team A agents work the 18:00 - 03:00 shift? (COUNTIFS on the Agents tab)</li>
+</ol>
+<h3>B. Logic &amp; lookups (tab S3_Logic_Lookup)</h3>
+<ol>
+<li>Look up the shift for Login IDs 21003, 99001 and 21018, showing "Not Available" when the ID is missing.</li>
+<li>Build the Dynamic Status Field for all 20 agents (Team → SL Target → nested IF). How many agents are Excellent, On Target and Below Target?</li>
+<li>Risk band for Rana Ashraf (Aban 4.8%): High &gt; 5%, Medium &gt; 3%, else Low.</li>
+</ol>
+<h3>C. Cleaning (tab S4_Cleaning)</h3>
+<ol>
+<li>Convert the text "15-03-2026" into a real date and show it as a long date.</li>
+<li>Split "Mahmoud Saeed 21010" into Login ID (number) and Name.</li>
+<li>Data Cleanup Lab: how many rows remain after Remove Duplicates, and what is the new Calls Offered total?</li>
+</ol>
+<h3>D. PivotTables (tab S5_Pivot)</h3>
+<ol>
+<li>PivotTable: Team in Rows, Shift in Columns, Sum of Calls Answered. Write the Grand Total and Team C's total.</li>
+<li>Group Week Start by month. Which month has the largest share, and why is that comparison not fair?</li>
+<li>Average of AHT by team vs true AHT by team: write both for Team B.</li>
+</ol>
+<h3>E. Dashboard (tab S6_Dashboard)</h3>
+<ol>
+<li>The three KPI numbers: Total Calls Answered, team AHT, Agents Below Target.</li>
+<li>Which agents turn RED on Aban % (&gt; 5%) but are still Excellent or On Target on Service Level?</li>
+<li>Write your 5-minute presentation headline using the template: "This week the team answered ___ calls at ___ seconds average handling time; ___ agents are below target."</li>
+</ol></div><button class="btn ghost" id="keybtn" onclick="const k=document.getElementById('key');k.hidden=!k.hidden;this.textContent=k.hidden?'Show answer key':'Hide answer key'">Show answer key</button>
+<div id="key" class="box key" hidden><table>
+<thead>
+<tr>
+<th>#</th>
+<th>Answer</th>
+<th>Formula / method</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>Header = row 31; data range A32:F51 (20 agents); types: number, text, text, time, time, number</td>
+<td>Title rows 28-29 and the footer in row 52 are not data. Shift is TEXT (the dash).</td>
+</tr>
+<tr>
+<td>2</td>
+<td>9.10 hours</td>
+<td>=MOD(C24-B24,1)*24</td>
+</tr>
+<tr>
+<td>3</td>
+<td>10,381</td>
+<td>=SUM(C53:C72)</td>
+</tr>
+<tr>
+<td>4</td>
+<td>196.9 s (Sherif Mounir)</td>
+<td>=MAX(G53:G72)</td>
+</tr>
+<tr>
+<td>5</td>
+<td>69.4% (Salma Reda)</td>
+<td>=MIN(H53:H72)</td>
+</tr>
+<tr>
+<td>6</td>
+<td>18</td>
+<td>=COUNT(H53:H72), 2 new joiners are blank</td>
+</tr>
+<tr>
+<td>7</td>
+<td>168.3 s</td>
+<td>=SUM(F53:F72)/SUM(D53:D72) (the plain average of the AHT column is 169.4)</td>
+</tr>
+<tr>
+<td>8</td>
+<td>2 (Dina Gamal, Bassem Ragab)</td>
+<td>=COUNTIFS(Agents!C:C,"Team A",Agents!E:E,"18:00 - 03:00")</td>
+</tr>
+<tr>
+<td>9</td>
+<td>21003 → 09:00 - 18:00; 99001 → Not Available; 21018 → 18:00 - 03:00</td>
+<td>=XLOOKUP(A23,Agents!A:A,Agents!E:E,"Not Available")</td>
+</tr>
+<tr>
+<td>10</td>
+<td>Excellent 4, On Target 6, Below Target 10</td>
+<td>=IF(D34&gt;=F34+0.1,"Excellent",IF(D34&gt;=F34,"On Target","Below Target"))</td>
+</tr>
+<tr>
+<td>11</td>
+<td>Medium</td>
+<td>=IF(B18&gt;0.05,"High",IF(B18&gt;0.03,"Medium","Low"))</td>
+</tr>
+<tr>
+<td>12</td>
+<td>Sunday, 15 March 2026</td>
+<td>=DATE(RIGHT(A28,4),MID(A28,4,2),LEFT(A28,2)) then Long Date</td>
+</tr>
+<tr>
+<td>13</td>
+<td>21010 and "Mahmoud Saeed"</td>
+<td>=VALUE(RIGHT(A36,5)) and =LEFT(A36,LEN(A36)-6)</td>
+</tr>
+<tr>
+<td>14</td>
+<td>32 rows; Calls Offered 17,072 (was 21,089)</td>
+<td>Data &gt; Remove Duplicates, all columns</td>
+</tr>
+<tr>
+<td>15</td>
+<td>Grand Total 121,099; Team C 37,025</td>
+<td>Pivot: Rows Team, Columns Shift, Values Sum of Calls Answered</td>
+</tr>
+<tr>
+<td>16</td>
+<td>August 2026 (42.0%); it contains 5 week-start dates vs 4 in July and 3 in September</td>
+<td>Group &gt; Months; Show Values As % of Grand Total</td>
+</tr>
+<tr>
+<td>17</td>
+<td>Team B: average of AHT 171.0 vs true AHT 170.6</td>
+<td>Sum THT / Sum Calls Answered, or a Calculated Field</td>
+</tr>
+<tr>
+<td>18</td>
+<td>121,099 calls; 168.5 s; 10 agents below target</td>
+<td>=SUM(E12:E31); =SUM(H12:H31)/SUM(E12:E31); =COUNTIF(L12:L31,"Below Target")</td>
+</tr>
+<tr>
+<td>19</td>
+<td>Karim Adel and Hossam Ali (Excellent), Mariam Sobhy (On Target)</td>
+<td>Aban % 6.8%, 6.3% and 7.3% with SL above target</td>
+</tr>
+<tr>
+<td>20</td>
+<td>"This week the team answered 121,099 calls at 168.5 seconds average handling time; 10 agents are below target."</td>
+<td>Participant Guide 6.4 template</td>
+</tr>
+</tbody>
+</table></div></section><section id="p-library" class="page"><div class="eyebrow">Library</div><h1>Guides & practice files</h1>
+<div class="cols"><div class="box"><h3>Guides (PDF)</h3><ul class="links"><li><a href="docs/participant-guide.pdf" target="_blank" rel="noopener">Participant Guide</a></li><li><a href="docs/01-course-map-start-here.pdf" target="_blank" rel="noopener">Course map</a></li><li><a href="docs/excel-training-brochure.pdf" target="_blank" rel="noopener">Training brochure</a></li><li><a href="docs/03-slide-decks-sessions-1-6.pdf" target="_blank" rel="noopener">All slide decks (Sessions 1-6)</a></li><li><a href="docs/04-activities-workbook-tasks-and-answer-key.pdf" target="_blank" rel="noopener">Activities Workbook: tasks &amp; answers</a></li><li><a href="docs/05-practice-workbooks-tasks-and-answers.pdf" target="_blank" rel="noopener">Practice workbooks: tasks &amp; answers</a></li><li><a href="docs/06-trainer-demo-files-explained.pdf" target="_blank" rel="noopener">What the trainer built live</a></li><li><a href="docs/07-pro-tips-beyond-the-course.pdf" target="_blank" rel="noopener">Pro tips beyond the course</a></li><li><a href="docs/08-session-recordings-notes.pdf" target="_blank" rel="noopener">Session notes with timestamps</a></li></ul></div>
+<div class="box"><h3>Excel files to practise on</h3><ul class="links"><li><a href="files/activities-workbook.xlsx">Activities Workbook</a><small>Used in every session and the final exam</small></li><li><a href="files/excel-practice-from-easy-to-advanced.xlsx">Excel practice: easy to advanced</a><small>Extra drills by level</small></li><li><a href="files/lookup-text-functions-practice.xlsx">Lookup &amp; text functions practice</a><small>VLOOKUP, XLOOKUP, LEFT, MID, TRIM</small></li></ul></div></div></section></main>
+<footer>Kalam CX · Excel Training Program · November 2026</footer>
+<script>const D={"sessions": [{"n": 1, "title": "Reading Data, Functions & Time", "topics": ["Read an export: header row, data range, column types", "The Big Five: SUM, AVERAGE, COUNT, MAX, MIN", "Conditions: COUNTIF(S), SUMIF(S), AVERAGEIF(S), MAXIFS", "Relative vs absolute references ($ and F4)", "Dates & times: YEAR, MONTH, WEEKDAY, WEEKNUM, FLOOR"], "tabs": "S1_Basics, S2_Formulas", "videos": [{"t": "Quick video: the whole session in short", "k": "Animated summary", "m": 23, "src": "media/s1-quick.mp4"}, {"t": "The Excel Interface", "k": "Trainer demo · Chapter 1", "m": 13, "src": "media/s1-ch01.mp4"}, {"t": "Ribbon Formula Bar and Formatting", "k": "Trainer demo · Chapter 2", "m": 4, "src": "media/s1-ch02.mp4"}, {"t": "How Formulas Work", "k": "Trainer demo · Chapter 3", "m": 13, "src": "media/s1-ch03.mp4"}, {"t": "SUM and SUMIF", "k": "Trainer demo · Chapter 4", "m": 11, "src": "media/s1-ch04.mp4"}, {"t": "SUMIF AVERAGEIF and COUNTIF", "k": "Trainer demo · Chapter 5", "m": 12, "src": "media/s1-ch05.mp4"}, {"t": "MAX MIN and MAXIFS", "k": "Trainer demo · Chapter 6", "m": 9, "src": "media/s1-ch06.mp4"}, {"t": "Practice on Real Call Data", "k": "Trainer demo · Chapter 7", "m": 7, "src": "media/s1-ch07.mp4"}, {"t": "Dates DATE and WEEKDAY", "k": "Trainer demo · Chapter 8", "m": 15, "src": "media/s1-ch08.mp4"}, {"t": "WEEKNUM YEAR MONTH DAY", "k": "Trainer demo · Chapter 9", "m": 11, "src": "media/s1-ch09.mp4"}, {"t": "Time TIME and HOUR", "k": "Trainer demo · Chapter 10", "m": 10, "src": "media/s1-ch10.mp4"}, {"t": "Intervals With FLOOR", "k": "Trainer demo · Chapter 11", "m": 8, "src": "media/s1-ch11.mp4"}], "slides": "docs/session-1-slides.pdf", "testpdf": "docs/session-1-test.pdf"}, {"n": 2, "title": "Errors, Logic, Lookups & Cleaning", "topics": ["Error messages: #DIV/0!, #REF!, #VALUE!, #NAME?, #N/A", "IF, nested IF, AND, OR, IFERROR", "VLOOKUP, HLOOKUP and XLOOKUP", "Cleaning: Remove Duplicates, TRIM, PROPER, Text to Columns", "Splitting IDs: LEFT, RIGHT, MID, VALUE · Data Validation"], "tabs": "S3_Logic_Lookup, S4_Cleaning", "videos": [{"t": "Quick video: the whole session in short", "k": "Animated summary", "m": 10, "src": "media/s2-quick.mp4"}], "slides": "docs/session-2-slides.pdf", "testpdf": "docs/session-2-test.pdf"}, {"n": 3, "title": "PivotTables, Charts & Dashboard", "topics": ["Turn a manager's question into Rows / Columns / Values / Filters", "Refresh (Alt+F5) · Group by month · % of Grand Total", "The average-of-averages trap: true AHT", "Pick the right chart and give it a title that states the message", "Build a one-page dashboard and present it in 5 minutes"], "tabs": "S5_Pivot, S6_Dashboard", "videos": [{"t": "Quick video: the whole session in short", "k": "Animated summary", "m": 21, "src": "media/s3-quick.mp4"}], "slides": "docs/session-3-slides.pdf", "testpdf": "docs/session-3-test.pdf"}], "tests": {"Session 1": {"title": "Session 1 Test: Reading Data, Functions, Conditions, Dates & Times", "pass": 14, "questions": [{"q": "A WFM export has a report title in rows 1-2, column names in row 4, 20 agents in rows 5-24 and \"End of export.\" in row 25. Which row is the header row?", "o": ["Row 1", "Row 4", "Row 5", "Row 25"], "a": 1, "e": "The header row is the single row of column names. Title lines above it and the footer below are not data."}, {"q": "The Shift column shows \"09:00 - 18:00\". What type is it for Excel?", "o": ["Time", "Number", "Text", "Date"], "a": 2, "e": "The dash makes it text. Excel cannot calculate with it as a time (unlike Login Time 09:02)."}, {"q": "A number is left-aligned and has a small green triangle. What does it mean?", "o": ["It is a formula", "It is a number stored as text", "It is a negative number", "It is a percentage"], "a": 1, "e": "Numbers align right by default. A left-aligned number with a green triangle is stored as text, and SUM will ignore it."}, {"q": "Manager: \"What is the longest AHT in the team (the slowest agent)?\" Which function?", "o": ["MIN", "AVERAGE", "MAX", "COUNT"], "a": 2, "e": "For AHT the worst value is the biggest, so MAX."}, {"q": "Manager: \"What is the lowest Service Level % in the team?\" Which function?", "o": ["MAX", "MIN", "SUM", "COUNTA"], "a": 1, "e": "For Service Level the worst value is the smallest, so MIN."}, {"q": "You need to count the agent NAMES in column B. Which function?", "o": ["COUNT", "COUNTA", "COUNTBLANK", "SUM"], "a": 1, "e": "COUNT counts numbers only (it gives 0 on names). COUNTA counts any non-empty cell."}, {"q": "20 agents, but 2 new joiners have a blank Service Level. What does =COUNT(H53:H72) return?", "o": ["20", "2", "18", "0"], "a": 2, "e": "COUNT ignores blank cells: 20 − 2 = 18."}, {"q": "=B2/B5 is copied down to calculate each agent's share of the team total in B5, and the results break. What is the fix?", "o": ["=B2/$B$5", "=$B2/B5", "=SUM(B2/B5)", "=B2/B5*100"], "a": 0, "e": "The team total must stay locked. Press F4 to add the $ signs."}, {"q": "Which argument order is correct for SUMIFS?", "o": ["SUMIFS(criteria_range, criteria, sum_range)", "SUMIFS(sum_range, criteria_range1, criteria1, ...)", "SUMIFS(criteria1, sum_range)", "SUMIFS(sum_range, criteria1, criteria_range1)"], "a": 1, "e": "SUMIF puts the sum range last; SUMIFS puts it first because it can take up to 127 conditions."}, {"q": "Nour Hassan: 405 calls offered, 15 abandoned. What is her Aban %?", "o": ["3.7%", "3.8%", "15%", "96.3%"], "a": 0, "e": "Aban % = Aban Calls / Calls Offered = 15 / 405 = 3.7%."}, {"q": "Nour answered 390 calls with a THT of 67,306 seconds. What is her AHT?", "o": ["166.2 s", "172.6 s", "390 s", "93.3 s"], "a": 1, "e": "AHT = THT / Calls Answered = 67,306 / 390 = 172.6 seconds."}, {"q": "You type 93.3 in a cell and then click the % button. What does Excel show?", "o": ["93.3%", "0.933%", "9330%", "#VALUE!"], "a": 2, "e": "Excel treats 1 = 100%, so it multiplies 93.3 by 100. Type 0.933 then %, or type 93.3% directly."}, {"q": "An agent logs in at 18:14 and out at 03:20. Which formula gives the hours worked?", "o": ["=(C2-B2)*24", "=MOD(C2-B2,1)*24", "=HOUR(C2-B2)", "=(B2-C2)*24"], "a": 1, "e": "The night shift crosses midnight; MOD(...,1) wraps the negative result around. Answer: 9.10 hours."}, {"q": "A call arrives at 13:47. What does =FLOOR(B2,\"00:30:00\") return?", "o": ["13:47", "14:00", "13:30", "13:00"], "a": 2, "e": "FLOOR rounds DOWN to the half-hour interval: 13:30. This is how WFM builds interval reports."}, {"q": "On the Agents tab, how many Team B agents work the 09:00 - 18:00 shift?", "o": ["2", "3", "4", "7"], "a": 1, "e": "=COUNTIFS(Team,\"Team B\",Shift,\"09:00 - 18:00\") = 3 (Karim Adel, Farah Wael, Sherif Mounir)."}, {"q": "=WEEKDAY(A2,2) returns 1 for which day?", "o": ["Sunday", "Monday", "Saturday", "Friday"], "a": 1, "e": "Return type 2 makes Monday = 1. Without it (type 1), Sunday = 1."}, {"q": "You want the highest AHT for Team B only. Which formula works?", "o": ["=MAXIF(G5:G24,C5:C24,\"Team B\")", "=MAXIFS(G5:G24,C5:C24,\"Team B\")", "=MAX(IF(\"Team B\"))", "=SUMIFS(G5:G24,C5:C24,\"Team B\")"], "a": 1, "e": "There is no MAXIF in standard Excel. Use MAXIFS, even with one condition."}, {"q": "What is the difference between =SUM(B4,B50) and =SUM(B4:B50)?", "o": ["None", "The comma adds only 2 cells; the colon adds the whole range of 47 cells", "The colon adds only 2 cells", "The comma gives an error"], "a": 1, "e": "A comma separates individual cells; a colon creates a continuous range from B4 to B50."}]}, "Session 2": {"title": "Session 2 Test: Errors, Logic, Lookups & Cleaning", "pass": 14, "questions": [{"q": "Answered % = C4/B4 shows #DIV/0!. What is the most likely cause?", "o": ["B4 is blank or 0", "C4 is text", "The function is misspelled", "A row was deleted"], "a": 0, "e": "#DIV/0! means dividing by zero or an empty cell. In the trainer's demo, 4 Oct had a blank Offered cell."}, {"q": "You typed =SUMM(B3:B11). What error appears?", "o": ["#REF!", "#VALUE!", "#NAME?", "#N/A"], "a": 2, "e": "#NAME? means Excel does not recognize the function name. Pick functions from Excel's suggestion list to avoid typos."}, {"q": "A lookup returns #N/A although the Login ID looks identical in both tables. Most likely cause?", "o": ["The column is too narrow", "One ID is stored as text or has a hidden space", "Division by zero", "The sheet is protected"], "a": 1, "e": "A number in one table and text in the other, or a trailing space, makes the IDs different for Excel."}, {"q": "In a nested IF for Excellent / On Target / Below Target, which condition must be tested first?", "o": ["The lowest band", "The highest band (Excellent)", "Any order works", "The value_if_false"], "a": 1, "e": "Excel stops at the first TRUE test. If you test >= target first, an Excellent agent is labelled On Target."}, {"q": "Mona Fathy has SL 82.2% and is in Team C (target 85%). What is her status?", "o": ["Excellent", "On Target", "Below Target", "Not Available"], "a": 2, "e": "82.2% is above 80% but Team C's target is 85%. The lookup to the Targets tab makes the status fair per team."}, {"q": "In the Dynamic Status Field activity (20 agents), how many are Below Target?", "o": ["4", "6", "10", "20"], "a": 2, "e": "Results: 4 Excellent, 6 On Target, 10 Below Target."}, {"q": "=VLOOKUP(A2,Agents!A:E,3,FALSE). Which column does it return? (A Login ID, B Name, C Team, D Team Leader, E Shift)", "o": ["Login ID", "Agent Name", "Team", "Shift"], "a": 2, "e": "Column numbers count inside the table: C is the 3rd column = Team."}, {"q": "How do you show \"Not Available\" when an ID is missing, using XLOOKUP?", "o": ["=XLOOKUP(A2,Agents!A:A,Agents!E:E,\"Not Available\")", "=XLOOKUP(A2,\"Not Available\")", "=VLOOKUP(A2,Agents!A:E,5,\"Not Available\")", "=XLOOKUP(\"Not Available\",A2)"], "a": 0, "e": "XLOOKUP's 4th argument is the built-in 'if not found' value. With VLOOKUP you need IFERROR."}, {"q": "What does the last argument FALSE (or 0) mean in VLOOKUP?", "o": ["Approximate match", "Exact match", "Search from the bottom", "Ignore errors"], "a": 1, "e": "FALSE/0 = exact match, which you need for names, IDs and languages."}, {"q": "When do you use HLOOKUP instead of VLOOKUP?", "o": ["When the table is sorted", "When the headers run across a row (horizontal table)", "When you need two conditions", "Never"], "a": 1, "e": "HLOOKUP searches the top row of a horizontal table and returns a row number. XLOOKUP can do both."}, {"q": "The Data Cleanup Lab has 40 raw rows. How many remain after Remove Duplicates (all columns)?", "o": ["40", "36", "32", "20"], "a": 2, "e": "8 duplicates are removed, leaving 32. Calls Offered drops from 21,089 to 17,072."}, {"q": "What does =PROPER(TRIM(\" absent \")) return?", "o": ["absent", "ABSENT", "Absent", " Absent "], "a": 2, "e": "TRIM removes extra spaces and PROPER capitalizes the first letter."}, {"q": "Which formula turns the text \"31-12-2025\" into a real date?", "o": ["=VALUE(A2)", "=DATE(RIGHT(A2,4),MID(A2,4,2),LEFT(A2,2))", "=TEXT(A2,\"dd/mm/yyyy\")", "=DAY(A2)"], "a": 1, "e": "DATE(year, month, day) built from the pieces; then format it as Long Date."}, {"q": "What does =VALUE(RIGHT(\"Karim Adel 21002\",5)) return?", "o": ["Karim", "21002 (as a number)", "\"21002\" (as text)", "#VALUE!"], "a": 1, "e": "RIGHT takes the last 5 characters; VALUE turns them into a real number."}, {"q": "The trainer's rule before running Text to Columns:", "o": ["Sort the data", "Insert empty columns / choose an empty destination", "Delete the header row", "Turn on filters"], "a": 1, "e": "Otherwise the split overwrites the columns to the right."}, {"q": "Why add a Data Validation dropdown (Complete / Pending / In progress)?", "o": ["To make the file smaller", "To stop inconsistent spellings that break analysis", "To protect formulas", "To sort automatically"], "a": 1, "e": "\"Absent\", \"absent\" and \"Absent \" count as three different items in filters and pivots."}, {"q": "Nested IF risk band: High if Aban % > 5%, Medium if > 3%, else Low. Hossam Ali has 5.1%. Result?", "o": ["Low", "Medium", "High", "#VALUE!"], "a": 2, "e": "5.1% > 5% → High."}, {"q": "Why does INDEX + MATCH still matter when you have VLOOKUP?", "o": ["It is faster to type", "It can look left and do two-way lookups in every Excel version", "It ignores errors", "It works only in Excel 365"], "a": 1, "e": "INDEX/MATCH returns from any column and can match a row and a column, in all versions."}]}, "Session 3": {"title": "Session 3 Test: PivotTables, Charts & the Dashboard", "pass": 14, "questions": [{"q": "Manager: \"Calls answered by team and by shift.\" Where does Shift go in the PivotTable?", "o": ["Rows", "Columns", "Values", "Filters"], "a": 1, "e": "[number] by [Rows] and by [Columns]: Team in Rows, Shift in Columns, Sum of Calls Answered in Values."}, {"q": "S5 data (20 agents × 12 weeks): what is the Grand Total of Calls Answered?", "o": ["10,381", "121,099", "47,975", "43,482"], "a": 1, "e": "The PivotTable Builder answer: 121,099."}, {"q": "Which team answered the most calls on the 09:00 - 18:00 shift?", "o": ["Team A (16,708)", "Team B (18,798)", "Team C (12,469)", "All equal"], "a": 1, "e": "Team B answered 18,798 calls on 09:00 - 18:00."}, {"q": "You changed the source data, but the PivotTable still shows old numbers. What do you do?", "o": ["Rebuild it", "Refresh (Alt + F5)", "Press F9", "Save the file"], "a": 1, "e": "PivotTables never update by themselves. Right-click > Refresh, or Ctrl+Alt+F5 for all."}, {"q": "Team A: 'Average of AHT' in the pivot = 170.7, but the true AHT = 169.0. Why?", "o": ["Rounding", "The pivot averages averages instead of THT / Calls Answered", "Blank cells", "Old data"], "a": 1, "e": "True AHT = total handling time / total calls answered. A busy week must weigh more than a quiet one."}, {"q": "How do you get the TRUE team AHT inside the PivotTable?", "o": ["Value Field Settings > Average", "A Calculated Field = THT / 'Calls Answered'", "Show Values As > % of Grand Total", "Group by month"], "a": 1, "e": "A calculated field sums each field first, then divides, so it gives the weighted AHT."}, {"q": "Grouped by month, August 2026 has the largest share of calls. Why?", "o": ["August is the busy season", "August has 5 week-start dates in the data", "AHT is higher in August", "A data error"], "a": 1, "e": "July has 4 weeks, August 5, September 3. Always check whether a period comparison is fair."}, {"q": "A PivotTable shows 'Count of Calls' instead of 'Sum'. Usual cause?", "o": ["The field has blanks or numbers stored as text", "Too many rows", "The pivot is not refreshed", "The chart is missing"], "a": 0, "e": "Clean the column (Session 2), then re-add the field."}, {"q": "Dates will not group by month in the pivot. Why?", "o": ["The dates are stored as text", "Too many dates", "The pivot is filtered", "Month grouping needs Excel 365"], "a": 0, "e": "Convert them to real dates first (DATE / Text to Columns)."}, {"q": "Which chart fits 'weekly calls answered across 12 weeks'?", "o": ["Pie", "Line", "Doughnut", "Scatter"], "a": 1, "e": "A trend over time = a line chart."}, {"q": "Which chart fits the status breakdown (Excellent / On Target / Below Target)?", "o": ["Line", "Pie", "Scatter", "Area"], "a": 1, "e": "Parts of a whole with only a few slices = a pie chart."}, {"q": "Conditional formatting rule 'Aban % greater than 5%': what do you type as the limit?", "o": ["5", "5% or 0.05", "50", "0.5"], "a": 1, "e": "Percent cells hold fractions: 5% = 0.05. Typing 5 means 500%."}, {"q": "Dashboard KPI 2: the team AHT (THT / Calls Answered) over 12 weeks is:", "o": ["170.7 s", "168.5 s", "172.6 s", "165.7 s"], "a": 1, "e": "Total THT / total answered for all 20 agents = 168.5 seconds."}, {"q": "Dashboard KPI 3: how many agents are Below Target over the 12 weeks?", "o": ["5", "8", "10", "12"], "a": 2, "e": "5 Excellent, 5 On Target, 10 Below Target."}, {"q": "To colour the WHOLE row of a below-target agent, which conditional-formatting formula is right? (Status in column L, data from row 5)", "o": ["=L5=\"Below Target\"", "=$L5=\"Below Target\"", "=$L$5=\"Below Target\"", "=L$5=\"Below Target\""], "a": 1, "e": "Lock the column with $L, keep the row relative so it moves down the table."}, {"q": "What controls a PivotChart?", "o": ["Its own data range", "The PivotTable it is built on, including its filters", "Conditional formatting", "Nothing, it is static"], "a": 1, "e": "Change or filter the pivot and the chart changes with it."}, {"q": "Which setting shows each team's share of the total?", "o": ["Value Field Settings > Max", "Show Values As > % of Grand Total", "Group > Months", "Refresh"], "a": 1, "e": "Show Values As turns the numbers into shares without any formula."}, {"q": "The trainer's advice about using AI tools to write formulas:", "o": ["Never use AI", "Use AI, but understand the formula so you can update it later", "Copy any formula without checking", "Only use AI for charts"], "a": 1, "e": "\"The objective of this course is that you understand how a formula is written.\""}]}}};const T=D.tests;
+let st={};try{st=JSON.parse(localStorage.getItem('kalamAcademy')||'{}')}catch(e){}
+st.q=st.q||{};st.w=st.w||{};
+function save(){try{localStorage.setItem('kalamAcademy',JSON.stringify(st))}catch(e){}}
+const pages=[...document.querySelectorAll('.page')],links=[...document.querySelectorAll('nav a')];
+function route(){const h=(location.hash||'#home').slice(1);let id='p-'+h;if(h.startsWith('test-'))id='p-session-'+h.slice(5);if(!document.getElementById(id))id='p-home';
+ pages.forEach(p=>p.classList.toggle('on',p.id===id));links.forEach(a=>a.classList.toggle('on','p-'+a.dataset.s===id));
+ pages.forEach(p=>{if(p.id!==id)p.querySelectorAll('video').forEach(v=>v.pause())});
+ if(h.startsWith('test-'))document.getElementById(h).scrollIntoView();else scrollTo(0,0);homeProgress();}
+addEventListener('hashchange',route);
+/* players */
+D.sessions.forEach(s=>{const v=document.getElementById('v'+s.n),ol=document.getElementById('pl'+s.n),auto=document.getElementById('auto'+s.n);let cur=0;
+ const watched=st.w[s.n]||(st.w[s.n]=[]);
+ function list(){ol.innerHTML='';s.videos.forEach((x,i)=>{const li=document.createElement('li');if(i===cur)li.className='on';else if(watched.includes(i))li.className='done';
+  const b=document.createElement('button');b.innerHTML='<span class="ix"></span><span class="tt"><b></b><small></small></span><span class="mn"></span>';
+  b.querySelector('.ix').textContent=watched.includes(i)&&i!==cur?'✓':(i===0?'▶':i);b.querySelector('b').textContent=x.t;b.querySelector('small').textContent=x.k;b.querySelector('.mn').textContent=x.m+' min';
+  b.onclick=()=>{load(i);v.play().catch(()=>{})};li.appendChild(b);ol.appendChild(li);});}
+ function load(i){cur=i;v.src=s.videos[i].src;document.getElementById('nk'+s.n).textContent=s.videos[i].k;document.getElementById('nt'+s.n).textContent=s.videos[i].t;list();}
+ v.addEventListener('ended',()=>{if(!watched.includes(cur)){watched.push(cur);save();}if(auto.checked&&cur<s.videos.length-1){load(cur+1);v.play().catch(()=>{})}else list();homeProgress();});
+ v.addEventListener('timeupdate',()=>{if(v.duration&&v.currentTime/v.duration>.9&&!watched.includes(cur)){watched.push(cur);save();}});
+ load(0);});
+/* tests */
+function draw(name){const box=document.querySelector(`.quiz[data-s="${name}"]`);const t=T[name];const s=st.q[name]||(st.q[name]={});box.innerHTML='';
+ t.questions.forEach((q,i)=>{const d=document.createElement('div');d.className='q';d.innerHTML='<div><span class="qn"></span><span class="qt"></span></div>';
+  d.querySelector('.qn').textContent=i+1;d.querySelector('.qt').textContent=q.q;
+  q.o.forEach((o,j)=>{const b=document.createElement('button');b.className='o';b.textContent=String.fromCharCode(65+j)+')  '+o;
+   if(s[i]!==undefined){if(j===q.a)b.classList.add('ok');else if(j===s[i])b.classList.add('no');b.disabled=true;}
+   b.onclick=()=>{s[i]=j;save();draw(name);homeProgress();};d.appendChild(b);});
+  if(s[i]!==undefined){const e=document.createElement('div');e.className='ex';e.textContent=(s[i]===q.a?'Correct. ':'Not quite. ')+q.e;d.appendChild(e);}box.appendChild(d);});
+ const n=Object.keys(s).length,ok=Object.entries(s).filter(([i,v])=>t.questions[i].a===v).length,el=document.getElementById('score-'+name.slice(-1));
+ el.innerHTML='';el.append('Score: '+ok+' / '+t.questions.length);const sp=document.createElement('span');
+ if(n<t.questions.length)sp.textContent='  ('+(t.questions.length-n)+' left)';else if(ok>=t.pass){sp.className='pass';sp.textContent='  · Passed';}else{sp.className='fail';sp.textContent='  · Below the pass mark of '+t.pass+'. Review and try again.';}
+ el.appendChild(sp);}
+function resetQuiz(name){st.q[name]={};save();draw(name);homeProgress();}
+Object.keys(T).forEach(draw);
+function homeProgress(){D.sessions.forEach(s=>{const t=T['Session '+s.n],q=st.q['Session '+s.n]||{},w=(st.w[s.n]||[]).length;
+ const ok=Object.entries(q).filter(([i,v])=>t.questions[i].a===v).length;const pct=Math.round(100*(w/s.videos.length*0.5+ok/t.questions.length*0.5));
+ const el=document.getElementById('hp'+s.n);if(el)el.style.width=pct+'%';});}
+/* exam tables scroll on phones */
+document.querySelectorAll('.exam table,.key table').forEach(t=>{const w=document.createElement('div');w.className='tw';t.parentNode.insertBefore(w,t);w.appendChild(t);});
+const root=document.documentElement;try{const th=localStorage.getItem('kalamTheme');if(th)root.dataset.theme=th}catch(e){}
+document.getElementById('theme').onclick=()=>{const dark=root.dataset.theme?root.dataset.theme==='dark':matchMedia('(prefers-color-scheme: dark)').matches;root.dataset.theme=dark?'light':'dark';try{localStorage.setItem('kalamTheme',root.dataset.theme)}catch(e){}};
+route();
+</script></body></html>
