@@ -20,10 +20,10 @@
  "instructors": [
   {
    "id": "mfawzy",
-   "name": "Mohamed Fawzy Bayoumy",
+   "name": "Mohamed Fawzy",
    "title": "Workforce Management, Kalam CX",
-   "bio": "Mohamed works in Workforce Management at Kalam CX and uses Excel every day for forecasting, scheduling and reporting. He teaches the way he works: straight on real exports, explaining each formula so you can rebuild it yourself.",
-   "photo": ""
+   "bio": "Mohamed Fawzy works in Workforce Management at Kalam CX and uses Excel every day for forecasting, scheduling and reporting. He teaches the way he works: straight on real exports, explaining each formula so you can rebuild it yourself.",
+   "photo": "img/instructors/mfawzy.jpg"
   },
   {
    "id": "youtube-creators",

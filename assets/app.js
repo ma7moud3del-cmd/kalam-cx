@@ -79,6 +79,7 @@ function stats(c) {
 }
 const durationText = c => c.durationLabel || (c.videoMinutes ? `${(c.videoMinutes / 60).toFixed(1)} hours` : 'Self-paced');
 const priceText = c => (c.price ? `${c.price}` : 'Free');
+const avatar = (i, cls = '') => i.photo ? `<img class="avatar ${cls}" src="${esc(i.photo)}" alt="" width="96" height="96">` : `<span class="avatar ${cls}" aria-hidden="true">${esc(i.name.split(' ').map(w => w[0]).slice(0, 2).join(''))}</span>`;
 const instr = c => (c.instructors || []).map(id => App.instructors[id]).filter(Boolean);
 async function boot() {
   try {
@@ -289,7 +290,7 @@ function viewCourse(c) {
   <section><h2>Requirements</h2><ul class="dots">${(c.requirements || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>
   <section><h2>Description</h2>${(c.description || []).map(p => `<p>${esc(p)}</p>`).join('')}<h3>Who this course is for</h3><ul class="dots">${(c.audience || []).map(x => `<li>${esc(x)}</li>`).join('')}</ul></section>
   ${(c.resources || []).length ? `<section id="resources"><h2>Files and guides</h2>${resList(c, c.resources)}</section>` : ''}
-  <section><h2>${ins.length > 1 ? 'Instructors' : 'Instructor'}</h2>${ins.map(i => `<div class="inst"><span class="avatar" aria-hidden="true">${esc(i.name.split(' ').map(w => w[0]).slice(0, 2).join(''))}</span><div><h3><a href="#/instructor/${i.id}">${esc(i.name)}</a></h3><p class="muted">${esc(i.title)}</p><p>${esc(i.bio)}</p></div></div>`).join('')}</section>
+  <section><h2>${ins.length > 1 ? 'Instructors' : 'Instructor'}</h2>${ins.map(i => `<div class="inst">${avatar(i)}<div><h3><a href="#/instructor/${i.id}">${esc(i.name)}</a></h3><p class="muted">${esc(i.title)}</p><p>${esc(i.bio)}</p></div></div>`).join('')}</section>
   <section><h2>Reviews</h2><div class="empty"><p><b>No reviews yet.</b> Ratings and reviews open when learner accounts are available, so every review comes from someone who really took the course.</p></div></section>
   ${rel.length ? `<section><h2>Learners also take</h2><div class="grid">${rel.map(card).join('')}</div></section>` : ''}
  </div>
@@ -414,7 +415,7 @@ function viewMy() {
 function viewInstructor(i) {
   const cs = App.order.map(id => App.courses[id]).filter(c => (c.instructors || []).includes(i.id));
   return { title: i.name, html: `<section class="wrap pad narrow2">${crumbs([['Home', '#/'], ['Instructors', ''], [i.name, '']])}
-  <div class="iprof"><span class="avatar big" aria-hidden="true">${esc(i.name.split(' ').map(w => w[0]).slice(0, 2).join(''))}</span><div><p class="eyebrow">${i.external ? 'Curated creators' : 'Instructor'}</p><h1 tabindex="-1" data-focus>${esc(i.name)}</h1><p class="lead">${esc(i.title)}</p></div></div>
+  <div class="iprof">${avatar(i, 'big')}<div><p class="eyebrow">${i.external ? 'Curated creators' : 'Instructor'}</p><h1 tabindex="-1" data-focus>${esc(i.name)}</h1><p class="lead">${esc(i.title)}</p></div></div>
   <p>${esc(i.bio)}</p><h2>Courses</h2><div class="grid">${cs.map(card).join('')}</div></section>` };
 }
 function viewStudio() {
