@@ -1,0 +1,46 @@
+{
+ "platform": {
+  "name": "Kalam CX Academy",
+  "tagline": "Practical skills for the people who run customer experience.",
+  "intro": "Short, hands-on courses built from Kalam CX's own training: real tools, real call-center data, taught by the people who use them every day.",
+  "audience": [
+   "Agents and new hires",
+   "Team leaders and supervisors",
+   "WFM, quality and reporting teams"
+  ],
+  "mode": "Public pilot. All courses are free. Your progress, notes and saved courses stay in this browser only."
+ },
+ "categories": [
+  {
+   "id": "data",
+   "name": "Data & Excel",
+   "blurb": "Spreadsheets, reporting and dashboards."
+  }
+ ],
+ "instructors": [
+  {
+   "id": "mfawzy",
+   "name": "Mohamed Fawzy",
+   "title": "Workforce Management, Kalam CX",
+   "bio": "Mohamed Fawzy works in Workforce Management at Kalam CX and uses Excel every day for forecasting, scheduling and reporting. He teaches the way he works: straight on real exports, explaining each formula so you can rebuild it yourself.",
+   "photo": "img/instructors/mfawzy.jpg"
+  },
+  {
+   "id": "youtube-creators",
+   "name": "Excel creators on YouTube",
+   "title": "Curated, not affiliated",
+   "external": true,
+   "bio": "Free lessons by well-known Excel teachers, including Leila Gharani, Kevin Stratvert, MyOnlineTrainingHub, Excel Campus, GoSkills and GCFLearnFree. Videos play from YouTube and belong to their creators. Kalam CX isn't affiliated with these channels."
+  }
+ ],
+ "courses": [
+  {
+   "id": "excel",
+   "data": "courses/excel/course.json"
+  },
+  {
+   "id": "excel-expert-picks",
+   "data": "courses/excel-expert-picks/course.json"
+  }
+ ]
+}
