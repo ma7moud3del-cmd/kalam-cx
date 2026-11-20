@@ -3,20 +3,35 @@
  "platform": {
   "name": "Kalam CX Academy",
   "tagline": "Practical skills for the people who run customer experience.",
-  "intro": "Short, hands-on courses built from Kalam CX's own training: real tools, real call-center data, taught by the people who use them every day.",
+  "intro": "Practical courses built from Kalam CX's own training: real tools and real call-center data, taught by the people who use them every day.",
   "audience": [
    "Agents and new hires",
    "Team leaders and supervisors",
    "WFM, quality and reporting teams"
   ],
-  "mode": "Public pilot. All trainings are free. Progress stays in this browser only.",
-  "footer": "Trainings are free. Videos in the Excel training are in Egyptian Arabic with English Excel terms. Your watch history and test scores are saved only in this browser."
+  "mode": "Public prototype. All courses are free. No accounts: progress stays in this browser only.",
+  "footer": "All courses are free. Videos in the Excel course are in Egyptian Arabic with English Excel terms. There are no accounts yet: your watch history and test scores are saved only in this browser."
  },
  "topics": [
   {
+   "id": "cx",
+   "name": "Customer Experience",
+   "blurb": "Handling customers, quality and the skills of the floor."
+  },
+  {
    "id": "data",
-   "name": "Data & Excel",
+   "name": "Data & Reporting",
    "blurb": "Spreadsheets, reporting and dashboards."
+  },
+  {
+   "id": "wfm",
+   "name": "Workforce Management",
+   "blurb": "Forecasting, scheduling and real-time management."
+  },
+  {
+   "id": "leadership",
+   "name": "Leadership",
+   "blurb": "Leading teams, coaching and running the floor."
   }
  ],
  "instructors": [

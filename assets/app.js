@@ -1,8 +1,8 @@
-/* Kalam CX Academy: one simple, Apple-style look for every training.
-   Structure: Academy › Topic › Training › Session › Video.
-   Content lives in data only: data/catalog.json lists topics and trainings; each training is courses/<id>/course.json
-   (course → sections → lessons → resources / tests). Adding a training = adding data, no code changes.
-   See CONTENT.md in the builder repo for every field. Learner progress stays in this browser (localStorage). */
+/* Kalam CX Academy: a multi-course learning platform in a simple, Apple-style look.
+   Learner journey: Home › Explore or Categories › Course overview › Learning view (player + curriculum) › Final assessment.
+   Content lives in data only: data/catalog.json lists categories (topics), instructors and courses; each course is
+   courses/<id>/course.json (course → modules → lessons → resources / tests). Adding a course = adding data, no code changes.
+   See CONTENT.md in the builder repo. There are no accounts: learner progress stays in this browser (localStorage). */
 'use strict';
 document.documentElement.classList.add('js');
 const $ = (s, r = document) => r.querySelector(s), $$ = (s, r = document) => [...r.querySelectorAll(s)];
@@ -10,8 +10,16 @@ const esc = s => String(s ?? '').replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': 
 const CHEV = '<svg class="chev" viewBox="0 0 8 14" aria-hidden="true"><path d="M1 1l6 6-6 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 const PLAY = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 5.5v13l11-6.5z" fill="currentColor"/></svg>';
 const CHECK = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="11" fill="currentColor" opacity=".12"/><path d="M7 12.5l3.2 3.2L17 9" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+const ICON = {
+  video: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10 8.5v7l5.5-3.5z" fill="currentColor"/></svg>',
+  practice: '<svg viewBox="0 0 24 24" aria-hidden="true"><rect x="4" y="3" width="16" height="18" rx="2.5" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M8 8h8M8 12h8M8 16h5" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+  quiz: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M9.5 9.5a2.5 2.5 0 1 1 3.4 2.3c-.6.3-.9.8-.9 1.4v.3" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="16.8" r="1" fill="currentColor"/></svg>',
+  exam: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
+};
+ICON.youtube = ICON.embed = ICON.video;
+ICON.reading = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1v13c-3-1-6-1-9 1-3-2-6-2-9-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 6.5v13" stroke="currentColor" stroke-width="1.6"/></svg>';
 const App = { cat: null, courses: {}, entries: {}, order: [], people: {}, topics: [] };
-const RESERVED = ['trainings', 'topics', 'my'];
+const RESERVED = ['explore', 'categories', 'my', 'trainings', 'topics'];
 
 /* ---------- progress (this browser only) ---------- */
 const Store = (() => {
@@ -21,11 +29,13 @@ const Store = (() => {
   const save = () => { try { localStorage.setItem(KEY, JSON.stringify(s)); } catch (e) {} };
   const C = id => s.courses[id] || (s.courses[id] = { done: {}, answers: {} });
   return {
-    isDone: (c, l) => !!C(c).done[l], setDone(c, l) { if (!C(c).done[l]) { C(c).done[l] = Date.now(); save(); } },
+    isDone: (c, l) => !!C(c).done[l],
+    setDone(c, l) { if (!C(c).done[l]) { C(c).done[l] = Date.now(); C(c).at = Date.now(); save(); } },
+    unsetDone(c, l) { delete C(c).done[l]; save(); },
     answer(c, q, rev) { const a = C(c).answers[q]; return a && a.r === (rev || 1) ? a.c : undefined; },
     setAnswer(c, q, rev, v) { C(c).answers[q] = { c: v, r: rev || 1 }; C(c).at = Date.now(); save(); },
     reset(c, qs) { qs.forEach(q => delete C(c).answers[q]); save(); },
-    /* where the learner was last in a training: powers "Resume" and "Continue where you left off" */
+    /* where the learner was last: powers "Resume" and "Continue learning" */
     visit(c, sec, lesson) { const x = C(c); x.last = { s: sec, l: lesson || '' }; x.at = Date.now(); save(); },
     last: c => C(c).last || null, at: c => C(c).at || Math.max(0, ...Object.values(C(c).done).map(Number)),
     started: c => !!(s.courses[c] && (s.courses[c].last || Object.keys(s.courses[c].done).length || Object.keys(s.courses[c].answers).length)),
@@ -50,25 +60,36 @@ const Store = (() => {
 
 /* ---------- data helpers ---------- */
 const url = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.base || '') + p;
-const vids = sec => sec.lessons.filter(l => l.type === 'video' || l.type === 'youtube' || l.type === 'embed');
-/* video files: a relative path is served from the site, or from "mediaBase" (catalog platform or course) when videos move to another host */
-const media = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.mediaBase || App.cat.platform.mediaBase || '') + (c.base || '') + p;
-/* players that are web pages (YouTube, Bunny or Cloudflare Stream, Vimeo…) play in an iframe */
-const frameSrc = (L, auto) => L.type === 'youtube' ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(L.yt)}?rel=0${auto ? '&autoplay=1' : ''}` : L.type === 'embed' ? L.embed : '';
-const thumbOf = (c, L) => L.type === 'youtube' ? `https://i.ytimg.com/vi/${esc(L.yt)}/hqdefault.jpg` : L.poster ? esc(media(c, L.poster)) : 'img/kalam-mark.png';
+const isVid = l => l.type === 'video' || l.type === 'youtube' || l.type === 'embed';
+const vids = sec => sec.lessons.filter(isVid);
 const quizOf = sec => sec.lessons.find(l => l.type === 'quiz');
 const isExamSec = s => s.id === 'final' || (s.lessons.length && s.lessons.every(l => l.type === 'exam'));
 const secsOf = c => c.sections.filter(s => !isExamSec(s));
 const examOf = c => c.sections.find(isExamSec);
 const people = c => (c.instructors || []).map(i => App.people[i]).filter(Boolean);
-const mins = c => c.sections.reduce((n, s) => n + vids(s).reduce((m, v) => m + (v.minutes || 0), 0), 0);
-const word = c => (c.labels && c.labels.section) || 'Session';                 /* "Session", "Module", "Week"… */
+const word = c => (c.labels && c.labels.section) || 'Module';                  /* "Module", "Session", "Week"… */
 const LANG = { ar: 'Arabic', en: 'English', fr: 'French' };
 const langShort = c => c.languageShort || LANG[c.language] || c.languageLabel || '';
-const hours = m => m >= 60 ? `${(m / 60).toFixed(1)} hours` : `${m} min`;
-const topicOf = c => App.topics.find(t => t.id === (App.entries[c.id]?.topic || c.category));
-const extrasOf = c => App.order.map(id => App.courses[id]).filter(x => x.partOf === c.id);   /* e.g. Expert Picks belongs to Excel */
-/* files for a session: explicit "files" in course.json, else the older convention (first workbook, PDF titled "slides", test PDF) */
+const hrs = m => m >= 60 ? `${+(m / 60).toFixed(1)} h` : `${m} min`;
+const hours = m => m >= 60 ? `${+(m / 60).toFixed(1)} hours` : `${m} minutes`;
+const free = c => !+(c.price || 0);
+const topicId = c => App.entries[c.id]?.topic || c.category;
+const topicOf = c => App.topics.find(t => t.id === topicId(c));
+const extrasOf = c => App.order.map(id => App.courses[id]).filter(x => x.partOf === c.id);
+/* video files: relative paths come from the site, or from "mediaBase" when videos move to another host */
+const media = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.mediaBase || App.cat.platform.mediaBase || '') + (c.base || '') + p;
+/* players that are web pages (YouTube, Bunny or Cloudflare Stream, Vimeo…) play in an iframe */
+const frameSrc = (L, auto) => L.type === 'youtube' ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(L.yt)}?rel=0${auto ? '&autoplay=1' : ''}` : L.type === 'embed' ? L.embed : '';
+const thumbOf = (c, L) => L.type === 'youtube' ? `https://i.ytimg.com/vi/${esc(L.yt)}/hqdefault.jpg` : L.poster ? esc(media(c, L.poster)) : 'img/kalam-mark.png';
+/* time: video minutes are measured; practice, test and exam minutes are the course's own estimates */
+function timeOf(c) {
+  const all = c.sections.flatMap(s => s.lessons), v = all.filter(isVid);
+  const t = k => all.filter(l => l.type === k).reduce((a, l) => a + (+l.minutes || 0), 0);
+  const video = v.reduce((a, l) => a + (+l.minutes || 0), 0), practice = t('practice'), tests = t('quiz'), exam = t('exam'), reading = t('reading');
+  return { video, videos: v.length, practice, tests, exam, reading, readings: all.filter(l => l.type === 'reading').length, total: video + practice + tests + exam + reading,
+    nPractice: all.filter(l => l.type === 'practice').length, nTests: all.filter(l => l.type === 'quiz').length, nExam: all.filter(l => l.type === 'exam').length };
+}
+/* files for a module: explicit "files" in course.json, else the older convention (first workbook, PDF titled "slides", test PDF) */
 function filesOf(c, sec) {
   const f = sec.files || {}, pr = sec.lessons.find(l => l.type === 'practice'), q = quizOf(sec);
   const R = (pr && pr.resources) || [];
@@ -76,17 +97,27 @@ function filesOf(c, sec) {
   const tp = f.testPdf || ((q && q.resources) || [])[0]?.href;
   return { workbook: wb && url(c, wb), slides: sl && url(c, sl), testPdf: tp && url(c, tp), practice: f.practice || pr?.body?.[0] };
 }
+/* the learning path: every lesson of every module in order, then the final assessment */
+function path(c) {
+  if (c._path) return c._path;
+  const out = [];
+  secsOf(c).forEach((s, i) => s.lessons.forEach(L => out.push({ L, sec: s, mi: i })));
+  const ex = examOf(c); if (ex) ex.lessons.forEach(L => out.push({ L, sec: ex, mi: -1 }));
+  return (c._path = out);
+}
 function passed(c, q) { const ok = q.questions.filter(x => Store.answer(c.id, x.id, x.rev) === x.a).length; return ok >= q.pass; }
+const lessonDone = (c, L) => L.type === 'quiz' ? passed(c, L) : Store.isDone(c.id, L.id);
 function progress(c) {
-  const ss = secsOf(c), all = ss.flatMap(vids), watched = all.filter(v => Store.isDone(c.id, v.id)).length;
-  const qs = ss.map(quizOf).filter(Boolean), pass = qs.filter(q => passed(c, q)).length;
-  const last = Store.last(c.id); let sec = last && ss.find(s => s.id === last.s), lesson = last && last.l;
-  if (!sec) { sec = ss.find(s => vids(s).some(v => !Store.isDone(c.id, v.id))) || ss[0]; lesson = ''; }
-  const units = all.length + qs.length, doneUnits = watched + pass;
-  return { watched, total: all.length, tests: qs.length, pass, pct: units ? Math.round(100 * doneUnits / units) : 0, started: Store.started(c.id),
-    resume: sec ? `#/${c.id}/${sec.id}${lesson ? '/' + lesson : ''}` : `#/${c.id}`, resumeSec: sec };
+  const P = path(c), done = P.filter(x => lessonDone(c, x.L)).length, vs = P.filter(x => isVid(x.L));
+  const qs = P.filter(x => x.L.type === 'quiz');
+  const last = Store.last(c.id); let at = last && P.find(x => x.L.id === last.l) || (last && P.find(x => x.sec.id === last.s));
+  if (!at) at = P.find(x => !lessonDone(c, x.L)) || P[0];
+  return { done, total: P.length, pct: P.length ? Math.round(100 * done / P.length) : 0, started: Store.started(c.id),
+    watched: vs.filter(x => Store.isDone(c.id, x.L.id)).length, videos: vs.length, pass: qs.filter(x => passed(c, x.L)).length, tests: qs.length,
+    resume: at ? `#/${c.id}/learn/${at.L.id}` : `#/${c.id}`, at };
 }
 const bar = p => `<span class="pbar" role="img" aria-label="${p}% complete"><i style="width:${p}%"></i></span>`;
+const modName = (c, x) => x.mi < 0 ? 'Final assessment' : `${word(c)} ${x.mi + 1} · ${x.sec.title}`;
 
 async function boot() {
   try {
@@ -103,12 +134,13 @@ async function boot() {
   if (App.cat.platform && App.cat.platform.footer) $('#foot').textContent = App.cat.platform.footer;
   route();
 }
-/* trainings shown in lists: live and coming-soon, but not collections that belong to another training */
+/* courses shown in lists: live and planned, but not collections that belong to another course (Expert Picks = Excel's extra videos) */
 const listed = () => App.order.map(id => App.courses[id]).filter(c => !c.partOf);
+const live = () => listed().filter(c => !c.soon && c.type !== 'collection');
 
 /* ---------- routes ----------
-   #/  #/trainings  #/topics/<topic>  #/my
-   #/<training>  #/<training>/<section>[/<lesson>|/test]  #/<training>/exam  #/<training>/library  #/<training>/extras */
+   #/  #/explore[?q=&topic=&level=&lang=&dur=&price=]  #/categories[/<id>]  #/my
+   #/<course>  #/<course>/learn[/<lesson>]  #/<course>/resources  #/<course>/extras */
 function legacy(h) {
   if (h === '' || h === '#' || h === '#home') return '#/';
   let m = h.match(/^#(session|test)-(\d)$/); if (m) return `#/excel/s${m[2]}${m[1] === 'test' ? '/test' : ''}`;
@@ -118,58 +150,71 @@ function legacy(h) {
   if ((m = h.match(/^#\/learn\/([\w-]+)\/final-exam/))) return `#/${m[1]}/exam`;
   if ((m = h.match(/^#\/learn\/([\w-]+)\/((s\d)-[\w-]+)/))) return `#/${m[1]}/${m[3]}/${m[2]}`;
   if ((m = h.match(/^#\/learn\/([\w-]+)\/((e\d)-\d+)/))) return `#/${m[1]}`;
-  if (/^#\/courses/.test(h)) return '#/trainings';
+  if (/^#\/(courses|trainings)\/?$/.test(h)) return '#/explore';
+  if ((m = h.match(/^#\/topics\/([\w-]+)/))) return `#/categories/${m[1]}`;
   if (/^#\/(studio|about|instructor)/.test(h)) return '#/';
   if ((m = h.match(/^#\/([\w-]+)\/?$/)) && App.courses[m[1]]?.partOf) return `#/${App.courses[m[1]].partOf}/extras`;
+  /* course pages from the session layout → the learning view */
+  if ((m = h.match(/^#\/([\w-]+)\/([\w-]+)(?:\/([\w-]+))?$/)) && App.courses[m[1]] && !App.courses[m[1]].soon) {
+    const c = App.courses[m[1]], P = path(c);
+    if (m[2] === 'exam') { const x = P.find(y => y.L.type === 'exam'); return x ? `#/${c.id}/learn/${x.L.id}` : `#/${c.id}`; }
+    if (m[2] === 'library') return `#/${c.id}/resources`;
+    const sec = secsOf(c).find(s => s.id === m[2]);
+    if (sec) {
+      const L = m[3] === 'test' ? quizOf(sec) : m[3] ? sec.lessons.find(l => l.id === m[3]) : sec.lessons[0];
+      return `#/${c.id}/learn/${(L || sec.lessons[0]).id}`;
+    }
+  }
   return null;
 }
-let shown = null;   /* null = nothing drawn yet (the home page's key is '') */
+let shown = null;   /* null = nothing drawn yet */
 function route() {
   if (!App.cat) return;
-  const fix = legacy(location.hash); if (fix && fix !== location.hash) { history.replaceState(null, '', fix); }
-  const parts = location.hash.replace(/^#\/?/, '').split('/').filter(Boolean).map(decodeURIComponent);
+  let fix, n = 0; while ((fix = legacy(location.hash)) && fix !== location.hash && n++ < 4) history.replaceState(null, '', fix);
+  const [pth, qs] = location.hash.replace(/^#\/?/, '').split('?');
+  const parts = pth.split('/').filter(Boolean).map(decodeURIComponent), Q = new URLSearchParams(qs || '');
   const c = RESERVED.includes(parts[0]) ? null : App.courses[parts[0]]; let v;
   if (!parts.length) v = home();
-  else if (parts[0] === 'trainings') v = trainings();
-  else if (parts[0] === 'topics') v = topicPage(parts[1]);
+  else if (parts[0] === 'explore') v = explore(Q);
+  else if (parts[0] === 'categories') v = parts[1] ? category(parts[1]) : categories();
   else if (parts[0] === 'my') v = myLearning();
   else if (!c) v = notFound();
   else if (c.soon) v = soonPage(c);
-  else if (!parts[1] || c.type === 'collection') v = grid(c);
-  else if (parts[1] === 'exam') v = exam(c);
-  else if (parts[1] === 'library') v = library(c);
+  else if (c.type === 'collection') v = grid(c);
+  else if (!parts[1]) v = overview(c);
+  else if (parts[1] === 'learn') v = learn(c, parts[2]);
+  else if (parts[1] === 'resources') v = resources(c);
   else if (parts[1] === 'extras') v = extras(c);
-  else { const sec = secsOf(c).find(s => s.id === parts[1]); v = sec ? section(c, sec, parts[2]) : notFound(); }
+  else v = notFound();
   const key = parts.slice(0, 2).join('/');
-  if (key !== shown || !$('#app').firstElementChild) { $('#app').innerHTML = v.html; v.after && v.after(); window.scrollTo({ top: 0, behavior: 'instant' }); if (shown !== null) { const h = $('#app h1'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } } }
-  else if (v.update) v.update();
+  if (key !== shown || !$('#app').firstElementChild || !v.update) {
+    $('#app').innerHTML = v.html; v.after && v.after(); window.scrollTo({ top: 0, behavior: 'instant' });
+    if (shown !== null) { const h = $('#app h1'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
+  } else v.update();
   shown = key;
-  if (parts[2] === 'test') setTimeout(() => $('#test')?.scrollIntoView({ behavior: 'instant', block: 'start' }), 60);
   document.title = v.title === 'Kalam CX Academy' ? v.title : `${v.title} · Kalam CX Academy`;
   nav(parts[0] || '', c && !c.soon && c.type !== 'collection' ? c : null, parts[1], v.crumbs);
   reveal($('#app'));
 }
 addEventListener('hashchange', route);
-/* global nav (Home · Trainings · My learning) + a local bar for the open training: breadcrumb on the left, its pages on the right */
+/* main nav (Home · Explore courses · Categories · My learning) + a course bar inside a course: breadcrumb left, course pages right */
 function nav(top, c, cur, crumbs) {
-  const g = [['Home', '#/', top === ''], ['Trainings', '#/trainings', top === 'trainings' || top === 'topics' || !!App.courses[top]], ['My learning', '#/my', top === 'my']];
+  const g = [['Home', '#/', top === ''], ['Explore courses', '#/explore', top === 'explore'], ['Categories', '#/categories', top === 'categories'], ['My learning', '#/my', top === 'my']];
   $('#nav').innerHTML = g.map(([t, h, on]) => `<a href="${h}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`).join('');
   $('#nav').classList.remove('open'); $('#menu').setAttribute('aria-expanded', 'false');
   const ln = $('#lnav');
   if (!crumbs && !c) { ln.hidden = true; ln.innerHTML = ''; return; }
   const trail = crumbs || [];
-  const links = c ? [['Overview', `#/${c.id}`, !cur], ...secsOf(c).map((s, i) => [`${word(c)} ${i + 1}`, `#/${c.id}/${s.id}`, cur === s.id]),
-    ...(examOf(c) ? [['Final exam', `#/${c.id}/exam`, cur === 'exam']] : []), ...(extrasOf(c).length ? [['Extra videos', `#/${c.id}/extras`, cur === 'extras']] : []),
-    ...((c.resources || []).length ? [['Library', `#/${c.id}/library`, cur === 'library']] : [])] : [];
+  const links = c ? [['Overview', `#/${c.id}`, !cur], ['Learn', progress(c).resume, cur === 'learn'], ['Resources', `#/${c.id}/resources`, cur === 'resources'],
+    ...(extrasOf(c).length ? [['Extra videos', `#/${c.id}/extras`, cur === 'extras']] : [])] : [];
   ln.innerHTML = `<div class="in"><nav class="crumbs" aria-label="Breadcrumb"><ol>${trail.map(([t, h], i) => `<li>${h && i < trail.length - 1 ? `<a href="${h}">${esc(t)}</a>` : `<span aria-current="page">${esc(t)}</span>`}</li>`).join('')}</ol></nav>
-  ${links.length ? `<nav class="lpages" aria-label="${esc(c.title)}">${links.map(([t, h, on]) => `<a href="${h}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`).join('')}</nav>` : ''}</div>`;
+  ${links.length ? `<nav class="lpages" aria-label="Course: ${esc(c.title)}">${links.map(([t, h, on]) => `<a href="${h}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`).join('')}</nav>` : ''}</div>`;
   ln.hidden = false;
-  const on = $('.lpages a.on', ln); if (on) on.scrollIntoView({ block: 'nearest', inline: 'center' });
 }
-/* breadcrumb trail for a training page: Academy › Topic › Training [› page] */
+/* breadcrumb trail for a course page: Academy › Category › Course [› page] */
 function trail(c, ...more) {
   const t = topicOf(c), out = [['Academy', '#/']];
-  if (t) out.push([t.name, `#/topics/${t.id}`]);
+  if (t) out.push([t.name, `#/categories/${t.id}`]);
   out.push([c.navTitle || c.title, `#/${c.id}`]);
   return out.concat(more);
 }
@@ -177,145 +222,297 @@ const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.
 function reveal(scope) { $$('.rv:not(.seen)', scope).forEach(el => io ? io.observe(el) : el.classList.add('seen')); setTimeout(() => { if (!$('.rv.seen', scope)) $$('.rv', scope).forEach(el => el.classList.add('seen')); }, 2500); }
 const notFound = () => ({ title: 'Page not found', html: '<section class="band"><div class="in narrow center"><h1 class="display">This page isn\'t here.</h1><p class="sub center">The link may be old.</p><a class="pill big" href="#/">Go to the Academy</a></div></section>' });
 
-/* ---------- training cards, grouped by topic ---------- */
+/* ---------- course cards ---------- */
 function coverOf(c) {
   if (c.cover) return `<img src="${esc(url(c, c.cover))}" alt="" loading="lazy">`;
   const yt = c.sections.length ? vids(c.sections[0]).filter(v => v.yt).slice(0, 4) : [];
   if (yt.length) return `<span class="ytmosaic">${yt.map(v => `<img src="https://i.ytimg.com/vi/${esc(v.yt)}/hqdefault.jpg" alt="" loading="lazy">`).join('')}</span>`;
   return '<span class="blank"><img src="img/kalam-mark.png" alt=""></span>';
 }
-function ccard(c) {
+function ccard(c, hits) {
   const t = topicOf(c);
-  if (c.soon) return `<div class="ccard soon rv"><span class="cimg">${coverOf(c)}<span class="tag">Coming soon</span></span><span class="cx"><small>${esc(t?.name || 'Training')}</small><b>${esc(c.title)}</b><span class="cs">${esc(c.subtitle || '')}</span>${c.level ? `<span class="cm">${esc(c.level)}</span>` : ''}</span></div>`;
-  const n = c.sections.reduce((a, s) => a + vids(s).length, 0), m = mins(c), p = progress(c);
-  const meta = [c.level, m ? hours(m) : `${n} videos`, langShort(c)].filter(Boolean).map(esc).join(' · ');
-  return `<a class="ccard rv" href="#/${c.id}"><span class="cimg">${coverOf(c)}<span class="play">${PLAY}</span></span><span class="cx"><small>${esc(t?.name || 'Training')}</small><b>${esc(c.title)}</b><span class="cs">${esc(c.subtitle || '')}</span>
-  <span class="cm">${meta}</span>${p.started ? `<span class="cp">${bar(p.pct)}<span>${p.pct}% done</span></span>` : ''}</span></a>`;
+  if (c.soon) return `<div class="ccard soon rv"><span class="cimg">${coverOf(c)}<span class="tag">Planned</span></span><span class="cx"><small>${esc(t?.name || 'Course')}</small><b>${esc(c.title)}</b><span class="cs">${esc(c.subtitle || 'Not available yet.')}</span><span class="cm">Planned · not available yet</span></span></div>`;
+  const T = timeOf(c), p = progress(c), who = people(c).map(x => x.name).join(', ');
+  return `<a class="ccard rv" href="#/${c.id}"><span class="cimg">${coverOf(c)}<span class="play">${PLAY}</span></span><span class="cx"><small>${esc(t?.name || 'Course')}</small><b>${esc(c.title)}</b>
+  ${who ? `<span class="cwho">${esc(who)}</span>` : ''}<span class="cs">${esc(c.subtitle || '')}</span>
+  <span class="cm"><span>${esc(c.level || 'All levels')}</span><span>${T.video ? `${hrs(T.video)} video` : `${T.readings} lessons · ${hrs(T.reading)}`}</span><span>${esc(langShort(c))}</span><span class="${free(c) ? 'free' : ''}">${free(c) ? 'Free' : 'Paid'}</span></span>
+  ${hits && hits.length ? `<span class="chits">Includes: ${hits.slice(0, 3).map(esc).join(' · ')}</span>` : ''}
+  ${p.started ? `<span class="cp">${bar(p.pct)}<span>${p.pct}% done</span></span>` : ''}</span></a>`;
 }
-function topicBlocks(only, cap) {
-  const all = listed(), groups = App.topics.filter(t => !only || t.id === only).map(t => [t, all.filter(c => (App.entries[c.id]?.topic || c.category) === t.id)]).filter(([, l]) => l.length);
-  const loose = only ? [] : all.filter(c => !App.topics.some(t => t.id === (App.entries[c.id]?.topic || c.category)));
-  if (loose.length) groups.push([{ id: '', name: 'More trainings' }, loose]);
-  return groups.map(([t, l]) => `<section class="topic"${only ? '' : ` aria-labelledby="t-${esc(t.id)}"`}>${only ? '' : `<div class="th2"><h2 class="headline small2 rv" id="t-${esc(t.id)}">${esc(t.name)}</h2>
-  ${t.id && cap && l.length > cap ? `<a class="link rv" href="#/topics/${esc(t.id)}">See all ${l.length} ${CHEV}</a>` : ''}</div>${t.blurb ? `<p class="tblurb rv">${esc(t.blurb)}</p>` : ''}`}
-  <div class="cgrid">${l.slice(0, cap || l.length).map(ccard).join('')}</div></section>`).join('');
-}
-function continueRow() {
-  const l = listed().filter(c => !c.soon && c.type !== 'collection' && Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id)).slice(0, 3);
-  if (!l.length) return '';
-  return `<div class="band tight"><div class="in"><h2 class="headline small2 rv">Continue where you left off.</h2><div class="rows">${l.map(resumeRow).join('')}</div></div></div>`;
+function catTile(t) {
+  const n = live().filter(c => topicId(c) === t.id).length, planned = listed().filter(c => c.soon && topicId(c) === t.id).length;
+  return `<a class="cat rv" href="#/categories/${esc(t.id)}"><b>${esc(t.name)}</b><span>${esc(t.blurb || '')}</span>
+  <small class="${n ? '' : 'plan'}">${n ? `${n} course${n > 1 ? 's' : ''}` : planned ? 'Planned · coming later' : 'Planned · no courses yet'}</small></a>`;
 }
 function resumeRow(c) {
-  const p = progress(c), s = p.resumeSec, i = s ? secsOf(c).indexOf(s) : -1;
-  return `<div class="rrow rv"><a class="rimg" href="#/${c.id}" tabindex="-1" aria-hidden="true">${coverOf(c)}</a><div class="rx"><small>${esc(topicOf(c)?.name || 'Training')}</small><a class="rt" href="#/${c.id}">${esc(c.title)}</a>
-  <span class="cp">${bar(p.pct)}<span>${p.watched} of ${p.total} videos${p.tests ? ` · ${p.pass} of ${p.tests} tests passed` : ''}</span></span></div>
-  <a class="pill" href="${p.resume}">${p.pct ? 'Resume' : 'Start'}${i >= 0 ? `<span class="sr"> ${esc(c.title)},</span> ${word(c)} ${i + 1}` : ''}</a></div>`;
+  const p = progress(c);
+  return `<div class="rrow rv"><a class="rimg" href="#/${c.id}" tabindex="-1" aria-hidden="true">${coverOf(c)}</a><div class="rx"><small>${esc(topicOf(c)?.name || 'Course')}</small><a class="rt" href="#/${c.id}">${esc(c.title)}</a>
+  <span class="cp">${bar(p.pct)}<span>${p.done} of ${p.total} steps · ${p.watched} of ${p.videos} videos${p.tests ? ` · ${p.pass} of ${p.tests} tests passed` : ''}</span></span>
+  ${p.at ? `<span class="rnext">Next: ${esc(p.at.L.title)}</span>` : ''}</div>
+  <a class="pill" href="${p.resume}">${p.done ? 'Resume' : 'Start'}<span class="sr"> ${esc(c.title)}</span></a></div>`;
 }
 
-/* ---------- Academy home, all trainings, one topic, my learning ---------- */
+/* ---------- home ---------- */
+const searchForm = (q, big) => `<form class="search ${big ? 'big' : ''}" role="search" action="#/explore" data-search>
+  <label class="sr" for="q${big ? 'h' : ''}">Search courses</label><input id="q${big ? 'h' : ''}" name="q" type="search" value="${esc(q || '')}" placeholder="Search courses and lessons, e.g. VLOOKUP" autocomplete="off">
+  <button class="pill" type="submit">Search</button></form>`;
+function wireSearch() { $$('[data-search]').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); const q = $('input', f).value.trim(); location.hash = '#/explore' + (q ? '?q=' + encodeURIComponent(q) : ''); })); }
 function home() {
-  const P = App.cat.platform, first = listed().find(c => !c.soon && c.type !== 'collection');
+  const P = App.cat.platform, L = live(), feat = L.filter(c => c.featured === true || c.featured === 'True' || c.featured === 'true');
+  const started = L.filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id)).slice(0, 3);
+  const planned = listed().filter(c => c.soon);
   return { title: 'Kalam CX Academy', html: `<section class="hero"><div class="in">
   <p class="eyebrow center rv">${esc(P.name || 'Kalam CX Academy')}</p>
   <h1 class="mega center rv">Learn it.<br><span class="grad">Use it on the floor.</span></h1>
   <p class="sub center wide rv">${esc(P.intro)}</p>
-  <div class="ctas rv"><a class="pill big" href="#/trainings">Browse trainings</a>${first ? `<a class="link big" href="#/${first.id}">Start with ${esc(first.navTitle || first.title)} ${CHEV}</a>` : ''}</div></div></section>
- ${continueRow()}
- <div class="band"><div class="in">${topicBlocks(null, 3)}<p class="soonnote rv">More trainings are on the way. Each one appears here, under its topic, with the same simple layout.</p></div></div>
+  <div class="rv">${searchForm('', true)}</div>
+  <p class="hnote rv">${L.length} course${L.length === 1 ? '' : 's'} available${planned.length ? ` · ${planned.length} planned` : ''} · All free</p></div></section>
+ <div class="band tight"><div class="in"><div class="th2"><h2 class="headline small2 rv">Browse by topic.</h2><a class="link rv" href="#/categories">All categories ${CHEV}</a></div>
+  <div class="cats">${App.topics.map(catTile).join('')}</div></div></div>
+ <div class="band tight"><div class="in"><div class="th2"><h2 class="headline small2 rv">${feat.length ? 'Featured courses.' : 'Courses.'}</h2><a class="link rv" href="#/explore">Explore all courses ${CHEV}</a></div>
+  <div class="cgrid">${(feat.length ? feat : L).map(c => ccard(c)).join('')}${planned.slice(0, 2).map(c => ccard(c)).join('')}</div>
+  ${L.length < 2 ? '<p class="note left rv">Excel is the first course. More courses will appear here as they are published. Popularity and ratings will only be shown once there is real learner data.</p>' : ''}</div></div>
+ ${started.length ? `<div class="band tight"><div class="in"><h2 class="headline small2 rv">Continue learning.</h2><div class="rows">${started.map(resumeRow).join('')}</div></div></div>` : ''}
  <div class="band gray"><div class="in"><h2 class="headline center rv">How it works.</h2>
-  <div class="steps"><div class="rv"><b>1</b><h3>Pick a training</h3><p>Every training is free and opens in your browser.</p></div><div class="rv"><b>2</b><h3>Watch</h3><p>Short videos with the trainer's own voice.</p></div><div class="rv"><b>3</b><h3>Practise</h3><p>Repeat each step with the practice files.</p></div><div class="rv"><b>4</b><h3>Test</h3><p>Self-marking tests. Your progress stays in this browser.</p></div></div></div></div>` };
+  <div class="steps"><div class="rv"><b>1</b><h3>Find a course</h3><p>Search, or browse by topic. Every course is free and opens in your browser.</p></div><div class="rv"><b>2</b><h3>Learn step by step</h3><p>Short videos in modules, with the trainer's own voice.</p></div><div class="rv"><b>3</b><h3>Practise and test</h3><p>Workbooks, slides and a self-marking test in every module.</p></div><div class="rv"><b>4</b><h3>Finish strong</h3><p>A practical final assessment. Progress is saved in this browser only, with no account.</p></div></div></div></div>`,
+    after: wireSearch };
 }
-function trainings() {
-  return { title: 'All trainings', crumbs: [['Academy', '#/'], ['All trainings']], html: `<section><div class="band slim"><div class="in">
-  <h1 class="display rv">All trainings.</h1><p class="sub wide rv">${esc(App.cat.platform.tagline || '')} Grouped by topic. All free.</p>${topicBlocks()}</div></div></section>` };
+
+/* ---------- explore: search + filters over real course data ---------- */
+const DUR = [['short', 'Under 2 hours of video', m => m < 120], ['medium', '2 to 6 hours of video', m => m >= 120 && m <= 360], ['long', 'Over 6 hours of video', m => m > 360]];
+function searchHits(c, q) {
+  if (!q) return { ok: true, hits: [] };
+  const words = q.toLowerCase().split(/\s+/).filter(Boolean), t = topicOf(c);
+  const head = [c.title, c.subtitle, c.intro, ...(c.description || []), ...(c.outcomes || []), t?.name, ...people(c).map(p => p.name), ...secsOf(c).map(s => `${s.title} ${s.covers || ''}`)].join(' ').toLowerCase();
+  const lessons = c.sections.flatMap(s => s.lessons).filter(l => l.title);
+  const hits = lessons.filter(l => words.every(w => l.title.toLowerCase().includes(w))).map(l => l.title);
+  const ok = words.every(w => head.includes(w) || lessons.some(l => l.title.toLowerCase().includes(w)));
+  return { ok, hits: [...new Set(hits)] };
 }
-function topicPage(id) {
+function explore(Q) {
+  const all = live(), planned = listed().filter(c => c.soon);
+  const opt = (name, label, items, cur) => `<label class="flt"><span>${label}</span><select name="${name}"><option value="">Any</option>${items.map(([v, t]) => `<option value="${esc(v)}"${cur === v ? ' selected' : ''}>${esc(t)}</option>`).join('')}</select></label>`;
+  const levels = [...new Set(all.map(c => c.level).filter(Boolean))], langs = [...new Set(all.map(c => c.language).filter(Boolean))];
+  const html = `<section><div class="band slim"><div class="in">
+  <h1 class="display rv">Explore courses.</h1><p class="sub wide rv">Search every course and lesson, then narrow by topic, level, language, length and price.</p>
+  ${searchForm(Q.get('q'))}
+  <form class="filters" id="flt" aria-label="Filter courses">
+   ${opt('topic', 'Topic', App.topics.map(t => [t.id, t.name]), Q.get('topic') || '')}
+   ${opt('level', 'Level', levels.map(l => [l, l]), Q.get('level') || '')}
+   ${opt('lang', 'Language', langs.map(l => [l, LANG[l] || l]), Q.get('lang') || '')}
+   ${opt('dur', 'Video length', DUR.map(([v, t]) => [v, t]), Q.get('dur') || '')}
+   ${opt('price', 'Price', [['free', 'Free'], ['paid', 'Paid']], Q.get('price') || '')}
+   <button type="button" class="link btnlink" id="clr">Clear filters</button></form>
+  <p class="count" id="count" role="status" aria-live="polite"></p>
+  <div class="cgrid" id="results"></div>
+  ${planned.length ? `<h2 class="headline small2 rv">Planned.</h2><p class="tblurb">Not available yet. Shown so you know what's coming.</p><div class="cgrid">${planned.map(c => ccard(c)).join('')}</div>` : ''}
+  </div></div></section>`;
+  function draw() {
+    const P = new URLSearchParams(location.hash.split('?')[1] || ''), q = (P.get('q') || '').trim();
+    const d = DUR.find(x => x[0] === P.get('dur'));
+    const res = all.map(c => [c, searchHits(c, q)]).filter(([c, s]) => s.ok
+      && (!P.get('topic') || topicId(c) === P.get('topic')) && (!P.get('level') || c.level === P.get('level')) && (!P.get('lang') || c.language === P.get('lang'))
+      && (!d || d[2](timeOf(c).video)) && (!P.get('price') || (P.get('price') === 'free') === free(c)));
+    $('#results').innerHTML = res.map(([c, s]) => ccard(c, s.hits)).join('') || `<div class="empty"><h3>No courses match.</h3><p>${App.topics.find(t => t.id === P.get('topic')) && !all.some(c => topicId(c) === P.get('topic')) ? 'This topic is planned and has no courses yet. ' : ''}Try fewer filters or another word.</p></div>`;
+    $('#count').textContent = `${res.length} course${res.length === 1 ? '' : 's'}${q ? ` for "${q}"` : ''}`;
+    $$('#results .rv').forEach(e => e.classList.add('seen'));
+  }
+  function push() {
+    const P = new URLSearchParams(); const q = $('#q').value.trim(); if (q) P.set('q', q);
+    $$('#flt select').forEach(s => s.value && P.set(s.name, s.value));
+    history.replaceState(null, '', '#/explore' + (P.toString() ? '?' + P : '')); draw();
+  }
+  let timer = 0;
+  return { title: 'Explore courses', crumbs: [['Academy', '#/'], ['Explore courses']], html, after() {
+    draw();
+    $('#flt').addEventListener('change', push);
+    $('[data-search]').addEventListener('submit', e => { e.preventDefault(); push(); });
+    $('#q').addEventListener('input', () => { clearTimeout(timer); timer = setTimeout(push, 250); });
+    $('#clr').addEventListener('click', () => { $$('#flt select').forEach(s => (s.value = '')); push(); });
+  } };
+}
+
+/* ---------- categories ---------- */
+function categories() {
+  return { title: 'Categories', crumbs: [['Academy', '#/'], ['Categories']], html: `<section><div class="band slim"><div class="in">
+  <h1 class="display rv">Categories.</h1><p class="sub wide rv">Courses grouped by topic. Topics without courses yet are marked as planned.</p>
+  <div class="cats big">${App.topics.map(catTile).join('')}</div></div></div></section>` };
+}
+function category(id) {
   const t = App.topics.find(x => x.id === id); if (!t) return notFound();
-  return { title: t.name, crumbs: [['Academy', '#/'], ['All trainings', '#/trainings'], [t.name]], html: `<section><div class="band slim"><div class="in">
-  <p class="eyebrow rv">Topic</p><h1 class="display rv">${esc(t.name)}.</h1>${t.blurb ? `<p class="sub wide rv">${esc(t.blurb)}</p>` : ''}${topicBlocks(id)}</div></div></section>` };
+  const L = listed().filter(c => topicId(c) === id), n = L.filter(c => !c.soon).length;
+  return { title: t.name, crumbs: [['Academy', '#/'], ['Categories', '#/categories'], [t.name]], html: `<section><div class="band slim"><div class="in">
+  <p class="eyebrow rv">Category</p><h1 class="display rv">${esc(t.name)}.</h1>${t.blurb ? `<p class="sub wide rv">${esc(t.blurb)}</p>` : ''}
+  ${L.length ? `<div class="cgrid">${L.map(c => ccard(c)).join('')}</div>` : ''}
+  ${!n ? `<div class="empty"><h3>No courses here yet.</h3><p>This topic is planned. Courses will appear here when they are published.</p><a class="pill" href="#/explore">See available courses</a></div>` : ''}</div></div></section>` };
 }
+
+/* ---------- my learning ---------- */
 function myLearning() {
-  const l = listed().filter(c => !c.soon && Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id));
+  const l = live().filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id));
   const ext = App.order.map(id => App.courses[id]).filter(c => c.partOf && Store.started(c.id));
   return { title: 'My learning', crumbs: [['Academy', '#/'], ['My learning']], html: `<section><div class="band slim"><div class="in narrow">
-  <h1 class="display rv">My learning.</h1><p class="sub wide rv">Saved in this browser only. On another phone or laptop you start fresh.</p>
-  ${l.length ? `<div class="rows">${l.filter(c => c.type !== 'collection').map(resumeRow).join('')}</div>` : `<div class="card center rv"><h3>Nothing started yet.</h3><p>Pick a training and press play. It will show up here with your progress.</p><a class="pill" href="#/trainings">Browse trainings</a></div>`}
-  ${ext.length ? `<p class="note">Also watched: ${ext.map(c => `<a href="#/${c.partOf}/extras">${esc(c.title)}</a>`).join(', ')}.</p>` : ''}</div></div></section>` };
+  <h1 class="display rv">My learning.</h1><p class="sub wide rv">Saved in this browser only. There are no accounts yet, so on another phone or laptop you start fresh.</p>
+  ${l.length ? `<div class="rows">${l.map(resumeRow).join('')}</div>` : `<div class="empty"><h3>Nothing started yet.</h3><p>Pick a course and press Start. It will show up here with your progress.</p><a class="pill" href="#/explore">Explore courses</a></div>`}
+  ${ext.length ? `<p class="note left">Also watched: ${ext.map(c => `<a href="#/${c.partOf}/extras">${esc(c.title)}</a>`).join(', ')}.</p>` : ''}</div></div></section>` };
 }
 function soonPage(c) {
   const t = topicOf(c);
-  return { title: c.title, crumbs: [['Academy', '#/'], ...(t ? [[t.name, `#/topics/${t.id}`]] : []), [c.title]], html: `<section><div class="band"><div class="in narrow center">
-  <p class="eyebrow center">Coming soon</p><h1 class="display center">${esc(c.title)}</h1><p class="sub center wide">${esc(c.subtitle || 'This training is being prepared.')}</p>
-  <a class="pill big" href="#/trainings">See the trainings you can take now</a></div></div></section>` };
+  return { title: c.title, crumbs: [['Academy', '#/'], ...(t ? [[t.name, `#/categories/${t.id}`]] : []), [c.title]], html: `<section><div class="band"><div class="in narrow center">
+  <p class="eyebrow center">Planned</p><h1 class="display center">${esc(c.title)}</h1><p class="sub center wide">${esc(c.subtitle || 'This course is being prepared.')} It isn't available yet.</p>
+  <a class="pill big" href="#/explore">See available courses</a></div></div></section>` };
 }
 
-/* ---------- session page (dark player + playlist, topics, practice, test) ---------- */
-function section(c, sec, lessonId) {
-  const ss = secsOf(c), i = ss.indexOf(sec), list = vids(sec), q = quizOf(sec), F = filesOf(c, sec), W = word(c);
-  const nextSec = ss[i + 1], nextLink = nextSec ? `<a class="link" href="#/${c.id}/${nextSec.id}">Next: ${W} ${i + 2} ${CHEV}</a>` : examOf(c) ? `<a class="link" href="#/${c.id}/exam">Next: the final exam ${CHEV}</a>` : `<a class="link" href="#/${c.id}">Back to the overview ${CHEV}</a>`;
-  let cur = Math.max(0, list.findIndex(v => v.id === lessonId));
-  const html = `<section class="page-session">
- <div class="band dark"><div class="in">
-  <p class="eyebrow">${W} ${i + 1}</p><h1 class="display">${esc(sec.title)}</h1><p class="sub">${esc(sec.blurb || sec.summary)}</p>
-  ${list.length ? `<div class="player rv"><div class="screen" id="screen"></div>
-  <aside class="list" aria-label="${W} videos"><div class="lh"><b>Up next</b><span>${list.length} videos · ${list.reduce((a, v) => a + (v.minutes || 0), 0)} min</span></div><ol id="pl"></ol>${sec.note ? `<p class="soon">${esc(sec.note)}</p>` : ''}</aside></div>
-  <div class="nowbar"><div><span class="lbl" id="nk"></span><b id="nt"></b></div><label class="auto"><input type="checkbox" id="auto" checked><span class="sw"></span>Autoplay next</label></div>` : ''}
- </div></div>
- ${(sec.topics || []).length || F.workbook || F.slides ? `<div class="band"><div class="in">${(sec.topics || []).length ? `<h2 class="headline rv">What you'll be able to do.</h2>
-  <div class="feats">${sec.topics.map(([a, b]) => `<div class="feat rv"><span class="ic">${CHECK}</span><h3>${esc(a)}</h3><p>${esc(b)}</p></div>`).join('')}</div>` : ''}
-  <div class="duo rv">${F.workbook ? `<div class="card"><p class="eyebrow">Practise</p><h3>Do it yourself.</h3><p>${esc(F.practice || 'Practise each step on your own copy of the data.')}</p><a class="link" href="${esc(F.workbook)}">Download the workbook ${CHEV}</a></div>` : ''}
-  ${F.slides || F.testPdf ? `<div class="card"><p class="eyebrow">Review</p><h3>Keep the slides.</h3><p>Every slide from this ${W.toLowerCase()} in one PDF${F.testPdf ? ', with a printable copy of the test' : ''}.</p>${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Open the slides ${CHEV}</a>` : ''}${F.testPdf ? `<a class="link" href="${esc(F.testPdf)}" target="_blank" rel="noopener">Printable test ${CHEV}</a>` : ''}</div>` : ''}</div></div></div>` : ''}
- ${q ? `<div class="band gray" id="test"><div class="in narrow">
-  <p class="eyebrow center">${W} ${i + 1} test</p><h2 class="headline center">Check what stuck.</h2>
-  <p class="sub center">${q.questions.length} questions. Pass mark ${q.pass}. Each answer is marked instantly, with the reason.</p>${q.note ? `<p class="note center">${esc(q.note)}</p>` : ''}
-  <div class="scorecard"><div class="ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" class="trk"/><circle cx="18" cy="18" r="15.9" class="val" id="ring"/></svg><b id="rn">0</b></div><div><b class="score" id="score" role="status" aria-live="polite"></b><button class="link btnlink" data-act="reset">Start over</button></div></div>
-  <div class="quiz" id="quiz"></div>
-  <div class="center nextnav">${nextLink}</div></div></div>` : `<div class="band slim"><div class="in center nextnav">${nextLink}</div></div>`}</section>`;
-  const v = () => $('#vid');
-  function load(k, play) {
-    cur = k; const L = list[k];
-    if (frameSrc(L)) {
-      $('#screen').innerHTML = `<iframe src="${esc(frameSrc(L, play))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
-      if (play) { Store.setDone(c.id, L.id); }
-    } else {
-      if (!v()) { $('#screen').innerHTML = '<video id="vid" controls playsinline preload="metadata"></video>'; wire(); }
-      v().src = media(c, L.src); v().poster = media(c, L.poster); v().setAttribute('aria-label', 'Video: ' + L.title);
-      if (play) v().play().catch(() => {});
+/* ---------- course overview ---------- */
+function overview(c) {
+  const T = timeOf(c), p = progress(c), secs = secsOf(c), ex = examOf(c), P = path(c), W = word(c), t = topicOf(c);
+  const trainers = people(c), [h1a, h1b] = c.headline || [c.title, ''];
+  const row = x => `<li class="${lessonDone(c, x.L) ? 'done' : ''}"><a href="#/${c.id}/learn/${esc(x.L.id)}"><span class="li">${ICON[x.L.type] || ''}</span><span class="lt">${esc(x.L.title)}${x.L.kind && isVid(x.L) ? `<small>${esc(x.L.kind)}</small>` : ''}</span><span class="lm">${x.L.minutes ? `${+x.L.minutes} min` : ''}</span>${lessonDone(c, x.L) ? `<span class="lok">${CHECK}<span class="sr">Done</span></span>` : '<span class="lok"></span>'}</a></li>`;
+  const modules = secs.map((s, i) => {
+    const xs = P.filter(x => x.sec === s), vs = vids(s), m = vs.reduce((a, v) => a + (+v.minutes || 0), 0), d = xs.filter(x => lessonDone(c, x.L)).length;
+    return `<details class="mod"${p.at && p.at.sec === s ? ' open' : ''}><summary><span class="mn">${W} ${i + 1}</span><span class="mt"><b>${esc(s.title)}</b>${s.covers ? `<small>${esc(s.covers)}</small>` : ''}</span>
+    <span class="mc">${[vs.length ? `${vs.length} videos · ${m} min` : '', s.lessons.filter(l => l.type === 'reading').length ? `${s.lessons.filter(l => l.type === 'reading').length} reading lessons` : ''].filter(Boolean).join(' · ')}${s.lessons.some(l => l.type === 'practice') ? ' · practice' : ''}${quizOf(s) ? ' · test' : ''}${d ? ` · ${d}/${xs.length} done` : ''}</span></summary>${s.note ? `<p class="gnote mnote">${esc(s.note)}</p>` : ''}<ol class="lessons">${xs.map(row).join('')}</ol></details>`;
+  }).join('') + (ex ? `<details class="mod"><summary><span class="mn">Final</span><span class="mt"><b>${esc(ex.title || 'Final assessment')}</b><small>${esc(ex.summary || '')}</small></span><span class="mc">${T.exam ? `${T.exam} min` : ''}</span></summary><ol class="lessons">${P.filter(x => x.mi < 0).map(row).join('')}</ol></details>` : '');
+  const fl = secs.map((s, i) => [s, i, filesOf(c, s)]), wb = fl.find(([, , f]) => f.workbook);
+  const startLabel = p.done ? `Resume${p.at ? ': ' + p.at.L.title : ''}` : 'Start the course';
+  return { title: c.title, crumbs: trail(c), html: `<section class="ov">
+  <div class="band dark ehero"><div class="in">
+   <p class="eyebrow">${esc(t?.name || 'Course')}</p><h1 class="display">${esc(h1a)}${h1b ? `<br><span class="grad">${esc(h1b)}</span>` : ''}</h1>
+   <p class="sub wide">${esc(c.intro || c.subtitle)}</p>
+   <ul class="facts" aria-label="Course facts">${trainers.filter(x => !x.external).map(x => `<li class="tchip">${x.photo ? `<img src="${esc(x.photo)}" alt="">` : ''}${esc(x.name)}</li>`).join('')}
+    <li>${esc(c.levelRange || c.level || 'All levels')}</li><li>${esc(c.languageLabel || langShort(c))}</li>${T.video ? `<li>${hours(T.video)} of video</li>` : ''}${T.reading ? `<li>${T.readings} reading lessons</li>` : ''}<li>${secs.length} ${W.toLowerCase()}s</li><li>${free(c) ? 'Free' : 'Paid'}</li></ul>
+   <div class="hcta"><a class="pill big" href="${p.resume}">${esc(startLabel)}</a>${p.started ? `<span class="hprog">${bar(p.pct)}<span>${p.pct}% done</span></span>` : ''}<a class="link" href="#/${c.id}" data-jump="curriculum">See the curriculum ${CHEV}</a></div></div></div>
+  <div class="band slim"><div class="in">
+   <div class="ovgrid">
+    <div>${(c.description || []).length ? `<h2 class="headline small2">About this course.</h2>${c.description.map(d => `<p class="body">${esc(d)}</p>`).join('')}` : ''}
+     ${(c.outcomes || []).length ? `<h2 class="headline small2">What you'll learn.</h2><ul class="outs">${c.outcomes.map(o => `<li><span class="ic">${CHECK}</span>${esc(o)}</li>`).join('')}</ul>` : ''}</div>
+    <aside class="side">
+     <div class="card"><h3>Course length</h3><table class="len"><caption class="sr">Course length</caption><tbody>
+      ${T.videos ? `<tr><th scope="row">Video</th><td>${T.videos} videos · ${T.video} min</td></tr>` : ''}
+      ${T.reading ? `<tr><th scope="row">Reading</th><td>${T.readings} lessons · about ${T.reading} min</td></tr>` : ''}
+      ${T.practice ? `<tr><th scope="row">Practice</th><td>about ${T.practice} min <small>(${T.nPractice} × ${Math.round(T.practice / T.nPractice)})</small></td></tr>` : ''}
+      ${T.tests ? `<tr><th scope="row">${W} tests</th><td>about ${T.tests} min <small>(${T.nTests} × ${Math.round(T.tests / T.nTests)})</small></td></tr>` : ''}
+      ${T.exam ? `<tr><th scope="row">Final assessment</th><td>${T.exam} min</td></tr>` : ''}
+      <tr class="tot"><th scope="row">Total</th><td>about ${hours(T.total)}</td></tr></tbody></table>
+      <p class="fine">${T.video ? `The ${hours(T.video)} figure is video only. ` : ''}Reading, practice and test times are the course's estimates.</p></div>
+    </aside></div>
+   ${(c.audience || []).length || (c.requirements || []).length ? `<div class="duo">${(c.audience || []).length ? `<div class="card"><h3>Who it's for</h3><ul class="plain">${c.audience.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}${(c.requirements || []).length ? `<div class="card"><h3>Before you start</h3><ul class="plain">${c.requirements.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}</div>` : ''}
+  </div></div>
+  <div class="band gray slim" id="curriculum"><div class="in narrow">
+   <h2 class="headline small2">Curriculum.</h2><p class="tblurb">${secs.length} ${W.toLowerCase()}s, then a final assessment. Each ${W.toLowerCase()} has videos, workbook practice and a self-marking test.</p>
+   <div class="mods">${modules}</div></div></div>
+  <div class="band slim"><div class="in">
+   <h2 class="headline small2">Practice files and assessments.</h2>
+   <div class="grid3">
+    ${wb ? `<a class="doc xl" href="${esc(wb[2].workbook)}"><span class="badge">XLSX</span><b>Practice workbook</b><span>Used in every ${W.toLowerCase()} and in the final assessment.</span><span class="link">Download ${CHEV}</span></a>` : ''}
+    ${fl.filter(([, , f]) => f.slides).length ? `<div class="doc"><span class="badge">PDF</span><b>Slides</b><span>${fl.filter(([, , f]) => f.slides).map(([s, i, f]) => `<a href="${esc(f.slides)}" target="_blank" rel="noopener">${W} ${i + 1}: ${esc(s.title)}</a>`).join('<br>')}</span></div>` : ''}
+    ${fl.some(([s]) => quizOf(s)) ? `<div class="doc"><span class="badge q">TEST</span><b>${W} tests</b><span>${fl.filter(([s]) => quizOf(s)).map(([s, i, f]) => `<a href="#/${c.id}/learn/${quizOf(s).id}">${W} ${i + 1} test</a> (${quizOf(s).questions.length} questions, pass ${quizOf(s).pass})${f.testPdf ? ` · <a href="${esc(f.testPdf)}" target="_blank" rel="noopener">printable</a>` : ''}`).join('<br>')}</span></div>` : ''}
+    ${ex ? `<a class="doc" href="#/${c.id}/learn/${ex.lessons[0].id}"><span class="badge q">FINAL</span><b>${esc(ex.lessons[0].title || 'Final assessment')}</b><span>${esc(ex.summary || '')}</span><span class="link">Open ${CHEV}</span></a>` : ''}
+   </div>
+   <p class="center"><a class="link" href="#/${c.id}/resources">All guides and files ${CHEV}</a>${extrasOf(c).length ? `&nbsp;&nbsp;<a class="link" href="#/${c.id}/extras">Extra videos ${CHEV}</a>` : ''}</p>
+  </div></div>
+  ${trainers.length ? `<div class="band gray slim"><div class="in"><h2 class="headline small2">${trainers.filter(x => !x.external).length > 1 ? 'Instructors.' : 'Instructor.'}</h2>${trainers.filter(x => !x.external).map(x => `<div class="trainer">${x.photo ? `<img src="${esc(x.photo)}" alt="Photo of ${esc(x.name)}">` : ''}<div><h3 class="headline small2">${esc(x.name)}</h3><p class="sub">${esc(x.title || '')}</p><p>${esc(x.bio || '')}</p></div></div>`).join('')}</div></div>` : ''}
+  </section>`,
+    after() { $$('[data-jump]').forEach(a => a.addEventListener('click', e => { e.preventDefault(); const el = document.getElementById(a.dataset.jump); el.scrollIntoView({ behavior: 'smooth' }); const h = $('h2', el); h.tabIndex = -1; h.focus({ preventScroll: true }); })); } };
+}
+
+/* ---------- learning view: player / practice / test / exam + curriculum sidebar + previous/next ---------- */
+function learn(c, lessonId) {
+  const P = path(c), W = word(c);
+  let k = P.findIndex(x => x.L.id === lessonId);
+  if (k < 0) { const r = progress(c).resume.split('/').pop(); k = Math.max(0, P.findIndex(x => x.L.id === r)); history.replaceState(null, '', `#/${c.id}/learn/${P[k].L.id}`); }
+  const collapsed = (() => { try { return localStorage.getItem('kalam.sidebar') === 'closed'; } catch (e) { return false; } })();
+  const html = `<section class="learn${collapsed ? ' nocurr' : ''}" id="learn">
+  <div class="lmain" id="lmain"></div>
+  <aside class="curr" id="curr" aria-label="Course content"><div class="ch"><b>Course content</b><button class="cclose" id="ccls" type="button" aria-label="Close course content">✕</button><span id="cprog"></span></div><div id="ctoc"></div></aside></section>`;
+  /* the lesson comes first for keyboard and screen-reader users; the curriculum is placed on the left by CSS */
+  let cur = k;
+  function toc() {
+    const p = progress(c);
+    $('#cprog').innerHTML = `${bar(p.pct)}<span>${p.done}/${p.total}</span>`;
+    const groups = [...secsOf(c).map((s, i) => [s, i]), ...(examOf(c) ? [[examOf(c), -1]] : [])];
+    $('#ctoc').innerHTML = groups.map(([s, i]) => {
+      const xs = P.map((x, j) => [x, j]).filter(([x]) => x.sec === s), open = P[cur].sec === s;
+      return `<details${open ? ' open' : ''}><summary><span>${i < 0 ? 'Final' : `${W} ${i + 1}`}</span><b>${esc(i < 0 ? (s.title || 'Final assessment') : s.title)}</b><small>${xs.filter(([x]) => lessonDone(c, x.L)).length}/${xs.length}</small></summary><ol>${xs.map(([x, j]) =>
+        `<li class="${j === cur ? 'on' : ''} ${lessonDone(c, x.L) ? 'done' : ''}"><a href="#/${c.id}/learn/${esc(x.L.id)}"${j === cur ? ' aria-current="page"' : ''}><span class="li">${lessonDone(c, x.L) ? CHECK : ICON[x.L.type] || ''}</span><span class="lt">${esc(x.L.title)}</span>${x.L.minutes ? `<span class="lm">${+x.L.minutes}m</span>` : ''}<span class="sr">${lessonDone(c, x.L) ? ' (done)' : ''}</span></a></li>`).join('')}</ol></details>`;
+    }).join('');
+  }
+  function show(j) {
+    cur = j; const x = P[j], L = x.L, F = x.mi >= 0 ? filesOf(c, x.sec) : {}, prev = P[j - 1], next = P[j + 1];
+    Store.visit(c.id, x.sec.id, L.id);
+    const doneBtn = L.type !== 'quiz' ? `<button class="pill ghost small" id="done" aria-pressed="${Store.isDone(c.id, L.id)}">${Store.isDone(c.id, L.id) ? '✓ Completed' : 'Mark as complete'}</button>` : '';
+    const files = (F.workbook || F.slides) && L.type !== 'practice' ? `<div class="lfiles"><b>For this ${W.toLowerCase()}</b>${F.workbook ? `<a class="link" href="${esc(F.workbook)}">Practice workbook ${CHEV}</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides (PDF) ${CHEV}</a>` : ''}${quizOf(x.sec) && L.type !== 'quiz' ? `<a class="link" href="#/${c.id}/learn/${quizOf(x.sec).id}">${W} test ${CHEV}</a>` : ''}</div>` : '';
+    let body = '';
+    if (isVid(L)) body = `<div class="screen" id="screen">${frameSrc(L) ? `<iframe src="${esc(frameSrc(L))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>` : `<video id="vid" controls playsinline preload="metadata" src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`}</div>
+      <div class="lbar"><p class="lmeta">${esc(L.kind || L.by || 'Video')}${L.minutes ? ` · ${+L.minutes} min` : ''}</p>${doneBtn}</div>${L.summary ? `<p class="body">${esc(L.summary)}</p>` : ''}${files}`;
+    else if (L.type === 'reading') body = `${L.image ? `<figure class="rfig"><img src="${esc(media(c, L.image))}" alt="${esc(L.alt || '')}"></figure>` : ''}
+      <div class="rblocks">${(L.blocks || []).map((b, n) => `<section class="rb${b.tone === 'warn' ? ' warn' : ''}">${b.h ? `<h2>${esc(b.h)}</h2>` : ''}${b.p ? `<p>${esc(b.p)}</p>` : ''}${b.code != null ? `<div class="code"><pre id="code-${n}"><code>${esc(b.code)}</code></pre><button type="button" class="pill ghost small" data-copy="code-${n}" aria-label="Copy${b.h ? ': ' + esc(b.h) : ''}">Copy</button></div>` : ''}</section>`).join('')}</div>
+      <div class="lbar"><p class="lmeta">Reading${L.minutes ? ` · about ${+L.minutes} min` : ''}</p>${doneBtn}</div>${files}`;
+    else if (L.type === 'practice') body = `<div class="card"><p class="eyebrow">Practice</p>${(L.body || []).map(b => `<p>${esc(b)}</p>`).join('')}
+      <div class="ctas left">${F.workbook ? `<a class="pill" href="${esc(F.workbook)}">Download the workbook</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides (PDF) ${CHEV}</a>` : ''}</div></div>
+      <div class="lbar"><p class="lmeta">About ${+L.minutes || 30} min · do it in Excel on your own copy</p>${doneBtn}</div>`;
+    else if (L.type === 'quiz') body = `<div id="test"><p class="sub">${L.questions.length} questions. Pass mark ${L.pass}. Each answer is marked instantly, with the reason.</p>${L.note ? `<p class="note left">${esc(L.note)}</p>` : ''}
+      <div class="scorecard"><div class="ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" class="trk"/><circle cx="18" cy="18" r="15.9" class="val" id="ring"/></svg><b id="rn">0</b></div><div><b class="score" id="score" role="status" aria-live="polite"></b><button class="link btnlink" data-act="reset">Start over</button>${F.testPdf ? ` · <a class="link" href="${esc(F.testPdf)}" target="_blank" rel="noopener">Printable test</a>` : ''}</div></div>
+      <div class="quiz" id="quiz"></div></div>`;
+    else if (L.type === 'exam') {
+      const wb = (L.resources || []).find(r => r.type === 'xlsx'), pdf = (L.resources || []).find(r => r.type === 'pdf');
+      body = `<p class="sub">${esc(L.intro || 'Open the workbook, complete every task, then reveal the answer key.')}${L.minutes ? ` ${esc(L.minutes)} minutes.` : ''}</p>
+      <div class="ctas left">${wb ? `<a class="pill" href="${esc(url(c, wb.href))}">Download the workbook</a>` : ''}${pdf ? `<a class="link" href="${esc(url(c, pdf.href))}" target="_blank" rel="noopener">Printable exam ${CHEV}</a>` : ''}</div>
+      <h2 class="headline small">The tasks</h2><div class="card exam">${L.html || ''}</div>
+      ${L.keyHtml ? `<div class="center"><button class="pill ghost" id="keybtn" aria-expanded="false" aria-controls="key">Show the answer key</button></div><div id="key" class="card key" hidden>${L.keyHtml}</div>` : ''}
+      <div class="lbar"><p class="lmeta">Self-marked. Your result isn't sent anywhere.</p>${doneBtn}</div>`;
     }
-    $('#nk').textContent = `${L.kind || L.by || ''}${L.minutes ? ' · ' + L.minutes + ' min' : ''}`; $('#nt').textContent = L.title; drawList();
-    Store.visit(c.id, sec.id, L.id);
+    $('#lmain').innerHTML = `<div class="ltop"><button class="ctoggle" id="ctog" aria-controls="curr" aria-expanded="${!$('#learn').classList.contains('nocurr')}"><span aria-hidden="true">☰</span> Course content</button><span class="lpos">Step ${j + 1} of ${P.length}</span></div>
+     <p class="eyebrow">${esc(modName(c, x))}</p><h1 class="headline">${esc(L.title)}</h1>${body}${x.sec.note && isVid(L) ? `<p class="gnote">${esc(x.sec.note)}</p>` : ''}
+     <nav class="pn" aria-label="Lesson navigation">${prev ? `<a class="prev" href="#/${c.id}/learn/${esc(prev.L.id)}" rel="prev"><small>Previous</small><b>${esc(prev.L.title)}</b></a>` : '<span></span>'}
+     ${next ? `<a class="next" href="#/${c.id}/learn/${esc(next.L.id)}" rel="next" id="nextbtn"><small>Next${next.sec !== x.sec ? ` · ${esc(modName(c, next))}` : ''}</small><b>${esc(next.L.title)}</b></a>` : `<a class="next" href="#/${c.id}" id="nextbtn"><small>Finished</small><b>Back to the course overview</b></a>`}</nav>`;
+    wire(L); toc();
+    const on = $('#ctoc li.on'); if (on && $('#curr').scrollHeight > $('#curr').clientHeight) on.scrollIntoView({ block: 'nearest' });
   }
-  function wire() {
-    const el = v();
-    el.addEventListener('timeupdate', () => { if (el.isConnected && el.duration && el.currentTime / el.duration > 0.9 && !Store.isDone(c.id, list[cur].id)) { Store.setDone(c.id, list[cur].id); drawList(); } });
-    el.addEventListener('ended', () => { if (!el.isConnected) return; Store.setDone(c.id, list[cur].id); if ($('#auto').checked && cur < list.length - 1) { load(cur + 1, true); history.replaceState(null, '', `#/${c.id}/${sec.id}/${list[cur].id}`); } else drawList(); });
+  function wire(L) {
+    $('#ctog').onclick = () => { const l = $('#learn'), o = l.classList.toggle('nocurr'); $('#ctog').setAttribute('aria-expanded', !o); try { localStorage.setItem('kalam.sidebar', o ? 'closed' : 'open'); } catch (e) {} if (!o && innerWidth <= 900) $('#ctoc a[aria-current]')?.focus(); };
+    if ($('#done')) $('#done').onclick = e => { const d = Store.isDone(c.id, L.id); d ? Store.unsetDone(c.id, L.id) : Store.setDone(c.id, L.id); const b = e.currentTarget; b.setAttribute('aria-pressed', !d); b.textContent = d ? 'Mark as complete' : '✓ Completed'; toc(); };
+    const v = $('#vid');
+    if (v) {
+      v.addEventListener('timeupdate', () => { if (v.isConnected && v.duration && v.currentTime / v.duration > 0.9 && !Store.isDone(c.id, L.id)) { Store.setDone(c.id, L.id); toc(); const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } } });
+      v.addEventListener('ended', () => { if (v.isConnected) $('#nextbtn')?.focus(); });
+    } else if (frameSrc(L) || L.type === 'reading') { Store.setDone(c.id, L.id); const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } }
+    $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+      const src = $('#' + b.dataset.copy), t = src.textContent; let ok = false;
+      try { await navigator.clipboard.writeText(t); ok = true; } catch (e) { const rg = document.createRange(); rg.selectNodeContents(src); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); try { ok = document.execCommand('copy'); } catch (e2) {} }
+      b.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(() => (b.textContent = 'Copy'), 1800);
+    }));
+    if (L.type === 'quiz') {
+      const draw = () => { $('#quiz').innerHTML = L.questions.map((q, n) => qcard(c, q, n, L.questions.length)).join(''); score(); };
+      const score = () => {
+        const ans = L.questions.map(q => Store.answer(c.id, q.id, q.rev)), done = ans.filter(a => a !== undefined).length, ok = L.questions.filter((q, n) => ans[n] === q.a).length, tot = L.questions.length;
+        $('#score').innerHTML = done === 0 ? 'Answer the first question to begin.' : `${ok} of ${done} correct` + (done < tot ? ` · ${tot - done} to go` : ok >= L.pass ? ' <span class="pass">· Passed</span>' : ` <span class="fail">· Pass mark is ${L.pass}. Review and try again.</span>`);
+        $('#ring').style.strokeDasharray = Math.round(100 * ok / tot) + ' 100'; $('#rn').textContent = ok;
+        if (done === tot) Store.setDone(c.id, L.id); toc();
+      };
+      draw();
+      $('#test').addEventListener('click', e => {
+        const b = e.target.closest('button.o'); if (b && b.getAttribute('aria-disabled') !== 'true') { const q = L.questions.find(y => y.id === b.dataset.q); Store.setAnswer(c.id, q.id, q.rev, +b.dataset.j);
+          $(`#q-${q.id}`).outerHTML = qcard(c, q, L.questions.indexOf(q), L.questions.length); score(); $(`#q-${q.id} .ex`).focus(); }
+        if (e.target.closest('[data-act="reset"]')) { Store.reset(c.id, L.questions.map(y => y.id)); draw(); $('#quiz .o')?.focus(); }
+      });
+    }
+    if (L.type === 'exam') {
+      $$('.exam table,.key table').forEach(t => { const w = document.createElement('div'); w.className = 'tw'; t.parentNode.insertBefore(w, t); w.appendChild(t); });
+      if ($('#keybtn')) $('#keybtn').onclick = e => { const kk = $('#key'); kk.hidden = !kk.hidden; e.target.setAttribute('aria-expanded', !kk.hidden); e.target.textContent = kk.hidden ? 'Show the answer key' : 'Hide the answer key'; };
+    }
   }
-  const thumb = L => thumbOf(c, L);
-  function drawList() {
-    $('#pl').innerHTML = list.map((L, k) => `<li class="${k === cur ? 'on' : ''}"><button data-k="${k}" ${k === cur ? 'aria-current="true"' : ''}><span class="th"><img src="${thumb(L)}" alt="" loading="lazy">${L.minutes ? `<span class="d">${L.minutes} min</span>` : ''}${Store.isDone(c.id, L.id) ? '<span class="w" aria-label="Watched">✓</span>' : ''}</span><span class="tt"><b>${esc(L.title)}</b><small>${esc(L.kind || L.by || '')}</small></span></button></li>`).join('');
-  }
-  function drawQuiz() {
-    if (!q) return;
-    $('#quiz').innerHTML = q.questions.map((x, n) => qcard(c, x, n, q.questions.length)).join(''); score();
-  }
-  function score() {
-    const ans = q.questions.map(x => Store.answer(c.id, x.id, x.rev)), done = ans.filter(a => a !== undefined).length, ok = q.questions.filter((x, n) => ans[n] === x.a).length, tot = q.questions.length;
-    const el = $('#score'); el.innerHTML = done === 0 ? 'Answer the first question to begin.' : `${ok} of ${done} correct` + (done < tot ? ` · ${tot - done} to go` : ok >= q.pass ? ' <span class="pass">· Passed</span>' : ` <span class="fail">· Pass mark is ${q.pass}. Review and try again.</span>`);
-    $('#ring').style.strokeDasharray = Math.round(100 * ok / tot) + ' 100'; $('#rn').textContent = ok;
-    if (done === tot) Store.setDone(c.id, q.id);
-  }
-  return { title: `${W} ${i + 1}: ${sec.title} · ${c.title}`, crumbs: trail(c, [`${W} ${i + 1}`]), html, after() {
-    if (list.length) {
-      load(cur, false);
-      $('#pl').addEventListener('click', e => { const b = e.target.closest('button[data-k]'); if (b) { load(+b.dataset.k, true); history.replaceState(null, '', `#/${c.id}/${sec.id}/${list[+b.dataset.k].id}`); } });
-    } else Store.visit(c.id, sec.id, '');
-    drawQuiz();
-    if (q) $('#test').addEventListener('click', e => {
-      const b = e.target.closest('button.o'); if (b && b.getAttribute('aria-disabled') !== 'true') { const x = q.questions.find(y => y.id === b.dataset.q); Store.setAnswer(c.id, x.id, x.rev, +b.dataset.j);
-        const n = q.questions.indexOf(x); $(`#q-${x.id}`).outerHTML = qcard(c, x, n, q.questions.length); score(); $(`#q-${x.id} .ex`).focus(); }
-      if (e.target.closest('[data-act="reset"]')) { Store.reset(c.id, q.questions.map(y => y.id)); drawQuiz(); $('#quiz .o')?.focus(); }
-    });
-  }, update() { const k = list.findIndex(x => x.id === lessonId); if (k >= 0 && k !== cur) load(k, false); } };
+  return { title: `${P[k].L.title} · ${c.title}`, crumbs: trail(c, [P[k].mi < 0 ? 'Final assessment' : `${W} ${P[k].mi + 1}`]), html,
+    after() {
+      show(k); if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); $('#ctog').setAttribute('aria-expanded', 'false'); }
+      const close = () => { if (innerWidth > 900 || $('#learn').classList.contains('nocurr')) return; $('#learn').classList.add('nocurr'); $('#ctog').setAttribute('aria-expanded', 'false'); $('#ctog').focus(); };
+      $('#ccls').onclick = close; $('#curr').addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+    },
+    update() {
+      const j = P.findIndex(x => x.L.id === location.hash.split('/').pop()); if (j < 0) return;
+      if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); }
+      show(j); window.scrollTo({ top: 0, behavior: 'instant' }); const h = $('#lmain h1'); h.tabIndex = -1; h.focus({ preventScroll: true });
+    } };
 }
 function qcard(c, x, n, tot) {
   const a = Store.answer(c.id, x.id, x.rev), done = a !== undefined;
@@ -325,63 +522,33 @@ function qcard(c, x, n, tot) {
   ${done ? `<p class="ex" tabindex="-1"><b>${a === x.a ? 'Correct.' : 'Not quite.'}</b> ${esc(x.e)}</p>` : ''}</fieldset>`;
 }
 
-/* ---------- final exam, library, extra videos ---------- */
-function exam(c) {
-  const L = examOf(c)?.lessons[0]; if (!L) return notFound();
-  const wb = (L.resources || []).find(r => r.type === 'xlsx'), pdf = (L.resources || []).find(r => r.type === 'pdf');
-  return { title: `Final exam · ${c.title}`, crumbs: trail(c, ['Final exam']), html: `<section><div class="band"><div class="in narrow">
-  <p class="eyebrow center">Final exam</p><h1 class="display center">${esc(L.headline || 'Prove it.')}</h1>
-  <p class="sub center">${esc(L.intro || 'Open the workbook, complete every task, then reveal the answer key.')}${L.minutes ? ` ${esc(L.minutes)} minutes.` : ''}</p>
-  <div class="ctas">${pdf ? `<a class="pill" href="${esc(url(c, pdf.href))}" target="_blank" rel="noopener">Printable exam</a>` : ''}${wb ? `<a class="link" href="${esc(url(c, wb.href))}">Download the workbook ${CHEV}</a>` : ''}</div>
-  <h2 class="headline small">The tasks</h2><div class="card exam">${L.html || ''}</div>
-  ${L.keyHtml ? `<div class="center"><button class="pill ghost" id="keybtn" aria-expanded="false" aria-controls="key">Show the answer key</button></div>
-  <div id="key" class="card key" hidden>${L.keyHtml}</div>` : ''}</div></div></section>`,
-    after() { $$('.exam table,.key table').forEach(t => { const w = document.createElement('div'); w.className = 'tw'; t.parentNode.insertBefore(w, t); w.appendChild(t); });
-      if ($('#keybtn')) $('#keybtn').onclick = e => { const k = $('#key'); k.hidden = !k.hidden; e.target.setAttribute('aria-expanded', !k.hidden); e.target.textContent = k.hidden ? 'Show the answer key' : 'Hide the answer key'; }; } };
-}
-function library(c) {
-  const files = (c.resources || []).filter(r => r.type === 'xlsx'), docs = (c.resources || []).filter(r => r.type !== 'xlsx');
+/* ---------- resources, extra videos ---------- */
+function resources(c) {
+  const files = (c.resources || []).filter(r => r.type === 'xlsx'), docs = (c.resources || []).filter(r => r.type !== 'xlsx'), W = word(c);
   const tile = (r, open) => `<a class="doc ${r.type === 'xlsx' ? 'xl' : ''}" href="${esc(url(c, r.href))}" ${open ? 'target="_blank" rel="noopener"' : ''}><span class="badge">${esc(r.type.toUpperCase())}</span><b>${esc(r.title)}</b><span>${esc(r.summary || '')}</span><span class="link">${open ? 'Open' : 'Download'} ${CHEV}</span></a>`;
-  return { title: `Library · ${c.title}`, crumbs: trail(c, ['Library']), html: `<section><div class="band"><div class="in">
-  <p class="eyebrow center">Library</p><h1 class="display center">Guides and practice files.</h1>
+  const mods = secsOf(c).map((s, i) => [s, i, filesOf(c, s)]).filter(([, , f]) => f.slides || f.testPdf);
+  return { title: `Resources · ${c.title}`, crumbs: trail(c, ['Resources']), html: `<section><div class="band slim"><div class="in">
+  <h1 class="display">Resources.</h1><p class="sub wide">Practice files, slides, printable tests and guides for ${esc(c.title)}.</p>
   ${files.length ? `<h2 class="headline small">Practice files</h2><div class="grid3">${files.map(r => tile(r, false)).join('')}</div>` : ''}
+  ${mods.length ? `<h2 class="headline small">By ${W.toLowerCase()}</h2><div class="grid3">${mods.map(([s, i, f]) => `<div class="doc"><span class="badge">PDF</span><b>${W} ${i + 1}: ${esc(s.title)}</b><span>${f.slides ? `<a href="${esc(f.slides)}" target="_blank" rel="noopener">Slides</a>` : ''}${f.slides && f.testPdf ? ' · ' : ''}${f.testPdf ? `<a href="${esc(f.testPdf)}" target="_blank" rel="noopener">Printable test with answer key</a>` : ''}</span></div>`).join('')}</div>` : ''}
   ${docs.length ? `<h2 class="headline small">Guides</h2><div class="grid3">${docs.map(r => tile(r, true)).join('')}</div>` : ''}</div></div></section>` };
 }
 function extras(c) {
   const ex = extrasOf(c); if (!ex.length) return notFound();
   const v = grid(ex[0], c); v.title = `Extra videos · ${c.title}`; v.crumbs = trail(c, ['Extra videos']); return v;
 }
-
-/* ---------- training page: header, then each session as a grid of video cards (pop-up player) ---------- */
+/* a collection (curated YouTube lessons): a grid of video cards with a pop-up player */
 function vcard(c, L) {
-  const img = thumbOf(c, L);
-  const by = L.type === 'youtube' ? L.by : L.kind;
-  return `<button class="yt rv" data-c="${c.id}" data-l="${esc(L.id)}"><span class="ytimg"><img src="${img}" alt="" loading="lazy"><span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${L.minutes} min</span>` : ''}${Store.isDone(c.id, L.id) ? '<span class="seen-mark">✓<span class="sr"> Watched</span></span>' : ''}</span>
-  <span class="ytx"><small>${esc(by || '')}</small><b>${esc(L.title)}</b>${L.summary && L.type === 'youtube' ? `<span>${esc(L.summary)}</span>` : ''}</span></button>`;
+  return `<button class="yt rv" data-c="${c.id}" data-l="${esc(L.id)}"><span class="ytimg"><img src="${thumbOf(c, L)}" alt="" loading="lazy"><span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${L.minutes} min</span>` : ''}${Store.isDone(c.id, L.id) ? '<span class="seen-mark">✓<span class="sr"> Watched</span></span>' : ''}</span>
+  <span class="ytx"><small>${esc(L.by || L.kind || '')}</small><b>${esc(L.title)}</b>${L.summary ? `<span>${esc(L.summary)}</span>` : ''}</span></button>`;
 }
 function grid(c, parent) {
-  const isCol = c.type === 'collection', secs = secsOf(c), ex = examOf(c), W = word(c);
-  const nv = secs.reduce((a, s) => a + vids(s).length, 0), m = mins(c);
   const [h1a, h1b] = c.headline || [c.title, ''];
-  const trainer = people(c).filter(p => !p.external)[0], p = isCol ? null : progress(c);
-  const groups = secs.map((s, i) => {
-    const q = quizOf(s), F = filesOf(c, s), vs = vids(s), w = vs.filter(v => Store.isDone(c.id, v.id)).length;
-    const qs = q && q.questions.some(x => Store.answer(c.id, x.id, x.rev) !== undefined) ? (passed(c, q) ? '<span class="ok">Test passed</span>' : 'Test started') : '';
-    const acts = isCol ? '' : `<div class="gacts"><a class="pill" href="#/${c.id}/${s.id}">Open ${W.toLowerCase()} ${i + 1}</a>${q ? `<a class="link" href="#/${c.id}/${s.id}/test">Take the test ${CHEV}</a>` : ''}${F.workbook ? `<a class="link" href="${esc(F.workbook)}">Practice workbook ${CHEV}</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides ${CHEV}</a>` : ''}</div>`;
-    return `<div class="egroup"><p class="eyebrow">${isCol ? esc(s.summary || '') : `${W} ${i + 1} · ${vs.length} videos · ${vs.reduce((a, v) => a + (v.minutes || 0), 0)} min`}</p>
-    <h2 class="headline small2">${esc(s.title)}</h2>${!isCol && (w || qs) ? `<p class="gprog">${bar(Math.round(100 * w / (vs.length || 1)))}<span>${w} of ${vs.length} watched${qs ? ' · ' + qs : ''}</span></p>` : ''}${acts}${s.note ? `<p class="gnote">${esc(s.note)}</p>` : ''}<div class="ytgrid">${vs.map(L => vcard(c, L)).join('')}</div></div>`;
-  }).join('');
-  const extra = isCol ? [] : extrasOf(c), outcomes = isCol ? [] : (c.outcomes || []);
+  const groups = secsOf(c).map(s => `<div class="egroup"><p class="eyebrow">${esc(s.summary || '')}</p><h2 class="headline small2">${esc(s.title)}</h2><div class="ytgrid">${vids(s).map(L => vcard(c, L)).join('')}</div></div>`).join('');
   return { title: c.title, crumbs: parent ? null : trail(c), html: `<section><div class="band dark ehero"><div class="in">
-  <p class="eyebrow center">${isCol ? 'Extra videos' : esc(topicOf(c)?.name || 'Training')}</p><h1 class="display center">${esc(h1a)}${h1b ? `<br><span class="grad">${esc(h1b)}</span>` : ''}</h1>
-  <p class="sub center wide">${esc(c.intro || c.subtitle)}</p>
-  <div class="who">${isCol ? (c.who || []).map(w => `<span>${esc(w)}</span>`).join('') : `${trainer ? `<span class="tchip">${trainer.photo ? `<img src="${esc(trainer.photo)}" alt="">` : ''}${esc(trainer.name)}</span>` : ''}${c.levelRange || c.level ? `<span>${esc(c.levelRange || c.level)}</span>` : ''}<span>${nv} videos</span>${m ? `<span>${hours(m)}</span>` : ''}<span>${esc(c.languageLabel)}</span><span>Free</span>`}</div>
-  ${p ? `<div class="ctas hcta">${p.started ? `<a class="pill big" href="${p.resume}">Resume ${word(c)} ${secsOf(c).indexOf(p.resumeSec) + 1}</a><span class="hprog">${bar(p.pct)}<span>${p.pct}% done</span></span>` : secs[0] ? `<a class="pill big" href="#/${c.id}/${secs[0].id}">Start ${W} 1</a>` : ''}</div>` : ''}</div></div>
-  ${outcomes.length ? `<div class="band gray slim"><div class="in"><h2 class="headline small2 rv">What you'll learn.</h2><ul class="outs">${outcomes.map(o => `<li class="rv"><span class="ic">${CHECK}</span>${esc(o)}</li>`).join('')}</ul></div></div>` : ''}
-  <div class="band"><div class="in">${groups}
-  ${ex || (c.resources || []).length ? `<div class="egroup endcards"><div class="duo">${ex ? `<div class="card"><p class="eyebrow">Final exam</p><h3>${esc(ex.lessons[0]?.headline || 'Prove it.')}</h3><p>${esc(ex.summary)}</p><a class="link" href="#/${c.id}/exam">Open the exam ${CHEV}</a></div>` : ''}${(c.resources || []).length ? `<div class="card"><p class="eyebrow">Library</p><h3>Guides and practice files.</h3><p>Every workbook, answer key and guide in one place.</p><a class="link" href="#/${c.id}/library">Browse the library ${CHEV}</a></div>` : ''}</div></div>` : ''}
-  ${isCol ? '<p class="note">These videos play from YouTube and belong to their creators. Kalam CX isn\'t affiliated with these channels.</p>' : ''}
-  ${extra.length ? `<div class="ctas"><a class="pill ghost" href="#/${c.id}/extras">Want more? Watch the extra videos</a></div>` : ''}
+  <p class="eyebrow center">Extra videos</p><h1 class="display center">${esc(h1a)}${h1b ? `<br><span class="grad">${esc(h1b)}</span>` : ''}</h1>
+  <p class="sub center wide">${esc(c.intro || c.subtitle)}</p><div class="who">${(c.who || []).map(w => `<span>${esc(w)}</span>`).join('')}</div></div></div>
+  <div class="band"><div class="in">${groups}<p class="note">These videos play from YouTube and belong to their creators. Kalam CX isn't affiliated with these channels.</p>
   ${parent ? `<div class="ctas"><a class="pill" href="#/${parent.id}">Back to ${esc(parent.title)}</a></div>` : ''}</div></div></section>`,
     after() { $$('.yt').forEach(b => b.addEventListener('click', () => openVideo(b))); } };
 }
@@ -389,7 +556,6 @@ let lastBtn = null;
 function openVideo(b) {
   const c = App.courses[b.dataset.c], L = c.sections.flatMap(s => s.lessons).find(l => l.id === b.dataset.l); if (!L) return;
   lastBtn = b; const m = $('#ytm'), fr = $('.ytframe', m);
-  const sec = c.sections.find(s => s.lessons.includes(L)); if (c.type !== 'collection' && sec) Store.visit(c.id, sec.id, L.id);
   if (frameSrc(L)) {
     fr.innerHTML = `<iframe src="${esc(frameSrc(L, true))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
     $('#ytl').hidden = L.type !== 'youtube'; if (L.type === 'youtube') $('#ytl').href = 'https://www.youtube.com/watch?v=' + L.yt; Store.setDone(c.id, L.id);
@@ -398,7 +564,7 @@ function openVideo(b) {
     const v = $('video', fr); v.addEventListener('timeupdate', () => { if (v.duration && v.currentTime / v.duration > 0.9) Store.setDone(c.id, L.id); });
     $('#ytl').hidden = true;
   }
-  $('#ytt').textContent = L.title; $('#ytc').textContent = L.type === 'youtube' ? L.by : (L.kind || '');
+  $('#ytt').textContent = L.title; $('#ytc').textContent = L.by || L.kind || '';
   m.hidden = false; document.body.style.overflow = 'hidden'; $('#ytx').focus();
 }
 function closeYt() {
@@ -407,6 +573,8 @@ function closeYt() {
 }
 $('#ytx').addEventListener('click', closeYt);
 $('#ytm').addEventListener('click', e => { if (e.target.id === 'ytm') closeYt(); });
+/* keep keyboard focus inside the pop-up player while it is open */
+$('#ytm').addEventListener('keydown', e => { if (e.key !== 'Tab') return; const f = $$('#ytm a:not([hidden]),#ytm button,#ytm iframe,#ytm video'); const a = f[0], z = f[f.length - 1]; if (e.shiftKey && document.activeElement === a) { e.preventDefault(); z.focus(); } else if (!e.shiftKey && document.activeElement === z) { e.preventDefault(); a.focus(); } });
 addEventListener('keydown', e => { if (e.key === 'Escape') { closeYt(); if ($('#nav').classList.contains('open')) { $('#nav').classList.remove('open'); $('#menu').setAttribute('aria-expanded', 'false'); $('#menu').focus(); } } });
 addEventListener('hashchange', closeYt);
 $('#menu').addEventListener('click', () => { const o = $('#nav').classList.toggle('open'); $('#menu').setAttribute('aria-expanded', o); });
