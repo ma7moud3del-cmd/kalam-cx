@@ -400,3 +400,4 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 .lmain p.body{font-size:17px;line-height:1.55;max-width:68ch}
 @media (max-width:900px){.curr{inset:0 0 0 auto;box-shadow:-20px 0 60px rgba(0,0,0,.25);border-left:0}}
 @media (max-width:900px){.learn,.learn.nocurr{grid-template-columns:minmax(0,1fr)}}
+.rfig a{display:block;cursor:zoom-in}.rfig figcaption{margin-top:8px;color:var(--mute);font-size:13px;text-align:center}.rfig{grid-template-columns:1fr}

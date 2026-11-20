@@ -399,7 +399,7 @@ function overview(c) {
    ${(c.audience || []).length || (c.requirements || []).length ? `<div class="duo">${(c.audience || []).length ? `<div class="card"><h3>Who it's for</h3><ul class="plain">${c.audience.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}${(c.requirements || []).length ? `<div class="card"><h3>Before you start</h3><ul class="plain">${c.requirements.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}</div>` : ''}
   </div></div>
   <div class="band gray slim" id="curriculum"><div class="in narrow">
-   <h2 class="headline small2">Curriculum.</h2><p class="tblurb">${secs.length} ${W.toLowerCase()}s, then a final assessment. Each ${W.toLowerCase()} has videos, workbook practice and a self-marking test.</p>
+   <h2 class="headline small2">Curriculum.</h2><p class="tblurb">${(() => { const all = secs.flatMap(s => s.lessons), has = t => all.some(l => t.includes(l.type)), parts = [has(['video', 'youtube', 'embed']) && 'videos', has(['reading']) && 'reading lessons', has(['practice']) && 'workbook practice', has(['quiz']) && 'self-marking tests'].filter(Boolean); return `${secs.length} ${W.toLowerCase()}${secs.length === 1 ? '' : 's'}${examOf(c) ? ', then a final assessment' : ''}.${parts.length ? ` Inside: ${parts.length > 1 ? parts.slice(0, -1).join(', ') + ' and ' + parts.at(-1) : parts[0]}.` : ''}`; })()}</p>
    <div class="mods">${modules}</div></div></div>
   <div class="band slim"><div class="in">
    <h2 class="headline small2">Practice files and assessments.</h2>
@@ -447,7 +447,7 @@ function learn(c, lessonId) {
     let body = '';
     if (isVid(L)) body = `<div class="screen" id="screen">${frameSrc(L) ? `<iframe src="${esc(frameSrc(L))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>` : `<video id="vid" controls playsinline preload="metadata" src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`}</div>
       <div class="lbar"><p class="lmeta">${esc(L.kind || L.by || 'Video')}${L.minutes ? ` · ${+L.minutes} min` : ''}</p><span class="lact">${doneBtn}${nextBtn}</span></div>${L.summary ? `<p class="body">${esc(L.summary)}</p>` : ''}${files}`;
-    else if (L.type === 'reading') body = `${L.image ? `<figure class="rfig"><img src="${esc(media(c, L.image))}" alt="${esc(L.alt || '')}"></figure>` : ''}
+    else if (L.type === 'reading') body = `${L.image ? `<figure class="rfig"><a href="${esc(media(c, L.image))}" target="_blank" rel="noopener" title="Open the picture full size"><img src="${esc(media(c, L.image))}" alt="${esc(L.alt || '')}"></a><figcaption>Tap the picture to open it full size.</figcaption></figure>` : ''}
       <div class="rblocks">${(L.blocks || []).map((b, n) => `<section class="rb${b.tone === 'warn' ? ' warn' : ''}">${b.h ? `<h2>${esc(b.h)}</h2>` : ''}${b.p ? `<p>${esc(b.p)}</p>` : ''}${b.code != null ? `<div class="code"><pre id="code-${n}"><code>${esc(b.code)}</code></pre><button type="button" class="pill ghost small" data-copy="code-${n}" aria-label="Copy${b.h ? ': ' + esc(b.h) : ''}">Copy</button></div>` : ''}</section>`).join('')}</div>
       <div class="lbar"><p class="lmeta">Reading${L.minutes ? ` · about ${+L.minutes} min` : ''}</p><span class="lact">${doneBtn}${nextBtn}</span></div>${files}`;
     else if (L.type === 'practice') body = `<div class="card"><p class="eyebrow">Practice</p>${(L.body || []).map(b => `<p>${esc(b)}</p>`).join('')}
