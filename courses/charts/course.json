@@ -1,0 +1,2388 @@
+{
+ "id": "charts",
+ "type": "course",
+ "base": "courses/charts/",
+ "title": "Charts with AI: the Chart Prompt Guide",
+ "subtitle": "Pick the right chart for your question, prompt any AI tool to draw it, and check it before you share.",
+ "category": "data",
+ "level": "Beginner",
+ "levelRange": "Beginner to intermediate",
+ "language": "en",
+ "languageLabel": "English",
+ "price": 0,
+ "featured": false,
+ "instructors": [],
+ "updated": "November 2026",
+ "labels": {
+  "section": "Module"
+ },
+ "headline": [
+  "Charts with AI.",
+  "Right chart, right prompt."
+ ],
+ "intro": "33 chart styles, each with when to use it, how to read it, the common mistake and a ready prompt.",
+ "description": [
+  "Built from the IMS team's Chart Prompt Guide. Every lesson shows one chart on made-up sample data, explains when to use it and how to read it, and gives you a ready prompt you can paste into ChatGPT, Gemini or Copilot.",
+  "The course text, pictures, sample data and tests were generated with AI and checked against the guide. All numbers belong to a fictional team, so you can practise freely."
+ ],
+ "outcomes": [
+  "Pick the right chart from the question you need to answer",
+  "Write a 4-part prompt that AI tools follow: type, data, layout, style",
+  "Check totals, rates and periods before you chart them",
+  "Read and explain 33 chart types, from Pareto to Sankey",
+  "Make any tool match the Kalam look with one style block",
+  "Audit a generated chart before you share it"
+ ],
+ "requirements": [
+  "Any AI chat tool (ChatGPT, Gemini, Copilot) or Excel",
+  "No design or data background needed"
+ ],
+ "audience": [
+  "Team leaders and supervisors who report results",
+  "WFM, quality and reporting analysts",
+  "Anyone who presents numbers to a manager or client"
+ ],
+ "related": [
+  "excel"
+ ],
+ "cover": "img/25-pareto.jpg",
+ "certificate": false,
+ "reviews": [],
+ "sections": [
+  {
+   "id": "s0",
+   "title": "Start here",
+   "covers": "The method: question, prompt, data and checks",
+   "summary": "How to pick a chart from your question, write a 4-part prompt, check the data and audit the result.",
+   "files": {
+    "workbook": "files/chart-course-practice.xlsx"
+   },
+   "topics": [
+    [
+     "Start from the question",
+     "11 questions lead to 33 charts."
+    ],
+    [
+     "Write the prompt",
+     "Type, data, layout, style."
+    ],
+    [
+     "Check the data",
+     "Totals, rates with n, periods."
+    ],
+    [
+     "Audit the chart",
+     "Before anyone else sees it."
+    ]
+   ],
+   "lessons": [
+    {
+     "id": "s0-pick",
+     "type": "reading",
+     "title": "Pick the chart from your question",
+     "minutes": 5,
+     "blocks": [
+      {
+       "h": "Start from the question, not the chart",
+       "p": "Every chart in this course answers one of 11 questions. Find your question below, then open the lessons for the charts listed under it."
+      },
+      {
+       "h": "Q1 · How is it built, and what feeds it?",
+       "p": "01 Blueprint, 02 Diagram, 03 Exploded Donut"
+      },
+      {
+       "h": "Q2 · What is it made of, and what are the steps?",
+       "p": "04 Layers, 05 Flowchart, 06 Roadmap"
+      },
+      {
+       "h": "Q3 · When did things happen, and what should we pick?",
+       "p": "07 Timeline, 08 Cycle Diagram, 09 Decision Matrix"
+      },
+      {
+       "h": "Q4 · What is the headline, and what is behind it?",
+       "p": "10 Infographic, 11 Tree, 12 Iceberg"
+      },
+      {
+       "h": "Q5 · How do we brainstorm or take notes?",
+       "p": "13 Canvas, 14 Sketch Notes, 15 Handwritten"
+      },
+      {
+       "h": "Q6 · Is it going up, down or holding?",
+       "p": "16 Line / Area, 17 Run Chart, 18 Slope Chart"
+      },
+      {
+       "h": "Q7 · Are we on target, and who is ahead?",
+       "p": "19 Bullet Chart, 20 Ranked Bar, 21 Dumbbell"
+      },
+      {
+       "h": "Q8 · What is the total made of, and how did it move?",
+       "p": "22 Stacked Bar, 23 Treemap, 24 Waterfall"
+      },
+      {
+       "h": "Q9 · Where should we focus first?",
+       "p": "25 Pareto, 26 Heatmap, 27 Small Multiples"
+      },
+      {
+       "h": "Q10 · How are values spread, and are they linked?",
+       "p": "28 Histogram, 29 Box Plot, 30 Scatter Plot"
+      },
+      {
+       "h": "Q11 · How does volume flow, and who covers when?",
+       "p": "31 Funnel, 32 Sankey, 33 Gantt"
+      }
+     ]
+    },
+    {
+     "id": "s0-prompt",
+     "type": "reading",
+     "title": "Write a prompt in 4 parts",
+     "minutes": 5,
+     "image": "img/25-pareto.jpg",
+     "alt": "Pareto chart of 180 abandoned calls by client on made-up Team Nova data, used as the worked example.",
+     "blocks": [
+      {
+       "h": "1 · Chart type",
+       "p": "Name the chart and its job: \"A Pareto chart ranking…\"."
+      },
+      {
+       "h": "2 · Real data",
+       "p": "Every label and number, exactly. If a number isn't in the prompt, the tool invents one."
+      },
+      {
+       "h": "3 · Layout and labels",
+       "p": "Axes, order, what to highlight, where labels go, and \"to scale\"."
+      },
+      {
+       "h": "4 · Style",
+       "p": "Paste the style block (next lessons) so every chart looks the same."
+      },
+      {
+       "h": "A real prompt, taken apart",
+       "code": "A Pareto chart of 180 abandoned calls in January 2026 by client, descending bars Atlas 72, Birch 45, Cedar 27, Dune 18, Ember 9, Fjord 6, Gale 3; an amber cumulative line on a 0–100% right axis passing 40%, 65% and 80%; a dashed 80% reference line; the top three bars highlighted in plum, the rest in lilac; a callout 'Atlas + Birch + Cedar = 80% of abandoned', clean modern flat design. + style block"
+      },
+      {
+       "h": "Before you send the prompt",
+       "p": "Does the title say the finding, not just the topic? Are all numbers written in, and do the parts add up? Is the period clear? Is there one highlight only (amber)? Did you say \"to scale\" and where the axis starts? Did you paste the style block?"
+      }
+     ]
+    },
+    {
+     "id": "s0-data",
+     "type": "reading",
+     "title": "Check the data before you chart it",
+     "minutes": 5,
+     "blocks": [
+      {
+       "h": "1 · Totals",
+       "p": "Do the parts add up to the total? Do children add up to their parent (tree, Sankey)? If not, name the gap, for example \"not broken down\". Example: 1,900 + 700 + 400 = 3,000 ✓."
+      },
+      {
+       "h": "2 · Percentages",
+       "p": "Recompute each % from counts. Rounded shares may add to 99–101%: say \"rounded\". Use percentage points (pp) for differences between rates."
+      },
+      {
+       "h": "3 · Denominators",
+       "p": "Write what each rate is divided by and show n next to every rate: \"8.4% (64 of 760)\". Don't compare rates with very different n without a note."
+      },
+      {
+       "h": "4 · Dates and periods",
+       "p": "Put the period in the title. Full month or month-to-date? For per-day figures, say how many days."
+      },
+      {
+       "h": "5 · Definitions",
+       "p": "Same metric name, same formula? Targets set for the same definition? Mixing sources? Say so."
+      },
+      {
+       "h": "6 · Missing or partial data",
+       "p": "Mark partial periods (hollow dots). Never fill a gap with an estimate silently. Explain rounding gaps."
+      },
+      {
+       "h": "Label how sure you are",
+       "p": "Checked against the source, matches but read the note, model projection, illustrative, or needs confirmation. Put the label on the chart or under it."
+      },
+      {
+       "h": "A rate without its n can mislead",
+       "p": "33% from 3 calls and 33% from 300 calls are not the same evidence.",
+       "tone": "warn"
+      }
+     ]
+    },
+    {
+     "id": "s0-anatomy",
+     "type": "reading",
+     "title": "Anatomy of a good chart",
+     "minutes": 4,
+     "image": "img/25-pareto.jpg",
+     "alt": "The Pareto example with a finding title, sorted bars, values on bars, one highlight, an 80% reference line and a callout.",
+     "blocks": [
+      {
+       "h": "1 · Title = finding, eyebrow = scope",
+       "p": "\"Three clients make up 80% of abandoned calls\", with \"Team Nova · 180 abandoned calls by client · January 2026\" above it."
+      },
+      {
+       "h": "2 · Sorted bars",
+       "p": "Largest first, so the eye reads the ranking at once."
+      },
+      {
+       "h": "3 · Values on the bars",
+       "p": "No need to read the axis to get the number."
+      },
+      {
+       "h": "4 · One highlight colour",
+       "p": "Plum for the vital few, lilac for the rest."
+      },
+      {
+       "h": "5 · Reference line",
+       "p": "The 80% line shows where the vital few end."
+      },
+      {
+       "h": "6 · Takeaway callout",
+       "p": "\"Atlas + Birch + Cedar = 80% of abandoned\": the message in one line."
+      },
+      {
+       "h": "Six rules for every chart",
+       "p": "Bars start at zero (other charts may not, if labeled) · same scale when comparing · n with every rate · label partial periods · at most 2 accent colours · write the finding in the title."
+      }
+     ]
+    },
+    {
+     "id": "s0-style",
+     "type": "reading",
+     "title": "Make any AI tool match the Kalam look",
+     "minutes": 4,
+     "blocks": [
+      {
+       "h": "Paste this style block after every prompt",
+       "code": "Style: Kalam brand look. Warm off-white background #FBFAF8. Primary deep plum #4A154B with a plum gradient #7A3479 → #3A0F3B; secondary mauve #A36A9F; soft lilac fills #D9C2D8 and #F2DFF0. One accent only: amber #C26A1F (gradient #E5934A → #A9521A), used just for the key problem or insight. Text ink #1D1424, muted labels #6B6275, hairline borders #E8E2E8. Font DM Sans: bold titles, regular labels, small UPPERCASE letter-spaced section labels in plum. White rounded cards (12–14 px radius) with a soft shadow, lots of white space, thin light gridlines, values labeled directly on the chart, flat vector, no 3D, no clutter, 16:9 landscape. Use exactly the numbers given; do not add or change values."
+      },
+      {
+       "h": "Image tools (ChatGPT, Gemini, Firefly)",
+       "p": "Attach one picture from this course and say \"use this as a visual reference\". Then check and correct every text and number label: generated images often get them wrong."
+      },
+      {
+       "h": "Slides and Canva",
+       "p": "Set the theme colours to the hex codes above and the font to DM Sans first."
+      },
+      {
+       "h": "Precise charts",
+       "p": "Build them in Excel or Power BI from the source data, then apply the palette (plum main, lilac context, amber highlight). Use image tools for illustrations, not for exact data."
+      },
+      {
+       "h": "Don't",
+       "p": "Use more than 2 accent colours · ask for 3D, glow or stock-photo backgrounds · mix months or definitions in one chart without saying so · let the tool fill in missing data · put long sentences inside the chart.",
+       "tone": "warn"
+      }
+     ]
+    },
+    {
+     "id": "s0-audit",
+     "type": "reading",
+     "title": "Check the chart before you share it",
+     "minutes": 4,
+     "blocks": [
+      {
+       "h": "Visual-audit checklist",
+       "p": "Value accuracy: every label matches the source and the recomputed math. Clear title and units: what, where, when, and the unit. Readable labels: no overlaps, each label next to its mark. Honest scales: bars from zero, any non-zero axis marked and stated. Comparable periods: full month vs MTD, partial weeks marked. Accessible colours: never colour alone, add labels or ▲▼, keep strong contrast. Small samples: n shown, small groups marked or left out."
+      },
+      {
+       "h": "Zero-based axes are a default, not a law",
+       "p": "Bars encode value by length, so start them at zero. Line, dot, slope and run charts encode position, so a non-zero axis can be fine. Say so on the chart and add a break mark."
+      },
+      {
+       "h": "Thresholds are choices",
+       "p": "A cut-off like \"fewer than 5 calls\" is a choice for your data, not a standard. Print it in the legend."
+      },
+      {
+       "h": "Run charts: plot early, judge by a named method",
+       "p": "Plot from the first point. Before you call a signal, name a recognized run-chart method (for example the Anhøj rules) and apply only its rules. SPC control-chart rules are a different tool.",
+       "tone": "warn"
+      }
+     ]
+    },
+    {
+     "id": "s0-practice",
+     "type": "practice",
+     "title": "Exercise: write the prompt yourself",
+     "minutes": 15,
+     "body": [
+      "Open the practice workbook, tab Shifts by month. January: Day 1,900 offered, 57 abandoned; Evening 700, 63; Night 400, 60; total 3,000, 180.",
+      "1) Pick the chart that best compares abandoned rate across the three shifts. 2) Work out each rate and check the total. 3) Write a 4-part prompt.",
+      "Answer: a ranked bar chart (not a pie: we compare rates, not shares). Night 15.0% (60 of 400), Evening 9.0% (63 of 700), Day 3.0% (57 of 1,900), team 6.0% (180 of 3,000). Check: 57 + 63 + 60 = 180 ✓.",
+      "Model prompt: \"A ranked horizontal bar chart of abandoned-call rate by shift for January 2026, bars sorted high to low starting at zero: Night 15.0% (60 of 400), Evening 9.0% (63 of 700), Day 3.0% (57 of 1,900), a dashed reference line at the team rate 6.0% (180 of 3,000), Night highlighted in amber, others in lilac, values labeled on the bars\" + style block."
+     ],
+     "resources": [
+      {
+       "title": "Practice workbook",
+       "href": "files/chart-course-practice.xlsx",
+       "type": "xlsx"
+      }
+     ]
+    },
+    {
+     "id": "s0-quiz",
+     "type": "quiz",
+     "title": "Module test",
+     "minutes": 8,
+     "pass": 6,
+     "questions": [
+      {
+       "id": "charts-s0-q01",
+       "rev": 1,
+       "q": "What are the four parts of a good chart prompt, in order?",
+       "o": [
+        "Title, colours, font, size",
+        "Question, answer, chart, check",
+        "Data, chart type, style, title",
+        "Chart type, real data, layout and labels, style"
+       ],
+       "a": 3,
+       "e": "Name the chart and its job, give every number, say how to lay it out and label it, then paste the style block."
+      },
+      {
+       "id": "charts-s0-q02",
+       "rev": 1,
+       "q": "Your prompt says 'a bar chart of abandoned calls by client' but gives no numbers. What will most AI tools do?",
+       "o": [
+        "Leave the bars empty",
+        "Invent numbers that look plausible",
+        "Ask you for the data",
+        "Use last month's data"
+       ],
+       "a": 1,
+       "e": "No number in the prompt means the tool invents one. Write every label and value exactly."
+      },
+      {
+       "id": "charts-s0-q03",
+       "rev": 1,
+       "q": "Which title is best for a chart?",
+       "o": [
+        "Chart 3",
+        "Abandoned calls chart",
+        "Three clients make up 80% of abandoned calls",
+        "Abandoned calls (see data)"
+       ],
+       "a": 2,
+       "e": "A good title says the finding, not just the topic, and the eyebrow line gives the scope and period."
+      },
+      {
+       "id": "charts-s0-q04",
+       "rev": 1,
+       "q": "A rate is shown as '33%'. What should you add next to it?",
+       "o": [
+        "A second colour",
+        "Nothing, a rate is enough",
+        "Its count and base, for example 33% (1 of 3)",
+        "A bigger font"
+       ],
+       "a": 2,
+       "e": "33% from 3 calls and 33% from 300 calls are not the same evidence. Show n with every rate."
+      },
+      {
+       "id": "charts-s0-q05",
+       "rev": 1,
+       "q": "How many accent colours should one chart use?",
+       "o": [
+        "One (amber) for the one thing that needs action",
+        "As many as there are categories",
+        "Three, one per series",
+        "None at all"
+       ],
+       "a": 0,
+       "e": "Plum carries the data, lilac the context, and amber is kept for the one problem or insight."
+      },
+      {
+       "id": "charts-s0-q06",
+       "rev": 1,
+       "q": "When can a chart's axis start above zero?",
+       "o": [
+        "On line, slope or run charts, if the chart says so and shows a break mark",
+        "Never",
+        "Always, to show more detail",
+        "Only on bar charts"
+       ],
+       "a": 0,
+       "e": "Bars encode value by length, so they start at zero. Position charts can start higher if you say so on the chart."
+      },
+      {
+       "id": "charts-s0-q07",
+       "rev": 1,
+       "q": "An image tool made your chart. What must you do before sharing it?",
+       "o": [
+        "Only check the colours",
+        "Nothing, the tool used your prompt",
+        "Make it bigger",
+        "Check every text and number label against your data"
+       ],
+       "a": 3,
+       "e": "Generated images often get labels and numbers wrong. For exact data, build the chart in Excel or Power BI."
+      },
+      {
+       "id": "charts-s0-q08",
+       "rev": 1,
+       "q": "January has 31 days, and February's figure is month-to-date after 8 days. What must the chart say?",
+       "o": [
+        "That February is better",
+        "That February is a partial period (MTD, 8 days)",
+        "Nothing, both are months",
+        "Only the January total"
+       ],
+       "a": 1,
+       "e": "Comparable periods: mark full month vs month-to-date, and partial weeks with hollow dots."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m1",
+   "title": "Explain and plan",
+   "covers": "Questions 1–5 · charts 01–15, from Blueprint to Handwritten",
+   "summary": "Diagrams, stories and notes: show how something is built, what it is made of, what happened, the headline and the ideas.",
+   "files": {
+    "workbook": "files/chart-course-practice.xlsx"
+   },
+   "topics": [
+    [
+     "Q1",
+     "How is it built, and what feeds it?"
+    ],
+    [
+     "Q2",
+     "What is it made of, and what are the steps?"
+    ],
+    [
+     "Q3",
+     "When did things happen, and what should we pick?"
+    ],
+    [
+     "Q4",
+     "What is the headline, and what is behind it?"
+    ],
+    [
+     "Q5",
+     "How do we brainstorm or take notes?"
+    ]
+   ],
+   "lessons": [
+    {
+     "id": "c01",
+     "type": "reading",
+     "title": "01 · Blueprint",
+     "minutes": 4,
+     "image": "img/01-blueprint.jpg",
+     "alt": "Blueprint example on made-up Team Nova data. A technical blueprint of a call path for Team Nova, January 2026, white lines on a deep plum grid.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q1 · How is it built, and what feeds it?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You need to explain how a system or path is wired, like a technical drawing."
+      },
+      {
+       "h": "How to read it",
+       "p": "Follow the arrows left to right; each box is a stage, the numbers are what passed through it."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you need trends or exact comparisons; it shows structure only."
+      },
+      {
+       "h": "Watch out",
+       "p": "Keep it to 4–6 stages; more boxes become unreadable.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A technical blueprint of a call path for Team Nova, January 2026, white lines on a deep plum grid: four stages left to right, 'Client queues 3,000 offered' → 'Routing by language + skill' → 'Interpreter pool 2,820 rings' → 'Picked up 2,700 answered'; dashed amber drop lines to 'Abandoned 180 (6.0% of offered)' under the first stage and 'Missed 120 (4.3% of rings)' under the pool; dimension lines under each stage, a small title block 'Drawing: call path', note 'stage widths not to scale', precise vector style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A technical blueprint schematic diagram of a complex system, white lines on a solid blueprint blue background, architectural drafting style, labeled modular sections, technical callouts, and clean dimension lines, high precision vector aesthetic."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c02",
+     "type": "reading",
+     "title": "02 · Diagram",
+     "minutes": 4,
+     "image": "img/02-diagram.jpg",
+     "alt": "Diagram example on made-up Team Nova data. A structural diagram of what feeds Team Nova's queue in January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q1 · How is it built, and what feeds it?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to show which parts feed into one result, and how much each part brings."
+      },
+      {
+       "h": "How to read it",
+       "p": "Each box is a source; the thicker the line, the more calls came from it."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when flows need exact proportions; use a Sankey."
+      },
+      {
+       "h": "Watch out",
+       "p": "Show only the main links, not every possible one.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A structural diagram of what feeds Team Nova's queue in January 2026: five client boxes on the left, Atlas 1,200, Birch 800, Cedar 450, Dune 300 and 'Ember, Fjord, Gale' 250, each with its share; curved lines into a central plum box 'Team Nova queue 3,000 offered', line thickness proportional to calls, Atlas and Birch in plum and the rest in mauve; an arrow to 'Interpreters 2,820 rings'; clean vector infographic on a warm off-white background. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A structural breakdown diagram of a multi-component system, labeled parts, sub-assemblies, clean technical illustration style on a neutral background, professional vector infographic."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c03",
+     "type": "reading",
+     "title": "03 · Exploded Donut",
+     "minutes": 4,
+     "image": "img/03-exploded-donut.jpg",
+     "alt": "Exploded Donut example on made-up Team Nova data. An exploded donut chart of 2,820 rings in January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q1 · How is it built, and what feeds it?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to pull one total apart so every piece and its size is visible (a donut with its slices pulled out)."
+      },
+      {
+       "h": "How to read it",
+       "p": "The full ring is the total; each slice pulled out is one part, sized by its share."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when there are more than 5–6 parts, or you compare across groups."
+      },
+      {
+       "h": "Watch out",
+       "p": "Max 5–6 slices; tiny slices disappear.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "An exploded donut chart of 2,820 rings in January 2026: on time 2,484 (88.1%) in plum, late after 5 s 216 (7.7%) in mauve, missed 120 (4.3%) in amber; the late and missed slices pulled out from the ring with labels, total '2,820 rings' in the middle, a legend with counts and percentages and a note '88.1 + 7.7 + 4.3 = 100.1% (rounded)', clean vector illustration. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "An architectural exploded view diagram of a complex mechanical device, components suspended in mid-air showing exact assembly paths and internal parts, hyper-detailed technical illustration."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c04",
+     "type": "reading",
+     "title": "04 · Layers",
+     "minutes": 4,
+     "image": "img/04-layers.jpg",
+     "alt": "Layers example on made-up Team Nova data. A layered diagram of 3,000 offered calls by shift, January 2026, as stacked tiers with a light side face, read bottom to top.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q2 · What is it made of, and what are the steps?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to show what a total is made of, as stacked tiers."
+      },
+      {
+       "h": "How to read it",
+       "p": "Read bottom to top; each layer's thickness is its share of the whole block."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when parts overlap or don't add up to the total."
+      },
+      {
+       "h": "Watch out",
+       "p": "Very thin layers can't be read; group small items.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A layered diagram of 3,000 offered calls by shift, January 2026, as stacked tiers with a light side face, read bottom to top: Day 09–17 1,900 (63.3%) in plum, Evening 17–01 700 (23.3%) in mauve, Night 01–09 400 (13.3%) in amber; layer thickness to scale, labels on the left, a side note 'Night is the thinnest layer but has the highest abandoned rate', plum and lilac style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A cross-section layered diagram illustrating multiple tiers of a system, separated floating strata representing different functional levels, educational scientific illustration style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c05",
+     "type": "reading",
+     "title": "05 · Flowchart",
+     "minutes": 4,
+     "image": "img/05-flowchart.jpg",
+     "alt": "Flowchart example on made-up Team Nova data. A flowchart of what happens to a call, January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q2 · What is it made of, and what are the steps?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You need to show a decision process step by step, with yes/no branches."
+      },
+      {
+       "h": "How to read it",
+       "p": "Start at the left; at each diamond follow the Yes or No branch. Grey boxes mark steps that have no counts in the data."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when the process has no clear decisions; a list is enough."
+      },
+      {
+       "h": "Watch out",
+       "p": "Every diamond needs exactly two labeled exits.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A flowchart of what happens to a call, January 2026: 'Call arrives 3,000' → diamond 'Caller waits?' (No → 'Abandoned 180') → 'Ring interpreter 2,820' → diamond 'Picked up?' (No → 'Missed 120' → grey box 'Re-route to next, no counts in the data') → diamond 'Within 5 s?' (Yes → 'On time 2,484', No → 'Late 216'); every diamond with two labeled exits Yes/No, problem boxes in amber, clean professional vector style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A detailed flowchart diagram mapping a sequential process, directional arrows connecting workflow steps, branching decision nodes, clean professional vector infographic style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c06",
+     "type": "reading",
+     "title": "06 · Roadmap",
+     "minutes": 4,
+     "image": "img/06-roadmap.jpg",
+     "alt": "Roadmap example on made-up Team Nova data. A roadmap on a winding road from bottom-left to top-right with four pins.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q2 · What is it made of, and what are the steps?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to tell a journey with milestones, like a project or recovery path."
+      },
+      {
+       "h": "How to read it",
+       "p": "Follow the road from bottom-left; each pin is a milestone with its result."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when exact dates and durations matter; use a timeline or Gantt."
+      },
+      {
+       "h": "Watch out",
+       "p": "It shows order, not true time spacing.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A roadmap on a winding road from bottom-left to top-right with four pins: 'Jan · done: baseline abandoned 6.0% (180 of 3,000)', 'Feb · done: cause found, Night 18.9% (68 of 360)', 'Mar · planned: add 2 night interpreters', 'Apr · planned: goal abandoned ≤ 5%'; done pins in plum, planned in mauve and amber, note 'order only, not true time spacing', modern clean vector style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A visual roadmap infographic illustrating an end-to-end journey or project path, winding path format with milestone icons, modern clean vector graphic style with bright accent colors."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c07",
+     "type": "reading",
+     "title": "07 · Timeline",
+     "minutes": 4,
+     "image": "img/07-timeline.jpg",
+     "alt": "Timeline example on made-up Team Nova data. A timeline from 1 Jan to 20 Feb 2026, spacing true to time with a tick every two weeks, five event cards alternating above and below the line.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q3 · When did things happen, and what should we pick?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You need to show key events in order across weeks or months."
+      },
+      {
+       "h": "How to read it",
+       "p": "Read left to right along the arrow; cards above and below mark events and results."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you need to compare values; use a line or bar chart."
+      },
+      {
+       "h": "Watch out",
+       "p": "Keep spacing true to time; don't squeeze gaps.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A timeline from 1 Jan to 20 Feb 2026, spacing true to time with a tick every two weeks, five event cards alternating above and below the line: 5 Jan 'New client Dune goes live (300 calls in January)', 19 Jan 'Pick-up coaching starts (missed 4.7% the week before)', 2 Feb 'Peak week: 815 offered' in amber, 9 Feb '4th week below 4% missed (3.5%)', 16 Feb 'Night roster review (Night abandoned 18.9% in Feb)', sleek document style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A chronological timeline infographic tracking a sequence of events over time, linear timeline with chronological markers, phase blocks, and descriptive icons, sleek historical document aesthetic."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c08",
+     "type": "reading",
+     "title": "08 · Cycle Diagram",
+     "minutes": 4,
+     "image": "img/08-cycle-diagram.jpg",
+     "alt": "Cycle Diagram example on made-up Team Nova data. A circular cycle diagram of a monthly review loop, four arc segments clockwise from the top.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q3 · When did things happen, and what should we pick?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to show a repeating process, like a monthly review loop."
+      },
+      {
+       "h": "How to read it",
+       "p": "Go clockwise from the top; the center shows the result of one full loop."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when the steps don't really repeat, or you must show results over time."
+      },
+      {
+       "h": "Watch out",
+       "p": "Only for processes that really repeat.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A circular cycle diagram of a monthly review loop, four arc segments clockwise from the top: '1 Measure: Jan missed 120 of 2,820 (4.3%)', '2 Find cause: Night late 56 of 340 (16.5%)' in amber, '3 Act: coaching + roster', '4 Re-measure: Feb missed 94 of 2,601 (3.6%)'; centre 'missed 4.3% → 3.6%'; a note 'illustrative loop, the loop does not prove coaching caused the change', plum and amber. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A circular cycle diagram illustrating a continuous loop process, arrows looping from start to finish through distinct operational stages, clean infographic style with natural color tones."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c09",
+     "type": "reading",
+     "title": "09 · Decision Matrix",
+     "minutes": 4,
+     "image": "img/09-decision-matrix.jpg",
+     "alt": "Decision Matrix example on made-up Team Nova data. A decision matrix heat grid of projected occupancy from a scenario model.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q3 · When did things happen, and what should we pick?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You must pick between options measured on the same criteria."
+      },
+      {
+       "h": "How to read it",
+       "p": "Rows are routing options, columns are rosters; each cell is projected occupancy (%), not a score. Darker = higher occupancy."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when criteria have no agreed scoring or direction."
+      },
+      {
+       "h": "Watch out",
+       "p": "These are projections, not scores; higher occupancy is not always better (it can slow answers).",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A decision matrix heat grid of projected occupancy from a scenario model: rows 'Route as today', 'Bilinguals as overflow', 'Shared pool first'; columns 'Current roster', '+2 evening', '+2 night'; values 72/70/68, 76/74/71, 81/79/75 %; darker plum = higher; the 81% cell outlined in amber with the note 'above the 80% ceiling'; footnote 'model projection, not actuals or scores'; flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A clean decision matrix infographic comparing various options against specific criteria, structured grid layout with clear icons, comparative data bars, and modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c10",
+     "type": "reading",
+     "title": "10 · Infographic",
+     "minutes": 4,
+     "image": "img/10-infographic.jpg",
+     "alt": "Infographic example on made-up Team Nova data. A KPI infographic with four white cards for Team Nova, February 2026 vs January.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q4 · What is the headline, and what is behind it?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You need a one-glance summary of the most important numbers."
+      },
+      {
+       "h": "How to read it",
+       "p": "Big number = this month; the small line = last month with its counts; ▲/▼ shows the direction and the word says better or worse."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when readers need detail or a full trend."
+      },
+      {
+       "h": "Watch out",
+       "p": "Max 4–6 numbers, and always show what you compare to.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A KPI infographic with four white cards for Team Nova, February 2026 vs January: Abandoned 7.1% (199 of 2,800) in amber with '▲ worse' and 'Jan 6.0% (180 of 3,000)'; Late answers 6.2% (161 of 2,601 rings) '▼ better', Jan 7.7% (216 of 2,820); Missed 3.6% (94 of 2,601) '▼ better', Jan 4.3% (120 of 2,820); Offered calls 2,800 '▼ 200 fewer', Jan 3,000; never colour alone, plum and amber palette. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A comprehensive data infographic summarizing key statistical metrics, featuring bold typography, charts, data visualization icons, and a vibrant color palette with a clean modern layout."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c11",
+     "type": "reading",
+     "title": "11 · Tree",
+     "minutes": 4,
+     "image": "img/11-tree.jpg",
+     "alt": "Tree example on made-up Team Nova data. A tree diagram of 3,000 offered calls in January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q4 · What is the headline, and what is behind it?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to break one total into groups and sub-groups."
+      },
+      {
+       "h": "How to read it",
+       "p": "Start at the top box and move down; the bar inside each box is its share of the total."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when branches don't add up to their parent, or there are many levels."
+      },
+      {
+       "h": "Watch out",
+       "p": "Children must add up to their parent.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A tree diagram of 3,000 offered calls in January 2026: root 'Offered 3,000' → Day 1,900 (63.3%), Evening 700 (23.3%), Night 400 (13.3%), each with a small share bar → each split into 'Reached' and 'Abandoned': Day 1,843 / 57 (3.0%), Evening 637 / 63 (9.0%), Night 340 / 60 (15.0%), abandoned boxes in amber; clean branching infographic. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A hierarchical tree diagram mapping categories and sub-categories, branching structure originating from a core root down to specific branches, clean branching infographic aesthetic."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c12",
+     "type": "reading",
+     "title": "12 · Iceberg",
+     "minutes": 4,
+     "image": "img/12-iceberg.jpg",
+     "alt": "Iceberg example on made-up Team Nova data. An iceberg visual.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q4 · What is the headline, and what is behind it?"
+      },
+      {
+       "h": "Use it when",
+       "p": "The headline number hides bigger causes underneath."
+      },
+      {
+       "h": "How to read it",
+       "p": "Above the water = what the report shows; below = the causes people don't see."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you have no data for what sits below the line."
+      },
+      {
+       "h": "Watch out",
+       "p": "It's a metaphor; put real numbers on the labels.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "An iceberg visual: above the waterline a white card 'What the report shows: Abandoned 6.0%, 180 of 3,000 calls'; below the water four labels 'Night shift loses 15.0% (60 of 400)', 'Evening loses 9.0% (63 of 700)', '3 clients = 80% of abandoned (Atlas, Birch, Cedar: 144 of 180)', 'Only 2 interpreters 21:00–01:00'; sky and deep-blue sea gradient, conceptual vector style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "An iceberg visualization showing visible elements above the waterline, and underlying foundational, hidden, or structural factors below, conceptual vector graphic style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c13",
+     "type": "reading",
+     "title": "13 · Canvas",
+     "minutes": 4,
+     "image": "img/13-canvas.jpg",
+     "alt": "Canvas example on made-up Team Nova data. A canvas mind map on a dotted whiteboard.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q5 · How do we brainstorm or take notes?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You are brainstorming fixes around one goal, as a whiteboard."
+      },
+      {
+       "h": "How to read it",
+       "p": "Center = the goal; each sticky note is one idea with the fact behind it."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you are reporting final results."
+      },
+      {
+       "h": "Watch out",
+       "p": "For ideas and workshops, not final reporting.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A canvas mind map on a dotted whiteboard: a central plum circle 'Cut abandoned, 180 in Jan' with dotted lines to five sticky notes in soft colours: 'Night: 60 of 400 lost (15%)', '3 clients = 80% (Atlas, Birch, Cedar)', 'Only 2 on 21–01, add evening cover?', 'Evening late 10.3% (70 of 680 rings)', 'Shared pool first → 75% occupancy (model)'; handwritten font, clean digital illustration. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A visual canvas style mind map exploring a central concept, open collaborative whiteboard layout with sticky notes, connecting lines, and centralized concept sketches, clean digital illustration style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c14",
+     "type": "reading",
+     "title": "14 · Sketch Notes",
+     "minutes": 4,
+     "image": "img/14-sketch-notes.jpg",
+     "alt": "Sketch Notes example on made-up Team Nova data. A sketch-note tip sheet on warm paper with a plum banner 'Pick up inside 5 s!' and four hand-drawn amber ticks.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q5 · How do we brainstorm or take notes?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want a friendly one-page tip sheet people will remember."
+      },
+      {
+       "h": "How to read it",
+       "p": "Banner = the message; each tick = one tip backed by a real number."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when the report is formal, client-facing or data-heavy."
+      },
+      {
+       "h": "Watch out",
+       "p": "One line per tip; long text kills the style.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A sketch-note tip sheet on warm paper with a plum banner 'Pick up inside 5 s!' and four hand-drawn amber ticks: 'Jan: 216 late + 120 missed out of 2,820 rings', 'Night: 56 of 340 late (16.5%)', 'Day: 90 of 1,800 late, only 5.0%', 'Stay Ready, headset ON between calls'; hand lettering, one line per tip, engaging visual note layout. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "Sketchnote style visual summary of a core topic, hand-drawn lettering, decorative containers, thematic doodles, and bulleted key takeaways, dynamic and engaging visual note layout."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c15",
+     "type": "reading",
+     "title": "15 · Handwritten",
+     "minutes": 4,
+     "image": "img/15-handwritten.jpg",
+     "alt": "Handwritten example on made-up Team Nova data. A handwritten notebook page on lined cream paper.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q5 · How do we brainstorm or take notes?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want a personal, informal note style, like a lead's notebook."
+      },
+      {
+       "h": "How to read it",
+       "p": "Read it like notes: numbers first, then the to-do list."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when official reports or precise numbers."
+      },
+      {
+       "h": "Watch out",
+       "p": "Informal; avoid it in client-facing decks.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A handwritten notebook page on lined cream paper: title 'Jan → Feb review'; lines 'abandoned 6.0 → 7.1 ↑ (!!)' and 'night abandoned 15.0 → 18.9 ↑' in amber, 'missed 4.3 → 3.6 ✓', 'late 7.7 → 6.2 ✓'; then 'to do:' with boxes '☐ night cover (68 lost in Feb)', '☐ Birch queue: 64 of 760', '☐ only 2 people 21:00–01:00'; warm paper texture. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "Handwritten sketch style journal page, sketched conceptual illustrations, handwritten typography and annotations, warm paper texture aesthetic."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "m1-quiz",
+     "type": "quiz",
+     "title": "Module test",
+     "minutes": 10,
+     "pass": 8,
+     "questions": [
+      {
+       "id": "charts-m1-q01",
+       "rev": 1,
+       "q": "You want to explain the path a call takes, stage by stage, like a technical drawing. Which chart?",
+       "o": [
+        "Treemap",
+        "Histogram",
+        "Slope chart",
+        "Blueprint"
+       ],
+       "a": 3,
+       "e": "A blueprint shows how a system or path is wired: boxes for stages, arrows and the numbers that pass through."
+      },
+      {
+       "id": "charts-m1-q02",
+       "rev": 1,
+       "q": "Five clients feed one queue and you want line thickness to show how much each brings. Which chart?",
+       "o": [
+        "Gantt",
+        "Run chart",
+        "Box plot",
+        "Diagram"
+       ],
+       "a": 3,
+       "e": "A diagram shows which parts feed one result and how much each part brings."
+      },
+      {
+       "id": "charts-m1-q03",
+       "rev": 1,
+       "q": "An exploded donut works best with how many slices?",
+       "o": [
+        "Exactly 2",
+        "Any number",
+        "Up to 20",
+        "5–6 at most"
+       ],
+       "a": 3,
+       "e": "Tiny slices disappear. Keep it to 5–6 parts, or use a treemap or bar chart."
+      },
+      {
+       "id": "charts-m1-q04",
+       "rev": 1,
+       "q": "In a flowchart, what must every decision diamond have?",
+       "o": [
+        "Exactly two labeled exits, like Yes and No",
+        "Three exits",
+        "A number inside",
+        "An amber colour"
+       ],
+       "a": 0,
+       "e": "Every diamond needs exactly two labeled exits so the reader always knows where to go."
+      },
+      {
+       "id": "charts-m1-q05",
+       "rev": 1,
+       "q": "A roadmap shows four milestones from January to April. What doesn't it show?",
+       "o": [
+        "Which steps are done",
+        "True time spacing between milestones",
+        "The goal",
+        "The order of milestones"
+       ],
+       "a": 1,
+       "e": "A roadmap shows order, not true time spacing. Use a timeline or Gantt chart when dates matter."
+      },
+      {
+       "id": "charts-m1-q06",
+       "rev": 1,
+       "q": "The Team Nova review loop shows missed calls going from 4.3% to 3.6% after coaching. What can you claim?",
+       "o": [
+        "Coaching cut missed calls by 0.7 points",
+        "Coaching will always work",
+        "Missed calls went down; the loop does not prove coaching caused it",
+        "The loop proves the cause"
+       ],
+       "a": 2,
+       "e": "A cycle diagram is a teaching layout. Before/after numbers alone don't prove a cause."
+      },
+      {
+       "id": "charts-m1-q07",
+       "rev": 1,
+       "q": "In the decision matrix, the 'Shared pool first, current roster' cell shows 81%. What is it?",
+       "o": [
+        "A projected occupancy from a model, not an actual result or a score",
+        "A satisfaction score",
+        "The best option",
+        "Last month's actual occupancy"
+       ],
+       "a": 0,
+       "e": "Matrix cells here are model projections. Higher occupancy is not always better: it can slow answers."
+      },
+      {
+       "id": "charts-m1-q08",
+       "rev": 1,
+       "q": "A tree splits 3,000 offered calls into Day 1,900, Evening 700 and Night 400. What must be true?",
+       "o": [
+        "Only two levels are allowed",
+        "The children add up to the parent: 1,900 + 700 + 400 = 3,000",
+        "Each branch has the same size",
+        "The biggest branch is on the left"
+       ],
+       "a": 1,
+       "e": "Children must add up to their parent. If they don't, name the gap (for example 'not broken down')."
+      },
+      {
+       "id": "charts-m1-q09",
+       "rev": 1,
+       "q": "The headline is 'abandoned 6.0%' but Night loses 15%. Which chart shows the hidden problem under the headline?",
+       "o": [
+        "Layers",
+        "Iceberg",
+        "Infographic",
+        "Canvas"
+       ],
+       "a": 1,
+       "e": "An iceberg puts what the report shows above the water and the causes people don't see below it."
+      },
+      {
+       "id": "charts-m1-q10",
+       "rev": 1,
+       "q": "Where should you not use sketch notes or handwritten styles?",
+       "o": [
+        "Formal, client-facing or data-heavy reports",
+        "Team huddles",
+        "Workshops",
+        "Personal notes"
+       ],
+       "a": 0,
+       "e": "They're friendly and memorable, but informal. Keep them out of client decks."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m2",
+   "title": "Track and compare",
+   "covers": "Questions 6–8 · charts 16–24, from Line / Area to Waterfall",
+   "summary": "Trends over time, results against targets, rankings and how a total is made up or moved.",
+   "files": {
+    "workbook": "files/chart-course-practice.xlsx"
+   },
+   "topics": [
+    [
+     "Q6",
+     "Is it going up, down or holding?"
+    ],
+    [
+     "Q7",
+     "Are we on target, and who is ahead?"
+    ],
+    [
+     "Q8",
+     "What is the total made of, and how did it move?"
+    ]
+   ],
+   "lessons": [
+    {
+     "id": "c16",
+     "type": "reading",
+     "title": "16 · Line / Area",
+     "minutes": 4,
+     "image": "img/16-line-area.jpg",
+     "alt": "Line / Area example on made-up Team Nova data. A line and area chart of Team Nova offered calls per week, weeks starting Monday.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q6 · Is it going up, down or holding?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want the overall trend of one measure over time."
+      },
+      {
+       "h": "How to read it",
+       "p": "Follow the line left to right; the shaded area shows volume; hollow dots are partial weeks."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when categories have no natural order (use bars)."
+      },
+      {
+       "h": "Watch out",
+       "p": "Mark partial periods; don't read them as a trend.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A line and area chart of Team Nova offered calls per week, weeks starting Monday: 29 Dec 210 (partial week, hollow dot), 5 Jan 640, 12 Jan 702, 19 Jan 688, 26 Jan 731, 2 Feb 815 (peak, label in amber), 9 Feb 390 (partial week, hollow dot); plum line over a soft lilac area, y-axis 0 to 1,000, value labels on each point, light gridlines, legend 'full week / partial week', title 'Offered calls climbed to a peak of 815 in the week of 2 Feb', clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A line and area chart infographic showing one measure over time, a smooth line with point markers over a soft shaded area, value labels, light gridlines and hollow markers for incomplete periods, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c17",
+     "type": "reading",
+     "title": "17 · Run Chart",
+     "minutes": 4,
+     "image": "img/17-run-chart.jpg",
+     "alt": "Run Chart example on made-up Team Nova data. A run chart of weekly missed-call rate for 12 full weeks.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q6 · Is it going up, down or holding?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to check if a change is working, against a target and the usual level."
+      },
+      {
+       "h": "How to read it",
+       "p": "Plot it from the first point. Before calling a change, choose and name a recognized run-chart method and apply its rules."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you have fewer than ~10 points, or need control limits (use an SPC chart)."
+      },
+      {
+       "h": "Watch out",
+       "p": "Plot from the first point, but don't call a lasting shift from a handful of weeks. Name the run-chart method you use (for example the Anhøj rules) and apply only its rules.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A run chart of weekly missed-call rate for 12 full weeks: 10 Nov 5.1, 17 Nov 4.8, 24 Nov 5.4, 1 Dec 4.6, 8 Dec 4.9, 15 Dec 5.0, 5 Jan 4.3, 12 Jan 4.7, 19 Jan 3.6, 26 Jan 3.8, 2 Feb 3.4, 9 Feb 3.5 %; plum line with dots and labels, dotted mauve median line 4.65%, dashed amber target line 4.0%, a vertical dotted marker 'coaching starts' before 19 Jan, y-axis 0–7%, note 'watch more weeks before calling a lasting shift', flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A run chart infographic plotting a metric over time with a connected line and dots, a dashed target line, a dotted median line, hollow markers for incomplete periods and labels on each point, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c18",
+     "type": "reading",
+     "title": "18 · Slope Chart",
+     "minutes": 4,
+     "image": "img/18-slope-chart.jpg",
+     "alt": "Slope Chart example on made-up Team Nova data. A slope chart comparing four lower-is-better rates between January and February 2026 (full months) on the same 0–20% scale.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q6 · Is it going up, down or holding?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You compare several measures between just two points in time."
+      },
+      {
+       "h": "How to read it",
+       "p": "Each line joins last month (left) to this month (right); steeper = bigger change; amber = moved the wrong way."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when there are more than two time points or many crossing lines."
+      },
+      {
+       "h": "Watch out",
+       "p": "Only two time points; use a line chart for more.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A slope chart comparing four lower-is-better rates between January and February 2026 (full months) on the same 0–20% scale: Abandoned 6.0% → 7.1% (199 of 2,800) and Night abandoned 15.0% → 18.9% (68 of 360) in amber with '▲ worse'; Late answers 7.7% → 6.2% (161 of 2,601) and Missed 4.3% → 3.6% (94 of 2,601) in plum with '▼ better'; every line labeled at both ends, labels never overlapping, clean minimal design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A slope chart infographic comparing several items between two points in time, two vertical axes joined by straight lines, values labeled at both ends and color showing improvement or decline, clean minimal design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c19",
+     "type": "reading",
+     "title": "19 · Bullet Chart",
+     "minutes": 4,
+     "image": "img/19-bullet-chart.jpg",
+     "alt": "Bullet Chart example on made-up Team Nova data. A bullet chart of February 2026 actual vs target, one row per measure with grey background bands.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q7 · Are we on target, and who is ahead?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You show actual results against a target in a compact way."
+      },
+      {
+       "h": "How to read it",
+       "p": "The thick bar is the actual, the black line is the target; past the line = target met."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when there is no agreed target."
+      },
+      {
+       "h": "Watch out",
+       "p": "Say clearly when lower is better (e.g. missed calls).",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A bullet chart of February 2026 actual vs target, one row per measure with grey background bands: Service level 82.0% vs target 80% (higher is better, met, plum); Abandoned rate 7.1% vs 5% (lower is better, not met, amber); Late answers 6.2% vs 8% (lower is better, met); Missed 3.6% vs 4% (lower is better, met); a black target marker on each row, '✓ met' or '✗ not met' at the right, footnote 'sample targets', clean dashboard style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A bullet chart infographic comparing actual values against targets, one row per measure with a bold actual bar, a target marker line and soft background ranges, clear labels, clean dashboard style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c20",
+     "type": "reading",
+     "title": "20 · Ranked Bar",
+     "minutes": 4,
+     "image": "img/20-ranked-bar.jpg",
+     "alt": "Ranked Bar example on made-up Team Nova data. A ranked horizontal bar chart of calls handled per interpreter, January 2026, sorted high to low, bars starting at zero.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q7 · Are we on target, and who is ahead?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to rank people or items from highest to lowest."
+      },
+      {
+       "h": "How to read it",
+       "p": "Longest bar at the top; compare lengths, not colors; highlighted bars are the leaders."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when order is natural (time, steps) or names are sensitive."
+      },
+      {
+       "h": "Watch out",
+       "p": "Bars start at zero; sort by value, never alphabetically.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A ranked horizontal bar chart of calls handled per interpreter, January 2026, sorted high to low, bars starting at zero: Int-07 212, Int-03 198, Int-11 176, Int-02 160, Int-09 151, Int-05 140, Int-12 122, Int-04 95; top three bars in plum, the rest in lilac, value labels at the bar ends, a callout 'Top 3 = 47%, 586 of 1,254 calls', clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A ranked horizontal bar chart infographic sorting items from largest to smallest, value labels at the end of each bar, the leaders highlighted, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c21",
+     "type": "reading",
+     "title": "21 · Dumbbell",
+     "minutes": 4,
+     "image": "img/21-dumbbell.jpg",
+     "alt": "Dumbbell example on made-up Team Nova data. A dumbbell chart of abandoned rate by client, January → February 2026, same 0–12% scale on every row.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q7 · Are we on target, and who is ahead?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You compare a before and after value for each item."
+      },
+      {
+       "h": "How to read it",
+       "p": "Light dot = before, dark dot = after; the bar between them is the change."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when there are more than two time points."
+      },
+      {
+       "h": "Watch out",
+       "p": "Use the same scale for every row.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A dumbbell chart of abandoned rate by client, January → February 2026, same 0–12% scale on every row: Atlas 6.0% (72 of 1,200) → 5.2% (60 of 1,150) plum; Birch 5.6% (45 of 800) → 8.4% (64 of 760) amber; Cedar 6.0% (27 of 450) → 4.1% (18 of 440) plum; Dune 6.0% (18 of 300) → 9.6% (27 of 280) amber; January dots in lilac, February dots coloured by better/worse, both values labeled, clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A dumbbell chart infographic comparing two values per item, one row per item with two dots connected by a line, color showing improvement or decline and labels with both values, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c22",
+     "type": "reading",
+     "title": "22 · Stacked Bar",
+     "minutes": 4,
+     "image": "img/22-stacked-bar.jpg",
+     "alt": "Stacked Bar example on made-up Team Nova data. A 100% stacked horizontal bar chart of ring outcomes by shift, January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q8 · What is the total made of, and how did it move?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You compare groups and also show how each total splits into parts."
+      },
+      {
+       "h": "How to read it",
+       "p": "Each bar is 100%; compare the size of the same color across bars."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you must compare middle segments precisely."
+      },
+      {
+       "h": "Watch out",
+       "p": "Rounded shares may not add to 100%; label every segment, even tiny ones.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A 100% stacked horizontal bar chart of ring outcomes by shift, January 2026: Day 1,800 rings: on time 92.2%, late 5.0%, missed 2.8%; Evening 680 rings: 83.8%, 10.3%, 5.9%; Night 340 rings: 74.7%, 16.5%, 8.8%; on time in plum, late in mauve, missed in amber; labels inside large segments and beside tiny ones, a note that rounded shares may not add to 100%, plum, lilac and amber palette. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A stacked bar chart infographic comparing groups side by side, each bar divided into colored segments that show how parts add up to the whole, percentage labels inside segments and a clear legend, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c23",
+     "type": "reading",
+     "title": "23 · Treemap",
+     "minutes": 4,
+     "image": "img/23-treemap.jpg",
+     "alt": "Treemap example on made-up Team Nova data. A treemap of 3,000 offered calls by client, January 2026, rectangles sized by value, largest first.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q8 · What is the total made of, and how did it move?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You show many parts of one total, sized by area."
+      },
+      {
+       "h": "How to read it",
+       "p": "Bigger rectangle = bigger share; read the largest blocks first."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when values are close in size or can be negative."
+      },
+      {
+       "h": "Watch out",
+       "p": "Similar sizes are hard to compare; always label values.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A treemap of 3,000 offered calls by client, January 2026, rectangles sized by value, largest first: Atlas 1,200 (40.0%), Birch 800 (26.7%), Cedar 450 (15.0%), Dune 300 (10.0%), Ember 150 (5.0%), Fjord 70 (2.3%), Gale 30 (1.0%); plum-to-lilac single-hue palette, every block labeled with count and share, clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A treemap infographic dividing one total into nested rectangles sized by value, the largest parts first, labels with values and shares, a calm single-hue palette with one highlight, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c24",
+     "type": "reading",
+     "title": "24 · Waterfall",
+     "minutes": 4,
+     "image": "img/24-waterfall.jpg",
+     "alt": "Waterfall example on made-up Team Nova data. A waterfall chart of abandoned calls from January 180 to February 199.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q8 · What is the total made of, and how did it move?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You explain how a total moved from one value to another, step by step."
+      },
+      {
+       "h": "How to read it",
+       "p": "Start bar → each floating bar adds (amber) or removes (lilac) → end bar."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when the steps don't add up to the total change."
+      },
+      {
+       "h": "Watch out",
+       "p": "Non-zero axis is acceptable here only with a break mark and a note; check that rounded steps still reconcile.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A waterfall chart of abandoned calls from January 180 to February 199: start bar 180 in plum, then floating steps by client Atlas −12 (lilac), Birch +19 (amber), Cedar −9 (lilac), Dune +9 (amber), Others +12 (amber), end bar 199 in plum; dotted connector lines, value labels, y-axis starting at 150 with a break mark and the note 'axis starts at 150; −12 + 19 − 9 + 9 + 12 = +19', clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A waterfall chart infographic showing how a starting value moves to an ending value through a sequence of positive and negative steps, floating bars for each change, start and end totals in a solid color, connector lines and value labels, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "m2-quiz",
+     "type": "quiz",
+     "title": "Module test",
+     "minutes": 10,
+     "pass": 8,
+     "questions": [
+      {
+       "id": "charts-m2-q01",
+       "rev": 1,
+       "q": "Weekly offered calls for 29 Dec and 9 Feb are partial weeks. How should the line chart show them?",
+       "o": [
+        "Solid dots like the others",
+        "Leave them out without saying so",
+        "Double them to estimate a full week",
+        "Hollow dots, with a note not to read them as a trend"
+       ],
+       "a": 3,
+       "e": "Mark partial periods, never fill a gap with a silent estimate."
+      },
+      {
+       "id": "charts-m2-q02",
+       "rev": 1,
+       "q": "A run chart has a median line and a target line. Before you say 'the change worked', what should you do?",
+       "o": [
+        "Count three points below the median",
+        "Add control limits",
+        "Wait for one good week",
+        "Name a recognized run-chart method and apply its rules"
+       ],
+       "a": 3,
+       "e": "Plot from the first point, but call a signal only by a named method, such as the Anhøj rules."
+      },
+      {
+       "id": "charts-m2-q03",
+       "rev": 1,
+       "q": "You compare four rates between January and February only. Which chart?",
+       "o": [
+        "Slope chart",
+        "Gantt",
+        "Histogram",
+        "Run chart"
+       ],
+       "a": 0,
+       "e": "A slope chart compares several measures between just two points in time."
+      },
+      {
+       "id": "charts-m2-q04",
+       "rev": 1,
+       "q": "In a bullet chart for abandoned rate, actual 7.1% and target 5%. What must the row say?",
+       "o": [
+        "Lower is better, and the target is not met",
+        "Higher is better",
+        "Nothing, the bar is enough",
+        "Target met"
+       ],
+       "a": 0,
+       "e": "Say clearly when lower is better. 7.1% is above the 5% target, so it is not met."
+      },
+      {
+       "id": "charts-m2-q10",
+       "rev": 1,
+       "q": "How should a ranked bar chart of calls per interpreter be sorted?",
+       "o": [
+        "By value, highest first, with bars starting at zero",
+        "Alphabetically by name",
+        "Randomly",
+        "By interpreter id"
+       ],
+       "a": 0,
+       "e": "Sort by value, never alphabetically, and start bars at zero."
+      },
+      {
+       "id": "charts-m2-q05",
+       "rev": 1,
+       "q": "Birch's abandoned rate went from 5.6% (45 of 800) to 8.4% (64 of 760). Which chart shows this before-and-after for every client?",
+       "o": [
+        "Funnel",
+        "Sankey",
+        "Dumbbell",
+        "Treemap"
+       ],
+       "a": 2,
+       "e": "A dumbbell joins a before and after dot for each item, on the same scale for every row."
+      },
+      {
+       "id": "charts-m2-q06",
+       "rev": 1,
+       "q": "In the stacked bar, Day's shares are 92.2% + 5.0% + 2.8%. Another bar adds up to 100.1%. Why?",
+       "o": [
+        "Rounding, so say 'shares are rounded'",
+        "Missed calls are counted twice",
+        "The bar is wrong",
+        "A data error"
+       ],
+       "a": 0,
+       "e": "Rounded shares can add to 99–101%. Recompute from counts, and write that shares are rounded."
+      },
+      {
+       "id": "charts-m2-q07",
+       "rev": 1,
+       "q": "When is a treemap a poor choice?",
+       "o": [
+        "When one part is large",
+        "When values are close in size or can be negative",
+        "When there are 7 parts",
+        "When you have counts"
+       ],
+       "a": 1,
+       "e": "Similar rectangles are hard to compare, and negative values can't be an area."
+      },
+      {
+       "id": "charts-m2-q08",
+       "rev": 1,
+       "q": "Abandoned calls went from 180 to 199. The waterfall steps are −12, +19, −9, +9 and +12. What should you check?",
+       "o": [
+        "That the axis starts at zero",
+        "That the steps add up to the total change: +19",
+        "That each step is positive",
+        "That there are five steps"
+       ],
+       "a": 1,
+       "e": "Steps must reconcile: −12 + 19 − 9 + 9 + 12 = +19 = 199 − 180."
+      },
+      {
+       "id": "charts-m2-q09",
+       "rev": 1,
+       "q": "The waterfall's axis starts at 150, not 0. What makes this acceptable?",
+       "o": [
+        "Nothing, it is never acceptable",
+        "Using amber bars",
+        "A bigger title",
+        "A break mark and a note saying where the axis starts"
+       ],
+       "a": 3,
+       "e": "A non-zero axis is acceptable in a waterfall only with a break mark and a note."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "m3",
+   "title": "Focus, spread and flow",
+   "covers": "Questions 9–11 · charts 25–33, from Pareto to Gantt",
+   "summary": "Find the vital few, see spread and relationships, and show how volume flows and who covers when.",
+   "files": {
+    "workbook": "files/chart-course-practice.xlsx"
+   },
+   "topics": [
+    [
+     "Q9",
+     "Where should we focus first?"
+    ],
+    [
+     "Q10",
+     "How are values spread, and are they linked?"
+    ],
+    [
+     "Q11",
+     "How does volume flow, and who covers when?"
+    ]
+   ],
+   "lessons": [
+    {
+     "id": "c25",
+     "type": "reading",
+     "title": "25 · Pareto",
+     "minutes": 4,
+     "image": "img/25-pareto.jpg",
+     "alt": "Pareto example on made-up Team Nova data. A Pareto chart of 180 abandoned calls in January 2026 by client, descending bars Atlas 72, Birch 45, Cedar 27, Dune 18, Ember 9, Fjord 6, Gale 3; an amber cumulative line on a 0–100% right axis passing 40%, 65% and 80%; a dashed 80% reference line; the top three bars highlighted in plum, the rest in lilac; a callout 'Atlas + Birch + Cedar = 80% of abandoned', clean modern flat design..",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q9 · Where should we focus first?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to find the few causes behind most of a problem."
+      },
+      {
+       "h": "How to read it",
+       "p": "Bars rank causes; the amber line is the running total; where it crosses 80% = the vital few."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when categories overlap or you only have percentages."
+      },
+      {
+       "h": "Watch out",
+       "p": "Use counts of causes, not percentages or averages.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A Pareto chart of 180 abandoned calls in January 2026 by client, descending bars Atlas 72, Birch 45, Cedar 27, Dune 18, Ember 9, Fjord 6, Gale 3; an amber cumulative line on a 0–100% right axis passing 40%, 65% and 80%; a dashed 80% reference line; the top three bars highlighted in plum, the rest in lilac; a callout 'Atlas + Birch + Cedar = 80% of abandoned', clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A Pareto chart infographic ranking categories from largest to smallest with descending bars, a cumulative-percentage line on a secondary axis, a dashed 80% reference line and the vital few bars highlighted, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c26",
+     "type": "reading",
+     "title": "26 · Heatmap",
+     "minutes": 4,
+     "image": "img/26-heatmap.jpg",
+     "alt": "Heatmap example on made-up Team Nova data. An hourly heatmap mock-up of abandoned rate, days Mon–Sun as rows and two-hour blocks 00–22 as columns, single-hue lilac-to-plum scale 0–20% with values in each cell, higher at night (00–06) and on Friday and Saturday evenings; hatched grey cells for slots with fewer than 5 calls, a legend stating that cut-off, subtitle 'illustrative mock-up, values invented', clean data-visualization style..",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q9 · Where should we focus first?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to see when or where a problem clusters across two dimensions."
+      },
+      {
+       "h": "How to read it",
+       "p": "Darker cell = higher rate; hatched = too few calls to judge. This one is a mock-up: learn the format, not when problems happen."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when most cells have very few cases, or the period is unknown."
+      },
+      {
+       "h": "Watch out",
+       "p": "The '< 3 calls' cut-off is an example, not a standard; choose and state your own.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "An hourly heatmap mock-up of abandoned rate, days Mon–Sun as rows and two-hour blocks 00–22 as columns, single-hue lilac-to-plum scale 0–20% with values in each cell, higher at night (00–06) and on Friday and Saturday evenings; hatched grey cells for slots with fewer than 5 calls, a legend stating that cut-off, subtitle 'illustrative mock-up, values invented', clean data-visualization style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "An hourly heatmap infographic with days of the week as rows and hours of the day as columns, each cell shaded by the value of a rate on a single-hue color scale, a clear legend and muted cells for low-volume periods, clean modern data-visualization style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c27",
+     "type": "reading",
+     "title": "27 · Small Multiples",
+     "minutes": 4,
+     "image": "img/27-small-multiples.jpg",
+     "alt": "Small Multiples example on made-up Team Nova data. Small multiples.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q9 · Where should we focus first?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You compare the same chart across several groups without clutter."
+      },
+      {
+       "h": "How to read it",
+       "p": "Every panel uses the same scale, so compare bar heights across panels directly."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when each panel would need its own scale."
+      },
+      {
+       "h": "Watch out",
+       "p": "Same scale on every panel, or it misleads.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "Small multiples: three identical panels for Day, Evening and Night, each a pair of columns for January and February abandoned rate on the same 0–20% scale: Day 3.0% (57 of 1,900) → 3.4% (61 of 1,780), Evening 9.0% (63 of 700) → 10.6% (70 of 660), Night 15.0% (60 of 400) → 18.9% (68 of 360); January in lilac, February in amber when worse, counts under each value, clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A small multiples infographic made of several identical mini charts arranged in a row or grid, one per group, all on the same axes and scale, consistent colors and short titles, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c28",
+     "type": "reading",
+     "title": "28 · Histogram",
+     "minutes": 4,
+     "image": "img/28-histogram.jpg",
+     "alt": "Histogram example on made-up Team Nova data. A histogram of seconds to pick up for 2,700 answered rings, January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q10 · How are values spread, and are they linked?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You want to see how values are spread, not just the average."
+      },
+      {
+       "h": "How to read it",
+       "p": "Each bar counts how many rings were picked up in that many seconds; everything right of the 5 s line was late."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you have very few values (fewer than ~30)."
+      },
+      {
+       "h": "Watch out",
+       "p": "Bins should be equal width; mark any grouped bin.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A histogram of seconds to pick up for 2,700 answered rings, January 2026: 0–1 s 500, 1–2 s 760, 2–3 s 600, 3–4 s 374, 4–5 s 250 in plum; 5–6 s 110, 6–7 s 56, 7–10 s 30, 10+ s 20 in amber; the two last bins outlined as grouped (wider) bins; a dashed vertical line at 5 s labeled '216 late (8.0% of 2,700 answered)', median 2–3 s noted, clean modern data-visualization style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A histogram infographic showing the distribution of a measure, equal-width bins with counts, a reference line for a key threshold, color bands for good, warning and bad ranges, axis labels and a note of the median, clean modern data-visualization style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c29",
+     "type": "reading",
+     "title": "29 · Box Plot",
+     "minutes": 4,
+     "image": "img/29-box-plot.jpg",
+     "alt": "Box Plot example on made-up Team Nova data. A box plot of average handle time per interpreter by team, January 2026, horizontal, 4–12 min axis.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q10 · How are values spread, and are they linked?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You compare the spread of values between groups, including outliers."
+      },
+      {
+       "h": "How to read it",
+       "p": "Box = middle half of people, thick line = median, whiskers = lowest and highest, dots = each person."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when each group has only a handful of values; show the dots instead."
+      },
+      {
+       "h": "Watch out",
+       "p": "With few people, show the individual dots too.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A box plot of average handle time per interpreter by team, January 2026, horizontal, 4–12 min axis: Team A (n = 9) median 7.2 with one outlier at 11.2 in amber; Team B (n = 8) median 6.2; Team C (n = 10) median 8.4; boxes for the middle 50%, bold median line, whiskers to min and max, every interpreter shown as a dot beside the box, dashed amber target line at 8 min labeled 'sample target', clean minimal style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A box plot infographic comparing the spread of a measure across groups, boxes for the middle 50%, a bold median line, whiskers to the minimum and maximum, individual points beside each box and a target reference line, clean minimal data-visualization style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c30",
+     "type": "reading",
+     "title": "30 · Scatter Plot",
+     "minutes": 4,
+     "image": "img/30-scatter-plot.jpg",
+     "alt": "Scatter Plot example on made-up Team Nova data. A scatter plot of 12 interpreters, x = occupancy 55–90%, y = late-answer rate 0–14%, bubble size = rings.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q10 · How are values spread, and are they linked?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You check whether two measures move together, item by item."
+      },
+      {
+       "h": "How to read it",
+       "p": "Each bubble is one interpreter: further right = busier, higher = more late answers; bubble size = rings."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you want to prove a cause, or have very few points."
+      },
+      {
+       "h": "Watch out",
+       "p": "A pattern is not proof of cause.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A scatter plot of 12 interpreters, x = occupancy 55–90%, y = late-answer rate 0–14%, bubble size = rings: points rise from Int-01 (58%, 4.1%, 180 rings) to Int-10 (88%, 12.5%, 290 rings) along a dashed trend line; one outlier Int-11 (62%, 10.4%, 120 rings) in amber with the callout 'late but not busy, check training, not workload'; footnote 'a pattern is not proof of cause', clean data-visualization style. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A scatter plot infographic comparing two measures, one dot per item placed by its x and y values, optional bubble size for a third value, a reference line and highlighted outliers with labels, clean modern data-visualization style."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c31",
+     "type": "reading",
+     "title": "31 · Funnel",
+     "minutes": 4,
+     "image": "img/31-funnel.jpg",
+     "alt": "Funnel example on made-up Team Nova data. A funnel chart of January 2026 calls, each stage part of the one before.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q11 · How does volume flow, and who covers when?"
+      },
+      {
+       "h": "Use it when",
+       "p": "Each stage is a real step and you want to see where volume drops."
+      },
+      {
+       "h": "How to read it",
+       "p": "Width = how many reach that stage; the side labels show the drop at each step."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when stages are not real sequential steps."
+      },
+      {
+       "h": "Watch out",
+       "p": "Only real steps where each stage is part of the one before.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A funnel chart of January 2026 calls, each stage part of the one before: Offered 3,000 (100%) → Rang an interpreter 2,820 (94.0%) → Picked up 2,700 (90.0%) → Picked up within 5 s 2,484 (82.8%); widths proportional, plum to amber gradient, drop labels on the right '− 180 abandoned', '− 120 missed', '− 216 late', clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A funnel chart infographic showing how a starting volume narrows through sequential stages, each stage width proportional to its value, drop-off counts between stages and percentage labels, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c32",
+     "type": "reading",
+     "title": "32 · Sankey",
+     "minutes": 4,
+     "image": "img/32-sankey.jpg",
+     "alt": "Sankey example on made-up Team Nova data. A Sankey diagram of 3,000 offered calls in January 2026.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q11 · How does volume flow, and who covers when?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You show how one total splits into outcomes, and those outcomes split again."
+      },
+      {
+       "h": "How to read it",
+       "p": "Follow the bands left to right; band width = number of calls."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when flows don't keep their totals, or there are many tiny flows."
+      },
+      {
+       "h": "Watch out",
+       "p": "Bands must add up at every node.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A Sankey diagram of 3,000 offered calls in January 2026: Offered 3,000 splits into 'Rang an interpreter 2,820' and 'Abandoned 180 (6.0%)' in amber; 'Rang' splits again into 'On time 2,484 (88.1%)' in plum, 'Late 216 (7.7%)' in mauve and 'Missed 120 (4.3%)' in amber; band widths to scale, node labels with counts, bands adding up at every node, clean modern flat design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A Sankey flow diagram showing how a total splits into outcomes across stages, curved bands whose widths are proportional to the values, labeled nodes with counts, a calm palette with one highlight color, clean modern flat design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "c33",
+     "type": "reading",
+     "title": "33 · Gantt",
+     "minutes": 4,
+     "image": "img/33-gantt.jpg",
+     "alt": "Gantt example on made-up Team Nova data. A Gantt chart of a sample weekday roster, axis 06.",
+     "blocks": [
+      {
+       "h": "The question it answers",
+       "p": "Q11 · How does volume flow, and who covers when?"
+      },
+      {
+       "h": "Use it when",
+       "p": "You show who works when, or tasks across time."
+      },
+      {
+       "h": "How to read it",
+       "p": "One row per person; the bar runs from shift start to end across the 24-hour axis."
+      },
+      {
+       "h": "Not for",
+       "p": "Don't use it when you need to show volumes rather than time spans."
+      },
+      {
+       "h": "Watch out",
+       "p": "Sort rows by start time so coverage gaps show.",
+       "tone": "warn"
+      },
+      {
+       "h": "Sample prompt for the picture above",
+       "code": "A Gantt chart of a sample weekday roster, axis 06:00 to 10:00 next day, one row per interpreter sorted by start time: Int-02, Int-03, Int-05 09–17 Day; Int-07 11–19 Mid; Int-09 13–21 Mid; Int-11 and Int-12 17–01 Evening; Int-01 and Int-04 01–09 Night; bars coloured by block, a shaded night band 01–09 and an amber band 21:00–01:00 labeled 'only 2 on', clean scheduling-tool design. + style block"
+      },
+      {
+       "h": "General master prompt (any data)",
+       "code": "A Gantt chart infographic showing items as horizontal bars across a time axis, one row per item, bar start and end at exact times, shaded time bands and clear row labels, clean scheduling-tool design."
+      },
+      {
+       "h": "Try it",
+       "p": "Paste the sample prompt and the style block into ChatGPT, Gemini or Copilot. Then compare the result with the picture: check every number and label before you trust it."
+      }
+     ]
+    },
+    {
+     "id": "m3-quiz",
+     "type": "quiz",
+     "title": "Module test",
+     "minutes": 10,
+     "pass": 8,
+     "questions": [
+      {
+       "id": "charts-m3-q01",
+       "rev": 1,
+       "q": "Atlas 72 + Birch 45 + Cedar 27 = 144 of 180 abandoned calls. What share is that, and which chart shows it best?",
+       "o": [
+        "80%, a line chart",
+        "72%, a pie chart",
+        "80%, a Pareto chart",
+        "65%, a treemap"
+       ],
+       "a": 2,
+       "e": "144 ÷ 180 = 80%. A Pareto chart ranks causes and shows where the running total crosses 80%."
+      },
+      {
+       "id": "charts-m3-q02",
+       "rev": 1,
+       "q": "A Pareto chart should be built from…",
+       "o": [
+        "Averages",
+        "Rates with different bases",
+        "Percentages only",
+        "Counts of causes"
+       ],
+       "a": 3,
+       "e": "Use counts of causes, not percentages or averages, so the running total is meaningful."
+      },
+      {
+       "id": "charts-m3-q03",
+       "rev": 1,
+       "q": "A heatmap hatches cells with fewer than 5 calls. What is that cut-off?",
+       "o": [
+        "Not needed",
+        "Always 3 calls",
+        "A choice for this data, printed in the legend",
+        "An industry standard"
+       ],
+       "a": 2,
+       "e": "Thresholds are choices. Pick one that fits your volumes and print it in the legend."
+      },
+      {
+       "id": "charts-m3-q04",
+       "rev": 1,
+       "q": "You show abandoned rate by shift in three small panels. What must every panel share?",
+       "o": [
+        "The same title",
+        "The same scale",
+        "The same colour for every bar",
+        "The same number of bars"
+       ],
+       "a": 1,
+       "e": "Small multiples are only comparable when every panel uses the same axes and scale."
+      },
+      {
+       "id": "charts-m3-q05",
+       "rev": 1,
+       "q": "A histogram's last two bins are 7–10 s and 10+ s, wider than the others. What must the chart do?",
+       "o": [
+        "Hide them",
+        "Nothing",
+        "Mark them as grouped bins so heights aren't compared directly",
+        "Make them the same colour as the rest"
+       ],
+       "a": 2,
+       "e": "Bins should be equal width. Mark any grouped bin."
+      },
+      {
+       "id": "charts-m3-q06",
+       "rev": 1,
+       "q": "Team A has 9 interpreters, one at 11.2 minutes. Why show the dots next to the box plot?",
+       "o": [
+        "Dots look nicer",
+        "With few people, each value matters, so show them",
+        "To hide the outlier",
+        "Box plots need colour"
+       ],
+       "a": 1,
+       "e": "With small groups, show the individual dots too."
+      },
+      {
+       "id": "charts-m3-q07",
+       "rev": 1,
+       "q": "Busier interpreters answer late more often in the scatter plot. What can you say?",
+       "o": [
+        "There is no pattern",
+        "Busyness causes late answers",
+        "The two move together; this alone doesn't prove busyness causes late answers",
+        "Int-11 is the busiest"
+       ],
+       "a": 2,
+       "e": "A pattern is not proof of cause. Int-11 is late but not busy, which points to something else."
+      },
+      {
+       "id": "charts-m3-q08",
+       "rev": 1,
+       "q": "Which stages can go in a funnel?",
+       "o": [
+        "Clients sorted by size",
+        "Any categories in any order",
+        "Months",
+        "Real steps where each stage is part of the one before"
+       ],
+       "a": 3,
+       "e": "Offered 3,000 → rang 2,820 → picked up 2,700 → within 5 s 2,484: each is part of the one before."
+      },
+      {
+       "id": "charts-m3-q09",
+       "rev": 1,
+       "q": "In the Sankey, 'Rang an interpreter 2,820' splits into 2,484 + 216 + 120. Why check this?",
+       "o": [
+        "Sankeys need three outcomes",
+        "To pick colours",
+        "Bands must add up at every node",
+        "To sort the bands"
+       ],
+       "a": 2,
+       "e": "2,484 + 216 + 120 = 2,820. Flows that don't keep their totals mislead."
+      },
+      {
+       "id": "charts-m3-q10",
+       "rev": 1,
+       "q": "Why sort a Gantt roster by start time?",
+       "o": [
+        "To hide the night shift",
+        "So coverage gaps show",
+        "Because it is alphabetical",
+        "It doesn't matter"
+       ],
+       "a": 1,
+       "e": "Sorted rows make gaps, like only two people 21:00–01:00, easy to see."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "final",
+   "title": "Final task",
+   "summary": "Answer a manager's question with three charts: pick them, prompt them, check them. About 45 minutes.",
+   "lessons": [
+    {
+     "id": "final-exam",
+     "type": "exam",
+     "title": "Final task",
+     "minutes": 45,
+     "headline": "Show it.",
+     "intro": "Pick the charts, write the prompts, check the result, then reveal the model answer.",
+     "html": "<p>Open <strong>Chart course practice workbook.xlsx</strong>. It has Team Nova's made-up data for January and February 2026. Use any AI tool you like (ChatGPT, Gemini, Copilot, Canva) or Excel. Time: about 45 minutes. Pass mark: 8 of 10 tasks.</p>\n<p><strong>The brief:</strong> your manager asks, \"Why did abandoned calls go up in February, and where should we act first?\" Build a short answer of three charts.</p>\n<ol>\n<li><strong>Headline.</strong> From the <em>Monthly KPIs</em> tab, work out January and February abandoned rate with counts. Write both as \"x% (a of b)\".</li>\n<li><strong>Pick chart 1.</strong> Choose a chart that shows how abandoned calls moved from January to February, client by client. Name it and say why.</li>\n<li><strong>Prompt 1.</strong> Write a 4-part prompt (type · data · layout · style) for that chart, using the <em>Clients by month</em> tab. Paste the style block from the course.</li>\n<li><strong>Check 1.</strong> Show that your steps add up to the total change.</li>\n<li><strong>Pick chart 2.</strong> Choose a chart that compares abandoned rate by shift in both months on the same scale. Name it.</li>\n<li><strong>Prompt 2.</strong> Write the prompt for chart 2 from the <em>Shifts by month</em> tab, with n next to every rate.</li>\n<li><strong>Pick chart 3.</strong> Choose a chart that shows who covers which hours, from the <em>Roster</em> tab, so a coverage gap is visible. Name it and the gap.</li>\n<li><strong>Title.</strong> Write a finding title (not a topic title) for each of the three charts.</li>\n<li><strong>Generate and audit.</strong> Generate at least one chart and check it with the visual-audit checklist. List anything the tool got wrong.</li>\n<li><strong>Caveat.</strong> Write one sentence on what these charts cannot prove.</li>\n</ol>",
+     "keyHtml": "<table><thead><tr><th>#</th><th>Model answer</th></tr></thead><tbody>\n<tr><td>1</td><td>January 6.0% (180 of 3,000); February 7.1% (199 of 2,800). Both full months.</td></tr>\n<tr><td>2</td><td>A waterfall: it explains how a total moved from 180 to 199 step by step. (A dumbbell of rates is a good second choice.)</td></tr>\n<tr><td>3</td><td>\"A waterfall chart of abandoned calls from January 180 to February 199: start bar 180 in plum, steps Atlas −12, Birch +19, Cedar −9, Dune +9, Others +12 (increases amber, decreases lilac), end bar 199 in plum, connector lines, value labels, y-axis from 150 with a break mark and a note\" + style block.</td></tr>\n<tr><td>4</td><td>−12 + 19 − 9 + 9 + 12 = +19 = 199 − 180 ✓. Feb by client: 60 + 64 + 18 + 27 + 30 = 199 ✓.</td></tr>\n<tr><td>5</td><td>Small multiples (one panel per shift, same 0–20% scale). A dumbbell is also fine.</td></tr>\n<tr><td>6</td><td>Day 3.0% (57 of 1,900) → 3.4% (61 of 1,780); Evening 9.0% (63 of 700) → 10.6% (70 of 660); Night 15.0% (60 of 400) → 18.9% (68 of 360); same scale on every panel; worse values in amber.</td></tr>\n<tr><td>7</td><td>A Gantt chart sorted by start time. Gap: only two interpreters (Int-11, Int-12) cover 21:00–01:00.</td></tr>\n<tr><td>8</td><td>For example: \"Birch (+19) drove most of the rise from 180 to 199\"; \"Night got much worse in February\"; \"Only two interpreters cover 21:00–01:00\".</td></tr>\n<tr><td>9</td><td>Any honest audit: wrong or missing numbers, labels on the wrong bar, bars not to scale, axis not from zero without a note, extra colours, partial periods not marked.</td></tr>\n<tr><td>10</td><td>For example: \"The roster gap and the night rise happen together, but these charts don't prove the gap caused the rise.\"</td></tr>\n</tbody></table>",
+     "resources": [
+      {
+       "title": "Practice workbook",
+       "href": "files/chart-course-practice.xlsx",
+       "type": "xlsx"
+      }
+     ]
+    }
+   ]
+  }
+ ],
+ "resources": [
+  {
+   "title": "Practice workbook",
+   "href": "files/chart-course-practice.xlsx",
+   "type": "xlsx",
+   "summary": "Team Nova's made-up data for every exercise and the final task."
+  }
+ ]
+}
