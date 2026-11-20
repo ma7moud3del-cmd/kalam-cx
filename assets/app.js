@@ -73,6 +73,7 @@ const people = c => (c.instructors || []).map(i => App.people[i]).filter(Boolean
 const word = c => (c.labels && c.labels.section) || 'Module';                  /* "Module", "Session", "Week"… */
 const LANG = { ar: 'Arabic', en: 'English', fr: 'French' };
 const langShort = c => c.languageShort || LANG[c.language] || c.languageLabel || '';
+const plural = (k, w) => `${k} ${w}${k === 1 ? '' : 's'}`;   /* "1 video", "3 videos" */
 const hrs = m => m >= 60 ? `${+(m / 60).toFixed(1)} h` : `${m} min`;
 const hours = m => m >= 60 ? `${+(m / 60).toFixed(1)} hours` : `${m} minutes`;
 const free = c => !+(c.price || 0);
@@ -177,7 +178,7 @@ function route() {
   if (!App.cat) return;
   let fix, n = 0; while ((fix = legacy(location.hash)) && fix !== location.hash && n++ < 4) history.replaceState(null, '', fix);
   const [pth, qs] = location.hash.replace(/^#\/?/, '').split('?');
-  const parts = pth.split('/').filter(Boolean).map(decodeURIComponent), Q = new URLSearchParams(qs || '');
+  const parts = pth.split('/').filter(Boolean).map(p => { try { return decodeURIComponent(p); } catch (e) { return p; } }), Q = new URLSearchParams(qs || '');
   const c = RESERVED.includes(parts[0]) ? null : App.courses[parts[0]]; let v;
   if (!parts.length) v = home();
   else if (parts[0] === 'explore') v = explore(Q);
@@ -245,23 +246,22 @@ function ccard(c, hits) {
   ${p.started ? `<span class="cp">${bar(p.pct)}<span>${p.pct}% done</span></span>` : ''}</span></a>`;
 }
 function catTile(t) {
-  const n = live().filter(c => topicId(c) === t.id).length, planned = listed().filter(c => c.soon && topicId(c) === t.id).length;
+  const k = live().filter(c => topicId(c) === t.id).length, planned = listed().filter(c => c.soon && topicId(c) === t.id).length;
   return `<a class="cat rv" href="#/categories/${esc(t.id)}"><b>${esc(t.name)}</b><span>${esc(t.blurb || '')}</span>
-  <small class="${n ? '' : 'plan'}">${n ? `${n} course${n > 1 ? 's' : ''}` : planned ? 'Planned · coming later' : 'Planned · no courses yet'}</small></a>`;
+  <small class="${k ? '' : 'plan'}">${k ? plural(k, 'course') : planned ? 'Planned · coming later' : 'Planned · no courses yet'}</small></a>`;
 }
 function resumeRow(c) {
   const p = progress(c);
   return `<div class="rrow rv"><a class="rimg" href="#/${c.id}" tabindex="-1" aria-hidden="true">${coverOf(c)}</a><div class="rx"><small>${esc(topicOf(c)?.name || 'Course')}</small><a class="rt" href="#/${c.id}">${esc(c.title)}</a>
-  <span class="cp">${bar(p.pct)}<span>${p.done} of ${p.total} steps · ${p.watched} of ${p.videos} videos${p.tests ? ` · ${p.pass} of ${p.tests} tests passed` : ''}</span></span>
+  <span class="cp">${bar(p.pct)}<span>${p.done} of ${plural(p.total, 'step')} · ${p.watched} of ${plural(p.videos, 'video')}${p.tests ? ` · ${p.pass} of ${plural(p.tests, 'test')} passed` : ''}</span></span>
   ${p.at ? `<span class="rnext">Next: ${esc(p.at.L.title)}</span>` : ''}</div>
   <a class="pill" href="${p.resume}">${p.done ? 'Resume' : 'Start'}<span class="sr"> ${esc(c.title)}</span></a></div>`;
 }
 
 /* ---------- home ---------- */
-const searchForm = (q, big) => `<form class="search ${big ? 'big' : ''}" role="search" action="#/explore" data-search>
-  <label class="sr" for="q${big ? 'h' : ''}">Search courses</label><input id="q${big ? 'h' : ''}" name="q" type="search" value="${esc(q || '')}" placeholder="Search courses and lessons, e.g. VLOOKUP" autocomplete="off">
+const searchForm = q => `<form class="search" role="search" action="#/explore" data-search>
+  <label class="sr" for="q">Search courses</label><input id="q" name="q" type="search" value="${esc(q || '')}" placeholder="Search courses and lessons, e.g. VLOOKUP" autocomplete="off">
   <button class="pill" type="submit">Search</button></form>`;
-function wireSearch() { $$('[data-search]').forEach(f => f.addEventListener('submit', e => { e.preventDefault(); const q = $('input', f).value.trim(); location.hash = '#/explore' + (q ? '?q=' + encodeURIComponent(q) : ''); })); }
 function home() {
   const P = App.cat.platform, L = live(), planned = listed().filter(c => c.soon);
   const started = L.filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id)).slice(0, 3);
@@ -314,7 +314,7 @@ function explore(Q) {
       && (!P.get('topic') || topicId(c) === P.get('topic')) && (!P.get('level') || c.level === P.get('level')) && (!P.get('lang') || c.language === P.get('lang'))
       && (!d || d[2](timeOf(c).video)) && (!P.get('price') || (P.get('price') === 'free') === free(c)));
     $('#results').innerHTML = res.map(([c, s]) => ccard(c, s.hits)).join('') || `<div class="empty"><h3>No courses match.</h3><p>${App.topics.find(t => t.id === P.get('topic')) && !all.some(c => topicId(c) === P.get('topic')) ? 'This topic is planned and has no courses yet. ' : ''}Try fewer filters or another word.</p></div>`;
-    $('#count').textContent = `${res.length} course${res.length === 1 ? '' : 's'}${q ? ` for "${q}"` : ''}`;
+    $('#count').textContent = `${plural(res.length, 'course')}${q ? ` for "${q}"` : ''}`;
     $$('#results .rv').forEach(e => e.classList.add('seen'));
   }
   function push() {
@@ -370,13 +370,13 @@ function scard(c, s, i, P) {
   const go = (xs.find(x => !lessonDone(c, x.L)) || xs[0]).L.id, nr = s.lessons.filter(l => l.type === 'reading').length;
   return `<a class="scard rv ${st[0]}" href="#/${c.id}/learn/${esc(go)}"><span class="sh"><span>${esc(W)} ${i + 1}</span><span class="st">${st[1]}</span></span>
    <b>${esc(s.title)}</b>${s.covers ? `<span class="sc">${esc(s.covers)}</span>` : ''}
-   <span class="sm">${[vs.length ? `${vs.length} videos · ${m} min` : '', nr ? `${nr} reading lessons` : ''].filter(Boolean).join(' · ')}${d && d < xs.length ? ` · ${d} of ${xs.length} done` : ''}</span>
+   <span class="sm">${[vs.length ? `${plural(vs.length, 'video')} · ${m} min` : '', nr ? plural(nr, 'reading lesson') : ''].filter(Boolean).join(' · ')}${d && d < xs.length ? ` · ${d} of ${xs.length} done` : ''}</span>
    <span class="sl">${s.lessons.some(l => l.type === 'practice') ? '<span>Practice workbook</span>' : ''}${q ? `<span>${esc(W)} test${q.questions.some(x => Store.answer(c.id, x.id, x.rev) !== undefined) ? (passed(c, q) ? ' · passed' : ' · not passed yet') : ` · ${q.questions.length} questions`}</span>` : ''}</span></a>`;
 }
 function ecard(c, x, s, i) {
   const vs = vids(s), seen = vs.filter(L => Store.isDone(x.id, L.id)).length;
   return `<a class="scard ecard rv" href="#/${c.id}/extras"><span class="sh"><span>With ${esc(word(c).toLowerCase())} ${i + 1}</span><span class="st">${seen ? `${seen} of ${vs.length} watched` : 'Optional'}</span></span>
-   <b>${esc(s.title)}</b><span class="sm">${vs.length} videos${vs.some(L => L.type === 'youtube') ? ' · YouTube' : ''}</span>
+   <b>${esc(s.title)}</b><span class="sm">${plural(vs.length, 'video')}${vs.some(L => L.type === 'youtube') ? ' · YouTube' : ''}</span>
    <span class="eth" aria-hidden="true">${vs.slice(0, 3).map(L => `<img src="${thumbOf(x, L)}" alt="" loading="lazy">`).join('')}${vs.length > 3 ? `<small>+${vs.length - 3}</small>` : ''}</span>
    <span class="sl">${vs.slice(0, 3).map(L => `<span>${esc(L.title)}</span>`).join('')}</span></a>`;
 }
@@ -394,7 +394,7 @@ function overview(c) {
   const startLabel = p.done ? `Resume${p.at ? ': ' + p.at.L.title : ''}` : 'Start the course';
   const has = ty => secs.some(s => s.lessons.some(l => ty.includes(l.type)));
   const sv = secs.flatMap(vids), svm = mins(sv);
-  const meta = [sv.length ? `${sv.length} videos · ${hours(svm)} of video` : '', T.readings ? `${T.readings} reading lessons` : '', has(['practice']) ? 'practice' : '', has(['quiz']) ? `a test after each ${W.toLowerCase()}` : '', ex ? 'final task' : ''].filter(Boolean).join(' · ');
+  const meta = [sv.length ? `${plural(sv.length, 'video')} · ${hours(svm)} of video` : '', T.readings ? plural(T.readings, 'reading lesson') : '', has(['practice']) ? 'practice' : '', has(['quiz']) ? `a test after each ${W.toLowerCase()}` : '', ex ? 'final task' : ''].filter(Boolean).join(' · ');
   const SH = shortOf(c), pn = n => `Part ${n + (SH ? 1 : 0)}`;
   const jumps = [...(SH ? [['short', SH.title]] : []), ['curriculum', part], ...(X ? [['extras', 'Extra videos']] : []), ['files', 'Files'], ['about', 'About']];
   return { title: c.title, crumbs: trail(c), html: `<section class="ov">
@@ -402,14 +402,14 @@ function overview(c) {
    <p class="eyebrow">${esc(t?.name || 'Course')}</p><h1 class="display">${esc(h1a)}${h1b ? `<br><span class="grad">${esc(h1b)}</span>` : ''}</h1>
    <p class="sub wide">${esc(c.intro || c.subtitle)}</p>
    <ul class="facts" aria-label="Course facts">${trainers.filter(x => !x.external).map(x => `<li class="tchip">${x.photo ? `<img src="${esc(x.photo)}" alt="">` : ''}${esc(x.name)}</li>`).join('')}
-    <li>${esc(c.levelRange || c.level || 'All levels')}</li><li>${esc(c.languageLabel || langShort(c))}</li>${T.video ? `<li>${hours(T.video)} of video</li>` : ''}${T.reading ? `<li>${T.readings} reading lessons</li>` : ''}<li>${secs.length} ${W.toLowerCase()}s</li><li>${free(c) ? 'Free' : 'Paid'}</li></ul>
+    <li>${esc(c.levelRange || c.level || 'All levels')}</li><li>${esc(c.languageLabel || langShort(c))}</li>${T.video ? `<li>${hours(T.video)} of video</li>` : ''}${T.reading ? `<li>${plural(T.readings, 'reading lesson')}</li>` : ''}<li>${plural(secs.length, W.toLowerCase())}</li><li>${free(c) ? 'Free' : 'Paid'}</li></ul>
    <div class="hcta"><a class="pill big" href="${p.resume}">${esc(startLabel)}</a>${p.started ? `<span class="hprog">${bar(p.pct)}<span>${p.done} of ${p.total} steps</span></span>` : ''}</div></div></div>
   <nav class="ovtabs" aria-label="On this page"><div class="in">${jumps.map(([id, tx]) => `<a href="#/${c.id}" data-jump="${id}">${esc(tx)}</a>`).join('')}</div></nav>
   ${SH ? `<div class="band slim" id="short"><div class="in">
-   <p class="eyebrow">Part 1 · Start here</p><h2 class="headline small2 ph">${esc(SH.title)} · ${SH.lessons.length} videos</h2><p class="tblurb">${esc(SH.summary || '')} ${hours(mins(vids(SH)))} in total.</p>
+   <p class="eyebrow">Part 1 · Start here</p><h2 class="headline small2 ph">${esc(SH.title)} · ${plural(SH.lessons.length, 'video')}</h2><p class="tblurb">${esc(SH.summary || '')} ${hours(mins(vids(SH)))} in total.</p>
    <div class="scards">${SH.lessons.map(L => qcard2(c, L)).join('')}</div></div></div>` : ''}
   <div class="band ${SH ? 'gray ' : ''}slim" id="curriculum"><div class="in">
-   <p class="eyebrow">${pn(1)}</p><h2 class="headline small2 ph">${esc(part)} · ${secs.length} ${W.toLowerCase()}${secs.length === 1 ? '' : 's'}</h2><p class="tblurb">${esc(meta)}</p>
+   <p class="eyebrow">${pn(1)}</p><h2 class="headline small2 ph">${esc(part)} · ${plural(secs.length, W.toLowerCase())}</h2><p class="tblurb">${esc(meta)}</p>
    <div class="scards">${secs.map((s, i) => scard(c, s, i, P)).join('')}</div>
    ${exL ? `<a class="fcard rv" href="#/${c.id}/learn/${esc(exL.id)}"><span><small>Final task</small><b>${esc(exL.title || 'Final assessment')}${exL.minutes ? ` · about ${+exL.minutes} min` : ''}</b>${ex.summary ? `<span>${esc(ex.summary)}</span>` : ''}</span><span class="link">${lessonDone(c, exL) ? '✓ Done' : `Open ${CHEV}`}</span></a>` : ''}
    <details class="every"><summary>Show every lesson</summary><div class="mods">${lists}</div></details></div></div>
@@ -430,8 +430,8 @@ function overview(c) {
      ${(c.outcomes || []).length ? `<h2 class="headline small2">What you'll learn.</h2><ul class="outs">${c.outcomes.map(o => `<li><span class="ic">${CHECK}</span>${esc(o)}</li>`).join('')}</ul>` : ''}</div>
     <aside class="side">
      <div class="card"><h3>Course length</h3><table class="len"><caption class="sr">Course length</caption><tbody>
-      ${T.videos ? `<tr><th scope="row">Video</th><td>${T.videos} videos · ${T.video} min</td></tr>` : ''}
-      ${T.reading ? `<tr><th scope="row">Reading</th><td>${T.readings} lessons · about ${T.reading} min</td></tr>` : ''}
+      ${T.videos ? `<tr><th scope="row">Video</th><td>${plural(T.videos, 'video')} · ${T.video} min</td></tr>` : ''}
+      ${T.reading ? `<tr><th scope="row">Reading</th><td>${plural(T.readings, 'lesson')} · about ${T.reading} min</td></tr>` : ''}
       ${T.practice ? `<tr><th scope="row">Practice</th><td>about ${T.practice} min <small>(${T.nPractice} × ${Math.round(T.practice / T.nPractice)})</small></td></tr>` : ''}
       ${T.tests ? `<tr><th scope="row">${W} tests</th><td>about ${T.tests} min <small>(${T.nTests} × ${Math.round(T.tests / T.nTests)})</small></td></tr>` : ''}
       ${T.exam ? `<tr><th scope="row">Final assessment</th><td>${T.exam} min</td></tr>` : ''}
@@ -582,7 +582,7 @@ function extras(c) {
 }
 /* a collection (curated YouTube lessons): a grid of video cards with a pop-up player */
 function vcard(c, L) {
-  return `<button class="yt rv" data-c="${c.id}" data-l="${esc(L.id)}"><span class="ytimg"><img src="${thumbOf(c, L)}" alt="" loading="lazy"><span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${L.minutes} min</span>` : ''}${Store.isDone(c.id, L.id) ? '<span class="seen-mark">✓<span class="sr"> Watched</span></span>' : ''}</span>
+  return `<button class="yt rv" data-c="${c.id}" data-l="${esc(L.id)}"><span class="ytimg"><img src="${thumbOf(c, L)}" alt="" loading="lazy"><span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${+L.minutes} min</span>` : ''}${Store.isDone(c.id, L.id) ? '<span class="seen-mark">✓<span class="sr"> Watched</span></span>' : ''}</span>
   <span class="ytx"><small>${esc(L.by || L.kind || '')}</small><b>${esc(L.title)}</b>${L.summary ? `<span>${esc(L.summary)}</span>` : ''}</span></button>`;
 }
 function grid(c, parent) {
