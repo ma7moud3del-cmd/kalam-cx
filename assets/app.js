@@ -266,7 +266,7 @@ function home() {
   const empty = App.topics.filter(t => !listed().some(c => topicId(c) === t.id));
   return { title: 'Kalam CX Academy', html: `<section class="hero compact"><div class="in">
   <p class="eyebrow center rv">${esc(P.name || 'Kalam CX Academy')}</p>
-  <h1 class="mega center rv">Upgrade your<br><span class="grad">skills.</span></h1>
+  <h1 class="mega center rv">Upgrade your skills.<br><span class="grad">Lead with confidence.</span></h1>
   <p class="sub center wide rv">${esc(P.intro)}</p></div></section>
  ${started.length ? `<div class="band tight"><div class="in"><h2 class="headline small2 rv">Continue learning.</h2><div class="rows">${started.map(resumeRow).join('')}</div></div></div>` : ''}
  <div class="band tight"><div class="in"><div class="th2"><h2 class="headline small2 rv">Courses.</h2><a class="link rv" href="#/explore">Search all courses ${CHEV}</a></div>
