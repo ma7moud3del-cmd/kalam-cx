@@ -433,3 +433,4 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 @media (min-width:741px){.cgrid.two>.ccard:only-child{grid-column:1/-1;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}.cgrid.two>.ccard:only-child .cimg{height:100%;aspect-ratio:auto;min-height:300px}.cgrid.two>.ccard:only-child .cx{padding:36px 40px}.cgrid.two>.ccard:only-child b{font-size:30px}}
 .hero.compact{padding-bottom:8px}
 .band.tight:has(.cgrid.two){padding-bottom:64px}
+.curr ol.trim li.far{display:none}.cmore{font-size:14px;padding:4px 8px 8px;display:block}

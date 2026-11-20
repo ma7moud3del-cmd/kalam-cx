@@ -447,10 +447,11 @@ function learn(c, lessonId) {
     const groups = [...secsOf(c).map((s, i) => [s, i]), ...(examOf(c) ? [[examOf(c), -1]] : [])];
     $('#ctoc').innerHTML = groups.map(([s, i]) => {
       const xs = P.map((x, j) => [x, j]).filter(([x]) => x.sec === s), open = P[cur].sec === s;
-      return `<details${open ? ' open' : ''}><summary><span>${i < 0 ? 'Final' : `${W} ${i + 1}`}</span><b>${esc(i < 0 ? (s.title || 'Final assessment') : s.title)}</b><small>${xs.filter(([x]) => lessonDone(c, x.L)).length}/${xs.length}</small></summary><ol>${xs.map(([x, j]) =>
-        `<li class="${j === cur ? 'on' : ''} ${lessonDone(c, x.L) ? 'done' : ''}"><a href="#/${c.id}/learn/${esc(x.L.id)}"${j === cur ? ' aria-current="page"' : ''}><span class="li">${lessonDone(c, x.L) ? CHECK : ICON[x.L.type] || ''}</span><span class="lt">${esc(x.L.title)}</span>${x.L.minutes ? `<span class="lm">${+x.L.minutes}m</span>` : ''}<span class="sr">${lessonDone(c, x.L) ? ' (done)' : ''}</span></a></li>`).join('')}</ol></details>`;
+      return `<details${open ? ' open' : ''}><summary><span>${i < 0 ? 'Final' : `${W} ${i + 1}`}</span><b>${esc(i < 0 ? (s.title || 'Final assessment') : s.title)}</b><small>${xs.filter(([x]) => lessonDone(c, x.L)).length}/${xs.length}</small></summary><ol${open && xs.length > 4 ? ' class="trim"' : ''}>${xs.map(([x, j]) =>
+        `<li class="${j === cur ? 'on' : ''} ${lessonDone(c, x.L) ? 'done' : ''}${open && (j < cur - 1 || j > cur + 2) ? ' far' : ''}"><a href="#/${c.id}/learn/${esc(x.L.id)}"${j === cur ? ' aria-current="page"' : ''}><span class="li">${lessonDone(c, x.L) ? CHECK : ICON[x.L.type] || ''}</span><span class="lt">${esc(x.L.title)}</span>${x.L.minutes ? `<span class="lm">${+x.L.minutes}m</span>` : ''}<span class="sr">${lessonDone(c, x.L) ? ' (done)' : ''}</span></a></li>`).join('')}</ol>${open && xs.length > 4 ? `<button type="button" class="link btnlink cmore" aria-expanded="false">See all ${xs.length} lessons in this ${W.toLowerCase()}</button>` : ''}</details>`;
     }).join('');
   }
+  if (!window.cmoreOn) (window.cmoreOn = 1) && document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('.cmore'); if (!b) return; const ol = b.previousElementSibling, o = ol.classList.toggle('trim'); b.setAttribute('aria-expanded', !o); b.textContent = o ? b.textContent.replace(/^Show fewer.*$/, b.dataset.t || b.textContent) : (b.dataset.t = b.textContent, 'Show fewer'); });
   function show(j) {
     cur = j; const x = P[j], L = x.L, F = x.mi >= 0 ? filesOf(c, x.sec) : {}, prev = P[j - 1], next = P[j + 1];
     Store.visit(c.id, x.sec.id, L.id);
