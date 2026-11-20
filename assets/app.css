@@ -386,3 +386,17 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 .ytbox{background:#1d1d1f;border-radius:22px;padding:10px 10px 4px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
 .lmain h1[tabindex="-1"]:focus:not(:focus-visible){outline:none}
 .ytbox .ytbar{margin:10px 8px 8px}.ytbox .ytframe{border-radius:14px}
+
+/* learning view v3: lesson centred, lessons list on the right */
+.learn{grid-template-columns:minmax(0,1fr) 340px}
+.learn.nocurr{grid-template-columns:minmax(0,1fr) 0}
+.curr{order:0;border-right:0;border-left:1px solid #e3e3e8}
+.lmain{max-width:920px;width:100%;margin:0 auto}
+.ltop{flex-direction:row-reverse}
+.lback{font-size:15px;max-width:60%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.lmain .eyebrow{margin-bottom:6px}.lmain .headline{margin-bottom:6px}
+.lmain .lpos{display:block;margin:0 0 20px;font-size:15px}
+.lact{display:flex;gap:10px;flex-wrap:wrap}
+.lmain p.body{font-size:17px;line-height:1.55;max-width:68ch}
+@media (max-width:900px){.curr{inset:0 0 0 auto;box-shadow:-20px 0 60px rgba(0,0,0,.25);border-left:0}}
+@media (max-width:900px){.learn,.learn.nocurr{grid-template-columns:minmax(0,1fr)}}

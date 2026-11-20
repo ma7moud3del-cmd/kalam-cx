@@ -425,7 +425,7 @@ function learn(c, lessonId) {
   const html = `<section class="learn${collapsed ? ' nocurr' : ''}" id="learn">
   <div class="lmain" id="lmain"></div>
   <aside class="curr" id="curr" aria-label="Course content"><div class="ch"><b>Course content</b><button class="cclose" id="ccls" type="button" aria-label="Close course content">✕</button><span id="cprog"></span></div><div id="ctoc"></div></aside></section>`;
-  /* the lesson comes first for keyboard and screen-reader users; the curriculum is placed on the left by CSS */
+  /* the lesson comes first; the course content list sits on the right */
   let cur = k;
   function toc() {
     const p = progress(c);
@@ -440,17 +440,19 @@ function learn(c, lessonId) {
   function show(j) {
     cur = j; const x = P[j], L = x.L, F = x.mi >= 0 ? filesOf(c, x.sec) : {}, prev = P[j - 1], next = P[j + 1];
     Store.visit(c.id, x.sec.id, L.id);
+    const inMod = P.filter(y => y.sec === x.sec), pos = inMod.indexOf(x) + 1;
+    const nextBtn = next ? `<a class="pill small" href="#/${c.id}/learn/${esc(next.L.id)}">Next lesson ›</a>` : '';
     const doneBtn = L.type !== 'quiz' ? `<button class="pill ghost small" id="done" aria-pressed="${Store.isDone(c.id, L.id)}">${Store.isDone(c.id, L.id) ? '✓ Completed' : 'Mark as complete'}</button>` : '';
     const files = (F.workbook || F.slides) && L.type !== 'practice' ? `<div class="lfiles"><b>For this ${W.toLowerCase()}</b>${F.workbook ? `<a class="link" href="${esc(F.workbook)}">Practice workbook ${CHEV}</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides (PDF) ${CHEV}</a>` : ''}${quizOf(x.sec) && L.type !== 'quiz' ? `<a class="link" href="#/${c.id}/learn/${quizOf(x.sec).id}">${W} test ${CHEV}</a>` : ''}</div>` : '';
     let body = '';
     if (isVid(L)) body = `<div class="screen" id="screen">${frameSrc(L) ? `<iframe src="${esc(frameSrc(L))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>` : `<video id="vid" controls playsinline preload="metadata" src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`}</div>
-      <div class="lbar"><p class="lmeta">${esc(L.kind || L.by || 'Video')}${L.minutes ? ` · ${+L.minutes} min` : ''}</p>${doneBtn}</div>${L.summary ? `<p class="body">${esc(L.summary)}</p>` : ''}${files}`;
+      <div class="lbar"><p class="lmeta">${esc(L.kind || L.by || 'Video')}${L.minutes ? ` · ${+L.minutes} min` : ''}</p><span class="lact">${doneBtn}${nextBtn}</span></div>${L.summary ? `<p class="body">${esc(L.summary)}</p>` : ''}${files}`;
     else if (L.type === 'reading') body = `${L.image ? `<figure class="rfig"><img src="${esc(media(c, L.image))}" alt="${esc(L.alt || '')}"></figure>` : ''}
       <div class="rblocks">${(L.blocks || []).map((b, n) => `<section class="rb${b.tone === 'warn' ? ' warn' : ''}">${b.h ? `<h2>${esc(b.h)}</h2>` : ''}${b.p ? `<p>${esc(b.p)}</p>` : ''}${b.code != null ? `<div class="code"><pre id="code-${n}"><code>${esc(b.code)}</code></pre><button type="button" class="pill ghost small" data-copy="code-${n}" aria-label="Copy${b.h ? ': ' + esc(b.h) : ''}">Copy</button></div>` : ''}</section>`).join('')}</div>
-      <div class="lbar"><p class="lmeta">Reading${L.minutes ? ` · about ${+L.minutes} min` : ''}</p>${doneBtn}</div>${files}`;
+      <div class="lbar"><p class="lmeta">Reading${L.minutes ? ` · about ${+L.minutes} min` : ''}</p><span class="lact">${doneBtn}${nextBtn}</span></div>${files}`;
     else if (L.type === 'practice') body = `<div class="card"><p class="eyebrow">Practice</p>${(L.body || []).map(b => `<p>${esc(b)}</p>`).join('')}
       <div class="ctas left">${F.workbook ? `<a class="pill" href="${esc(F.workbook)}">Download the workbook</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides (PDF) ${CHEV}</a>` : ''}</div></div>
-      <div class="lbar"><p class="lmeta">About ${+L.minutes || 30} min · do it in Excel on your own copy</p>${doneBtn}</div>`;
+      <div class="lbar"><p class="lmeta">About ${+L.minutes || 30} min · do it in Excel on your own copy</p><span class="lact">${doneBtn}${nextBtn}</span></div>`;
     else if (L.type === 'quiz') body = `<div id="test"><p class="sub">${L.questions.length} questions. Pass mark ${L.pass}. Each answer is marked instantly, with the reason.</p>${L.note ? `<p class="note left">${esc(L.note)}</p>` : ''}
       <div class="scorecard"><div class="ring" aria-hidden="true"><svg viewBox="0 0 36 36"><circle cx="18" cy="18" r="15.9" class="trk"/><circle cx="18" cy="18" r="15.9" class="val" id="ring"/></svg><b id="rn">0</b></div><div><b class="score" id="score" role="status" aria-live="polite"></b><button class="link btnlink" data-act="reset">Start over</button>${F.testPdf ? ` · <a class="link" href="${esc(F.testPdf)}" target="_blank" rel="noopener">Printable test</a>` : ''}</div></div>
       <div class="quiz" id="quiz"></div></div>`;
@@ -460,17 +462,17 @@ function learn(c, lessonId) {
       <div class="ctas left">${wb ? `<a class="pill" href="${esc(url(c, wb.href))}">Download the workbook</a>` : ''}${pdf ? `<a class="link" href="${esc(url(c, pdf.href))}" target="_blank" rel="noopener">Printable exam ${CHEV}</a>` : ''}</div>
       <h2 class="headline small">The tasks</h2><div class="card exam">${L.html || ''}</div>
       ${L.keyHtml ? `<div class="center"><button class="pill ghost" id="keybtn" aria-expanded="false" aria-controls="key">Show the answer key</button></div><div id="key" class="card key" hidden>${L.keyHtml}</div>` : ''}
-      <div class="lbar"><p class="lmeta">Self-marked. Your result isn't sent anywhere.</p>${doneBtn}</div>`;
+      <div class="lbar"><p class="lmeta">Self-marked. Your result isn't sent anywhere.</p><span class="lact">${doneBtn}${nextBtn}</span></div>`;
     }
-    $('#lmain').innerHTML = `<div class="ltop"><button class="ctoggle" id="ctog" aria-controls="curr" aria-expanded="${!$('#learn').classList.contains('nocurr')}"><span aria-hidden="true">☰</span> Course content</button><span class="lpos">Step ${j + 1} of ${P.length}</span></div>
-     <p class="eyebrow">${esc(modName(c, x))}</p><h1 class="headline">${esc(L.title)}</h1>${body}${x.sec.note && isVid(L) ? `<p class="gnote">${esc(x.sec.note)}</p>` : ''}
+    $('#lmain').innerHTML = `<div class="ltop"><button class="ctoggle" id="ctog" aria-controls="curr" aria-expanded="${!$('#learn').classList.contains('nocurr')}"><span aria-hidden="true">☰</span> <span id="ctogt">${$('#learn').classList.contains('nocurr') ? 'Show' : 'Hide'} lessons</span></button><a class="link lback" href="#/${c.id}">‹ ${esc(c.title)}</a></div>
+     <p class="eyebrow">${esc(modName(c, x))}</p><h1 class="headline">${esc(L.title)}</h1><p class="lpos">${x.mi < 0 ? 'Final step of the course' : `Lesson ${pos} of ${inMod.length} in this ${W.toLowerCase()}`}</p>${body}${x.sec.note && isVid(L) ? `<p class="gnote">${esc(x.sec.note)}</p>` : ''}
      <nav class="pn" aria-label="Lesson navigation">${prev ? `<a class="prev" href="#/${c.id}/learn/${esc(prev.L.id)}" rel="prev"><small>Previous</small><b>${esc(prev.L.title)}</b></a>` : '<span></span>'}
      ${next ? `<a class="next" href="#/${c.id}/learn/${esc(next.L.id)}" rel="next" id="nextbtn"><small>Next${next.sec !== x.sec ? ` · ${esc(modName(c, next))}` : ''}</small><b>${esc(next.L.title)}</b></a>` : `<a class="next" href="#/${c.id}" id="nextbtn"><small>Finished</small><b>Back to the course overview</b></a>`}</nav>`;
     wire(L); toc();
     const on = $('#ctoc li.on'); if (on && $('#curr').scrollHeight > $('#curr').clientHeight) on.scrollIntoView({ block: 'nearest' });
   }
   function wire(L) {
-    $('#ctog').onclick = () => { const l = $('#learn'), o = l.classList.toggle('nocurr'); $('#ctog').setAttribute('aria-expanded', !o); try { localStorage.setItem('kalam.sidebar', o ? 'closed' : 'open'); } catch (e) {} if (!o && innerWidth <= 900) $('#ctoc a[aria-current]')?.focus(); };
+    $('#ctog').onclick = () => { const l = $('#learn'), o = l.classList.toggle('nocurr'); $('#ctog').setAttribute('aria-expanded', !o); $('#ctogt').textContent = (o ? 'Show' : 'Hide') + ' lessons'; try { localStorage.setItem('kalam.sidebar', o ? 'closed' : 'open'); } catch (e) {} if (!o && innerWidth <= 900) $('#ctoc a[aria-current]')?.focus(); };
     if ($('#done')) $('#done').onclick = e => { const d = Store.isDone(c.id, L.id); d ? Store.unsetDone(c.id, L.id) : Store.setDone(c.id, L.id); const b = e.currentTarget; b.setAttribute('aria-pressed', !d); b.textContent = d ? 'Mark as complete' : '✓ Completed'; toc(); };
     const v = $('#vid');
     if (v) {
@@ -504,13 +506,13 @@ function learn(c, lessonId) {
   }
   return { title: `${P[k].L.title} · ${c.title}`, crumbs: trail(c, [P[k].mi < 0 ? 'Final assessment' : `${W} ${P[k].mi + 1}`]), html,
     after() {
-      show(k); if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); $('#ctog').setAttribute('aria-expanded', 'false'); }
-      const close = () => { if (innerWidth > 900 || $('#learn').classList.contains('nocurr')) return; $('#learn').classList.add('nocurr'); $('#ctog').setAttribute('aria-expanded', 'false'); $('#ctog').focus(); };
+      show(k); if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); if ($('#ctogt')) $('#ctogt').textContent = 'Show lessons'; $('#ctog').setAttribute('aria-expanded', 'false'); }
+      const close = () => { if (innerWidth > 900 || $('#learn').classList.contains('nocurr')) return; $('#learn').classList.add('nocurr'); if ($('#ctogt')) $('#ctogt').textContent = 'Show lessons'; $('#ctog').setAttribute('aria-expanded', 'false'); $('#ctog').focus(); };
       $('#ccls').onclick = close; $('#curr').addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
     },
     update() {
       const j = P.findIndex(x => x.L.id === location.hash.split('/').pop()); if (j < 0) return;
-      if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); }
+      if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); if ($('#ctogt')) $('#ctogt').textContent = 'Show lessons'; }
       show(j); window.scrollTo({ top: 0, behavior: 'instant' }); const h = $('#lmain h1'); h.tabIndex = -1; h.focus({ preventScroll: true });
     } };
 }
