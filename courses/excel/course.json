@@ -15,7 +15,7 @@
  "updated": "November 2026",
  "description": [
   "Three recorded live sessions from Kalam CX's Workforce Management team, cut into short chapters you can watch one at a time. The trainer works in Excel on a real-style call-center export, explaining in Egyptian Arabic with the English Excel terms you see on screen.",
-  "Each module starts with an animated quick video, then the trainer's live demos, then practice in the Activities Workbook and a short self-marking test. A 20-task practical exam closes the course."
+  "Start with the short course: one animated quick video per session. Each full session then has the trainer's live demos, then practice in the Activities Workbook and a short self-marking test. A 20-task practical exam closes the course."
  ],
  "outcomes": [
   "Read any system export: find the header row, the data range and each column's type",
@@ -41,13 +41,14 @@
   "excel-expert-picks"
  ],
  "labels": {
-  "section": "Module"
+  "section": "Session",
+  "part": "The full sessions"
  },
  "headline": [
   "Excel.",
   "Built for the floor."
  ],
- "intro": "Real call-center data. A real WFM trainer. Three modules that take you from reading an export to presenting a dashboard.",
+ "intro": "Real call-center data. A real WFM trainer. Three sessions that take you from reading an export to presenting a dashboard.",
  "type": "course",
  "base": "courses/excel/",
  "cover": "img/posters/s1-hero.jpg",
@@ -55,21 +56,15 @@
  "durationLabel": "5.3 hours of video",
  "sections": [
   {
-   "id": "s1",
-   "title": "Foundations",
-   "covers": "Reading Data, Functions & Time",
-   "summary": "Read an export, use the five everyday functions with conditions, lock references, and work with dates, times and intervals.",
-   "files": {
-    "workbook": "files/activities-workbook.xlsx",
-    "slides": "docs/session-1-slides.pdf",
-    "testPdf": "docs/session-1-test.pdf",
-    "practice": "Open the Activities Workbook and complete tabs S1_Basics, S2_Formulas while the videos are fresh."
-   },
+   "id": "short",
+   "part": "short",
+   "title": "The short course",
+   "summary": "One animated video per session: the whole session in a few minutes, with real Excel scenes. Watch these first, or use them to revise.",
    "lessons": [
     {
      "id": "s1-quick",
      "type": "video",
-     "title": "The whole module in short",
+     "title": "Foundations in short",
      "kind": "Quick video",
      "minutes": 23,
      "src": "media/s1-quick.mp4",
@@ -86,8 +81,69 @@
        "href": "docs/session-1-slides.pdf",
        "type": "pdf"
       }
-     ]
+     ],
+     "of": "s1"
     },
+    {
+     "id": "s2-quick",
+     "type": "video",
+     "title": "Cleaning & Lookups in short",
+     "kind": "Quick video",
+     "minutes": 10,
+     "src": "media/s2-quick.mp4",
+     "poster": "img/posters/s2-quick.jpg",
+     "summary": "An animated summary with real Excel scenes. Watch it first, then the trainer's demos.",
+     "resources": [
+      {
+       "title": "Activities Workbook",
+       "href": "files/activities-workbook.xlsx",
+       "type": "xlsx"
+      },
+      {
+       "title": "Section 2 slides",
+       "href": "docs/session-2-slides.pdf",
+       "type": "pdf"
+      }
+     ],
+     "of": "s2"
+    },
+    {
+     "id": "s3-quick",
+     "type": "video",
+     "title": "Reporting & Dashboards in short",
+     "kind": "Quick video",
+     "minutes": 21,
+     "src": "media/s3-quick.mp4",
+     "poster": "img/posters/s3-quick.jpg",
+     "summary": "An animated summary with real Excel scenes. Watch it first, then the trainer's demos.",
+     "resources": [
+      {
+       "title": "Activities Workbook",
+       "href": "files/activities-workbook.xlsx",
+       "type": "xlsx"
+      },
+      {
+       "title": "Section 3 slides",
+       "href": "docs/session-3-slides.pdf",
+       "type": "pdf"
+      }
+     ],
+     "of": "s3"
+    }
+   ]
+  },
+  {
+   "id": "s1",
+   "title": "Foundations",
+   "covers": "Reading Data, Functions & Time",
+   "summary": "Read an export, use the five everyday functions with conditions, lock references, and work with dates, times and intervals.",
+   "files": {
+    "workbook": "files/activities-workbook.xlsx",
+    "slides": "docs/session-1-slides.pdf",
+    "testPdf": "docs/session-1-test.pdf",
+    "practice": "Open the Activities Workbook and complete tabs S1_Basics, S2_Formulas while the videos are fresh."
+   },
+   "lessons": [
     {
      "id": "s1-ch01",
      "type": "video",
@@ -361,7 +417,7 @@
     {
      "id": "s1-quiz",
      "type": "quiz",
-     "title": "Module test",
+     "title": "Session test",
      "minutes": 15,
      "pass": 14,
      "note": "Formulas here use commas (,) between arguments and a dot for decimals. If your Excel uses semicolons (;) and decimal commas, which is common with Arabic or European regional settings, type those instead.",
@@ -650,28 +706,6 @@
    },
    "lessons": [
     {
-     "id": "s2-quick",
-     "type": "video",
-     "title": "The whole module in short",
-     "kind": "Quick video",
-     "minutes": 10,
-     "src": "media/s2-quick.mp4",
-     "poster": "img/posters/s2-quick.jpg",
-     "summary": "An animated summary with real Excel scenes. Watch it first, then the trainer's demos.",
-     "resources": [
-      {
-       "title": "Activities Workbook",
-       "href": "files/activities-workbook.xlsx",
-       "type": "xlsx"
-      },
-      {
-       "title": "Section 2 slides",
-       "href": "docs/session-2-slides.pdf",
-       "type": "pdf"
-      }
-     ]
-    },
-    {
      "id": "s2-ch01",
      "type": "video",
      "title": "Recap and Excel Errors",
@@ -900,7 +934,7 @@
     {
      "id": "s2-quiz",
      "type": "quiz",
-     "title": "Module test",
+     "title": "Session test",
      "minutes": 15,
      "pass": 14,
      "note": "Formulas here use commas (,) between arguments and a dot for decimals. If your Excel uses semicolons (;) and decimal commas, which is common with Arabic or European regional settings, type those instead.",
@@ -1189,28 +1223,6 @@
    },
    "lessons": [
     {
-     "id": "s3-quick",
-     "type": "video",
-     "title": "The whole module in short",
-     "kind": "Quick video",
-     "minutes": 21,
-     "src": "media/s3-quick.mp4",
-     "poster": "img/posters/s3-quick.jpg",
-     "summary": "An animated summary with real Excel scenes. Watch it first, then the trainer's demos.",
-     "resources": [
-      {
-       "title": "Activities Workbook",
-       "href": "files/activities-workbook.xlsx",
-       "type": "xlsx"
-      },
-      {
-       "title": "Section 3 slides",
-       "href": "docs/session-3-slides.pdf",
-       "type": "pdf"
-      }
-     ]
-    },
-    {
      "id": "s3-ch01",
      "type": "video",
      "title": "Recap of Sessions 1 and 2",
@@ -1395,7 +1407,7 @@
     {
      "id": "s3-quiz",
      "type": "quiz",
-     "title": "Module test",
+     "title": "Session test",
      "minutes": 15,
      "pass": 14,
      "note": "Formulas here use commas (,) between arguments and a dot for decimals. If your Excel uses semicolons (;) and decimal commas, which is common with Arabic or European regional settings, type those instead.",
@@ -1670,7 +1682,7 @@
    ],
    "hero": "img/posters/s3-hero.jpg",
    "tabs": "S5_Pivot, S6_Dashboard",
-   "note": "The trainer's demos in this module cover PivotTables, calculated fields, slicers and PivotCharts. Conditional formatting and building the one-page dashboard are covered in the quick video, the slides and the S6_Dashboard practice tab. The live session's last segment walked through a real client report and is not published."
+   "note": "The trainer's demos in this session cover PivotTables, calculated fields, slicers and PivotCharts. Conditional formatting and building the one-page dashboard are covered in the quick video, the slides and the S6_Dashboard practice tab. The live session's last segment walked through a real client report and is not published."
   },
   {
    "id": "final",
