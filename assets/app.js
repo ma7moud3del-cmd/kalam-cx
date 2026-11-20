@@ -134,7 +134,7 @@ async function boot() {
     }));
     list.filter(Boolean).forEach(c => { App.courses[c.id] = c; App.order.push(c.id); if (!c.soon) Store.mergeLegacy(c); });
   } catch (e) { $('#app').innerHTML = '<section class="band"><div class="in"><h1 class="display">The Academy couldn\'t load.</h1><p class="sub">Check your connection and reload the page.</p></div></section>'; return; }
-  if (App.cat.platform && App.cat.platform.footer) $('#foot').textContent = App.cat.platform.footer;
+  if (App.cat.platform && App.cat.platform.footer) { $('#foot').textContent = App.cat.platform.footer; $('#foot').hidden = false; }
   route();
 }
 /* courses shown in lists: live and planned, but not collections that belong to another course (Expert Picks = Excel's extra videos) */
