@@ -434,3 +434,13 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 .hero.compact{padding-bottom:8px}
 .band.tight:has(.cgrid.two){padding-bottom:64px}
 .curr ol.trim li.far{display:none}.cmore{font-size:14px;padding:4px 8px 8px;display:block}
+
+/* the short course: quick summary videos as big cards */
+.qcard{display:flex;flex-direction:column;background:var(--white);border:1px solid #e3e3e8;border-radius:22px;overflow:hidden;color:var(--ink);transition:transform .25s,box-shadow .25s}
+.qcard:hover{text-decoration:none;transform:translateY(-3px);box-shadow:0 20px 40px -24px rgba(43,14,44,.35)}
+.qimg{position:relative;display:block;aspect-ratio:16/9;background:#2B0E2C}.qimg img{width:100%;height:100%;object-fit:cover;display:block}
+.qimg .play{position:absolute;left:14px;bottom:14px;width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,.92);display:grid;place-items:center;color:var(--plum)}
+.qimg .play svg{width:16px;height:16px}
+.qimg .dur{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.72);color:#fff;font-size:12px;font-weight:600;border-radius:6px;padding:3px 7px}
+.qx{display:flex;flex-direction:column;gap:6px;padding:18px 22px 22px}.qx small{font-size:13px;font-weight:700;color:var(--plum);text-transform:uppercase;letter-spacing:.02em}.qx b{font-size:20px;letter-spacing:-.02em;line-height:1.25}
+.qcard.done small{color:var(--ok)}
