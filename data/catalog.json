@@ -1,4 +1,5 @@
 {
+ "_about": "Topics and trainings of Kalam CX Academy. Order here = order on the site. Fields are explained in CONTENT.md.",
  "platform": {
   "name": "Kalam CX Academy",
   "tagline": "Practical skills for the people who run customer experience.",
@@ -8,9 +9,10 @@
    "Team leaders and supervisors",
    "WFM, quality and reporting teams"
   ],
-  "mode": "Public pilot. All courses are free. Your progress, notes and saved courses stay in this browser only."
+  "mode": "Public pilot. All trainings are free. Progress stays in this browser only.",
+  "footer": "Trainings are free. Videos in the Excel training are in Egyptian Arabic with English Excel terms. Your watch history and test scores are saved only in this browser."
  },
- "categories": [
+ "topics": [
   {
    "id": "data",
    "name": "Data & Excel",
@@ -36,10 +38,15 @@
  "courses": [
   {
    "id": "excel",
+   "topic": "data",
+   "status": "live",
    "data": "courses/excel/course.json"
   },
   {
    "id": "excel-expert-picks",
+   "topic": "data",
+   "status": "live",
+   "partOf": "excel",
    "data": "courses/excel-expert-picks/course.json"
   }
  ]

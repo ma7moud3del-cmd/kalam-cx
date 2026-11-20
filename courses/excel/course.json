@@ -40,6 +40,9 @@
  "related": [
   "excel-expert-picks"
  ],
+ "labels": {
+  "section": "Session"
+ },
  "headline": [
   "Excel.",
   "Built for the floor."
@@ -55,6 +58,12 @@
    "id": "s1",
    "title": "Reading Data, Functions & Time",
    "summary": "Read an export, use the five everyday functions with conditions, lock references, and work with dates, times and intervals.",
+   "files": {
+    "workbook": "files/activities-workbook.xlsx",
+    "slides": "docs/session-1-slides.pdf",
+    "testPdf": "docs/session-1-test.pdf",
+    "practice": "Open the Activities Workbook and complete tabs S1_Basics, S2_Formulas while the videos are fresh."
+   },
    "lessons": [
     {
      "id": "s1-quick",
@@ -631,6 +640,12 @@
    "id": "s2",
    "title": "Errors, Logic, Lookups & Cleaning",
    "summary": "Fix error messages, write decisions with IF, look values up, and clean and split a messy export.",
+   "files": {
+    "workbook": "files/activities-workbook.xlsx",
+    "slides": "docs/session-2-slides.pdf",
+    "testPdf": "docs/session-2-test.pdf",
+    "practice": "Open the Activities Workbook and complete tabs S3_Logic_Lookup, S4_Cleaning while the videos are fresh."
+   },
    "lessons": [
     {
      "id": "s2-quick",
@@ -1163,6 +1178,12 @@
    "id": "s3",
    "title": "PivotTables, Charts & Dashboard",
    "summary": "Summarise data with PivotTables, add calculated fields and slicers, and chart the result.",
+   "files": {
+    "workbook": "files/activities-workbook.xlsx",
+    "slides": "docs/session-3-slides.pdf",
+    "testPdf": "docs/session-3-test.pdf",
+    "practice": "Open the Activities Workbook and complete tabs S5_Pivot, S6_Dashboard while the videos are fresh."
+   },
    "lessons": [
     {
      "id": "s3-quick",
@@ -1671,7 +1692,9 @@
        "href": "docs/final-practical-exam.pdf",
        "type": "pdf"
       }
-     ]
+     ],
+     "headline": "Prove it.",
+     "intro": "Open the workbook, build every answer in Excel, then reveal the key."
     }
    ]
   }

@@ -239,5 +239,6 @@
   "Excel Campus",
   "GoSkills",
   "GCFLearnFree"
- ]
+ ],
+ "partOf": "excel"
 }
