@@ -62,6 +62,7 @@ const Store = (() => {
 const url = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.base || '') + p;
 const isVid = l => l.type === 'video' || l.type === 'youtube' || l.type === 'embed';
 const vids = sec => sec.lessons.filter(isVid);
+const mins = list => list.reduce((a, l) => a + (+l.minutes || 0), 0);   /* total of the lessons' minutes */
 const quizOf = sec => sec.lessons.find(l => l.type === 'quiz');
 const isExamSec = s => s.id === 'final' || (s.lessons.length && s.lessons.every(l => l.type === 'exam'));
 const isShortSec = s => s.part === 'short';                                    /* quick summary videos, shown as their own part */
@@ -82,12 +83,13 @@ const extrasOf = c => App.order.map(id => App.courses[id]).filter(x => x.partOf 
 const media = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.mediaBase || App.cat.platform.mediaBase || '') + (c.base || '') + p;
 /* players that are web pages (YouTube, Bunny or Cloudflare Stream, Vimeo…) play in an iframe */
 const frameSrc = (L, auto) => L.type === 'youtube' ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(L.yt)}?rel=0${auto ? '&autoplay=1' : ''}` : L.type === 'embed' ? L.embed : '';
+const frame = (L, auto) => `<iframe src="${esc(frameSrc(L, auto))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
 const thumbOf = (c, L) => L.type === 'youtube' ? `https://i.ytimg.com/vi/${esc(L.yt)}/hqdefault.jpg` : L.poster ? esc(media(c, L.poster)) : 'img/kalam-mark.png';
 /* time: video minutes are measured; practice, test and exam minutes are the course's own estimates */
 function timeOf(c) {
   const all = c.sections.flatMap(s => s.lessons), v = all.filter(isVid);
-  const t = k => all.filter(l => l.type === k).reduce((a, l) => a + (+l.minutes || 0), 0);
-  const video = v.reduce((a, l) => a + (+l.minutes || 0), 0), practice = t('practice'), tests = t('quiz'), exam = t('exam'), reading = t('reading');
+  const t = k => mins(all.filter(l => l.type === k));
+  const video = mins(v), practice = t('practice'), tests = t('quiz'), exam = t('exam'), reading = t('reading');
   return { video, videos: v.length, practice, tests, exam, reading, readings: all.filter(l => l.type === 'reading').length, total: video + practice + tests + exam + reading,
     nPractice: all.filter(l => l.type === 'practice').length, nTests: all.filter(l => l.type === 'quiz').length, nExam: all.filter(l => l.type === 'exam').length };
 }
@@ -363,7 +365,7 @@ function soonPage(c) {
 
 /* ---------- course overview: Part 1 = the sessions (short course), Part 2 = extra videos, then files and about ---------- */
 function scard(c, s, i, P) {
-  const W = word(c), xs = P.filter(x => x.sec === s), vs = vids(s), m = vs.reduce((a, v) => a + (+v.minutes || 0), 0), d = xs.filter(x => lessonDone(c, x.L)).length, q = quizOf(s);
+  const W = word(c), xs = P.filter(x => x.sec === s), vs = vids(s), m = mins(vs), d = xs.filter(x => lessonDone(c, x.L)).length, q = quizOf(s);
   const st = d === xs.length ? ['done', '✓ Done'] : d ? ['on', 'In progress'] : ['', 'Not started'];
   const go = (xs.find(x => !lessonDone(c, x.L)) || xs[0]).L.id, nr = s.lessons.filter(l => l.type === 'reading').length;
   return `<a class="scard rv ${st[0]}" href="#/${c.id}/learn/${esc(go)}"><span class="sh"><span>${esc(W)} ${i + 1}</span><span class="st">${st[1]}</span></span>
@@ -378,7 +380,7 @@ function ecard(c, x, s, i) {
    <span class="eth" aria-hidden="true">${vs.slice(0, 3).map(L => `<img src="${thumbOf(x, L)}" alt="" loading="lazy">`).join('')}${vs.length > 3 ? `<small>+${vs.length - 3}</small>` : ''}</span>
    <span class="sl">${vs.slice(0, 3).map(L => `<span>${esc(L.title)}</span>`).join('')}</span></a>`;
 }
-function qcard2(c, L, P) {
+function qcard2(c, L) {
   const S = secsOf(c), i = S.findIndex(z => z.id === L.of), d = lessonDone(c, L);
   return `<a class="qcard rv${d ? ' done' : ''}" href="#/${c.id}/learn/${esc(L.id)}"><span class="qimg">${L.poster ? `<img src="${esc(media(c, L.poster))}" alt="" loading="lazy">` : ''}<span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${+L.minutes} min</span>` : ''}</span>
    <span class="qx"><small>${i >= 0 ? `${esc(word(c))} ${i + 1}` : 'Quick video'}${d ? ' · ✓ Watched' : ''}</small><b>${esc(L.title)}</b></span></a>`;
@@ -391,7 +393,7 @@ function overview(c) {
   const fl = secs.map((s, i) => [s, i, filesOf(c, s)]), wb = fl.find(([, , f]) => f.workbook), exL = ex && ex.lessons[0];
   const startLabel = p.done ? `Resume${p.at ? ': ' + p.at.L.title : ''}` : 'Start the course';
   const has = ty => secs.some(s => s.lessons.some(l => ty.includes(l.type)));
-  const sv = secs.flatMap(vids), svm = sv.reduce((a, v) => a + (+v.minutes || 0), 0);
+  const sv = secs.flatMap(vids), svm = mins(sv);
   const meta = [sv.length ? `${sv.length} videos · ${hours(svm)} of video` : '', T.readings ? `${T.readings} reading lessons` : '', has(['practice']) ? 'practice' : '', has(['quiz']) ? `a test after each ${W.toLowerCase()}` : '', ex ? 'final task' : ''].filter(Boolean).join(' · ');
   const SH = shortOf(c), pn = n => `Part ${n + (SH ? 1 : 0)}`;
   const jumps = [...(SH ? [['short', SH.title]] : []), ['curriculum', part], ...(X ? [['extras', 'Extra videos']] : []), ['files', 'Files'], ['about', 'About']];
@@ -404,8 +406,8 @@ function overview(c) {
    <div class="hcta"><a class="pill big" href="${p.resume}">${esc(startLabel)}</a>${p.started ? `<span class="hprog">${bar(p.pct)}<span>${p.done} of ${p.total} steps</span></span>` : ''}</div></div></div>
   <nav class="ovtabs" aria-label="On this page"><div class="in">${jumps.map(([id, tx]) => `<a href="#/${c.id}" data-jump="${id}">${esc(tx)}</a>`).join('')}</div></nav>
   ${SH ? `<div class="band slim" id="short"><div class="in">
-   <p class="eyebrow">Part 1 · Start here</p><h2 class="headline small2 ph">${esc(SH.title)} · ${SH.lessons.length} videos</h2><p class="tblurb">${esc(SH.summary || '')} ${hours(vids(SH).reduce((a, v) => a + (+v.minutes || 0), 0))} in total.</p>
-   <div class="scards">${SH.lessons.map(L => qcard2(c, L, P)).join('')}</div></div></div>` : ''}
+   <p class="eyebrow">Part 1 · Start here</p><h2 class="headline small2 ph">${esc(SH.title)} · ${SH.lessons.length} videos</h2><p class="tblurb">${esc(SH.summary || '')} ${hours(mins(vids(SH)))} in total.</p>
+   <div class="scards">${SH.lessons.map(L => qcard2(c, L)).join('')}</div></div></div>` : ''}
   <div class="band ${SH ? 'gray ' : ''}slim" id="curriculum"><div class="in">
    <p class="eyebrow">${pn(1)}</p><h2 class="headline small2 ph">${esc(part)} · ${secs.length} ${W.toLowerCase()}${secs.length === 1 ? '' : 's'}</h2><p class="tblurb">${esc(meta)}</p>
    <div class="scards">${secs.map((s, i) => scard(c, s, i, P)).join('')}</div>
@@ -459,21 +461,26 @@ function learn(c, lessonId) {
     $('#cprog').innerHTML = `${bar(p.pct)}<span>${p.done}/${p.total}</span>`;
     const groups = [...(shortOf(c) ? [[shortOf(c), -2]] : []), ...secsOf(c).map((s, i) => [s, i]), ...(examOf(c) ? [[examOf(c), -1]] : [])];
     $('#ctoc').innerHTML = groups.map(([s, i]) => {
-      const xs = P.map((x, j) => [x, j]).filter(([x]) => x.sec === s), open = P[cur].sec === s;
-      return `<details${open ? ' open' : ''}><summary><span>${i === -2 ? 'Quick videos' : i < 0 ? 'Final' : `${W} ${i + 1}`}</span><b>${esc(i < 0 ? (s.title || 'Final assessment') : s.title)}</b><small>${xs.filter(([x]) => lessonDone(c, x.L)).length}/${xs.length}</small></summary><ol${open && xs.length > 4 ? ' class="trim"' : ''}>${xs.map(([x, j]) =>
-        `<li class="${j === cur ? 'on' : ''} ${lessonDone(c, x.L) ? 'done' : ''}${open && (j < cur - 1 || j > cur + 2) ? ' far' : ''}"><a href="#/${c.id}/learn/${esc(x.L.id)}"${j === cur ? ' aria-current="page"' : ''}><span class="li">${lessonDone(c, x.L) ? CHECK : ICON[x.L.type] || ''}</span><span class="lt">${esc(x.L.title)}</span>${x.L.minutes ? `<span class="lm">${+x.L.minutes}m</span>` : ''}<span class="sr">${lessonDone(c, x.L) ? ' (done)' : ''}</span></a></li>`).join('')}</ol>${open && xs.length > 4 ? `<button type="button" class="link btnlink cmore" aria-expanded="false">See all ${xs.length} lessons in this ${W.toLowerCase()}</button>` : ''}</details>`;
+      const xs = P.map((x, j) => [x, j]).filter(([x]) => x.sec === s), open = P[cur].sec === s, long = open && xs.length > 4, all = long && $('#ctoc').dataset.all === s.id;
+      return `<details${open ? ' open' : ''}><summary><span>${i === -2 ? 'Quick videos' : i < 0 ? 'Final' : `${W} ${i + 1}`}</span><b>${esc(i < 0 ? (s.title || 'Final assessment') : s.title)}</b><small>${xs.filter(([x]) => lessonDone(c, x.L)).length}/${xs.length}</small></summary><ol${long && !all ? ' class="trim"' : ''}>${xs.map(([x, j]) =>
+        `<li class="${j === cur ? 'on' : ''} ${lessonDone(c, x.L) ? 'done' : ''}${open && (j < cur - 1 || j > cur + 2) ? ' far' : ''}"><a href="#/${c.id}/learn/${esc(x.L.id)}"${j === cur ? ' aria-current="page"' : ''}><span class="li">${lessonDone(c, x.L) ? CHECK : ICON[x.L.type] || ''}</span><span class="lt">${esc(x.L.title)}</span>${x.L.minutes ? `<span class="lm">${+x.L.minutes}m</span>` : ''}<span class="sr">${lessonDone(c, x.L) ? ' (done)' : ''}</span></a></li>`).join('')}</ol>${long ? `<button type="button" class="link btnlink cmore" data-sec="${esc(s.id)}" data-label="See all ${xs.length} lessons in this ${esc(W.toLowerCase())}" aria-expanded="${all}">${all ? 'Show fewer' : `See all ${xs.length} lessons in this ${W.toLowerCase()}`}</button>` : ''}</details>`;
     }).join('');
   }
-  if (!window.cmoreOn) (window.cmoreOn = 1) && document.addEventListener('click', e => { const b = e.target.closest && e.target.closest('.cmore'); if (!b) return; const ol = b.previousElementSibling, o = ol.classList.toggle('trim'); b.setAttribute('aria-expanded', !o); b.textContent = o ? b.textContent.replace(/^Show fewer.*$/, b.dataset.t || b.textContent) : (b.dataset.t = b.textContent, 'Show fewer'); });
+  /* sidebar open or closed: the class on #learn, the toggle button's state and label */
+  function setLessons(open) { $('#learn').classList.toggle('nocurr', !open); $('#ctog').setAttribute('aria-expanded', open); $('#ctogt').textContent = (open ? 'Hide' : 'Show') + ' lessons'; }
+  const markedDone = () => { const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } };
   function show(j) {
-    cur = j; const x = P[j], L = x.L, F = x.mi >= 0 ? filesOf(c, x.sec) : x.mi === -2 && L.of && secsOf(c).find(z => z.id === L.of) ? filesOf(c, secsOf(c).find(z => z.id === L.of)) : {}, prev = P[j - 1], next = P[j + 1];
+    cur = j; const x = P[j], L = x.L, prev = P[j - 1], next = P[j + 1], T = $('#ctoc');
+    if (T.dataset.at !== L.id) { delete T.dataset.all; T.dataset.at = L.id; }   /* a new lesson starts with the short list */
+    /* files of the lesson's module; a short-course video uses the files of the session it summarises ("of") */
+    const fsec = x.mi >= 0 ? x.sec : x.mi === -2 && L.of ? secsOf(c).find(z => z.id === L.of) : null, F = fsec ? filesOf(c, fsec) : {};
     Store.visit(c.id, x.sec.id, L.id);
     const inMod = P.filter(y => y.sec === x.sec), pos = inMod.indexOf(x) + 1;
     const nextBtn = next ? `<a class="pill small" href="#/${c.id}/learn/${esc(next.L.id)}">Next lesson ›</a>` : '';
     const doneBtn = L.type !== 'quiz' ? `<button class="pill ghost small" id="done" aria-pressed="${Store.isDone(c.id, L.id)}">${Store.isDone(c.id, L.id) ? '✓ Completed' : 'Mark as complete'}</button>` : '';
     const files = (F.workbook || F.slides) && L.type !== 'practice' ? `<div class="lfiles"><b>For this ${W.toLowerCase()}</b>${F.workbook ? `<a class="link" href="${esc(F.workbook)}">Practice workbook ${CHEV}</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides (PDF) ${CHEV}</a>` : ''}${quizOf(x.sec) && L.type !== 'quiz' ? `<a class="link" href="#/${c.id}/learn/${quizOf(x.sec).id}">${W} test ${CHEV}</a>` : ''}</div>` : '';
     let body = '';
-    if (isVid(L)) body = `<div class="screen" id="screen">${frameSrc(L) ? `<iframe src="${esc(frameSrc(L))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>` : `<video id="vid" controls playsinline preload="metadata" src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`}</div>
+    if (isVid(L)) body = `<div class="screen" id="screen">${frameSrc(L) ? frame(L) : `<video id="vid" controls playsinline preload="metadata" src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`}</div>
       <div class="lbar"><p class="lmeta">${esc(L.kind || L.by || 'Video')}${L.minutes ? ` · ${+L.minutes} min` : ''}</p><span class="lact">${doneBtn}${nextBtn}</span></div>${L.summary ? `<p class="body">${esc(L.summary)}</p>` : ''}${files}`;
     else if (L.type === 'reading') body = `${L.image ? `<figure class="rfig"><a href="${esc(media(c, L.image))}" target="_blank" rel="noopener" title="Open the picture full size"><img src="${esc(media(c, L.image))}" alt="${esc(L.alt || '')}"></a><figcaption>Tap the picture to open it full size.</figcaption></figure>` : ''}
       <div class="rblocks">${(L.blocks || []).map((b, n) => `<section class="rb${b.tone === 'warn' ? ' warn' : ''}">${b.h ? `<h2>${esc(b.h)}</h2>` : ''}${b.p ? `<p>${esc(b.p)}</p>` : ''}${b.code != null ? `<div class="code"><pre id="code-${n}"><code>${esc(b.code)}</code></pre><button type="button" class="pill ghost small" data-copy="code-${n}" aria-label="Copy${b.h ? ': ' + esc(b.h) : ''}">Copy</button></div>` : ''}</section>`).join('')}</div>
@@ -500,13 +507,13 @@ function learn(c, lessonId) {
     const on = $('#ctoc li.on'); if (on && $('#curr').scrollHeight > $('#curr').clientHeight) on.scrollIntoView({ block: 'nearest' });
   }
   function wire(L) {
-    $('#ctog').onclick = () => { const l = $('#learn'), o = l.classList.toggle('nocurr'); $('#ctog').setAttribute('aria-expanded', !o); $('#ctogt').textContent = (o ? 'Show' : 'Hide') + ' lessons'; try { localStorage.setItem('kalam.sidebar', o ? 'closed' : 'open'); } catch (e) {} if (!o && innerWidth <= 900) $('#ctoc a[aria-current]')?.focus(); };
+    $('#ctog').onclick = () => { const open = $('#learn').classList.contains('nocurr'); setLessons(open); try { localStorage.setItem('kalam.sidebar', open ? 'open' : 'closed'); } catch (e) {} if (open && innerWidth <= 900) $('#ctoc a[aria-current]')?.focus(); };
     if ($('#done')) $('#done').onclick = e => { const d = Store.isDone(c.id, L.id); d ? Store.unsetDone(c.id, L.id) : Store.setDone(c.id, L.id); const b = e.currentTarget; b.setAttribute('aria-pressed', !d); b.textContent = d ? 'Mark as complete' : '✓ Completed'; toc(); };
     const v = $('#vid');
     if (v) {
-      v.addEventListener('timeupdate', () => { if (v.isConnected && v.duration && v.currentTime / v.duration > 0.9 && !Store.isDone(c.id, L.id)) { Store.setDone(c.id, L.id); toc(); const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } } });
+      v.addEventListener('timeupdate', () => { if (v.isConnected && v.duration && v.currentTime / v.duration > 0.9 && !Store.isDone(c.id, L.id)) { Store.setDone(c.id, L.id); toc(); markedDone(); } });
       v.addEventListener('ended', () => { if (v.isConnected) $('#nextbtn')?.focus(); });
-    } else if (frameSrc(L) || L.type === 'reading') { Store.setDone(c.id, L.id); const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } }
+    } else if (frameSrc(L) || L.type === 'reading') { Store.setDone(c.id, L.id); markedDone(); }   /* players in an iframe can't report progress: opening counts */
     $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
       const src = $('#' + b.dataset.copy), t = src.textContent; let ok = false;
       try { await navigator.clipboard.writeText(t); ok = true; } catch (e) { const rg = document.createRange(); rg.selectNodeContents(src); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); try { ok = document.execCommand('copy'); } catch (e2) {} }
@@ -534,13 +541,19 @@ function learn(c, lessonId) {
   }
   return { title: `${P[k].L.title} · ${c.title}`, crumbs: trail(c, [P[k].mi === -2 ? P[k].sec.title : P[k].mi < 0 ? 'Final assessment' : `${W} ${P[k].mi + 1}`]), html,
     after() {
-      show(k); if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); if ($('#ctogt')) $('#ctogt').textContent = 'Show lessons'; $('#ctog').setAttribute('aria-expanded', 'false'); }
-      const close = () => { if (innerWidth > 900 || $('#learn').classList.contains('nocurr')) return; $('#learn').classList.add('nocurr'); if ($('#ctogt')) $('#ctogt').textContent = 'Show lessons'; $('#ctog').setAttribute('aria-expanded', 'false'); $('#ctog').focus(); };
+      show(k); if (innerWidth <= 900) setLessons(false);   /* on phones the list starts closed */
+      const close = () => { if (innerWidth > 900 || $('#learn').classList.contains('nocurr')) return; setLessons(false); $('#ctog').focus(); };
       $('#ccls').onclick = close; $('#curr').addEventListener('keydown', e => { if (e.key === 'Escape') close(); });
+      /* "See all" / "Show fewer": the choice is kept on #ctoc (not in this closure, which update() replaces), so toc() redraws keep it */
+      $('#ctoc').addEventListener('click', e => {
+        const b = e.target.closest('.cmore'); if (!b) return; const t = $('#ctoc'), all = b.previousElementSibling.classList.toggle('trim') === false;
+        if (all) t.dataset.all = b.dataset.sec; else delete t.dataset.all;
+        b.setAttribute('aria-expanded', all); b.textContent = all ? 'Show fewer' : b.dataset.label;
+      });
     },
     update() {
       const j = P.findIndex(x => x.L.id === location.hash.split('/').pop()); if (j < 0) return;
-      if (innerWidth <= 900) { $('#learn').classList.add('nocurr'); if ($('#ctogt')) $('#ctogt').textContent = 'Show lessons'; }
+      if (innerWidth <= 900) $('#learn').classList.add('nocurr');   /* show() draws the toggle button from this class */
       show(j); window.scrollTo({ top: 0, behavior: 'instant' }); const h = $('#lmain h1'); h.tabIndex = -1; h.focus({ preventScroll: true });
     } };
 }
@@ -587,7 +600,7 @@ function openVideo(b) {
   const c = App.courses[b.dataset.c], L = c.sections.flatMap(s => s.lessons).find(l => l.id === b.dataset.l); if (!L) return;
   lastBtn = b; const m = $('#ytm'), fr = $('.ytframe', m);
   if (frameSrc(L)) {
-    fr.innerHTML = `<iframe src="${esc(frameSrc(L, true))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+    fr.innerHTML = frame(L, true);
     $('#ytl').hidden = L.type !== 'youtube'; if (L.type === 'youtube') $('#ytl').href = 'https://www.youtube.com/watch?v=' + L.yt; Store.setDone(c.id, L.id);
   } else {
     fr.innerHTML = `<video controls autoplay playsinline src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`;
