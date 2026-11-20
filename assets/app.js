@@ -17,6 +17,7 @@ const ICON = {
   exam: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l2.6 5.3 5.9.9-4.3 4.1 1 5.8L12 16.4 6.8 19.1l1-5.8L3.5 9.2l5.9-.9z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>'
 };
 ICON.youtube = ICON.embed = ICON.video;
+ICON.reading = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 5.5c3-1 6-1 9 1 3-2 6-2 9-1v13c-3-1-6-1-9 1-3-2-6-2-9-1z" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/><path d="M12 6.5v13" stroke="currentColor" stroke-width="1.6"/></svg>';
 const App = { cat: null, courses: {}, entries: {}, order: [], people: {}, topics: [] };
 const RESERVED = ['explore', 'categories', 'my', 'trainings', 'topics'];
 
@@ -84,8 +85,8 @@ const thumbOf = (c, L) => L.type === 'youtube' ? `https://i.ytimg.com/vi/${esc(L
 function timeOf(c) {
   const all = c.sections.flatMap(s => s.lessons), v = all.filter(isVid);
   const t = k => all.filter(l => l.type === k).reduce((a, l) => a + (+l.minutes || 0), 0);
-  const video = v.reduce((a, l) => a + (+l.minutes || 0), 0), practice = t('practice'), tests = t('quiz'), exam = t('exam');
-  return { video, videos: v.length, practice, tests, exam, total: video + practice + tests + exam,
+  const video = v.reduce((a, l) => a + (+l.minutes || 0), 0), practice = t('practice'), tests = t('quiz'), exam = t('exam'), reading = t('reading');
+  return { video, videos: v.length, practice, tests, exam, reading, readings: all.filter(l => l.type === 'reading').length, total: video + practice + tests + exam + reading,
     nPractice: all.filter(l => l.type === 'practice').length, nTests: all.filter(l => l.type === 'quiz').length, nExam: all.filter(l => l.type === 'exam').length };
 }
 /* files for a module: explicit "files" in course.json, else the older convention (first workbook, PDF titled "slides", test PDF) */
@@ -234,7 +235,7 @@ function ccard(c, hits) {
   const T = timeOf(c), p = progress(c), who = people(c).map(x => x.name).join(', ');
   return `<a class="ccard rv" href="#/${c.id}"><span class="cimg">${coverOf(c)}<span class="play">${PLAY}</span></span><span class="cx"><small>${esc(t?.name || 'Course')}</small><b>${esc(c.title)}</b>
   ${who ? `<span class="cwho">${esc(who)}</span>` : ''}<span class="cs">${esc(c.subtitle || '')}</span>
-  <span class="cm"><span>${esc(c.level || 'All levels')}</span><span>${hrs(T.video)} video</span><span>${esc(langShort(c))}</span><span class="${free(c) ? 'free' : ''}">${free(c) ? 'Free' : 'Paid'}</span></span>
+  <span class="cm"><span>${esc(c.level || 'All levels')}</span><span>${T.video ? `${hrs(T.video)} video` : `${T.readings} lessons · ${hrs(T.reading)}`}</span><span>${esc(langShort(c))}</span><span class="${free(c) ? 'free' : ''}">${free(c) ? 'Free' : 'Paid'}</span></span>
   ${hits && hits.length ? `<span class="chits">Includes: ${hits.slice(0, 3).map(esc).join(' · ')}</span>` : ''}
   ${p.started ? `<span class="cp">${bar(p.pct)}<span>${p.pct}% done</span></span>` : ''}</span></a>`;
 }
@@ -370,7 +371,7 @@ function overview(c) {
   const modules = secs.map((s, i) => {
     const xs = P.filter(x => x.sec === s), vs = vids(s), m = vs.reduce((a, v) => a + (+v.minutes || 0), 0), d = xs.filter(x => lessonDone(c, x.L)).length;
     return `<details class="mod"${p.at && p.at.sec === s ? ' open' : ''}><summary><span class="mn">${W} ${i + 1}</span><span class="mt"><b>${esc(s.title)}</b>${s.covers ? `<small>${esc(s.covers)}</small>` : ''}</span>
-    <span class="mc">${vs.length} videos · ${m} min${s.lessons.some(l => l.type === 'practice') ? ' · practice' : ''}${quizOf(s) ? ' · test' : ''}${d ? ` · ${d}/${xs.length} done` : ''}</span></summary>${s.note ? `<p class="gnote mnote">${esc(s.note)}</p>` : ''}<ol class="lessons">${xs.map(row).join('')}</ol></details>`;
+    <span class="mc">${[vs.length ? `${vs.length} videos · ${m} min` : '', s.lessons.filter(l => l.type === 'reading').length ? `${s.lessons.filter(l => l.type === 'reading').length} reading lessons` : ''].filter(Boolean).join(' · ')}${s.lessons.some(l => l.type === 'practice') ? ' · practice' : ''}${quizOf(s) ? ' · test' : ''}${d ? ` · ${d}/${xs.length} done` : ''}</span></summary>${s.note ? `<p class="gnote mnote">${esc(s.note)}</p>` : ''}<ol class="lessons">${xs.map(row).join('')}</ol></details>`;
   }).join('') + (ex ? `<details class="mod"><summary><span class="mn">Final</span><span class="mt"><b>${esc(ex.title || 'Final assessment')}</b><small>${esc(ex.summary || '')}</small></span><span class="mc">${T.exam ? `${T.exam} min` : ''}</span></summary><ol class="lessons">${P.filter(x => x.mi < 0).map(row).join('')}</ol></details>` : '');
   const fl = secs.map((s, i) => [s, i, filesOf(c, s)]), wb = fl.find(([, , f]) => f.workbook);
   const startLabel = p.done ? `Resume${p.at ? ': ' + p.at.L.title : ''}` : 'Start the course';
@@ -379,7 +380,7 @@ function overview(c) {
    <p class="eyebrow">${esc(t?.name || 'Course')}</p><h1 class="display">${esc(h1a)}${h1b ? `<br><span class="grad">${esc(h1b)}</span>` : ''}</h1>
    <p class="sub wide">${esc(c.intro || c.subtitle)}</p>
    <ul class="facts" aria-label="Course facts">${trainers.filter(x => !x.external).map(x => `<li class="tchip">${x.photo ? `<img src="${esc(x.photo)}" alt="">` : ''}${esc(x.name)}</li>`).join('')}
-    <li>${esc(c.levelRange || c.level || 'All levels')}</li><li>${esc(c.languageLabel || langShort(c))}</li><li>${hours(T.video)} of video</li><li>${secs.length} ${W.toLowerCase()}s</li><li>${free(c) ? 'Free' : 'Paid'}</li></ul>
+    <li>${esc(c.levelRange || c.level || 'All levels')}</li><li>${esc(c.languageLabel || langShort(c))}</li>${T.video ? `<li>${hours(T.video)} of video</li>` : ''}${T.reading ? `<li>${T.readings} reading lessons</li>` : ''}<li>${secs.length} ${W.toLowerCase()}s</li><li>${free(c) ? 'Free' : 'Paid'}</li></ul>
    <div class="hcta"><a class="pill big" href="${p.resume}">${esc(startLabel)}</a>${p.started ? `<span class="hprog">${bar(p.pct)}<span>${p.pct}% done</span></span>` : ''}<a class="link" href="#/${c.id}" data-jump="curriculum">See the curriculum ${CHEV}</a></div></div></div>
   <div class="band slim"><div class="in">
    <div class="ovgrid">
@@ -387,12 +388,13 @@ function overview(c) {
      ${(c.outcomes || []).length ? `<h2 class="headline small2">What you'll learn.</h2><ul class="outs">${c.outcomes.map(o => `<li><span class="ic">${CHECK}</span>${esc(o)}</li>`).join('')}</ul>` : ''}</div>
     <aside class="side">
      <div class="card"><h3>Course length</h3><table class="len"><caption class="sr">Course length</caption><tbody>
-      <tr><th scope="row">Video</th><td>${T.videos} videos · ${T.video} min</td></tr>
+      ${T.videos ? `<tr><th scope="row">Video</th><td>${T.videos} videos · ${T.video} min</td></tr>` : ''}
+      ${T.reading ? `<tr><th scope="row">Reading</th><td>${T.readings} lessons · about ${T.reading} min</td></tr>` : ''}
       ${T.practice ? `<tr><th scope="row">Practice</th><td>about ${T.practice} min <small>(${T.nPractice} × ${Math.round(T.practice / T.nPractice)})</small></td></tr>` : ''}
       ${T.tests ? `<tr><th scope="row">${W} tests</th><td>about ${T.tests} min <small>(${T.nTests} × ${Math.round(T.tests / T.nTests)})</small></td></tr>` : ''}
       ${T.exam ? `<tr><th scope="row">Final assessment</th><td>${T.exam} min</td></tr>` : ''}
       <tr class="tot"><th scope="row">Total</th><td>about ${hours(T.total)}</td></tr></tbody></table>
-      <p class="fine">The ${hours(T.video)} figure is video only. Practice and test times are the course's estimates.</p></div>
+      <p class="fine">${T.video ? `The ${hours(T.video)} figure is video only. ` : ''}Reading, practice and test times are the course's estimates.</p></div>
     </aside></div>
    ${(c.audience || []).length || (c.requirements || []).length ? `<div class="duo">${(c.audience || []).length ? `<div class="card"><h3>Who it's for</h3><ul class="plain">${c.audience.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}${(c.requirements || []).length ? `<div class="card"><h3>Before you start</h3><ul class="plain">${c.requirements.map(a => `<li>${esc(a)}</li>`).join('')}</ul></div>` : ''}</div>` : ''}
   </div></div>
@@ -443,6 +445,9 @@ function learn(c, lessonId) {
     let body = '';
     if (isVid(L)) body = `<div class="screen" id="screen">${frameSrc(L) ? `<iframe src="${esc(frameSrc(L))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>` : `<video id="vid" controls playsinline preload="metadata" src="${esc(media(c, L.src))}" poster="${esc(media(c, L.poster))}" aria-label="Video: ${esc(L.title)}"></video>`}</div>
       <div class="lbar"><p class="lmeta">${esc(L.kind || L.by || 'Video')}${L.minutes ? ` · ${+L.minutes} min` : ''}</p>${doneBtn}</div>${L.summary ? `<p class="body">${esc(L.summary)}</p>` : ''}${files}`;
+    else if (L.type === 'reading') body = `${L.image ? `<figure class="rfig"><img src="${esc(media(c, L.image))}" alt="${esc(L.alt || '')}"></figure>` : ''}
+      <div class="rblocks">${(L.blocks || []).map((b, n) => `<section class="rb${b.tone === 'warn' ? ' warn' : ''}">${b.h ? `<h2>${esc(b.h)}</h2>` : ''}${b.p ? `<p>${esc(b.p)}</p>` : ''}${b.code != null ? `<div class="code"><pre id="code-${n}"><code>${esc(b.code)}</code></pre><button type="button" class="pill ghost small" data-copy="code-${n}" aria-label="Copy${b.h ? ': ' + esc(b.h) : ''}">Copy</button></div>` : ''}</section>`).join('')}</div>
+      <div class="lbar"><p class="lmeta">Reading${L.minutes ? ` · about ${+L.minutes} min` : ''}</p>${doneBtn}</div>${files}`;
     else if (L.type === 'practice') body = `<div class="card"><p class="eyebrow">Practice</p>${(L.body || []).map(b => `<p>${esc(b)}</p>`).join('')}
       <div class="ctas left">${F.workbook ? `<a class="pill" href="${esc(F.workbook)}">Download the workbook</a>` : ''}${F.slides ? `<a class="link" href="${esc(F.slides)}" target="_blank" rel="noopener">Slides (PDF) ${CHEV}</a>` : ''}</div></div>
       <div class="lbar"><p class="lmeta">About ${+L.minutes || 30} min · do it in Excel on your own copy</p>${doneBtn}</div>`;
@@ -471,7 +476,12 @@ function learn(c, lessonId) {
     if (v) {
       v.addEventListener('timeupdate', () => { if (v.isConnected && v.duration && v.currentTime / v.duration > 0.9 && !Store.isDone(c.id, L.id)) { Store.setDone(c.id, L.id); toc(); const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } } });
       v.addEventListener('ended', () => { if (v.isConnected) $('#nextbtn')?.focus(); });
-    } else if (frameSrc(L)) { Store.setDone(c.id, L.id); }
+    } else if (frameSrc(L) || L.type === 'reading') { Store.setDone(c.id, L.id); const b = $('#done'); if (b) { b.setAttribute('aria-pressed', true); b.textContent = '✓ Completed'; } }
+    $$('[data-copy]').forEach(b => b.addEventListener('click', async () => {
+      const src = $('#' + b.dataset.copy), t = src.textContent; let ok = false;
+      try { await navigator.clipboard.writeText(t); ok = true; } catch (e) { const rg = document.createRange(); rg.selectNodeContents(src); const sel = getSelection(); sel.removeAllRanges(); sel.addRange(rg); try { ok = document.execCommand('copy'); } catch (e2) {} }
+      b.textContent = ok ? 'Copied' : 'Select and copy'; setTimeout(() => (b.textContent = 'Copy'), 1800);
+    }));
     if (L.type === 'quiz') {
       const draw = () => { $('#quiz').innerHTML = L.questions.map((q, n) => qcard(c, q, n, L.questions.length)).join(''); score(); };
       const score = () => {

@@ -369,3 +369,20 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 @media (max-width:900px){.cclose{display:block}.ch{padding-right:44px}}
 .gnote{margin-top:18px}.mnote{margin:14px 22px 6px!important}
 .curr{order:-1}
+/* reading lessons (text + image, e.g. chart guides) */
+.rfig{margin:0 0 22px;background:var(--white);border:1px solid #e8e8ed;border-radius:18px;padding:16px;display:grid;place-items:center}
+.rfig img{max-height:460px;width:auto;max-width:100%;object-fit:contain}
+.rblocks{display:flex;flex-direction:column;gap:14px}
+.rb{background:var(--gray);border-radius:16px;padding:18px 22px}.rb h2{font-size:17px;margin:0 0 6px;letter-spacing:-.01em}.rb p{margin:0;color:var(--ink);max-width:70ch}
+.rb.warn{background:#fff7e6;border:1px solid #f0d9a6}.rb.warn h2{color:#7a5a12}
+.code{position:relative;margin-top:8px}.code pre{margin:0;background:#1d1d1f;color:#f5f5f7;border-radius:12px;padding:16px 18px;padding-right:96px;font:14px/1.55 ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;white-space:pre-wrap;overflow-wrap:anywhere}
+.code .pill{position:absolute;top:10px;right:10px;background:#fff;color:var(--plum);border-color:#fff}
+/* the playing video stays a window inside the page, not the whole screen */
+.lmain .screen{max-width:min(100%,calc(58vh * 16 / 9),880px);margin-left:auto;margin-right:auto}
+.ytm{background:rgba(29,29,31,.38);-webkit-backdrop-filter:blur(4px);backdrop-filter:blur(4px)}
+.ytbox{width:min(760px,100%,calc(60vh * 16 / 9))}
+.lmain .screen{max-width:min(100%,calc(52vh * 16 / 9),860px)}
+.ytm{-webkit-backdrop-filter:blur(2px);backdrop-filter:blur(2px)}
+.ytbox{background:#1d1d1f;border-radius:22px;padding:10px 10px 4px;box-shadow:0 40px 80px -30px rgba(0,0,0,.6)}
+.lmain h1[tabindex="-1"]:focus:not(:focus-visible){outline:none}
+.ytbox .ytbar{margin:10px 8px 8px}.ytbox .ytframe{border-radius:14px}
