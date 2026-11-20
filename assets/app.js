@@ -53,7 +53,7 @@ const url = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.base || '') +
 const vids = sec => sec.lessons.filter(l => l.type === 'video' || l.type === 'youtube' || l.type === 'embed');
 /* video files: a relative path is served from the site, or from "mediaBase" (catalog platform or course) when videos move to another host */
 const media = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.mediaBase || App.cat.platform.mediaBase || '') + (c.base || '') + p;
-/* players that are web pages (YouTube, SharePoint/Stream, Vimeo…) play in an iframe */
+/* players that are web pages (YouTube, Bunny or Cloudflare Stream, Vimeo…) play in an iframe */
 const frameSrc = (L, auto) => L.type === 'youtube' ? `https://www.youtube-nocookie.com/embed/${encodeURIComponent(L.yt)}?rel=0${auto ? '&autoplay=1' : ''}` : L.type === 'embed' ? L.embed : '';
 const thumbOf = (c, L) => L.type === 'youtube' ? `https://i.ytimg.com/vi/${esc(L.yt)}/hqdefault.jpg` : L.poster ? esc(media(c, L.poster)) : 'img/kalam-mark.png';
 const quizOf = sec => sec.lessons.find(l => l.type === 'quiz');
