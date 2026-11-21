@@ -388,8 +388,11 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 .qx{display:flex;flex-direction:column;gap:6px;padding:18px 22px 22px}.qx small{font-size:13px;font-weight:700;color:var(--plum);text-transform:uppercase;letter-spacing:.02em}.qx b{font-size:20px;letter-spacing:-.02em;line-height:1.25}
 .qcard.done small{color:var(--ok)}
 /* team photo band (home) */
-.team{display:grid;grid-template-columns:minmax(0,1.35fr) minmax(0,1fr);gap:48px;align-items:center;background:var(--gray);border-radius:28px;padding:20px 48px 20px 20px}
-.team img{width:100%;height:auto;aspect-ratio:16/9;object-fit:contain;display:block}
-.team .headline{margin-bottom:10px}.team .sub{margin:0;font-size:clamp(17px,1.8vw,20px)}
-@media (max-width:833px){.team{grid-template-columns:1fr;gap:22px;padding:14px 14px 26px;border-radius:24px}.team .tx{padding:0 10px}}
+.team{position:relative;border-radius:28px;overflow:hidden;background:var(--plum-d);box-shadow:0 30px 70px -30px rgba(43,14,44,.55)}
+.team img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
+.team .tx{position:absolute;left:0;right:0;bottom:0;padding:120px 44px 36px;background:linear-gradient(180deg,rgba(43,14,44,0) 0%,rgba(43,14,44,.72) 45%,rgba(43,14,44,.92) 100%);color:#fff}
+.team .eyebrow{color:#E6B84A;margin-bottom:6px}
+.team .headline{color:#fff;margin:0 0 8px}
+.team .sub{color:rgba(255,255,255,.82);margin:0;max-width:46ch;font-size:clamp(17px,1.8vw,20px)}
 .band.teamb{padding-bottom:56px}
+@media (max-width:833px){.team{border-radius:22px}.team .tx{position:static;padding:22px 22px 26px;background:var(--plum-d)}}
