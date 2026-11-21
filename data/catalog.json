@@ -9,7 +9,15 @@
    "Team leaders and supervisors",
    "WFM, quality and reporting teams"
   ],
-  "mode": "Public prototype. All courses are free. No accounts: progress stays in this browser only."
+  "mode": "Public prototype. All courses are free. No accounts: progress stays in this browser only.",
+  "team": {
+   "eyebrow": "The people behind it",
+   "title": "Built by the Kalam team.",
+   "text": "Every course here comes from our own training, made by colleagues who do this work every day on the floor, in reporting and in planning.",
+   "photo": "img/team/kalam-team-1280.webp",
+   "photoSmall": "img/team/kalam-team-768.webp",
+   "alt": "The Kalam CX team, around twenty colleagues, standing together and smiling in the Kalam office."
+  }
  },
  "topics": [
   {

@@ -262,6 +262,12 @@ function resumeRow(c) {
 const searchForm = q => `<form class="search" role="search" action="#/explore" data-search>
   <label class="sr" for="q">Search courses</label><input id="q" name="q" type="search" value="${esc(q || '')}" placeholder="Search courses and lessons, e.g. VLOOKUP" autocomplete="off">
   <button class="pill" type="submit">Search</button></form>`;
+function teamBand(T) {
+  if (!T || !T.photo) return '';
+  const set = T.photoSmall ? ` srcset="${esc(T.photoSmall)} 768w, ${esc(T.photo)} 1280w" sizes="(max-width:833px) calc(100vw - 44px), 540px"` : '';
+  return `<div class="band tight teamb"><div class="in"><div class="team rv"><img src="${esc(T.photo)}"${set} width="1280" height="720" alt="${esc(T.alt || '')}" loading="lazy" decoding="async">
+  <div class="tx">${T.eyebrow ? `<p class="eyebrow">${esc(T.eyebrow)}</p>` : ''}<h2 class="headline small2">${esc(T.title || 'Built by the Kalam team.')}</h2>${T.text ? `<p class="sub">${esc(T.text)}</p>` : ''}</div></div></div></div>`;
+}
 function home() {
   const P = App.cat.platform, L = live(), planned = listed().filter(c => c.soon);
   const started = L.filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id)).slice(0, 3);
@@ -274,6 +280,7 @@ function home() {
  <div class="band tight"><div class="in"><div class="th2"><h2 class="headline small2 rv">Courses.</h2><a class="link rv" href="#/explore">Search all courses ${CHEV}</a></div>
   <div class="cgrid two">${L.map(c => ccard(c)).join('')}${planned.map(c => ccard(c)).join('')}</div>
   ${empty.length ? `<p class="note left rv">Planned topics, no courses yet: ${empty.map(t => esc(t.name)).join(' · ')}.</p>` : ''}</div></div>
+ ${teamBand(P.team)}
  <div class="band gray"><div class="in"><h2 class="headline center rv">How a course works.</h2>
   <div class="steps three"><div class="rv"><b>1</b><h3>Watch</h3><p>Short videos, one skill at a time, in the trainer's own voice.</p></div><div class="rv"><b>2</b><h3>Practise</h3><p>Do it yourself in the session workbook.</p></div><div class="rv"><b>3</b><h3>Check</h3><p>A self-marking test after each session, then a final task. Progress is saved in this browser only.</p></div></div></div></div>` };
 }
