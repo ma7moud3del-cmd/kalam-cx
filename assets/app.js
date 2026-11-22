@@ -1,4 +1,4 @@
-/* Kalam CX Academy: a multi-course learning platform in a simple, Apple-style look.
+/* Kalam Learning: a multi-course learning platform in a simple, Apple-style look.
    Learner journey: Home › Explore or Categories › Course overview › Learning view (player + curriculum) › Final assessment.
    Content lives in data only: data/catalog.json lists categories (topics), instructors and courses; each course is
    courses/<id>/course.json (course → modules → lessons → resources / tests). Adding a course = adding data, no code changes.
@@ -136,7 +136,7 @@ async function boot() {
       try { const c = await (await fetch(r.data, { cache: 'no-cache' })).json(); c.base = c.base || r.data.replace(/course\.json$/, ''); if (r.partOf) c.partOf = r.partOf; return c; } catch (e) { return null; }
     }));
     list.filter(Boolean).forEach(c => { App.courses[c.id] = c; App.order.push(c.id); if (!c.soon) Store.mergeLegacy(c); });
-  } catch (e) { $('#app').innerHTML = '<section class="band"><div class="in"><h1 class="display">The Academy couldn\'t load.</h1><p class="sub">Check your connection and reload the page.</p></div></section>'; return; }
+  } catch (e) { $('#app').innerHTML = '<section class="band"><div class="in"><h1 class="display">Kalam Learning couldn\'t load.</h1><p class="sub">Check your connection and reload the page.</p></div></section>'; return; }
   if (App.cat.platform && App.cat.platform.footer) { $('#foot').textContent = App.cat.platform.footer; $('#foot').hidden = false; }
   route();
 }
@@ -198,7 +198,8 @@ function route() {
     if (shown !== null) { const h = $('#app h1'); if (h) { h.tabIndex = -1; h.focus({ preventScroll: true }); } }
   } else v.update();
   shown = key;
-  document.title = v.title === 'Kalam CX Academy' ? v.title : `${v.title} · Kalam CX Academy`;
+  const site = (App.cat && App.cat.platform && App.cat.platform.name) || 'Kalam Learning';
+  document.title = v.title === site ? v.title : `${v.title} · ${site}`;
   nav(parts[0] || '', c && !c.soon && c.type !== 'collection' ? c : null, parts[1], v.crumbs);
   reveal($('#app'));
 }
@@ -217,16 +218,16 @@ function nav(top, c, cur, crumbs) {
   ${links.length ? `<nav class="lpages" aria-label="Course: ${esc(c.title)}">${links.map(([t, h, on]) => `<a href="${h}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`).join('')}</nav>` : ''}</div>`;
   ln.hidden = false;
 }
-/* breadcrumb trail for a course page: Academy › Category › Course [› page] */
+/* breadcrumb trail for a course page: Home › Category › Course [› page] */
 function trail(c, ...more) {
-  const t = topicOf(c), out = [['Academy', '#/']];
+  const t = topicOf(c), out = [['Home', '#/']];
   if (t) out.push([t.name, `#/categories/${t.id}`]);
   out.push([c.navTitle || c.title, `#/${c.id}`]);
   return out.concat(more);
 }
 const io = 'IntersectionObserver' in window ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' }) : null;
 function reveal(scope) { $$('.rv:not(.seen)', scope).forEach(el => io ? io.observe(el) : el.classList.add('seen')); setTimeout(() => { if (!$('.rv.seen', scope)) $$('.rv', scope).forEach(el => el.classList.add('seen')); }, 2500); }
-const notFound = () => ({ title: 'Page not found', html: '<section class="band"><div class="in narrow center"><h1 class="display">This page isn\'t here.</h1><p class="sub center">The link may be old.</p><a class="pill big" href="#/">Go to the Academy</a></div></section>' });
+const notFound = () => ({ title: 'Page not found', html: '<section class="band"><div class="in narrow center"><h1 class="display">This page isn\'t here.</h1><p class="sub center">The link may be old.</p><a class="pill big" href="#/">Go to the home page</a></div></section>' });
 
 /* ---------- course cards ---------- */
 function coverOf(c) {
@@ -266,8 +267,8 @@ function home() {
   const P = App.cat.platform, L = live(), planned = listed().filter(c => c.soon);
   const started = L.filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id)).slice(0, 3);
   const empty = App.topics.filter(t => !listed().some(c => topicId(c) === t.id));
-  return { title: 'Kalam CX Academy', html: `<section class="hero compact"><div class="in">
-  <p class="eyebrow center rv">${esc(P.name || 'Kalam CX Academy')}</p>
+  return { title: P.name || 'Kalam Learning', html: `<section class="hero compact"><div class="in">
+  <p class="eyebrow center rv">${esc(P.name || 'Kalam Learning')}</p>
   <h1 class="mega center rv">Upgrade your skills.<br><span class="grad">Lead with confidence.</span></h1>
   <p class="sub center wide rv">${esc(P.intro)}</p></div></section>
  ${started.length ? `<div class="band tight"><div class="in"><h2 class="headline small2 rv">Continue learning.</h2><div class="rows">${started.map(resumeRow).join('')}</div></div></div>` : ''}
@@ -323,7 +324,7 @@ function explore(Q) {
     history.replaceState(null, '', '#/explore' + (P.toString() ? '?' + P : '')); draw();
   }
   let timer = 0;
-  return { title: 'Courses', crumbs: [['Academy', '#/'], ['Courses']], html, after() {
+  return { title: 'Courses', crumbs: [['Home', '#/'], ['Courses']], html, after() {
     draw();
     $('#flt').addEventListener('change', push);
     $('[data-search]').addEventListener('submit', e => { e.preventDefault(); push(); });
@@ -334,14 +335,14 @@ function explore(Q) {
 
 /* ---------- categories ---------- */
 function categories() {
-  return { title: 'Categories', crumbs: [['Academy', '#/'], ['Categories']], html: `<section><div class="band slim"><div class="in">
+  return { title: 'Categories', crumbs: [['Home', '#/'], ['Categories']], html: `<section><div class="band slim"><div class="in">
   <h1 class="display rv">Categories.</h1><p class="sub wide rv">Courses grouped by topic. Topics without courses yet are marked as planned.</p>
   <div class="cats big">${App.topics.map(catTile).join('')}</div></div></div></section>` };
 }
 function category(id) {
   const t = App.topics.find(x => x.id === id); if (!t) return notFound();
   const L = listed().filter(c => topicId(c) === id), n = L.filter(c => !c.soon).length;
-  return { title: t.name, crumbs: [['Academy', '#/'], ['Categories', '#/categories'], [t.name]], html: `<section><div class="band slim"><div class="in">
+  return { title: t.name, crumbs: [['Home', '#/'], ['Categories', '#/categories'], [t.name]], html: `<section><div class="band slim"><div class="in">
   <p class="eyebrow rv">Category</p><h1 class="display rv">${esc(t.name)}.</h1>${t.blurb ? `<p class="sub wide rv">${esc(t.blurb)}</p>` : ''}
   ${L.length ? `<div class="cgrid">${L.map(c => ccard(c)).join('')}</div>` : ''}
   ${!n ? `<div class="empty"><h3>No courses here yet.</h3><p>This topic is planned. Courses will appear here when they are published.</p><a class="pill" href="#/explore">See available courses</a></div>` : ''}</div></div></section>` };
@@ -351,14 +352,14 @@ function category(id) {
 function myLearning() {
   const l = live().filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id));
   const ext = App.order.map(id => App.courses[id]).filter(c => c.partOf && Store.started(c.id));
-  return { title: 'My learning', crumbs: [['Academy', '#/'], ['My learning']], html: `<section><div class="band slim"><div class="in narrow">
+  return { title: 'My learning', crumbs: [['Home', '#/'], ['My learning']], html: `<section><div class="band slim"><div class="in narrow">
   <h1 class="display rv">My learning.</h1><p class="sub wide rv">Saved in this browser only. There are no accounts yet, so on another phone or laptop you start fresh.</p>
   ${l.length ? `<div class="rows">${l.map(resumeRow).join('')}</div>` : `<div class="empty"><h3>Nothing started yet.</h3><p>Pick a course and press Start. It will show up here with your progress.</p><a class="pill" href="#/explore">Explore courses</a></div>`}
   ${ext.length ? `<p class="note left">Also watched: ${ext.map(c => `<a href="#/${c.partOf}/extras">${esc(c.title)}</a>`).join(', ')}.</p>` : ''}</div></div></section>` };
 }
 function soonPage(c) {
   const t = topicOf(c);
-  return { title: c.title, crumbs: [['Academy', '#/'], ...(t ? [[t.name, `#/categories/${t.id}`]] : []), [c.title]], html: `<section><div class="band"><div class="in narrow center">
+  return { title: c.title, crumbs: [['Home', '#/'], ...(t ? [[t.name, `#/categories/${t.id}`]] : []), [c.title]], html: `<section><div class="band"><div class="in narrow center">
   <p class="eyebrow center">Planned</p><h1 class="display center">${esc(c.title)}</h1><p class="sub center wide">${esc(c.subtitle || 'This course is being prepared.')} It isn't available yet.</p>
   <a class="pill big" href="#/explore">See available courses</a></div></div></section>` };
 }
