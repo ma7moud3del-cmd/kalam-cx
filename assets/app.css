@@ -387,3 +387,33 @@ a.ccard:hover{text-decoration:none;transform:translateY(-4px);box-shadow:0 22px 
 .qimg .dur{position:absolute;right:12px;bottom:12px;background:rgba(0,0,0,.72);color:#fff;font-size:12px;font-weight:600;border-radius:6px;padding:3px 7px}
 .qx{display:flex;flex-direction:column;gap:6px;padding:18px 22px 22px}.qx small{font-size:13px;font-weight:700;color:var(--plum);text-transform:uppercase;letter-spacing:.02em}.qx b{font-size:20px;letter-spacing:-.02em;line-height:1.25}
 .qcard.done small{color:var(--ok)}
+/* ---------- loading skeleton (shown until the data arrives; never a blank screen) ---------- */
+.skel{padding:64px 0 80px}
+.skel i{display:block;border-radius:14px;background:linear-gradient(90deg,#ececf0 25%,#f6f6f8 37%,#ececf0 63%);background-size:400% 100%;animation:skel 1.4s ease infinite}
+.skel .s1{width:22%;height:14px;margin:0 auto 22px}.skel .s2{width:72%;height:clamp(44px,7vw,84px);margin:0 auto 14px}.skel .s3{width:52%;height:clamp(44px,7vw,84px);margin:0 auto 26px}.skel .s4{width:60%;height:18px;margin:0 auto 56px}
+.skel .sg{display:grid;grid-template-columns:1fr 1fr;gap:22px}.skel .sg i{aspect-ratio:16/10;border-radius:22px}
+@keyframes skel{0%{background-position:100% 0}100%{background-position:0 0}}
+@media (max-width:740px){.skel .sg{grid-template-columns:1fr}.skel .sg i+i{display:none}}
+@media (prefers-reduced-motion:reduce){.skel i{animation:none}}
+/* ---------- error messages ---------- */
+.loadnote{margin-top:18px;background:var(--no-bg);color:var(--ink);border-radius:14px;padding:12px 18px;font-size:15px}
+.loadnote .btnlink{color:var(--link);font-weight:600}
+.verr{aspect-ratio:16/9;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;padding:24px;text-align:center;color:#f5f5f7;background:#111}
+.verr span{color:#a1a1a6}.verr .ctas{margin-top:10px;justify-content:center}.verr .link{color:var(--link-d)}
+/* ---------- video player extras: speed, resume note, shortcuts ---------- */
+.pctl{display:flex;flex-wrap:wrap;align-items:center;gap:10px 22px;margin-top:14px}.pctl .keys{flex-basis:100%}
+.speed{display:flex;flex-wrap:wrap;align-items:center;gap:4px;font-size:14px;color:var(--mute)}
+.speed>span{margin-right:6px}
+.speed button{font:inherit;font-size:13px;font-weight:600;color:var(--ink);background:var(--gray);border:1px solid transparent;border-radius:980px;padding:5px 11px;cursor:pointer;min-width:44px;min-height:32px}
+.speed button:hover{border-color:var(--line)}
+.speed button[aria-pressed=true]{background:var(--plum);color:#fff}
+.resumed{flex-basis:100%;order:-1;margin:0;font-size:14px;color:var(--mute)}.resumed .btnlink{font-size:14px;color:var(--link);font-weight:600}
+.keys{font-size:14px;color:var(--mute)}.keys summary{cursor:pointer;color:var(--link)}
+.keys dl{display:grid;grid-template-columns:repeat(auto-fill,minmax(230px,1fr));gap:6px 22px;margin:10px 0 0}
+.keys dl div{display:flex;gap:10px;align-items:baseline}.keys dt{flex:none;min-width:96px}.keys dd{margin:0}
+@media (hover:none) and (pointer:coarse){.pctl .keys{display:none}}
+@media (max-width:540px){.speed>span{flex-basis:100%;margin:0 0 2px}.speed button{min-width:0;padding:5px 10px}}
+kbd{font:600 12px/1 var(--sf);background:var(--white);border:1px solid var(--line);border-bottom-width:2px;border-radius:6px;padding:3px 6px;color:var(--ink)}
+/* ---------- continue learning ---------- */
+.hnext{margin:14px 0 0;font-size:15px;color:#a1a1a6}
+.rrow.fin .rnext{color:var(--ok);font-weight:600}

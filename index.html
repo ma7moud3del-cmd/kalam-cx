@@ -13,7 +13,7 @@
 <link rel="icon" href="img/kalam-mark.png">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=453adebf">
+<link rel="stylesheet" href="assets/app.css?v=4ce055fa">
 </head>
 <body>
 <a class="skip" href="#app" id="skip">Skip to main content</a>
@@ -23,9 +23,10 @@
  <nav id="nav" aria-label="Main"></nav>
 </div></header>
 <div id="lnav" class="lnav" hidden></div>
-<main id="app"><p class="loading">Loading Kalam Learning…</p><noscript><p class="loading">Kalam Learning needs JavaScript turned on.</p></noscript></main>
+<main id="app"><div class="skel" aria-busy="true"><div class="in"><span class="sr" role="status">Loading Kalam Learning…</span><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><div class="sg"><i></i><i></i></div></div></div><noscript><style>.skel{display:none}</style><p class="loading">Kalam Learning needs JavaScript turned on.</p></noscript></main>
 <footer><div class="in"><p id="foot" hidden></p><div class="fl"><img src="img/kalam-logo.png" alt="Kalam CX"><span>Kalam CX · Learning &amp; Development · 2026</span></div></div></footer>
 <div id="ytm" class="ytm" hidden><div class="ytbox" role="dialog" aria-modal="true" aria-labelledby="ytt"><div class="ytframe"></div><div class="ytbar"><div><small id="ytc"></small><b id="ytt"></b></div><div class="ytact"><a id="ytl" class="link" target="_blank" rel="noopener">Open on YouTube</a><button id="ytx" class="pill">Close</button></div></div></div></div>
-<script src="assets/app.js?v=453adebf" defer></script>
+<script type="module" src="assets/js/main.js?v=4ce055fa"></script>
+<script nomodule>document.getElementById("app").innerHTML='<p class="loading">Kalam Learning needs a newer browser. Please update Chrome, Edge, Safari or Firefox.</p>'</script>
 </body>
 </html>
