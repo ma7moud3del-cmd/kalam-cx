@@ -1,7 +1,7 @@
 /** Loading data/catalog.json and every course.json it lists into App (data/catalog.js). */
-import { App } from './catalog.js?v=8ddd3cd7';
-import { validateCourse } from './validate.js?v=8ddd3cd7';
-import { Store } from '../progress/store.js?v=8ddd3cd7';
+import { App } from './catalog.js?v=8e241242';
+import { validateCourse } from './validate.js?v=8e241242';
+import { Store } from '../progress/store.js?v=8e241242';
 
 const TIMEOUT = 20000;   /* ms before a data request counts as failed (slow mobile data) */
 

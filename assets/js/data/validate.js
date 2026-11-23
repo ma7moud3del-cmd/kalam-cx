@@ -3,7 +3,7 @@
  * It repairs what it safely can (drops a broken lesson or question, fills an empty list) and reports the rest.
  * The full check, with clear messages, runs before publishing: check_content.py in the builder repo.
  */
-import { providerOf } from './media.js?v=8ddd3cd7';
+import { providerOf } from './media.js?v=8e241242';
 
 /**
  * @param {object} c  course.json as loaded
