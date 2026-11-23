@@ -1,7 +1,7 @@
 {
- "_about": "Topics and trainings of Kalam CX Academy. Order here = order on the site. Fields are explained in CONTENT.md.",
+ "_about": "Topics and trainings of Kalam Learning. Order here = order on the site. Fields are explained in CONTENT.md.",
  "platform": {
-  "name": "Kalam CX Academy",
+  "name": "Kalam Learning",
   "tagline": "Practical skills for the people who run customer experience.",
   "intro": "Practical courses built from Kalam CX's own training: real tools and real call-center data, taught by the people who use them every day.",
   "audience": [
@@ -9,7 +9,16 @@
    "Team leaders and supervisors",
    "WFM, quality and reporting teams"
   ],
-  "mode": "Public prototype. All courses are free. No accounts: progress stays in this browser only."
+  "mode": "Public prototype. All courses are free. No accounts: progress stays in this browser only.",
+  "team": {
+   "eyebrow": "The Kalam family",
+   "title": "Learn together. Grow together.",
+   "text": "Every course here is made for everyone at Kalam, from the floor to the back office. Pick a skill, learn it at your own pace, and use it at work tomorrow.",
+   "photo": "img/team/kalam-team-1280.webp",
+   "photoSmall": "img/team/kalam-team-768.webp",
+   "photoLarge": "img/team/kalam-team-1920.webp",
+   "alt": "The Kalam CX family, around twenty colleagues, standing together and smiling."
+  }
  },
  "topics": [
   {
