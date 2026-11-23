@@ -2,6 +2,24 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>/* Moved home: the old github.io address forwards to Kalam Learning on Cloudflare, carrying this browser's saved progress.
+   On the new address the progress is read back from the link once (only keys this site doesn't have yet) and the link is cleaned. */
+(function () {
+  var NEW = 'https://kalam-learning.pages.dev/', KEYS = ['kalam.academy.v2', 'kalamAcademy', 'kalam.prefs', 'kalam.sidebar'];
+  try {
+    if (/\.github\.io$/.test(location.hostname)) {
+      var d = {}, n = 0;
+      KEYS.forEach(function (k) { try { var v = localStorage.getItem(k); if (v) { d[k] = v; n++; } } catch (e) {} });
+      var to = location.hash || '';
+      location.replace(NEW + (n ? '#carry=' + encodeURIComponent(JSON.stringify(d)) + '&to=' + encodeURIComponent(to) : to));
+      document.documentElement.style.display = 'none';
+    } else if (location.hash.indexOf('#carry=') === 0) {
+      var m = location.hash.match(/^#carry=([^&]*)(?:&to=(.*))?$/), data = JSON.parse(decodeURIComponent(m[1]));
+      KEYS.forEach(function (k) { try { if (typeof data[k] === 'string' && !localStorage.getItem(k)) localStorage.setItem(k, data[k]); } catch (e) {} });
+      history.replaceState(null, '', location.pathname + (m[2] ? decodeURIComponent(m[2]) : ''));
+    }
+  } catch (e) {}
+})();</script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Kalam Learning</title>
 <meta name="description" content="Kalam Learning: free, practical trainings for customer-experience teams, grouped by topic.">
