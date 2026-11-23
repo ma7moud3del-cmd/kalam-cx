@@ -1,10 +1,10 @@
 /** Home: headline, continue learning, the courses, and how a course works. */
-import { esc } from '../core/dom.js?v=e03e6c67';
-import { CHEV } from '../core/icons.js?v=e03e6c67';
-import { App, live, listed, planned, topicId, siteName } from '../data/catalog.js?v=e03e6c67';
-import { Store } from '../progress/store.js?v=e03e6c67';
-import { courseCard, resumeRow } from '../ui/cards.js?v=e03e6c67';
-import { failedNote } from './status.js?v=e03e6c67';
+import { esc } from '../core/dom.js?v=5be21f30';
+import { CHEV } from '../core/icons.js?v=5be21f30';
+import { App, live, listed, planned, topicId, siteName } from '../data/catalog.js?v=5be21f30';
+import { Store } from '../progress/store.js?v=5be21f30';
+import { courseCard, resumeRow } from '../ui/cards.js?v=5be21f30';
+import { failedNote } from './status.js?v=5be21f30';
 
 /** Courses the learner has started, most recent first. */
 export const startedCourses = () => live().filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id));

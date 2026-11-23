@@ -2,13 +2,13 @@
  * Lesson types → renderers. To add a lesson type: write a renderer ({render, wire?}) and add it here,
  * then teach check_content.py (builder repo) to check its fields.
  */
-import { esc } from '../core/dom.js?v=e03e6c67';
-import { videoLesson } from './video.js?v=e03e6c67';
-import { readingLesson } from './reading.js?v=e03e6c67';
-import { practiceLesson } from './practice.js?v=e03e6c67';
-import { quizLesson } from './quiz.js?v=e03e6c67';
-import { examLesson } from './exam.js?v=e03e6c67';
-import { actionBar } from './common.js?v=e03e6c67';
+import { esc } from '../core/dom.js?v=5be21f30';
+import { videoLesson } from './video.js?v=5be21f30';
+import { readingLesson } from './reading.js?v=5be21f30';
+import { practiceLesson } from './practice.js?v=5be21f30';
+import { quizLesson } from './quiz.js?v=5be21f30';
+import { examLesson } from './exam.js?v=5be21f30';
+import { actionBar } from './common.js?v=5be21f30';
 
 const LESSONS = {
   video: videoLesson,

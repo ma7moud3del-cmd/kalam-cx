@@ -10,14 +10,15 @@
  *
  * To add a host with its own lesson type, call registerProvider('stream', {...}) with the same shape as below.
  */
-import { App } from './catalog.js?v=e03e6c67';
-import { esc } from '../core/dom.js?v=e03e6c67';
+import { App } from './catalog.js?v=5be21f30';
+import { esc, safeUrl } from '../core/dom.js?v=5be21f30';
 
 const ABS = /^(https?:)?\/\//;
 const FALLBACK_THUMB = 'img/kalam-mark.png';
 
 /** Address of a media file (video, poster, reading image). Relative paths get mediaBase + the course folder. */
 export function mediaUrl(c, p) {
+  p = safeUrl(p);
   if (!p) return '';
   if (ABS.test(p)) return p;
   const base = c.mediaBase || (App.cat && App.cat.platform && App.cat.platform.mediaBase) || '';
@@ -30,7 +31,16 @@ export function mediaUrl(c, p) {
  * @property {(c:object, L:object, opts?:{autoplay?:boolean}) => string} src
  * @property {(c:object, L:object) => string} [thumb]   picture for cards
  * @property {(L:object) => ({href:string,label:string}|null)} [external]   "Open on …" link for the pop-up player
+ * @property {string} [sandbox]   iframe sandbox for this host, when it needs other permissions than SANDBOX
  */
+
+/**
+ * Sandbox for host players. The players are on another site, so scripts + same-origin only give them their OWN
+ * site's storage, never ours. Popups let "Watch on YouTube" open a normal tab. No forms, no top navigation, no downloads.
+ * A new host may also need its address in the site's Content-Security-Policy (frame-src): build_platform.py adds the
+ * hosts of every "embed" link it finds in course.json automatically.
+ */
+const SANDBOX = 'allow-scripts allow-same-origin allow-presentation allow-popups allow-popups-to-escape-sandbox';
 
 /** @type {Record<string, Provider>} */
 const PROVIDERS = {
@@ -41,7 +51,7 @@ const PROVIDERS = {
   },
   embed: {
     kind: 'frame',
-    src: (c, L) => L.embed || '',
+    src: (c, L) => /^https:\/\//i.test(L.embed || '') ? L.embed : '',   /* https only: anything else hides the lesson */
     thumb: (c, L) => L.poster ? mediaUrl(c, L.poster) : FALLBACK_THUMB
   },
   youtube: {
@@ -61,9 +71,9 @@ export const isFramed = L => providerOf(L)?.kind === 'frame';
 
 /** Iframe address for a framed lesson ('' for files). */
 export const frameSrc = (c, L, autoplay = false) => isFramed(L) ? providerOf(L).src(c, L, { autoplay }) : '';
-/** The iframe markup for a framed lesson. */
+/** The iframe markup for a framed lesson: sandboxed, and it sends only our site's address (YouTube needs that). */
 export const frameHtml = (c, L, autoplay = false) =>
-  `<iframe src="${esc(frameSrc(c, L, autoplay))}" title="${esc(L.title)} (video)" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" allowfullscreen></iframe>`;
+  `<iframe src="${esc(frameSrc(c, L, autoplay))}" title="${esc(L.title)} (video)" sandbox="${esc(providerOf(L).sandbox || SANDBOX)}" allow="autoplay; encrypted-media; picture-in-picture; fullscreen" referrerpolicy="strict-origin-when-cross-origin"></iframe>`;
 /** Address of the video file for a file lesson. */
 export const fileSrc = (c, L) => providerOf(L)?.kind === 'file' ? providerOf(L).src(c, L) : '';
 /** Card picture for a video lesson (already safe to put in an attribute after esc()). */

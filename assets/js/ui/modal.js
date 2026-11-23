@@ -2,11 +2,11 @@
  * The pop-up video player used by collections (Extra videos). Markup lives in index.html (#ytm).
  * Focus is kept inside while open and returns to the card that opened it.
  */
-import { $, $$, esc } from '../core/dom.js?v=e03e6c67';
-import { App } from '../data/catalog.js?v=e03e6c67';
-import { findLesson } from '../data/course.js?v=e03e6c67';
-import { isFramed, frameHtml, fileSrc, mediaUrl, externalLink } from '../data/media.js?v=e03e6c67';
-import { Store } from '../progress/store.js?v=e03e6c67';
+import { $, $$, esc } from '../core/dom.js?v=5be21f30';
+import { App } from '../data/catalog.js?v=5be21f30';
+import { findLesson } from '../data/course.js?v=5be21f30';
+import { isFramed, frameHtml, fileSrc, mediaUrl, externalLink } from '../data/media.js?v=5be21f30';
+import { Store } from '../progress/store.js?v=5be21f30';
 
 let opener = null;
 

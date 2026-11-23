@@ -1,9 +1,9 @@
 /** The main nav (Home · Courses · My learning) and the bar under it: breadcrumb left, course pages right. */
-import { $, esc } from '../core/dom.js?v=e03e6c67';
-import { topicOf, extrasOf } from '../data/catalog.js?v=e03e6c67';
-import { progress } from '../progress/progress.js?v=e03e6c67';
+import { $, esc } from '../core/dom.js?v=5be21f30';
+import { topicOf, extrasOf } from '../data/catalog.js?v=5be21f30';
+import { progress } from '../progress/progress.js?v=5be21f30';
 
-const link = ([t, h, on]) => `<a href="${h}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`;
+const link = ([t, h, on]) => `<a href="${esc(h)}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`;
 
 /**
  * @param {string} top   first part of the route ('' on home)
@@ -20,7 +20,7 @@ export function nav(top, c, cur, crumbs) {
   const trail = crumbs || [];
   const pages = c ? [['Overview', `#/${c.id}`, !cur], ['Learn', progress(c).resume, cur === 'learn'], ['Resources', `#/${c.id}/resources`, cur === 'resources'],
     ...(extrasOf(c).length ? [['Extra videos', `#/${c.id}/extras`, cur === 'extras']] : [])] : [];
-  ln.innerHTML = `<div class="in"><nav class="crumbs" aria-label="Breadcrumb"><ol>${trail.map(([t, h], i) => `<li>${h && i < trail.length - 1 ? `<a href="${h}">${esc(t)}</a>` : `<span aria-current="page">${esc(t)}</span>`}</li>`).join('')}</ol></nav>
+  ln.innerHTML = `<div class="in"><nav class="crumbs" aria-label="Breadcrumb"><ol>${trail.map(([t, h], i) => `<li>${h && i < trail.length - 1 ? `<a href="${esc(h)}">${esc(t)}</a>` : `<span aria-current="page">${esc(t)}</span>`}</li>`).join('')}</ol></nav>
   ${pages.length ? `<nav class="lpages" aria-label="Course: ${esc(c.title)}">${pages.map(link).join('')}</nav>` : ''}</div>`;
   ln.hidden = false;
 }

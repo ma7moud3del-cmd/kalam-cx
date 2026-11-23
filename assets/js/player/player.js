@@ -7,9 +7,9 @@
  *  - counts as done at 90% watched
  * Only for file videos (type "video"); host players in an iframe have their own controls.
  */
-import { $, esc } from '../core/dom.js?v=e03e6c67';
-import { clock } from '../core/format.js?v=e03e6c67';
-import { Store } from '../progress/store.js?v=e03e6c67';
+import { $, esc } from '../core/dom.js?v=5be21f30';
+import { clock } from '../core/format.js?v=5be21f30';
+import { Store } from '../progress/store.js?v=5be21f30';
 
 export const SPEEDS = [0.75, 1, 1.25, 1.5, 1.75, 2];
 const DONE_AT = 0.9;          /* share of the video that counts as watched */

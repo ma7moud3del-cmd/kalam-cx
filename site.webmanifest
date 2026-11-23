@@ -1,0 +1,17 @@
+{
+ "name": "Kalam Learning",
+ "short_name": "Kalam Learning",
+ "description": "Free, practical trainings for customer-experience teams.",
+ "id": "/",
+ "start_url": "/#/",
+ "scope": "/",
+ "display": "standalone",
+ "background_color": "#fbfbfd",
+ "theme_color": "#fbfbfd",
+ "icons": [
+  { "src": "img/icons/icon-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+  { "src": "img/icons/icon-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+  { "src": "img/icons/icon-192-maskable.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+  { "src": "img/icons/icon-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+ ]
+}

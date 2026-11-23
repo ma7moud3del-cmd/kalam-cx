@@ -1,8 +1,8 @@
-/** The final assessment: a workbook, the tasks (HTML from course.json) and a hidden answer key. Self-marked. */
-import { $, $$, esc } from '../core/dom.js?v=e03e6c67';
-import { CHEV } from '../core/icons.js?v=e03e6c67';
-import { url } from '../data/course.js?v=e03e6c67';
-import { actionBar } from './common.js?v=e03e6c67';
+/** The final assessment: a workbook, the tasks (HTML from course.json, cleaned by safeHtml) and a hidden answer key. Self-marked. */
+import { $, $$, esc, safeHtml } from '../core/dom.js?v=5be21f30';
+import { CHEV } from '../core/icons.js?v=5be21f30';
+import { url } from '../data/course.js?v=5be21f30';
+import { actionBar } from './common.js?v=5be21f30';
 
 export const examLesson = {
   render(ctx) {
@@ -10,8 +10,8 @@ export const examLesson = {
     const wb = R.find(r => r.type === 'xlsx'), pdf = R.find(r => r.type === 'pdf');
     return `<p class="sub">${esc(L.intro || 'Open the workbook, complete every task, then reveal the answer key.')}${L.minutes ? ` ${esc(L.minutes)} minutes.` : ''}</p>
       <div class="ctas left">${wb ? `<a class="pill" href="${esc(url(c, wb.href))}">Download the workbook</a>` : ''}${pdf ? `<a class="link" href="${esc(url(c, pdf.href))}" target="_blank" rel="noopener">Printable exam ${CHEV}</a>` : ''}</div>
-      <h2 class="headline small">The tasks</h2><div class="card exam">${L.html || ''}</div>
-      ${L.keyHtml ? `<div class="center"><button class="pill ghost" id="keybtn" aria-expanded="false" aria-controls="key">Show the answer key</button></div><div id="key" class="card key" hidden>${L.keyHtml}</div>` : ''}
+      <h2 class="headline small">The tasks</h2><div class="card exam">${safeHtml(L.html)}</div>
+      ${L.keyHtml ? `<div class="center"><button class="pill ghost" id="keybtn" aria-expanded="false" aria-controls="key">Show the answer key</button></div><div id="key" class="card key" hidden>${safeHtml(L.keyHtml)}</div>` : ''}
       ${actionBar(ctx, 'Self-marked. Your result isn\'t sent anywhere.')}`;
   },
   wire() {

@@ -16,6 +16,9 @@ export async function serveFromR2({ request, env, params }) {
   headers.set('etag', obj.httpEtag);
   headers.set('accept-ranges', 'bytes');
   headers.set('cache-control', 'public, max-age=604800');
+  /* _headers doesn't reach Functions, so the safety headers that matter for files are set here */
+  headers.set('x-content-type-options', 'nosniff');
+  headers.set('cross-origin-resource-policy', 'same-origin');   /* other sites can't embed our videos */
   if (request.method === 'HEAD') { headers.set('content-length', obj.size); return new Response(null, { status: 200, headers }); }
   if (!('body' in obj)) return new Response(null, { status: 304, headers });   /* browser copy is still current */
   if (request.headers.has('range') && obj.range && (obj.range.offset !== undefined || obj.range.suffix !== undefined)) {
