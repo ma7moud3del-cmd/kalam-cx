@@ -1,10 +1,10 @@
 /** Home: headline, continue learning, the courses, and how a course works. */
-import { esc } from '../core/dom.js?v=5d6558d6';
-import { CHEV } from '../core/icons.js?v=5d6558d6';
-import { App, live, listed, planned, topicId, siteName } from '../data/catalog.js?v=5d6558d6';
-import { Store } from '../progress/store.js?v=5d6558d6';
-import { courseCard, resumeRow } from '../ui/cards.js?v=5d6558d6';
-import { failedNote } from './status.js?v=5d6558d6';
+import { esc } from '../core/dom.js?v=9e4b0c06';
+import { CHEV } from '../core/icons.js?v=9e4b0c06';
+import { App, live, listed, planned, topicId, siteName } from '../data/catalog.js?v=9e4b0c06';
+import { Store } from '../progress/store.js?v=9e4b0c06';
+import { courseCard, resumeRow } from '../ui/cards.js?v=9e4b0c06';
+import { failedNote } from './status.js?v=9e4b0c06';
 
 /** Courses the learner has started, most recent first. */
 export const startedCourses = () => live().filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id));
@@ -12,7 +12,7 @@ export const startedCourses = () => live().filter(c => Store.started(c.id)).sort
 /** Optional team photo band, set by platform.team in the catalog (no block = no band). */
 function teamBand(T) {
   if (!T || !T.photo) return '';
-  const set = T.photoSmall ? ` srcset="${esc(T.photoSmall)} 768w, ${esc(T.photo)} 1280w" sizes="(max-width:833px) calc(100vw - 44px), 540px"` : '';
+  const set = T.photoSmall ? ` srcset="${esc(T.photoSmall)} 768w, ${esc(T.photo)} 1280w" sizes="(max-width:833px) calc(100vw - 44px), 940px"` : '';
   return `<div class="band tight teamb"><div class="in"><div class="team rv"><img src="${esc(T.photo)}"${set} width="1280" height="720" alt="${esc(T.alt || '')}" loading="lazy" decoding="async">
   <div class="tx">${T.eyebrow ? `<p class="eyebrow">${esc(T.eyebrow)}</p>` : ''}<h2 class="headline small2">${esc(T.title || 'Made for the Kalam family.')}</h2>${T.text ? `<p class="sub">${esc(T.text)}</p>` : ''}</div></div></div></div>`;
 }

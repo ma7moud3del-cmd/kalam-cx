@@ -2,8 +2,8 @@
  * Module tests: one-try-per-question multiple choice, marked instantly with the reason.
  * Answers are saved per question id + revision (see progress/store.js), so changing a question's "rev" clears old answers.
  */
-import { $, esc } from '../core/dom.js?v=5d6558d6';
-import { Store } from '../progress/store.js?v=5d6558d6';
+import { $, esc } from '../core/dom.js?v=9e4b0c06';
+import { Store } from '../progress/store.js?v=9e4b0c06';
 
 /** One question as a fieldset of option buttons; answered questions show the result and explanation. */
 export function questionCard(c, q, n, tot) {
