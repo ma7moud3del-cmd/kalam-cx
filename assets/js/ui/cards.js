@@ -1,11 +1,11 @@
 /** Reusable pieces of markup: course cards, category tiles, resume rows, progress bars, the search box. */
-import { esc } from '../core/dom.js?v=8e241242';
-import { PLAY } from '../core/icons.js?v=8e241242';
-import { plural, hrs, langShort, isFree, clock } from '../core/format.js?v=8e241242';
-import { topicOf, topicId, live, listed, peopleOf } from '../data/catalog.js?v=8e241242';
-import { url, vids, timeOf, modShort } from '../data/course.js?v=8e241242';
-import { thumbOf } from '../data/media.js?v=8e241242';
-import { progress } from '../progress/progress.js?v=8e241242';
+import { esc } from '../core/dom.js?v=e03e6c67';
+import { PLAY } from '../core/icons.js?v=e03e6c67';
+import { plural, hrs, langShort, isFree, clock } from '../core/format.js?v=e03e6c67';
+import { topicOf, topicId, live, listed, peopleOf } from '../data/catalog.js?v=e03e6c67';
+import { url, vids, timeOf, modShort } from '../data/course.js?v=e03e6c67';
+import { thumbOf } from '../data/media.js?v=e03e6c67';
+import { progress } from '../progress/progress.js?v=e03e6c67';
 
 /** A progress bar with an accessible label. */
 export const bar = p => `<span class="pbar" role="img" aria-label="${p}% complete"><i style="width:${p}%"></i></span>`;

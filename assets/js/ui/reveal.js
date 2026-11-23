@@ -1,5 +1,5 @@
 /** Fade-in of ".rv" elements as they scroll into view. Everything shows after 2.5 s even without IntersectionObserver. */
-import { $, $$ } from '../core/dom.js?v=8e241242';
+import { $, $$ } from '../core/dom.js?v=e03e6c67';
 
 const io = 'IntersectionObserver' in window
   ? new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) { e.target.classList.add('seen'); io.unobserve(e.target); } }), { rootMargin: '0px 0px -8% 0px' })

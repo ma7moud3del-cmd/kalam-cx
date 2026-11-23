@@ -2,14 +2,14 @@
  * The learning view: the lesson (drawn by its renderer in lessons/), previous/next, and the lessons sidebar on the right.
  * Moving between lessons of the same course redraws only the lesson and the sidebar (View.update), so the layout stays put.
  */
-import { $, esc, focusEl, storage } from '../core/dom.js?v=8e241242';
-import { CHECK, ICON } from '../core/icons.js?v=8e241242';
-import { secsOf, shortOf, examOf, word, filesOf, path, modName, modShort } from '../data/course.js?v=8e241242';
-import { Store } from '../progress/store.js?v=8e241242';
-import { progress, lessonDone } from '../progress/progress.js?v=8e241242';
-import { bar } from '../ui/cards.js?v=8e241242';
-import { trail } from '../ui/nav.js?v=8e241242';
-import { rendererFor } from '../lessons/index.js?v=8e241242';
+import { $, esc, focusEl, storage } from '../core/dom.js?v=e03e6c67';
+import { CHECK, ICON } from '../core/icons.js?v=e03e6c67';
+import { secsOf, shortOf, examOf, word, filesOf, path, modName, modShort } from '../data/course.js?v=e03e6c67';
+import { Store } from '../progress/store.js?v=e03e6c67';
+import { progress, lessonDone } from '../progress/progress.js?v=e03e6c67';
+import { bar } from '../ui/cards.js?v=e03e6c67';
+import { trail } from '../ui/nav.js?v=e03e6c67';
+import { rendererFor } from '../lessons/index.js?v=e03e6c67';
 
 const PHONE = 900;                    /* px: below this the sidebar is a drawer that starts closed */
 const SIDEBAR_KEY = 'kalam.sidebar';  /* 'open' | 'closed', remembered for desktop */

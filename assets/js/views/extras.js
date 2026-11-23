@@ -1,13 +1,13 @@
 /** Collections (curated videos, e.g. Expert Picks): a grid of video cards that open in the pop-up player. */
-import { $$, esc } from '../core/dom.js?v=8e241242';
-import { PLAY } from '../core/icons.js?v=8e241242';
-import { extrasOf } from '../data/catalog.js?v=8e241242';
-import { secsOf, vids, allLessons } from '../data/course.js?v=8e241242';
-import { thumbOf } from '../data/media.js?v=8e241242';
-import { Store } from '../progress/store.js?v=8e241242';
-import { trail } from '../ui/nav.js?v=8e241242';
-import { openVideo } from '../ui/modal.js?v=8e241242';
-import { notFound } from './status.js?v=8e241242';
+import { $$, esc } from '../core/dom.js?v=e03e6c67';
+import { PLAY } from '../core/icons.js?v=e03e6c67';
+import { extrasOf } from '../data/catalog.js?v=e03e6c67';
+import { secsOf, vids, allLessons } from '../data/course.js?v=e03e6c67';
+import { thumbOf } from '../data/media.js?v=e03e6c67';
+import { Store } from '../progress/store.js?v=e03e6c67';
+import { trail } from '../ui/nav.js?v=e03e6c67';
+import { openVideo } from '../ui/modal.js?v=e03e6c67';
+import { notFound } from './status.js?v=e03e6c67';
 
 function videoCard(c, L) {
   return `<button class="yt rv" data-c="${c.id}" data-l="${esc(L.id)}"><span class="ytimg"><img src="${esc(thumbOf(c, L))}" alt="" loading="lazy"><span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${+L.minutes} min</span>` : ''}${Store.isDone(c.id, L.id) ? '<span class="seen-mark">✓<span class="sr"> Watched</span></span>' : ''}</span>
