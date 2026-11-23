@@ -10,8 +10,8 @@
  *
  * To add a host with its own lesson type, call registerProvider('stream', {...}) with the same shape as below.
  */
-import { App } from './catalog.js?v=9e4b0c06';
-import { esc } from '../core/dom.js?v=9e4b0c06';
+import { App } from './catalog.js?v=60d4ad74';
+import { esc } from '../core/dom.js?v=60d4ad74';
 
 const ABS = /^(https?:)?\/\//;
 const FALLBACK_THUMB = 'img/kalam-mark.png';

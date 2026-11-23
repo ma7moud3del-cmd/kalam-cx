@@ -1,8 +1,8 @@
 /** Categories (topics) and one category's courses. Topics without courses are shown as planned. */
-import { esc } from '../core/dom.js?v=9e4b0c06';
-import { App, listed, topicId } from '../data/catalog.js?v=9e4b0c06';
-import { courseCard, categoryTile } from '../ui/cards.js?v=9e4b0c06';
-import { notFound } from './status.js?v=9e4b0c06';
+import { esc } from '../core/dom.js?v=60d4ad74';
+import { App, listed, topicId } from '../data/catalog.js?v=60d4ad74';
+import { courseCard, categoryTile } from '../ui/cards.js?v=60d4ad74';
+import { notFound } from './status.js?v=60d4ad74';
 
 /** @returns {import('../router.js').View} */
 export function categories() {

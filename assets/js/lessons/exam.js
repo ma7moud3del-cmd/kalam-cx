@@ -1,8 +1,8 @@
 /** The final assessment: a workbook, the tasks (HTML from course.json) and a hidden answer key. Self-marked. */
-import { $, $$, esc } from '../core/dom.js?v=9e4b0c06';
-import { CHEV } from '../core/icons.js?v=9e4b0c06';
-import { url } from '../data/course.js?v=9e4b0c06';
-import { actionBar } from './common.js?v=9e4b0c06';
+import { $, $$, esc } from '../core/dom.js?v=60d4ad74';
+import { CHEV } from '../core/icons.js?v=60d4ad74';
+import { url } from '../data/course.js?v=60d4ad74';
+import { actionBar } from './common.js?v=60d4ad74';
 
 export const examLesson = {
   render(ctx) {

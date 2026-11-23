@@ -1,7 +1,7 @@
 /** Practice lessons: instructions plus the module's workbook and slides. */
-import { esc } from '../core/dom.js?v=9e4b0c06';
-import { CHEV } from '../core/icons.js?v=9e4b0c06';
-import { actionBar } from './common.js?v=9e4b0c06';
+import { esc } from '../core/dom.js?v=60d4ad74';
+import { CHEV } from '../core/icons.js?v=60d4ad74';
+import { actionBar } from './common.js?v=60d4ad74';
 
 export const practiceLesson = {
   render(ctx) {

@@ -418,7 +418,7 @@ kbd{font:600 12px/1 var(--sf);background:var(--white);border:1px solid var(--lin
 .hnext{margin:14px 0 0;font-size:15px;color:#a1a1a6}
 .rrow.fin .rnext{color:var(--ok);font-weight:600}
 /* team photo band (home) */
-.team{position:relative;border-radius:28px;overflow:hidden;background:var(--plum-d);box-shadow:0 30px 70px -30px rgba(43,14,44,.55)}
+.team{position:relative;border-radius:28px;overflow:hidden;background:radial-gradient(120% 90% at 50% 20%,#ffffff 0%,#f1ebf5 55%,#e4d8ec 100%);box-shadow:0 30px 70px -30px rgba(43,14,44,.55)}
 .team img{width:100%;height:auto;aspect-ratio:16/9;object-fit:cover;display:block}
 .team .tx{position:absolute;left:0;right:0;bottom:0;padding:120px 44px 36px;background:linear-gradient(180deg,rgba(43,14,44,0) 0%,rgba(43,14,44,.72) 45%,rgba(43,14,44,.92) 100%);color:#fff}
 .team .eyebrow{color:#E6B84A;margin-bottom:6px}
