@@ -13,7 +13,7 @@
  * Older data under "kalamAcademy" (the first one-course Excel site) is merged in by mergeLegacy().
  * If the saved data can't be read it is copied to "kalam.academy.v2.unreadable" before starting fresh, never just dropped.
  */
-import { storage } from '../core/dom.js?v=8ddd3cd7';
+import { storage } from '../core/dom.js?v=8e241242';
 
 const KEY = 'kalam.academy.v2';
 const PREFS = 'kalam.prefs';   /* { rate: 1.25 } player preferences */

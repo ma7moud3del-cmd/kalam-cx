@@ -425,4 +425,11 @@ kbd{font:600 12px/1 var(--sf);background:var(--white);border:1px solid var(--lin
 .team .headline{color:#fff;margin:0 0 8px}
 .team .sub{color:rgba(255,255,255,.82);margin:0;max-width:46ch;font-size:clamp(17px,1.8vw,20px)}
 .band.teamb{padding-bottom:56px}
+/* gentle motion: the people drift in and slowly breathe; off for reduced motion */
+.team img{transform-origin:50% 60%;animation:teamin 1.4s cubic-bezier(.2,.7,.2,1) both,teamdrift 16s ease-in-out 1.4s infinite alternate;will-change:transform}
+.team .tx>*{animation:teamtx .9s cubic-bezier(.2,.7,.2,1) both}.team .tx>*:nth-child(2){animation-delay:.12s}.team .tx>*:nth-child(3){animation-delay:.24s}
+@keyframes teamin{from{opacity:0;transform:scale(1.08) translateY(18px)}to{opacity:1;transform:none}}
+@keyframes teamdrift{from{transform:none}to{transform:scale(1.045) translateY(-6px)}}
+@keyframes teamtx{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+@media (prefers-reduced-motion:reduce){.team img,.team .tx>*{animation:none}}
 @media (max-width:833px){.team{border-radius:22px}.team .tx{position:static;padding:22px 22px 26px;background:var(--plum-d)}}
