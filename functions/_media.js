@@ -18,7 +18,7 @@ export async function serveFromR2({ request, env, params }) {
   headers.set('cache-control', 'public, max-age=604800');
   if (request.method === 'HEAD') { headers.set('content-length', obj.size); return new Response(null, { status: 200, headers }); }
   if (!('body' in obj)) return new Response(null, { status: 304, headers });   /* browser copy is still current */
-  if (obj.range && (obj.range.offset !== undefined || obj.range.suffix !== undefined)) {
+  if (request.headers.has('range') && obj.range && (obj.range.offset !== undefined || obj.range.suffix !== undefined)) {
     const off = obj.range.suffix !== undefined ? obj.size - obj.range.suffix : obj.range.offset;
     const len = obj.range.length ?? (obj.size - off);
     headers.set('content-range', `bytes ${off}-${off + len - 1}/${obj.size}`);
