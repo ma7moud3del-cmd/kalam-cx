@@ -1,10 +1,10 @@
 /** My learning: every started course with its progress. Saved in this browser only. */
-import { esc } from '../core/dom.js?v=4ce055fa';
-import { App } from '../data/catalog.js?v=4ce055fa';
-import { Store } from '../progress/store.js?v=4ce055fa';
-import { resumeRow } from '../ui/cards.js?v=4ce055fa';
-import { progress } from '../progress/progress.js?v=4ce055fa';
-import { startedCourses } from './home.js?v=4ce055fa';
+import { esc } from '../core/dom.js?v=8ddd3cd7';
+import { App } from '../data/catalog.js?v=8ddd3cd7';
+import { Store } from '../progress/store.js?v=8ddd3cd7';
+import { resumeRow } from '../ui/cards.js?v=8ddd3cd7';
+import { progress } from '../progress/progress.js?v=8ddd3cd7';
+import { startedCourses } from './home.js?v=8ddd3cd7';
 
 /** @returns {import('../router.js').View} */
 export function myLearning() {
