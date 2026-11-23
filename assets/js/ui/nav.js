@@ -1,7 +1,7 @@
 /** The main nav (Home · Courses · My learning) and the bar under it: breadcrumb left, course pages right. */
-import { $, esc } from '../core/dom.js?v=60d4ad74';
-import { topicOf, extrasOf } from '../data/catalog.js?v=60d4ad74';
-import { progress } from '../progress/progress.js?v=60d4ad74';
+import { $, esc } from '../core/dom.js?v=8ddd3cd7';
+import { topicOf, extrasOf } from '../data/catalog.js?v=8ddd3cd7';
+import { progress } from '../progress/progress.js?v=8ddd3cd7';
 
 const link = ([t, h, on]) => `<a href="${h}"${on ? ' aria-current="page" class="on"' : ''}>${esc(t)}</a>`;
 

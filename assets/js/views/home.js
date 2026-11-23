@@ -1,10 +1,10 @@
 /** Home: headline, continue learning, the courses, and how a course works. */
-import { esc } from '../core/dom.js?v=60d4ad74';
-import { CHEV } from '../core/icons.js?v=60d4ad74';
-import { App, live, listed, planned, topicId, siteName } from '../data/catalog.js?v=60d4ad74';
-import { Store } from '../progress/store.js?v=60d4ad74';
-import { courseCard, resumeRow } from '../ui/cards.js?v=60d4ad74';
-import { failedNote } from './status.js?v=60d4ad74';
+import { esc } from '../core/dom.js?v=8ddd3cd7';
+import { CHEV } from '../core/icons.js?v=8ddd3cd7';
+import { App, live, listed, planned, topicId, siteName } from '../data/catalog.js?v=8ddd3cd7';
+import { Store } from '../progress/store.js?v=8ddd3cd7';
+import { courseCard, resumeRow } from '../ui/cards.js?v=8ddd3cd7';
+import { failedNote } from './status.js?v=8ddd3cd7';
 
 /** Courses the learner has started, most recent first. */
 export const startedCourses = () => live().filter(c => Store.started(c.id)).sort((a, b) => Store.at(b.id) - Store.at(a.id));
@@ -14,7 +14,7 @@ function teamBand(T) {
   if (!T || !T.photo) return '';
   const set = T.photoSmall ? ` srcset="${esc(T.photoSmall)} 768w, ${esc(T.photo)} 1280w" sizes="(max-width:833px) calc(100vw - 44px), 940px"` : '';
   return `<div class="band tight teamb"><div class="in"><div class="team rv"><img src="${esc(T.photo)}"${set} width="1280" height="720" alt="${esc(T.alt || '')}" loading="lazy" decoding="async">
-  <div class="tx">${T.eyebrow ? `<p class="eyebrow">${esc(T.eyebrow)}</p>` : ''}<h2 class="headline small2">${esc(T.title || 'Made for the Kalam family.')}</h2>${T.text ? `<p class="sub">${esc(T.text)}</p>` : ''}</div></div></div></div>`;
+  <div class="tx">${T.eyebrow ? `<p class="eyebrow">${esc(T.eyebrow)}</p>` : ''}<h2 class="headline small2">${esc(T.title || 'Learn together. Grow together.')}</h2>${T.text ? `<p class="sub">${esc(T.text)}</p>` : ''}</div></div></div></div>`;
 }
 
 /** @returns {import('../router.js').View} */
