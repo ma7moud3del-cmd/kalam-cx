@@ -3,9 +3,10 @@
  * A section is either a normal module, the "short course" (part: "short") or the final assessment.
  * Nothing here touches the DOM or progress.
  */
+import { safeUrl } from '../core/dom.js?v=5be21f30';
 
 /** Resolve a course-relative file path (docs, files, images). Absolute URLs are kept. */
-export const url = (c, p) => !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.base || '') + p;
+export const url = (c, p) => { p = safeUrl(p); return !p ? '' : /^(https?:)?\/\//.test(p) ? p : (c.base || '') + p; };
 
 /** Lesson types that play a video (a file, a YouTube id or any embeddable player). */
 export const VIDEO_TYPES = ['video', 'youtube', 'embed'];

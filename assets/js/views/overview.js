@@ -2,16 +2,16 @@
  * Course overview, in parts: the short course (if any) · the modules · extra videos (if any) · files · about.
  * Each part is its own function so a part can be changed or reordered without reading the others.
  */
-import { $, $$, esc, focusEl } from '../core/dom.js?v=e03e6c67';
-import { CHEV, CHECK, PLAY, ICON } from '../core/icons.js?v=e03e6c67';
-import { plural, hours, langShort, isFree } from '../core/format.js?v=e03e6c67';
-import { topicOf, peopleOf, extrasOf } from '../data/catalog.js?v=e03e6c67';
-import { isVid, vids, mins, quizOf, secsOf, shortOf, examOf, word, timeOf, filesOf, path } from '../data/course.js?v=e03e6c67';
-import { mediaUrl, thumbOf } from '../data/media.js?v=e03e6c67';
-import { Store } from '../progress/store.js?v=e03e6c67';
-import { progress, lessonDone, passed } from '../progress/progress.js?v=e03e6c67';
-import { bar, nextLine } from '../ui/cards.js?v=e03e6c67';
-import { trail } from '../ui/nav.js?v=e03e6c67';
+import { $, $$, esc, focusEl } from '../core/dom.js?v=5be21f30';
+import { CHEV, CHECK, PLAY, ICON } from '../core/icons.js?v=5be21f30';
+import { plural, hours, langShort, isFree } from '../core/format.js?v=5be21f30';
+import { topicOf, peopleOf, extrasOf } from '../data/catalog.js?v=5be21f30';
+import { isVid, vids, mins, quizOf, secsOf, shortOf, examOf, word, timeOf, filesOf, path } from '../data/course.js?v=5be21f30';
+import { mediaUrl, thumbOf } from '../data/media.js?v=5be21f30';
+import { Store } from '../progress/store.js?v=5be21f30';
+import { progress, lessonDone, passed } from '../progress/progress.js?v=5be21f30';
+import { bar, nextLine } from '../ui/cards.js?v=5be21f30';
+import { trail } from '../ui/nav.js?v=5be21f30';
 
 /* ----- cards ----- */
 

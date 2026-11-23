@@ -1,8 +1,8 @@
 /** Reading lessons: an optional picture and text blocks (heading, paragraph, copyable code). Opening counts as done. */
-import { $, $$, esc } from '../core/dom.js?v=e03e6c67';
-import { mediaUrl } from '../data/media.js?v=e03e6c67';
-import { Store } from '../progress/store.js?v=e03e6c67';
-import { actionBar, moduleFiles, showCompleted } from './common.js?v=e03e6c67';
+import { $, $$, esc } from '../core/dom.js?v=5be21f30';
+import { mediaUrl } from '../data/media.js?v=5be21f30';
+import { Store } from '../progress/store.js?v=5be21f30';
+import { actionBar, moduleFiles, showCompleted } from './common.js?v=5be21f30';
 
 /** Copy text to the clipboard; falls back to selecting it for older browsers. */
 async function copyText(src) {

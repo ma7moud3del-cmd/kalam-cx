@@ -2,36 +2,56 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
-<script>/* Moved home: the old github.io address forwards to Kalam Learning on Cloudflare, carrying this browser's saved progress.
-   On the new address the progress is read back from the link once (only keys this site doesn't have yet) and the link is cleaned. */
-(function () {
-  var NEW = 'https://kalam-learning.pages.dev/', KEYS = ['kalam.academy.v2', 'kalamAcademy', 'kalam.prefs', 'kalam.sidebar'];
-  try {
-    if (/\.github\.io$/.test(location.hostname)) {
-      var d = {}, n = 0;
-      KEYS.forEach(function (k) { try { var v = localStorage.getItem(k); if (v) { d[k] = v; n++; } } catch (e) {} });
-      var to = location.hash || '';
-      location.replace(NEW + (n ? '#carry=' + encodeURIComponent(JSON.stringify(d)) + '&to=' + encodeURIComponent(to) : to));
-      document.documentElement.style.display = 'none';
-    } else if (location.hash.indexOf('#carry=') === 0) {
-      var m = location.hash.match(/^#carry=([^&]*)(?:&to=(.*))?$/), data = JSON.parse(decodeURIComponent(m[1]));
-      KEYS.forEach(function (k) { try { if (typeof data[k] === 'string' && !localStorage.getItem(k)) localStorage.setItem(k, data[k]); } catch (e) {} });
-      history.replaceState(null, '', location.pathname + (m[2] ? decodeURIComponent(m[2]) : ''));
-    }
-  } catch (e) {}
-})();</script>
+<meta name="referrer" content="strict-origin-when-cross-origin">
+<script src="assets/carry.js?v=5be21f30"></script>
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <title>Kalam Learning</title>
 <meta name="description" content="Kalam Learning: free, practical trainings for customer-experience teams, grouped by topic.">
 <meta property="og:title" content="Kalam Learning">
 <meta property="og:description" content="Free, practical trainings for customer-experience teams.">
-<meta property="og:image" content="courses/excel/img/posters/s1-hero.jpg">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://kalam-learning.pages.dev/">
+<meta property="og:image" content="https://kalam-learning.pages.dev/courses/excel/img/posters/s1-hero.jpg">
+<meta property="og:image:alt" content="Kalam Learning: the Excel course">
+<meta name="twitter:card" content="summary_large_image">
 <meta name="robots" content="noindex">
 <meta name="theme-color" content="#fbfbfd">
 <link rel="icon" href="img/kalam-mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="assets/app.css?v=e03e6c67">
+<link rel="apple-touch-icon" href="img/icons/icon-192.png">
+<link rel="manifest" href="site.webmanifest">
+<link rel="stylesheet" href="assets/app.css?v=5be21f30">
+<link rel="modulepreload" href="assets/js/core/dom.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/core/format.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/core/icons.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/data/catalog.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/data/course.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/data/load.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/data/media.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/data/validate.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/common.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/exam.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/index.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/practice.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/quiz.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/reading.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/lessons/video.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/player/player.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/progress/progress.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/progress/store.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/router.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/ui/cards.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/ui/modal.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/ui/nav.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/ui/reveal.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/categories.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/explore.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/extras.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/home.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/learn.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/my.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/overview.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/resources.js?v=5be21f30">
+<link rel="modulepreload" href="assets/js/views/status.js?v=5be21f30">
 </head>
 <body>
 <a class="skip" href="#app" id="skip">Skip to main content</a>
@@ -44,7 +64,7 @@
 <main id="app"><div class="skel" aria-busy="true"><div class="in"><span class="sr" role="status">Loading Kalam Learning…</span><i class="s1"></i><i class="s2"></i><i class="s3"></i><i class="s4"></i><div class="sg"><i></i><i></i></div></div></div><noscript><style>.skel{display:none}</style><p class="loading">Kalam Learning needs JavaScript turned on.</p></noscript></main>
 <footer><div class="in"><p id="foot" hidden></p><div class="fl"><img src="img/kalam-logo.png" alt="Kalam CX"><span>Kalam CX · Learning &amp; Development · 2026</span></div></div></footer>
 <div id="ytm" class="ytm" hidden><div class="ytbox" role="dialog" aria-modal="true" aria-labelledby="ytt"><div class="ytframe"></div><div class="ytbar"><div><small id="ytc"></small><b id="ytt"></b></div><div class="ytact"><a id="ytl" class="link" target="_blank" rel="noopener">Open on YouTube</a><button id="ytx" class="pill">Close</button></div></div></div></div>
-<script type="module" src="assets/js/main.js?v=e03e6c67"></script>
-<script nomodule>document.getElementById("app").innerHTML='<p class="loading">Kalam Learning needs a newer browser. Please update Chrome, Edge, Safari or Firefox.</p>'</script>
+<script type="module" src="assets/js/main.js?v=5be21f30"></script>
+<script nomodule src="assets/nomodule.js?v=5be21f30"></script>
 </body>
 </html>

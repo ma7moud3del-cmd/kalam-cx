@@ -1,6 +1,6 @@
 /** Progress worked out from saved data + course structure: what's done, how far along, where to resume. */
-import { Store } from './store.js?v=e03e6c67';
-import { path, isVid } from '../data/course.js?v=e03e6c67';
+import { Store } from './store.js?v=5be21f30';
+import { path, isVid } from '../data/course.js?v=5be21f30';
 
 /** A test is passed when at least "pass" questions are answered correctly. */
 export function passed(c, q) {

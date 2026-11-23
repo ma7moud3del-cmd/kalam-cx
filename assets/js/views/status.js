@@ -1,6 +1,6 @@
 /** Simple pages: not found, a planned course, and the "couldn't load" messages. */
-import { esc } from '../core/dom.js?v=e03e6c67';
-import { topicOf } from '../data/catalog.js?v=e03e6c67';
+import { esc } from '../core/dom.js?v=5be21f30';
+import { topicOf } from '../data/catalog.js?v=5be21f30';
 
 /** @returns {import('../router.js').View} */
 export const notFound = () => ({
