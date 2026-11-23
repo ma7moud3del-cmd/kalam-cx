@@ -11,10 +11,10 @@
  * @property {string} W       what the course calls a module ("Module")
  * @property {() => void} refresh  redraw the lessons sidebar (after progress changes)
  */
-import { $, esc } from '../core/dom.js?v=8e241242';
-import { CHEV } from '../core/icons.js?v=8e241242';
-import { quizOf } from '../data/course.js?v=8e241242';
-import { Store } from '../progress/store.js?v=8e241242';
+import { $, esc } from '../core/dom.js?v=e03e6c67';
+import { CHEV } from '../core/icons.js?v=e03e6c67';
+import { quizOf } from '../data/course.js?v=e03e6c67';
+import { Store } from '../progress/store.js?v=e03e6c67';
 
 /** "Next lesson ›" button, when there is a next step. */
 export const nextButton = ctx => ctx.next ? `<a class="pill small" href="#/${ctx.c.id}/learn/${esc(ctx.next.L.id)}">Next lesson ›</a>` : '';

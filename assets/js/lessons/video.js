@@ -1,9 +1,9 @@
 /** Video lessons (type video, embed, youtube). Which player is used is decided by data/media.js. */
-import { $, esc } from '../core/dom.js?v=8e241242';
-import { isFramed, frameHtml, fileSrc, mediaUrl } from '../data/media.js?v=8e241242';
-import { Store } from '../progress/store.js?v=8e241242';
-import { attachPlayer, playerControls } from '../player/player.js?v=8e241242';
-import { actionBar, moduleFiles, complete, showCompleted } from './common.js?v=8e241242';
+import { $, esc } from '../core/dom.js?v=e03e6c67';
+import { isFramed, frameHtml, fileSrc, mediaUrl } from '../data/media.js?v=e03e6c67';
+import { Store } from '../progress/store.js?v=e03e6c67';
+import { attachPlayer, playerControls } from '../player/player.js?v=e03e6c67';
+import { actionBar, moduleFiles, complete, showCompleted } from './common.js?v=e03e6c67';
 
 /** @type {{render:(ctx:import('./common.js').LessonCtx)=>string, wire:(ctx:import('./common.js').LessonCtx)=>void}} */
 export const videoLesson = {
