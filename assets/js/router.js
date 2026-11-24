@@ -12,20 +12,20 @@
  *   #/<course>   #/<course>/learn[/<lesson>]   #/<course>/resources   #/<course>/extras
  * Course ids can't be one of RESERVED (check_content.py in the builder repo enforces this).
  */
-import { $, focusEl } from './core/dom.js?v=5be21f30';
-import { App, siteName } from './data/catalog.js?v=5be21f30';
-import { secsOf, quizOf, path, findLesson } from './data/course.js?v=5be21f30';
-import { nav } from './ui/nav.js?v=5be21f30';
-import { reveal } from './ui/reveal.js?v=5be21f30';
-import { home } from './views/home.js?v=5be21f30';
-import { explore } from './views/explore.js?v=5be21f30';
-import { categories, category } from './views/categories.js?v=5be21f30';
-import { myLearning } from './views/my.js?v=5be21f30';
-import { overview } from './views/overview.js?v=5be21f30';
-import { learn } from './views/learn.js?v=5be21f30';
-import { resources } from './views/resources.js?v=5be21f30';
-import { extras, collection } from './views/extras.js?v=5be21f30';
-import { notFound, soonPage, courseFailed, pageError } from './views/status.js?v=5be21f30';
+import { $, focusEl } from './core/dom.js?v=175c4d96';
+import { App, siteName } from './data/catalog.js?v=175c4d96';
+import { secsOf, quizOf, path, findLesson } from './data/course.js?v=175c4d96';
+import { nav } from './ui/nav.js?v=175c4d96';
+import { reveal } from './ui/reveal.js?v=175c4d96';
+import { home } from './views/home.js?v=175c4d96';
+import { explore } from './views/explore.js?v=175c4d96';
+import { categories, category } from './views/categories.js?v=175c4d96';
+import { myLearning } from './views/my.js?v=175c4d96';
+import { overview } from './views/overview.js?v=175c4d96';
+import { learn } from './views/learn.js?v=175c4d96';
+import { resources } from './views/resources.js?v=175c4d96';
+import { extras, collection } from './views/extras.js?v=175c4d96';
+import { notFound, soonPage, courseFailed, pageError } from './views/status.js?v=175c4d96';
 
 export const RESERVED = ['explore', 'categories', 'my', 'trainings', 'topics'];
 

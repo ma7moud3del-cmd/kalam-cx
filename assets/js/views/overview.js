@@ -2,16 +2,16 @@
  * Course overview, in parts: the short course (if any) · the modules · extra videos (if any) · files · about.
  * Each part is its own function so a part can be changed or reordered without reading the others.
  */
-import { $, $$, esc, focusEl } from '../core/dom.js?v=5be21f30';
-import { CHEV, CHECK, PLAY, ICON } from '../core/icons.js?v=5be21f30';
-import { plural, hours, langShort, isFree } from '../core/format.js?v=5be21f30';
-import { topicOf, peopleOf, extrasOf } from '../data/catalog.js?v=5be21f30';
-import { isVid, vids, mins, quizOf, secsOf, shortOf, examOf, word, timeOf, filesOf, path } from '../data/course.js?v=5be21f30';
-import { mediaUrl, thumbOf } from '../data/media.js?v=5be21f30';
-import { Store } from '../progress/store.js?v=5be21f30';
-import { progress, lessonDone, passed } from '../progress/progress.js?v=5be21f30';
-import { bar, nextLine } from '../ui/cards.js?v=5be21f30';
-import { trail } from '../ui/nav.js?v=5be21f30';
+import { $, $$, esc, focusEl } from '../core/dom.js?v=175c4d96';
+import { CHEV, CHECK, PLAY, ICON } from '../core/icons.js?v=175c4d96';
+import { plural, hours, langShort, isFree } from '../core/format.js?v=175c4d96';
+import { topicOf, peopleOf, extrasOf } from '../data/catalog.js?v=175c4d96';
+import { isVid, vids, mins, quizOf, secsOf, shortOf, examOf, word, timeOf, filesOf, path } from '../data/course.js?v=175c4d96';
+import { mediaUrl, thumbOf } from '../data/media.js?v=175c4d96';
+import { Store } from '../progress/store.js?v=175c4d96';
+import { progress, lessonDone, passed } from '../progress/progress.js?v=175c4d96';
+import { bar, nextLine } from '../ui/cards.js?v=175c4d96';
+import { trail } from '../ui/nav.js?v=175c4d96';
 
 /* ----- cards ----- */
 
@@ -128,20 +128,50 @@ function aboutPart(c, T, gray) {
   </div></div>`;
 }
 
+/* ----- series layout (course.json "presentation": "series"): a bright, chapter-by-chapter view of a drama series ----- */
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+
+function seriesHero(c, T, p, secs) {
+  const vs = secs.flatMap(vids), first = vs.find(L => L.poster);
+  const startLabel = p.complete ? 'Watch again' : p.done || p.pos ? 'Continue the series' : 'Begin Chapter I';
+  return `<div class="band shero">${first ? `<div class="sbg" style="background-image:url('${esc(mediaUrl(c, first.poster))}')" aria-hidden="true"></div>` : ''}<div class="in">
+   <p class="eyebrow">A Kalam CX series</p><h1 class="display">${esc(c.title)}</h1>
+   ${c.headline ? `<p class="stag">${esc(c.headline.join(' '))}</p>` : ''}
+   <p class="sub wide">${esc(c.intro || c.subtitle)}</p>
+   <ul class="sfacts" aria-label="Series facts"><li>${plural(vs.length, 'episode')}</li><li>${hours(T.video)}</li><li>${plural(secs.length, 'chapter')}</li><li>${esc(c.levelRange || c.level || '')}</li></ul>
+   <div class="hcta"><a class="pill big" href="${p.resume}">${esc(startLabel)}</a>${p.started ? `<span class="hprog">${bar(p.pct)}<span>${p.done} of ${p.total} steps</span></span>` : ''}</div></div></div>`;
+}
+
+function episodeCard(c, L) {
+  const d = lessonDone(c, L);
+  return `<a class="ecard2 rv${d ? ' done' : ''}" href="#/${c.id}/learn/${esc(L.id)}"><span class="qimg">${L.poster ? `<img src="${esc(mediaUrl(c, L.poster))}" alt="" loading="lazy">` : ''}<span class="play">${PLAY}</span>${L.minutes ? `<span class="dur">${+L.minutes} min</span>` : ''}${d ? '<i class="seen"></i>' : ''}</span>
+   <small>${esc(L.kind || '')}${d ? ' · ✓ Watched' : ''}</small><b>${esc(L.title)}</b>${L.summary ? `<span>${esc(L.summary)}</span>` : ''}</a>`;
+}
+
+function seriesPart(c, secs) {
+  return `<div class="band slim" id="curriculum"><div class="in">${secs.map((s, i) => {
+    const turns = s.lessons.filter(L => !isVid(L));
+    return `<section class="chapter" aria-labelledby="ch${i}"><div class="chead"><span class="cnum" aria-hidden="true">${ROMAN[i] || i + 1}</span>
+     <div><p class="eyebrow">Chapter ${ROMAN[i] || i + 1}</p><h2 class="headline small2" id="ch${i}">${esc(s.title)}</h2>${s.summary ? `<p class="tblurb">${esc(s.summary)}</p>` : ''}</div></div>
+     <div class="erow">${vids(s).map(L => episodeCard(c, L)).join('')}</div>
+     ${turns.length ? `<div class="turns">${turns.map(L => `<a class="turn${lessonDone(c, L) ? ' done' : ''}" href="#/${c.id}/learn/${esc(L.id)}"><span>${L.type === 'quiz' ? 'Check' : 'Your turn'}</span>${esc(L.type === 'quiz' ? `${L.questions.length} questions` : L.title.replace(/^Your turn · /, ''))}${lessonDone(c, L) ? ' · ✓' : ''}</a>`).join('')}</div>` : ''}</section>`;
+  }).join('')}</div></div>`;
+}
+
 /** @returns {import('../router.js').View} */
 export function overview(c) {
   const T = timeOf(c), p = progress(c), secs = secsOf(c), P = path(c), X = extrasOf(c)[0], SH = shortOf(c);
   const partName = (c.labels && c.labels.part) || 'The course', pn = n => `Part ${n + (SH ? 1 : 0)}`;
   /* bands alternate white / gray; with a short course first, everything shifts by one */
-  const g = !!SH;
-  const jumps = [...(SH ? [['short', SH.title]] : []), ['curriculum', partName], ...(X ? [['extras', 'Extra videos']] : []), ['files', 'Files'], ['about', 'About']];
+  const g = !!SH, series = c.presentation === 'series';
+  const jumps = [...(SH ? [['short', SH.title]] : []), ['curriculum', c.presentation === 'series' ? 'Episodes' : partName], ...(X ? [['extras', 'Extra videos']] : []), ['files', 'Files'], ['about', 'About']];
   return {
     title: c.title, crumbs: trail(c),
     html: `<section class="ov">
-  ${hero(c, T, p, secs)}
+  ${series ? seriesHero(c, T, p, secs) : hero(c, T, p, secs)}
   <nav class="ovtabs" aria-label="On this page"><div class="in">${jumps.map(([id, tx]) => `<a href="#/${c.id}" data-jump="${id}">${esc(tx)}</a>`).join('')}</div></nav>
   ${SH ? shortPart(c, SH) : ''}
-  ${curriculumPart(c, T, p, secs, P, pn(1), partName, g)}
+  ${series ? seriesPart(c, secs) : curriculumPart(c, T, p, secs, P, pn(1), partName, g)}
   ${X ? extrasPart(c, X, pn(2), !g) : ''}
   ${filesPart(c, secs, g)}
   ${aboutPart(c, T, !g)}

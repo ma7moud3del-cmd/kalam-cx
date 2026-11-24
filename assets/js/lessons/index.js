@@ -2,13 +2,14 @@
  * Lesson types → renderers. To add a lesson type: write a renderer ({render, wire?}) and add it here,
  * then teach check_content.py (builder repo) to check its fields.
  */
-import { esc } from '../core/dom.js?v=5be21f30';
-import { videoLesson } from './video.js?v=5be21f30';
-import { readingLesson } from './reading.js?v=5be21f30';
-import { practiceLesson } from './practice.js?v=5be21f30';
-import { quizLesson } from './quiz.js?v=5be21f30';
-import { examLesson } from './exam.js?v=5be21f30';
-import { actionBar } from './common.js?v=5be21f30';
+import { esc } from '../core/dom.js?v=175c4d96';
+import { videoLesson } from './video.js?v=175c4d96';
+import { readingLesson } from './reading.js?v=175c4d96';
+import { practiceLesson } from './practice.js?v=175c4d96';
+import { quizLesson } from './quiz.js?v=175c4d96';
+import { examLesson } from './exam.js?v=175c4d96';
+import { labLesson } from './lab.js?v=175c4d96';
+import { actionBar } from './common.js?v=175c4d96';
 
 const LESSONS = {
   video: videoLesson,
@@ -17,7 +18,8 @@ const LESSONS = {
   reading: readingLesson,
   practice: practiceLesson,
   quiz: quizLesson,
-  exam: examLesson
+  exam: examLesson,
+  lab: labLesson
 };
 
 /** Shown for a lesson type this version of the site doesn't know (instead of a blank page). */

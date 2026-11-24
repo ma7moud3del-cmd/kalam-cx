@@ -1,11 +1,11 @@
 /** Explore: search + filters over the real course data. Filters live in the URL (#/explore?q=&topic=…) so links can be shared. */
-import { $, $$, esc } from '../core/dom.js?v=5be21f30';
-import { LANG, plural, isFree } from '../core/format.js?v=5be21f30';
-import { App, live, planned, topicId, topicOf, peopleOf } from '../data/catalog.js?v=5be21f30';
-import { secsOf, allLessons, timeOf } from '../data/course.js?v=5be21f30';
-import { courseCard, searchForm } from '../ui/cards.js?v=5be21f30';
-import { revealNow } from '../ui/reveal.js?v=5be21f30';
-import { failedNote } from './status.js?v=5be21f30';
+import { $, $$, esc } from '../core/dom.js?v=175c4d96';
+import { LANG, plural, isFree } from '../core/format.js?v=175c4d96';
+import { App, live, planned, topicId, topicOf, peopleOf } from '../data/catalog.js?v=175c4d96';
+import { secsOf, allLessons, timeOf } from '../data/course.js?v=175c4d96';
+import { courseCard, searchForm } from '../ui/cards.js?v=175c4d96';
+import { revealNow } from '../ui/reveal.js?v=175c4d96';
+import { failedNote } from './status.js?v=175c4d96';
 
 const DUR = [['short', 'Under 2 hours of video', m => m < 120], ['medium', '2 to 6 hours of video', m => m >= 120 && m <= 360], ['long', 'Over 6 hours of video', m => m > 360]];
 
