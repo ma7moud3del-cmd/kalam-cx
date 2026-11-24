@@ -1,7 +1,7 @@
 {
- "_about": "Topics and trainings of Kalam CX Academy. Order here = order on the site. Fields are explained in CONTENT.md.",
+ "_about": "Topics and trainings of Kalam Learning. Order here = order on the site. Fields are explained in CONTENT.md.",
  "platform": {
-  "name": "Kalam CX Academy",
+  "name": "Kalam Learning",
   "tagline": "Practical skills for the people who run customer experience.",
   "intro": "Practical courses built from Kalam CX's own training: real tools and real call-center data, taught by the people who use them every day.",
   "audience": [
@@ -10,7 +10,15 @@
    "WFM, quality and reporting teams"
   ],
   "mode": "Public prototype. All courses are free. No accounts: progress stays in this browser only.",
-  "footer": "All courses are free. Videos in the Excel course are in Egyptian Arabic with English Excel terms. There are no accounts yet: your watch history and test scores are saved only in this browser."
+  "team": {
+   "eyebrow": "The Kalam family",
+   "title": "Learn together. Grow together.",
+   "text": "Every course here is made for everyone at Kalam, from the floor to the back office. Pick a skill, learn it at your own pace, and use it at work tomorrow.",
+   "photo": "img/team/kalam-team-1280.webp",
+   "photoSmall": "img/team/kalam-team-768.webp",
+   "photoLarge": "img/team/kalam-team-1920.webp",
+   "alt": "The Kalam CX family, around twenty colleagues, standing together and smiling."
+  }
  },
  "topics": [
   {
@@ -48,6 +56,20 @@
    "title": "Curated, not affiliated",
    "external": true,
    "bio": "Free lessons by well-known Excel teachers, including Leila Gharani, Kevin Stratvert, MyOnlineTrainingHub, Excel Campus, GoSkills and GCFLearnFree. Videos play from YouTube and belong to their creators. Kalam CX isn't affiliated with these channels."
+  },
+  {
+   "id": "kalam-learning",
+   "name": "Kalam Learning team",
+   "title": "Kalam CX",
+   "photo": "img/kalam-mark.png",
+   "bio": "Built by Kalam CX from its own supervisor and ACM training, rewritten with Kalam CX sample data. The animated lessons use an AI narrator, and every formula and answer was checked by hand."
+  },
+  {
+   "id": "cx-creators",
+   "name": "Contact-center creators on YouTube",
+   "title": "Curated, not affiliated",
+   "external": true,
+   "bio": "Free lessons by contact-center, workforce-management and quality teachers, including CallCentreHelper, CareforCustomers, Solid Rock Consulting and MetricNet. Videos play from YouTube and belong to their creators. Kalam CX isn't affiliated with these channels."
   }
  ],
  "courses": [
@@ -69,6 +91,12 @@
    "topic": "data",
    "status": "live",
    "data": "courses/charts/course.json"
+  },
+  {
+   "id": "call-center-management",
+   "topic": "leadership",
+   "status": "live",
+   "data": "courses/call-center-management/course.json"
   }
  ]
 }

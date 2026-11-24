@@ -1,0 +1,10 @@
+# Cloudflare Pages redirects (copied by build_platform.py; edit platform/app/static/_redirects in the builder repo).
+#
+# No "SPA fallback" (/* /index.html 200) on purpose: every page of the site is a # address (#/excel/learn/...),
+# and the part after # never reaches the server, so every deep link already loads /index.html.
+# A fallback would answer real broken links with "200 OK" instead of the 404 page.
+#
+# Someone who copies an old github.io link and only swaps the host (…pages.dev/kalam-cx/#/excel) still lands home;
+# the browser keeps the # part across the redirect.
+/kalam-cx      /  301
+/kalam-cx/*    /  301

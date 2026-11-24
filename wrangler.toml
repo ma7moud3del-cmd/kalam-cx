@@ -1,0 +1,9 @@
+# Cloudflare Pages settings for Kalam Learning (free plan).
+name = "kalam-learning"
+pages_build_output_dir = "."
+compatibility_date = "2025-01-01"
+
+# Videos and PDFs live in this R2 bucket, not in GitHub.
+[[r2_buckets]]
+binding = "MEDIA"
+bucket_name = "kalam-learning-media"

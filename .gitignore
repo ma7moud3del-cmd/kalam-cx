@@ -1,0 +1,5 @@
+# Videos and PDFs live in Cloudflare R2 (bucket kalam-learning-media), not in GitHub.
+# Keep local copies here if you like; upload them with the builder's upload_to_r2.py or wrangler.
+courses/*/media/
+courses/*/docs/
+.wrangler/
