@@ -14,8 +14,8 @@
  ],
  "updated": "November 2026",
  "description": [
-  "Three recorded live sessions from Kalam CX's Workforce Management team, cut into short chapters you can watch one at a time. The trainer works in Excel on a real-style call-center export, explaining in Egyptian Arabic with the English Excel terms you see on screen.",
-  "Start with the short course: one animated quick video per session. Each full session then has the trainer's live demos, then practice in the Activities Workbook and a short self-marking test. A 20-task practical exam closes the course."
+  "Four recorded live sessions from Kalam CX's Workforce Management team, cut into short chapters you can watch one at a time. The trainer works in Excel on a real-style call-center export, explaining in Egyptian Arabic with the English Excel terms you see on screen.",
+  "Start with the short course: one animated quick video for each of the first three sessions. Each full session then has the trainer's live demos; Sessions 1 to 3 add practice in the Activities Workbook and a short self-marking test, and Session 4 works through an assessment with the trainer. A 20-task practical exam closes the course."
  ],
  "outcomes": [
   "Read any system export: find the header row, the data range and each column's type",
@@ -25,7 +25,8 @@
   "Fix #DIV/0!, #REF!, #VALUE!, #NAME? and #N/A errors",
   "Look values up with VLOOKUP, HLOOKUP and XLOOKUP",
   "Clean a messy export: Remove Duplicates, Text to Columns, Flash Fill, LEFT/RIGHT/MID, Data Validation",
-  "Summarise thousands of rows with PivotTables, calculated fields, slicers and PivotCharts"
+  "Summarise thousands of rows with PivotTables, calculated fields, slicers and PivotCharts",
+  "Pull IDs and dates out of text with LEFT, RIGHT and MID, and match values with COUNTIFS and INDEX/MATCH"
  ],
  "requirements": [
   "Microsoft Excel 2016 or later. Microsoft 365 is best: XLOOKUP needs Excel 2021 or 365.",
@@ -48,12 +49,12 @@
   "Excel.",
   "From data to decisions."
  ],
- "intro": "Real call-center data. A real WFM trainer. Three sessions that take you from reading an export to presenting a dashboard.",
+ "intro": "Real call-center data. A real WFM trainer. Four sessions that take you from reading an export to presenting a dashboard.",
  "type": "course",
  "base": "courses/excel/",
  "cover": "img/posters/s1-hero.jpg",
- "videoMinutes": 319,
- "durationLabel": "5.3 hours of video",
+ "videoMinutes": 429,
+ "durationLabel": "7.2 hours of video",
  "sections": [
   {
    "id": "short",
@@ -1683,6 +1684,160 @@
    "hero": "img/posters/s3-hero.jpg",
    "tabs": "S5_Pivot, S6_Dashboard",
    "note": "The trainer's demos in this session cover PivotTables, calculated fields, slicers and PivotCharts. Conditional formatting and building the one-page dashboard are covered in the quick video, the slides and the S6_Dashboard practice tab. The live session's last segment walked through a real client report and is not published."
+  },
+  {
+   "id": "s4",
+   "title": "Practice & Advanced Formulas",
+   "covers": "Pivot recap, text formulas, COUNTIFS & INDEX/MATCH",
+   "summary": "Revise PivotTables and lookups, then work through a full call-center assessment with the trainer.",
+   "lessons": [
+    {
+     "id": "s4-ch01",
+     "type": "video",
+     "title": "Recap: PivotTables",
+     "kind": "Trainer demo · Chapter 1",
+     "minutes": 9,
+     "src": "media/s4-ch01.mp4",
+     "poster": "img/posters/s4-ch01.jpg",
+     "summary": "What a PivotTable does, and how to build one from the call data. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch02",
+     "type": "video",
+     "title": "Calculated Fields: Answer and Abandon %",
+     "kind": "Trainer demo · Chapter 2",
+     "minutes": 5,
+     "src": "media/s4-ch02.mp4",
+     "poster": "img/posters/s4-ch02.jpg",
+     "summary": "Value field settings, your own formulas inside a PivotTable, and percentage format. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch03",
+     "type": "video",
+     "title": "Slicers and Interval Grouping",
+     "kind": "Trainer demo · Chapter 3",
+     "minutes": 4,
+     "src": "media/s4-ch03.mp4",
+     "poster": "img/posters/s4-ch03.jpg",
+     "summary": "Filter by client, language and service, and look at the data per interval. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch04",
+     "type": "video",
+     "title": "PivotCharts: Column, Line and Pie",
+     "kind": "Trainer demo · Chapter 4",
+     "minutes": 9,
+     "src": "media/s4-ch04.mp4",
+     "poster": "img/posters/s4-ch04.jpg",
+     "summary": "Pick the right chart, add data labels and change the style. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch05",
+     "type": "video",
+     "title": "Refresher: VLOOKUP vs XLOOKUP",
+     "kind": "Trainer demo · Chapter 5",
+     "minutes": 8,
+     "src": "media/s4-ch05.mp4",
+     "poster": "img/posters/s4-ch05.jpg",
+     "summary": "Bring data from another tab, and why XLOOKUP is easier. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch06",
+     "type": "video",
+     "title": "Assessment: Call-Center KPIs",
+     "kind": "Trainer demo · Chapter 6",
+     "minutes": 16,
+     "src": "media/s4-ch06.mp4",
+     "poster": "img/posters/s4-ch06.jpg",
+     "summary": "Answered, abandon %, AHT and service level, worked through together. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch07",
+     "type": "video",
+     "title": "Conditional Formatting Rules",
+     "kind": "Trainer demo · Chapter 7",
+     "minutes": 10,
+     "src": "media/s4-ch07.mp4",
+     "poster": "img/posters/s4-ch07.jpg",
+     "summary": "Highlight abandon above 5%, service level above 80% and AHT in range, then copy the format. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch08",
+     "type": "video",
+     "title": "Text Formulas: Pull Out the Agent ID",
+     "kind": "Trainer demo · Chapter 8",
+     "minutes": 10,
+     "src": "media/s4-ch08.mp4",
+     "poster": "img/posters/s4-ch08.jpg",
+     "summary": "Lookups on the agent list, then RIGHT and LEN to split the ID from the name. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch09",
+     "type": "video",
+     "title": "Build a Date: RIGHT, MID and LEFT",
+     "kind": "Trainer demo · Chapter 9",
+     "minutes": 10,
+     "src": "media/s4-ch09.mp4",
+     "poster": "img/posters/s4-ch09.jpg",
+     "summary": "Turn text into a real date and show it in long date format. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch10",
+     "type": "video",
+     "title": "COUNTIFS: Shifts per Agent",
+     "kind": "Trainer demo · Chapter 10",
+     "minutes": 15,
+     "src": "media/s4-ch10.mp4",
+     "poster": "img/posters/s4-ch10.jpg",
+     "summary": "Count each agent's shifts with one or more conditions and lock the ranges. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch11",
+     "type": "video",
+     "title": "PivotTable: Shifts per Team Leader",
+     "kind": "Trainer demo · Chapter 11",
+     "minutes": 4,
+     "src": "media/s4-ch11.mp4",
+     "poster": "img/posters/s4-ch11.jpg",
+     "summary": "Summarise the shift list by team leader in a few clicks. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    },
+    {
+     "id": "s4-ch12",
+     "type": "video",
+     "title": "INDEX and MATCH: Find Break Times",
+     "kind": "Trainer demo · Chapter 12",
+     "minutes": 10,
+     "src": "media/s4-ch12.mp4",
+     "poster": "img/posters/s4-ch12.jpg",
+     "summary": "Look up each agent's break slot in a time grid with INDEX and MATCH. The trainer's live demo, in Egyptian Arabic with English Excel terms."
+    }
+   ],
+   "tag": "Put it all together.",
+   "blurb": "A recap of PivotTables and lookups, then a real-style assessment solved step by step.",
+   "topics": [
+    [
+     "Pivot recap",
+     "Calculated fields, slicers, interval grouping and PivotCharts."
+    ],
+    [
+     "Lookup refresher",
+     "VLOOKUP vs XLOOKUP."
+    ],
+    [
+     "Highlight it",
+     "Conditional formatting rules on KPIs."
+    ],
+    [
+     "Text formulas",
+     "LEFT, RIGHT and MID to pull IDs and build dates."
+    ],
+    [
+     "Count and find",
+     "COUNTIFS, a PivotTable of shifts, and INDEX with MATCH."
+    ]
+   ],
+   "hero": "img/posters/s4-ch06.jpg",
+   "note": "This session is the trainer's live demos only: there is no quick video, slides or session test for it yet."
   },
   {
    "id": "final",
