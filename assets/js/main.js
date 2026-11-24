@@ -10,14 +10,14 @@
  *          ui/ shared markup and widgets · views/ one file per page · lessons/ one file per lesson type ·
  *          player/ the video player · router.js the addresses
  */
-import { $, focusEl } from './core/dom.js?v=5be21f30';
-import { App } from './data/catalog.js?v=5be21f30';
-import { loadAll } from './data/load.js?v=5be21f30';
-import { route, resetRoute } from './router.js?v=5be21f30';
-import { Store } from './progress/store.js?v=5be21f30';
-import { loadError } from './views/status.js?v=5be21f30';
-import { initMenu } from './ui/nav.js?v=5be21f30';
-import { initModal } from './ui/modal.js?v=5be21f30';
+import { $, focusEl } from './core/dom.js?v=175c4d96';
+import { App } from './data/catalog.js?v=175c4d96';
+import { loadAll } from './data/load.js?v=175c4d96';
+import { route, resetRoute } from './router.js?v=175c4d96';
+import { Store } from './progress/store.js?v=175c4d96';
+import { loadError } from './views/status.js?v=175c4d96';
+import { initMenu } from './ui/nav.js?v=175c4d96';
+import { initModal } from './ui/modal.js?v=175c4d96';
 
 document.documentElement.classList.add('js');
 

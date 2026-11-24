@@ -1,8 +1,8 @@
 /** A course's files: practice workbooks, slides and printable tests per module, and guides. */
-import { esc } from '../core/dom.js?v=5be21f30';
-import { CHEV } from '../core/icons.js?v=5be21f30';
-import { url, secsOf, filesOf, word } from '../data/course.js?v=5be21f30';
-import { trail } from '../ui/nav.js?v=5be21f30';
+import { esc } from '../core/dom.js?v=175c4d96';
+import { CHEV } from '../core/icons.js?v=175c4d96';
+import { url, secsOf, filesOf, word } from '../data/course.js?v=175c4d96';
+import { trail } from '../ui/nav.js?v=175c4d96';
 
 /** @returns {import('../router.js').View} */
 export function resources(c) {

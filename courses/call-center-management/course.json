@@ -1,0 +1,653 @@
+{
+ "id": "call-center-management",
+ "title": "Inbound Call Center Management",
+ "subtitle": "Read the operation, plan the hours and understand the money behind an interpretation contact center.",
+ "category": "leadership",
+ "level": "Advanced",
+ "levelRange": "For experienced supervisors",
+ "language": "en",
+ "languageLabel": "English",
+ "price": 0,
+ "featured": true,
+ "instructors": [],
+ "updated": "November 2026",
+ "labels": {
+  "section": "Chapter"
+ },
+ "headline": [
+  "The numbers behind the floor,",
+  "and the decisions they make possible."
+ ],
+ "intro": "A 13-episode series on real Kalam CX data from October 2026. One client contract at risk, 60 days to save it, and every KPI and dollar that decides it.",
+ "description": "Built for supervisors who already run the floor. Each episode takes a real situation from the October 2026 IMS data, gives a quick refresher of the KPI, then the management view: what the number hides, what to check first, and what it costs. Real Kalam numbers are tagged IMS; example figures (prices, costs, QA, shrinkage) are labelled as examples.",
+ "outcomes": [
+  "Diagnose abandonment by exit point, shift, hour and language",
+  "State the right denominator and avoid misleading averages",
+  "Calculate staffing by hour, with occupancy, shrinkage and minimum cover",
+  "Read QA criticals, absence and attrition as coverage and quality risks",
+  "Explain per-minute, per-hour and minimum-commitment contracts",
+  "Build and reconcile an invoice, read a P&L and price your KPIs"
+ ],
+ "requirements": [
+  "Experience running an inbound interpretation or contact-center floor"
+ ],
+ "audience": [
+  "Supervisors",
+  "Team leaders with WFM or reporting duties"
+ ],
+ "type": "course",
+ "presentation": "series",
+ "base": "courses/call-center-management/",
+ "cover": "",
+ "videoMinutes": 52,
+ "durationLabel": "52 min of video",
+ "certificate": false,
+ "reviews": [],
+ "related": [],
+ "sections": [
+  {
+   "id": "c1",
+   "title": "Reading the Operation",
+   "covers": "Abandonment by client, exit point and shift; pickup and handle time; occupancy; staffing by hour; shrinkage",
+   "summary": "Client C puts its contract under review. Hana has 60 days, and October's real data to find out where callers were lost and why.",
+   "lessons": [
+    {
+     "id": "ch1-1-150-callers",
+     "type": "video",
+     "title": "150 Callers",
+     "kind": "Episode I.1",
+     "minutes": 5,
+     "src": "media/ch1-1-150-callers.mp4",
+     "poster": "media/ch1-1-150-callers.jpg",
+     "captions": "media/ch1-1-150-callers.vtt",
+     "summary": "Split 150 abandoned calls by client and by where callers left, and decide what to check first."
+    },
+    {
+     "id": "ch1-2-the-night-gap",
+     "type": "video",
+     "title": "The Night Gap",
+     "kind": "Episode I.2",
+     "minutes": 4,
+     "src": "media/ch1-2-the-night-gap.mp4",
+     "poster": "media/ch1-2-the-night-gap.jpg",
+     "captions": "media/ch1-2-the-night-gap.vtt",
+     "summary": "Night is 16% of calls but 53% of losses. Rates vs shares, and coverage by hour and language."
+    },
+    {
+     "id": "m1-quiz",
+     "type": "quiz",
+     "title": "Module check",
+     "minutes": 10,
+     "pass": 3,
+     "questions": [
+      {
+       "id": "io-m1-q01",
+       "rev": 1,
+       "q": "October by client (letters replace names): Client C lost 82 of 206 calls, Client D 41 of 83, and all other clients together 15 of 1,929. What does this tell a manager?",
+       "o": [
+        "Two small queues hold most of the loss; check their cover hour by hour",
+        "Client C's callers are less patient",
+        "The whole operation needs more interpreters",
+        "The 6.6% average describes every client well"
+       ],
+       "a": 0,
+       "e": "C and D hold 123 of 150 abandoned calls (82%). The big shared queues lost almost none. Small queues need their own cover check."
+      },
+      {
+       "id": "io-m1-q02",
+       "rev": 1,
+       "q": "October: 2,267 calls offered, 150 abandoned. 117 left while waiting with no interpreter free, 33 while a line was ringing. What should a manager look at first?",
+       "o": [
+        "Pickup speed coaching for all interpreters",
+        "Interpreter coverage by hour and language when the 117 called",
+        "The monthly abandonment target",
+        "Raising occupancy"
+       ],
+       "a": 1,
+       "e": "78% of losses never reached an interpreter. That is a coverage question first; pickup speed can only reach the 33."
+      },
+      {
+       "id": "io-m1-q03",
+       "rev": 1,
+       "q": "Night: 367 offered, 79 abandoned. Day: 1,627 offered, 47 abandoned. Which statement is right?",
+       "o": [
+        "Both shifts are close to the 6.6% average",
+        "Night's abandonment rate is about 7× the day rate (21.5% vs 2.9%)",
+        "Day is worse because it lost more calls in total",
+        "Night is 53% of calls offered"
+       ],
+       "a": 1,
+       "e": "79 ÷ 367 = 21.5% and 47 ÷ 1,627 = 2.9%. Night is 16% of calls but 53% of abandoned calls."
+      },
+      {
+       "id": "io-m1-q04",
+       "rev": 1,
+       "q": "Why can a monthly abandonment of 6.6% mislead a review?",
+       "o": [
+        "It blends shifts with very different rates, hiding the one in trouble",
+        "It counts calls that were answered",
+        "Abandonment should be divided by answered calls",
+        "It uses the wrong formula"
+       ],
+       "a": 0,
+       "e": "An average across shifts can hide a shift that loses one caller in five."
+      },
+      {
+       "id": "io-m1-q05",
+       "rev": 1,
+       "q": "The report lists 'busy on another call', 'on break' and 'not logged in' as reasons a caller waited. What does it not tell you?",
+       "o": [
+        "Which shift lost the most callers",
+        "When callers waited",
+        "How many callers abandoned",
+        "How many callers waited for each reason"
+       ],
+       "a": 3,
+       "e": "It lists the states without counting them, so the data shows when callers waited, not why. Investigate before acting."
+      }
+     ]
+    },
+    {
+     "id": "ch1-3-pickup-and-handle-time",
+     "type": "video",
+     "title": "What Really Moves Pickup and Handle Time",
+     "kind": "Episode I.3",
+     "minutes": 4,
+     "src": "media/ch1-3-pickup-and-handle-time.mp4",
+     "poster": "media/ch1-3-pickup-and-handle-time.jpg",
+     "captions": "media/ch1-3-pickup-and-handle-time.vtt",
+     "summary": "Two honest on-time numbers, an evening pattern, and why talk time is protected."
+    },
+    {
+     "id": "m2-quiz",
+     "type": "quiz",
+     "title": "Module check",
+     "minutes": 8,
+     "pass": 3,
+     "questions": [
+      {
+       "id": "io-m2-q01",
+       "rev": 1,
+       "q": "1,928 rings were picked up in under 5 s, out of 2,197 rings and 2,092 pickups. Which is correct?",
+       "o": [
+        "Only 92.2% is valid",
+        "Both 87.8% and 92.2% are valid; always state the denominator",
+        "Only 87.8% is valid",
+        "On-time is 95.2%"
+       ],
+       "a": 1,
+       "e": "87.8% divides by all rings, 92.2% by rings picked up. Until the official rule is confirmed, show both."
+      },
+      {
+       "id": "io-m2-q02",
+       "rev": 1,
+       "q": "Late pickups: day 3.8% of rings, evening 29.4%. Best first move?",
+       "o": [
+        "Map the evening: staffing, breaks, handovers and overlapping rings",
+        "Lower the 5-second rule for evenings",
+        "Send everyone a reminder of the 5-second rule",
+        "Rank interpreters and coach the bottom five"
+       ],
+       "a": 0,
+       "e": "When one shift is eight times worse under the same rule, the cause is usually the shift pattern, not individuals."
+      },
+      {
+       "id": "io-m2-q03",
+       "rev": 1,
+       "q": "Average talk per answered call was 11.45 minutes. Which is true?",
+       "o": [
+        "It should be reduced to improve AHT",
+        "It is talk time, not AHT; AHT also needs hold and after-call work",
+        "It is the AHT for October",
+        "It is the median handle time"
+       ],
+       "a": 1,
+       "e": "AHT = (talk + hold + ACW) ÷ handled. Talk time is the product the client pays for; never shorten interpretation to improve AHT."
+      },
+      {
+       "id": "io-m2-q04",
+       "rev": 1,
+       "q": "Median ring-to-pickup was 3 seconds. Can you report it as ASA?",
+       "o": [
+        "Only for the day shift",
+        "No. A median is not an average, and ASA uses all answered calls' waits",
+        "Yes, if rounded",
+        "Yes, they are the same"
+       ],
+       "a": 1,
+       "e": "ASA is total answer time ÷ calls answered. The 3 s median is a different statistic."
+      }
+     ]
+    },
+    {
+     "id": "ch1-4-the-occupancy-trade-off",
+     "type": "video",
+     "title": "The Occupancy Trade-off",
+     "kind": "Episode I.4",
+     "minutes": 4,
+     "src": "media/ch1-4-the-occupancy-trade-off.mp4",
+     "poster": "media/ch1-4-the-occupancy-trade-off.jpg",
+     "captions": "media/ch1-4-the-occupancy-trade-off.vtt",
+     "summary": "35% against a 40.8% target, and callers still waiting. Placement before volume."
+    },
+    {
+     "id": "m3-lab-occ",
+     "type": "lab",
+     "lab": "ioccupancy",
+     "title": "Your turn · Occupancy and cost",
+     "minutes": 10,
+     "intro": "October's 404 productive hours. Change logged-in hours and see occupancy, cost per productive hour and margin move."
+    },
+    {
+     "id": "ch1-5-staffing-math",
+     "type": "video",
+     "title": "Staffing Math, Hour by Hour",
+     "kind": "Episode I.5",
+     "minutes": 4,
+     "src": "media/ch1-5-staffing-math.mp4",
+     "poster": "media/ch1-5-staffing-math.jpg",
+     "captions": "media/ch1-5-staffing-math.vtt",
+     "summary": "Workload, occupancy, shrinkage and why small queues need a minimum cover."
+    },
+    {
+     "id": "m3-lab-hour",
+     "type": "lab",
+     "lab": "ihour",
+     "title": "Your turn · Staffing calculator",
+     "minutes": 10,
+     "intro": "Start from October's day, evening or night calls per hour. Compare the formula with minimum cover."
+    },
+    {
+     "id": "m3-quiz",
+     "type": "quiz",
+     "title": "Module check",
+     "minutes": 8,
+     "pass": 3,
+     "questions": [
+      {
+       "id": "io-m3-q01",
+       "rev": 1,
+       "q": "Occupancy was 35.0% against a 40.8% target, yet 117 callers left with nobody free. What does that suggest?",
+       "o": [
+        "There are too many interpreters overall",
+        "Callers should be asked to wait longer",
+        "Hours are in the wrong places: idle in quiet hours, missing in busy or night hours",
+        "Occupancy is calculated wrongly"
+       ],
+       "a": 2,
+       "e": "Low occupancy and lost callers in the same month mean a placement problem before a volume problem."
+      },
+      {
+       "id": "io-m3-q02",
+       "rev": 1,
+       "q": "Which is the healthiest way to move toward 40.8% occupancy?",
+       "o": [
+        "Cut 160 hours evenly across the month",
+        "Ask interpreters to take fewer breaks",
+        "Shorten interpretation time",
+        "Move hours from quiet day hours to night, by language"
+       ],
+       "a": 3,
+       "e": "A flat cut removes the last free interpreter at night; moving hours improves occupancy and service together."
+      },
+      {
+       "id": "io-m3-q03",
+       "rev": 1,
+       "q": "A busy hour has 9 calls, handle time 13.45 minutes, planned occupancy 40.8%. How many interpreters logged in?",
+       "o": [
+        "5",
+        "9",
+        "4",
+        "2"
+       ],
+       "a": 0,
+       "e": "9 × 13.45 ÷ 60 = 2.02 hours of work; ÷ 0.408 = 4.9, rounded up to 5 (before shrinkage)."
+      },
+      {
+       "id": "io-m3-q04",
+       "rev": 1,
+       "q": "Night volume gives a formula result of 0.7 interpreters per language. What should the plan use?",
+       "o": [
+        "The daily average",
+        "Zero, because the formula is below one",
+        "A minimum cover per language, checked against callers who waited",
+        "One interpreter for all languages"
+       ],
+       "a": 2,
+       "e": "With random arrivals and small volume, the formula under-staffs. Minimum cover or Erlang C protects small queues."
+      }
+     ]
+    },
+    {
+     "id": "ch1-6-shrinkage-and-schedules",
+     "type": "video",
+     "title": "Shrinkage and Schedules That Fit Demand",
+     "kind": "Episode I.6",
+     "minutes": 4,
+     "src": "media/ch1-6-shrinkage-and-schedules.mp4",
+     "poster": "media/ch1-6-shrinkage-and-schedules.jpg",
+     "captions": "media/ch1-6-shrinkage-and-schedules.vtt",
+     "summary": "Where the paid hours go, and where breaks belong."
+    },
+    {
+     "id": "m5-quiz",
+     "type": "quiz",
+     "title": "Module check",
+     "minutes": 6,
+     "pass": 2,
+     "questions": [
+      {
+       "id": "io-m5-q01",
+       "rev": 1,
+       "q": "Paid 160 h; breaks 12, training 6, meetings 4, absence 8. Shrinkage?",
+       "o": [
+        "30%",
+        "18.75%",
+        "12.5%",
+        "81.25%"
+       ],
+       "a": 1,
+       "e": "Unavailable 30 h ÷ paid 160 h = 18.75%."
+      },
+      {
+       "id": "io-m5-q02",
+       "rev": 1,
+       "q": "You need 800 logged-in hours with 20% shrinkage. Paid hours to schedule?",
+       "o": [
+        "960",
+        "1,000",
+        "820",
+        "640"
+       ],
+       "a": 1,
+       "e": "800 ÷ (1 − 0.20) = 1,000."
+      },
+      {
+       "id": "io-m5-q03",
+       "rev": 1,
+       "q": "A language has two night interpreters. How should breaks be planned?",
+       "o": [
+        "Both together at 03:00",
+        "Staggered, one at a time, in the quietest hour by arrival pattern",
+        "No breaks at night",
+        "Whenever each interpreter prefers"
+       ],
+       "a": 1,
+       "e": "Overlapping breaks leave the language with no cover; removing breaks raises fatigue and errors."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c2",
+   "title": "The Money",
+   "covers": "Contract models, invoices, cost per productive hour, the P&L",
+   "summary": "Procurement wants a price, a client disputes an invoice, and the director wants the P&L. How an interpretation operation earns and loses money.",
+   "lessons": [
+    {
+     "id": "ch2-1-how-a-contract-pays",
+     "type": "video",
+     "title": "How an Interpretation Contract Pays",
+     "kind": "Episode II.1",
+     "minutes": 4,
+     "src": "media/ch2-1-how-a-contract-pays.mp4",
+     "poster": "media/ch2-1-how-a-contract-pays.jpg",
+     "captions": "media/ch2-1-how-a-contract-pays.vtt",
+     "summary": "Per minute, per hour, minimums and tiers: who carries the volume risk, and the benefit for each side."
+    },
+    {
+     "id": "ch2-2-minutes-to-invoice",
+     "type": "video",
+     "title": "From Minutes to Invoice",
+     "kind": "Episode II.2",
+     "minutes": 4,
+     "src": "media/ch2-2-minutes-to-invoice.mp4",
+     "poster": "media/ch2-2-minutes-to-invoice.jpg",
+     "captions": "media/ch2-2-minutes-to-invoice.vtt",
+     "summary": "Billable minutes, rounding, service credits and month-end reconciliation."
+    },
+    {
+     "id": "ch2-3-what-an-hour-costs",
+     "type": "video",
+     "title": "What an Hour Really Costs",
+     "kind": "Episode II.3",
+     "minutes": 4,
+     "src": "media/ch2-3-what-an-hour-costs.mp4",
+     "poster": "media/ch2-3-what-an-hour-costs.jpg",
+     "captions": "media/ch2-3-what-an-hour-costs.vtt",
+     "summary": "Loaded cost, cost per productive hour and fully loaded cost."
+    },
+    {
+     "id": "ch2-4-reading-a-pnl",
+     "type": "video",
+     "title": "Reading a P&L",
+     "kind": "Episode II.4",
+     "minutes": 4,
+     "src": "media/ch2-4-reading-a-pnl.mp4",
+     "poster": "media/ch2-4-reading-a-pnl.jpg",
+     "captions": "media/ch2-4-reading-a-pnl.vtt",
+     "summary": "Revenue, direct cost, gross margin, overheads, and which line your floor moves."
+    },
+    {
+     "id": "m6-lab-contract",
+     "type": "lab",
+     "lab": "icontract",
+     "title": "Your turn · Invoice and P&L",
+     "minutes": 10,
+     "intro": "October's minutes and calls with example prices and costs. Change the contract terms and see the invoice and margin move."
+    },
+    {
+     "id": "m6-quiz",
+     "type": "quiz",
+     "title": "Module check",
+     "minutes": 16,
+     "pass": 6,
+     "questions": [
+      {
+       "id": "io-m6-q01",
+       "rev": 1,
+       "q": "Under a per-minute contract, who carries the cost of idle logged-in time?",
+       "o": [
+        "Nobody: idle time is free",
+        "Kalam: occupancy drives margin",
+        "Shared automatically",
+        "The client"
+       ],
+       "a": 1,
+       "e": "Per minute pays only for interpreted minutes. Under per-hour or dedicated contracts the client pays for readiness and fulfillment drives revenue."
+      },
+      {
+       "id": "io-m6-q02",
+       "rev": 1,
+       "q": "A client used 18,500 minutes on a 20,000-minute monthly minimum at $0.90 (example). What is billed?",
+       "o": [
+        "$18,000",
+        "$16,650",
+        "$20,000",
+        "$1,350"
+       ],
+       "a": 0,
+       "e": "The higher of usage and the minimum: 20,000 × $0.90 = $18,000."
+      },
+      {
+       "id": "io-m6-q03",
+       "rev": 1,
+       "q": "Why do billable minutes (25,299 in the example) exceed talk minutes (24,240)?",
+       "o": [
+        "Contract rounding: each call is rounded up to the whole minute",
+        "Hold time is billed twice",
+        "Talk minutes are wrong",
+        "Billable minutes include abandoned calls"
+       ],
+       "a": 0,
+       "e": "About half a minute of rounding per call across 2,117 calls. Rounding, minimums and fees come from the contract."
+      },
+      {
+       "id": "io-m6-q04",
+       "rev": 1,
+       "q": "Direct cost $11,928 for 404 productive hours (example). Cost per productive hour?",
+       "o": [
+        "$8.40",
+        "$10.34",
+        "$54.00",
+        "$29.52"
+       ],
+       "a": 3,
+       "e": "$11,928 ÷ 404 = $29.52, about 3.5× the loaded hourly cost, because of idle and unavailable time."
+      },
+      {
+       "id": "io-m6-q05",
+       "rev": 1,
+       "q": "Revenue $22,314, direct cost $11,928, overheads $5,000 (example). Gross margin %?",
+       "o": [
+        "24.1%",
+        "22.4%",
+        "53.5%",
+        "46.5%"
+       ],
+       "a": 3,
+       "e": "(22,314 − 11,928) ÷ 22,314 = 46.5%. Operating profit after overheads is 24.1%."
+      },
+      {
+       "id": "io-m6-q06",
+       "rev": 1,
+       "q": "Which P&L line does abandonment hit first?",
+       "o": [
+        "Revenue: minutes not delivered and service credits",
+        "Overheads",
+        "Direct cost only",
+        "None"
+       ],
+       "a": 0,
+       "e": "150 abandoned × 11.45 min × $0.90 ≈ $1,546 not earned, plus any service credit (example price)."
+      },
+      {
+       "id": "io-m6-q07",
+       "rev": 1,
+       "q": "Healthiest way to lower cost per productive hour?",
+       "o": [
+        "Remove breaks",
+        "Cut interpreter pay",
+        "Move idle hours to where callers wait, raising occupancy",
+        "Ask for shorter calls"
+       ],
+       "a": 2,
+       "e": "Same paid hours, more productive hours. Pay cuts drive attrition; shorter calls cut the product."
+      },
+      {
+       "id": "io-m6-q08",
+       "rev": 1,
+       "q": "Which line should an operations lead watch most closely month to month?",
+       "o": [
+        "Overheads",
+        "Gross margin %",
+        "Operating profit only",
+        "Revenue only"
+       ],
+       "a": 1,
+       "e": "Gross margin moves most directly with delivered minutes and the paid hours used to deliver them."
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "c3",
+   "title": "Owning the Operation",
+   "covers": "KPIs in money, QA criticals, absence and attrition, presenting to senior management",
+   "summary": "Every KPI gets a price, a compliance critical tests the night team, and Hana takes one page into the monthly review.",
+   "lessons": [
+    {
+     "id": "ch3-1-kpis-move-the-pnl",
+     "type": "video",
+     "title": "How Your KPIs Move the P&L",
+     "kind": "Episode III.1",
+     "minutes": 3,
+     "src": "media/ch3-1-kpis-move-the-pnl.mp4",
+     "poster": "media/ch3-1-kpis-move-the-pnl.jpg",
+     "captions": "media/ch3-1-kpis-move-the-pnl.vtt",
+     "summary": "Abandonment, occupancy and fulfillment, turned into money."
+    },
+    {
+     "id": "ch3-2-leading-with-data",
+     "type": "video",
+     "title": "Leading With Data",
+     "kind": "Episode III.2",
+     "minutes": 4,
+     "src": "media/ch3-2-leading-with-data.mp4",
+     "poster": "media/ch3-2-leading-with-data.jpg",
+     "captions": "media/ch3-2-leading-with-data.vtt",
+     "summary": "Customer, business and compliance criticals; absence and attrition as lost coverage."
+    },
+    {
+     "id": "m4-quiz",
+     "type": "quiz",
+     "title": "Module check",
+     "minutes": 6,
+     "pass": 2,
+     "questions": [
+      {
+       "id": "io-m4-q01",
+       "rev": 1,
+       "q": "Of 40 monitored sessions, 3 had a critical error: 1 customer, 1 business, 1 compliance. What comes first?",
+       "o": [
+        "Wait for next month's sample",
+        "Report 92.5% and move on",
+        "Handle the compliance case today, then calibrate the team on it",
+        "Send the whole team to retraining"
+       ],
+       "a": 2,
+       "e": "Compliance criticals (confidentiality, not interpreting everything) are zero tolerance. The rate shows how often; the type shows how serious."
+      },
+      {
+       "id": "io-m4-q02",
+       "rev": 1,
+       "q": "3 leavers in a quarter from a team of 20. Annualised attrition?",
+       "o": [
+        "60%",
+        "6%",
+        "15%",
+        "45%"
+       ],
+       "a": 0,
+       "e": "3 ÷ 20 = 15% a quarter × 4 = 60% a year."
+      },
+      {
+       "id": "io-m4-q03",
+       "rev": 1,
+       "q": "6% absence on about 1,154 logged-in hours means roughly:",
+       "o": [
+        "69 planned hours not delivered",
+        "6 hours lost",
+        "116 hours lost",
+        "No impact if occupancy is low"
+       ],
+       "a": 0,
+       "e": "1,154 × 0.06 ≈ 69 hours the plan counted on and did not get."
+      }
+     ]
+    },
+    {
+     "id": "ch3-3-the-monthly-review",
+     "type": "video",
+     "title": "The Monthly Review",
+     "kind": "Episode III.3",
+     "minutes": 4,
+     "src": "media/ch3-3-the-monthly-review.mp4",
+     "poster": "media/ch3-3-the-monthly-review.jpg",
+     "captions": "media/ch3-3-the-monthly-review.vtt",
+     "summary": "Cause, cost, proposal, priced: one page for senior management. The season finale."
+    }
+   ]
+  }
+ ],
+ "resources": [
+  {
+   "title": "Course handbook",
+   "href": "docs/handbook.pdf",
+   "type": "pdf",
+   "summary": "Every module in writing, the money chapter, 17 practice questions with answers, a KPI reference and a glossary."
+  }
+ ]
+}

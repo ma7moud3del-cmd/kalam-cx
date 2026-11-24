@@ -1,7 +1,7 @@
 /** Loading data/catalog.json and every course.json it lists into App (data/catalog.js). */
-import { App } from './catalog.js?v=5be21f30';
-import { validateCourse } from './validate.js?v=5be21f30';
-import { Store } from '../progress/store.js?v=5be21f30';
+import { App } from './catalog.js?v=175c4d96';
+import { validateCourse } from './validate.js?v=175c4d96';
+import { Store } from '../progress/store.js?v=175c4d96';
 
 const TIMEOUT = 20000;   /* ms before a data request counts as failed (slow mobile data) */
 /** Ids go into page addresses and markup, so only letters, digits, - and _ are accepted (the rule check_content.py uses for lesson ids). */
