@@ -87,6 +87,12 @@
    "data": "courses/excel-expert-picks/course.json"
   },
   {
+   "id": "charts",
+   "topic": "data",
+   "status": "live",
+   "data": "courses/charts/course.json"
+  },
+  {
    "id": "call-center-management",
    "topic": "leadership",
    "status": "live",
