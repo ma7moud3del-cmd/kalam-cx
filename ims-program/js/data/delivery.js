@@ -261,3 +261,22 @@ IMS.cuts = [
   { name: "Interpreter payment", label: "non-value steps removed", steps: [["Report emailed to ACMs", "x"], ["ACM reviews exceptions only", "bva"], ["Supervisors chase acceptance", "x"], ["Tasks fixed in Transparent", "x"], ["Corrections back to Finance", "x"], ["Concerns in chats and groups", "x"], ["Finance approves payment", "bva"], ["Paid, with status visible", "va"]], note: "Proposed: 5 non-value steps removed or prevented; 2 human approvals kept." },
   { name: "Onboarding", label: "waiting and defect steps removed", steps: [["Requisition from coverage gaps", "bva"], ["Training updates the stage", "bva"], ["Documents + portals (automated)", "bva"], ["Supervisor onboarding session", "va"], ["Set-up entered once, checked", "bva"], ["“Has the interpreter started?” by message", "x"], ["Never starts, found late", "x"]], note: "Proposed: removed by first-task tracking and an inactivity alert." }
 ];
+
+/* One-screen plan used on the overview: 5 phases and a short win per project */
+IMS.plan = [
+  { step: "Approve", when: "Dec 2026", gate: "G0", what: "Sponsor, budget, 3 pilots" },
+  { step: "Discover", when: "Jan – Feb 2027", gate: "G1", what: "Measure today's baseline" },
+  { step: "Design", when: "Mar – Apr 2027", gate: "G2 · G3", what: "Future process and architecture" },
+  { step: "Pilot", when: "Apr – Aug 2027", gate: "G4 – G6", what: "3 pilots, measured results" },
+  { step: "Scale", when: "Sep – Dec 2027", gate: "G7 · G8", what: "Roll out, confirm benefits" }
+];
+IMS.wins = {
+  P01: "More coaching, less chasing",
+  P02: "One set of numbers, on time",
+  P03: "No client request lost",
+  P04: "Faster start, fewer drop-outs",
+  P05: "Paid right, every time",
+  P06: "Coverage gaps seen before they happen",
+  P07: "Fewer repeat complaints",
+  P08: "One trusted management view"
+};

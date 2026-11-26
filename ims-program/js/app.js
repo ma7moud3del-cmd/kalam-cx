@@ -41,6 +41,17 @@
       const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) btns.forEach(b => b.classList.toggle("on", b.dataset.sec === e.target.id)); }), { rootMargin: "-130px 0px -60% 0px" });
       btns.forEach(b => { const t = document.getElementById(b.dataset.sec); if (t) io.observe(t); });
     }
+    $$("[data-scroll]").forEach(b => b.addEventListener("click", () => { const t = document.getElementById(b.dataset.scroll); if (t) t.scrollIntoView({ behavior: "smooth" }); }));
+    /* long tables: show the first rows, the rest behind a button */
+    $$("main table").forEach(t => {
+      if (t.closest(".raci,.gm")) return;
+      const rows = [...t.querySelectorAll(":scope > tbody > tr")];
+      if (rows.length <= 6) return;
+      rows.slice(5).forEach(r => r.classList.add("folded"));
+      const b = document.createElement("button"); b.className = "showall"; b.textContent = `Show all ${rows.length} rows`;
+      b.addEventListener("click", () => { const open = t.classList.toggle("unfold"); b.textContent = open ? "Show fewer" : `Show all ${rows.length} rows`; });
+      (t.parentElement.scrollWidth > t.parentElement.clientWidth || getComputedStyle(t.parentElement).overflowX !== "visible" ? t.parentElement : t).insertAdjacentElement("afterend", b);
+    });
     /* links to a section inside another chapter */
     $$("[data-goto]").forEach(a => a.addEventListener("click", () => sessionStorage.setItem("goto", a.dataset.goto)));
 
@@ -61,7 +72,7 @@
     /* roadmap filter */
     $$("#rfilters .fbtn").forEach(b => b.addEventListener("click", () => { $$("#rfilters .fbtn").forEach(x => x.classList.toggle("on", x === b)); const k = b.dataset.k; $$("#rfilters + .card .gr").forEach(r => r.classList.toggle("hidden", k !== "all" && r.dataset.kind !== k)); }));
     /* risk filter */
-    $$("#kfilters .fbtn").forEach(b => b.addEventListener("click", () => { $$("#kfilters .fbtn").forEach(x => x.classList.toggle("on", x === b)); const cat = b.dataset.c; $$(".risktbl tbody tr").forEach(r => r.classList.toggle("hidden", cat !== "all" && r.children[1].textContent !== cat)); }));
+    $$("#kfilters .fbtn").forEach(b => b.addEventListener("click", () => { $$("#kfilters .fbtn").forEach(x => x.classList.toggle("on", x === b)); const cat = b.dataset.c; $$(".risktbl").forEach(t => t.classList.toggle("unfold", cat !== "all"));$$(".risktbl tbody tr").forEach(r => r.classList.toggle("hidden", cat !== "all" && r.children[1].textContent !== cat)); }));
     /* payment toggle */
     $$("#paytoggle button").forEach(b => b.addEventListener("click", () => { $$("#paytoggle button").forEach(x => x.classList.toggle("on", x === b)); $("#pay-today").classList.toggle("hidden", b.dataset.v !== "today"); $("#pay-prop").classList.toggle("hidden", b.dataset.v !== "prop"); }));
     /* evidence lightbox */
