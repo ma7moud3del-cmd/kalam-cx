@@ -44,7 +44,7 @@
     $$("[data-scroll]").forEach(b => b.addEventListener("click", () => { const t = document.getElementById(b.dataset.scroll); if (t) t.scrollIntoView({ behavior: "smooth" }); }));
     /* long tables: show the first rows, the rest behind a button */
     $$("main table").forEach(t => {
-      if (t.closest(".raci,.gm")) return;
+      if (t.closest(".raci,.gm") || t.classList.contains("pm-table")) return;
       const rows = [...t.querySelectorAll(":scope > tbody > tr")];
       if (rows.length <= 6) return;
       rows.slice(5).forEach(r => r.classList.add("folded"));
