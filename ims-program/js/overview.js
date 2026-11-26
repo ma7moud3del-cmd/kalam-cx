@@ -40,7 +40,7 @@
 
     /* ---------- status bar ---------- */
     const head = `<header class="pm-head"><div class="ov-grid-bg"></div><div class="wrap">
-      <div class="pm-crumb"><span class="up-draftmini">DRAFT · NOT APPROVED</span> Program cockpit · ${esc(G.org)}</div>
+      <div class="pm-crumb">Program cockpit · ${esc(G.org)}</div>
       <div class="pm-title"><h1>IMS Transformation <em>2027</em></h1>
         <div class="pm-goal"><span>Company target</span><b>${esc(G.growth.target)}</b></div></div>
       <div class="pm-meta">
@@ -224,7 +224,7 @@
   }
 
   const ov = window.CHAPTERS[0];
-  ov.title = "Program Draft"; ov.nav = "Program draft";
+  ov.title = "Program Cockpit"; ov.nav = "Program";
   ov.render = render;
   ov.wire = wire;
   ov.sections = [["board", "Dashboard"], ["timeline", "Timeline"], ["projects", "Projects"], ["tasks", "Initiatives"], ["milestones", "Milestones"], ["decisions", "Decisions"], ["risks", "Risks"]];

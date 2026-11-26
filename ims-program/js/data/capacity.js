@@ -1,14 +1,18 @@
 /* =====================================================================
    PROJECT 9 · Client Demand, Resource Utilization & Capacity Optimization
-   No data is connected yet. Every KPI value is null and carries a status:
-     vr = Validation required · na = Not available · nm = Not measured
-   A missing value is never shown as zero.
+   Real figures come from the IMS Intelligence Dashboard (prototype; data built
+   18 Nov 2026 from Kalam and Incorta exports). Period: 1 Oct – 8 Nov 2026.
+   KPI status: m = Measured (value shown) · vr = Validation required ·
+   na = Not available · nm = Not measured. A missing value is never shown as zero.
+   "Abandoned" counts calls as the queue records them, including very short ones.
    ===================================================================== */
 window.IMS = window.IMS || {};
 
 IMS.capacity = {
   question: "How much more can IMS deliver with the resources it already has?",
-  updated: "Not refreshed · no source connected",
+  updated: "IMS dashboard data · 1 Oct – 8 Nov 2026 · built 18 Nov",
+  source: "IMS Intelligence Dashboard (Kalam + Incorta exports)",
+  asof: "18 Nov 2026",
   principles: [
     ["Unassigned", "≠ available"],
     ["No report", "≠ zero demand"],
@@ -17,43 +21,55 @@ IMS.capacity = {
   ],
   filters: ["Period", "Client", "Language", "Service line", "Interpreter status", "Assignment"],
 
-  /* Director's two-minute dashboard. kpi: [label, status, source, definition, period] */
+  /* Real demand from the IMS dashboard: client queue → [offered, answered, abandoned] */
+  real: {
+    period: "1 Oct – 8 Nov 2026",
+    total: [110301, 82317, 27984],
+    clients: [["Boostlingo", 42547, 42491, 56], ["TTG", 38025, 16863, 21162], ["Cloudbreak-OPI", 14421, 11995, 2426], ["Masterworld", 4306, 4306, 0], ["TBW", 3858, 1665, 2193], ["LLK", 3508, 1414, 2094], ["Lion Bridge", 2372, 2372, 0], ["Other 11 clients", 1264, 1211, 53]],
+    ttgLangs: [["Spanish", 31225, 14656, 16569], ["Mandarin", 1338, 337, 1001], ["Portuguese", 759, 470, 289], ["Korean", 445, 33, 412], ["German", 424, 22, 402], ["Italian", 325, 94, 231], ["Russian", 320, 142, 178], ["Other 47 languages", 3189, 1109, 2080]],
+    italian: [["Boostlingo", 420, 420, 0], ["TTG", 325, 94, 231], ["Cloudbreak-OPI", 118, 69, 49], ["LLK", 35, 20, 15], ["TBW", 10, 3, 7], ["Masterworld", 7, 7, 0], ["TW Languages", 1, 1, 0]],
+    italianInterp: [9, 3, 6],
+    hours: { idle: 29348, talk: 13138 },
+    weekOcc: ["24.1%", "W46 · 9–15 Nov", "target 35.3%"]
+  },
+
+  /* Director's two-minute dashboard. kpi: [label, status, source, definition, period, value] */
   panels: [
     { id: "A", name: "Client coverage", kpis: [
-      ["Active clients", "vr", "Account DB vs finance list", "Clients with an active contract", "Current month"],
+      ["Clients with calls", "m", "IMS dashboard · Incorta queues", "Client queues with at least one offered call", "1 Oct – 8 Nov", "18"],
       ["Clients missing in DB", "vr", "Client check report (one-off)", "Active clients not in the account database", "Last check"],
       ["DB accuracy score", "nm", "Module A reconciliation", "Matching records / records checked across 6 sources", "Monthly"] ] },
     { id: "B", name: "Resource utilization", kpis: [
-      ["Qualified interpreters", "vr", "Zoho / onboarding", "Interpreters passed for a language and active", "Current"],
-      ["Qualified, not assigned", "vr", "Zoho vs account DB", "Qualified for a language with demand, not assigned to that client", "Current"],
-      ["Logged vs scheduled hours", "na", "Schedules + Time Doctor", "Logged hours / scheduled hours", "Weekly"] ] },
+      ["Interpreters in Kalam", "m", "IMS dashboard · Kalam roster", "Interpreters with a Kalam profile in the period (all pools)", "1 Oct – 8 Nov", "349"],
+      ["Ready but idle", "m", "IMS dashboard · Kalam activity", "Hours interpreters were available and not on a call", "1 Oct – 8 Nov", "29,348 h"],
+      ["Talk time", "m", "IMS dashboard · Kalam activity", "Hours on calls", "1 Oct – 8 Nov", "13,138 h"] ] },
     { id: "C", name: "Demand vs capacity", kpis: [
-      ["Clients with visible demand", "vr", "Client reports, Kalam, Incorta", "Clients where offered calls are available", "Monthly"],
-      ["Demand visibility gaps", "vr", "Module B", "Active clients with no demand source", "Monthly"],
-      ["Languages under capacity", "nm", "Module E", "Demand above qualified, scheduled capacity", "Weekly"] ] },
+      ["Calls offered", "m", "IMS dashboard · Incorta queues", "Calls offered to IMS queues", "1 Oct – 8 Nov", "110,301"],
+      ["Calls abandoned", "m", "IMS dashboard · Incorta queues", "Offered calls not answered, as the queue records them", "1 Oct – 8 Nov", "27,984"],
+      ["Languages under capacity", "m", "IMS dashboard · Incorta queues", "Languages with ≥100 calls and over 30% abandoned", "1 Oct – 8 Nov", "14"] ] },
     { id: "D", name: "Data reliability", kpis: [
-      ["Sources connected", "nm", "Data discovery", "Sources with an approved, repeatable feed (of 6)", "Current"],
+      ["Sources in use", "m", "IMS dashboard source list", "Kalam and Incorta exports feeding the prototype (of 8 needed)", "18 Nov", "2 of 8"],
       ["KPIs with agreed definition", "vr", "KPI register", "KPIs signed off by an owner", "Current"],
-      ["Last full refresh", "na", "Refresh log", "Date of last complete refresh", "—"] ] },
+      ["Last data build", "m", "IMS dashboard", "Date the dashboard data was last built", "—", "18 Nov"] ] },
     { id: "E", name: "Opportunities", kpis: [
       ["Identified", "tracker", "Opportunity tracker", "Items logged in Module F", "Cumulative"],
       ["Validated", "tracker", "Opportunity tracker", "Items with data confirmed", "Cumulative"],
       ["Added delivery", "nm", "Module F (measured stage)", "Extra hours delivered from existing capacity", "Monthly"] ] }
   ],
   attention: [
-    ["TTG Italian: qualified Italian interpreters not assigned to TTG", "OP-01"],
-    ["TTG offered calls not visible", "OP-02"],
+    ["TTG: 21,162 of 38,025 calls abandoned (56%)", "OP-02"],
+    ["TTG Italian: 231 of 325 calls abandoned", "OP-01"],
+    ["29,348 h ready-idle while 27,984 calls abandoned: language mismatch?", "OP-04"],
     ["Clients missing in the account database", "OP-03"],
-    ["Demand source unknown for some clients", "R-17"],
     ["No owner named for Project 9 or its data sources", "R-09"]
   ],
 
-  /* Worked example. Each step: [what, status] (status: vr · na · desc) */
+  /* Worked example. Each step: [what, status, value] (m = measured, desc = as described) */
   ttg: [
-    ["Italian demand on TTG", "desc"],
-    ["TTG offered calls", "na"],
-    ["Italian interpreters qualified", "vr"],
-    ["Assigned to TTG", "desc"],
+    ["TTG Italian calls offered", "m", "325"],
+    ["Answered", "m", "94"],
+    ["Abandoned", "m", "231"],
+    ["Italian interpreters in Kalam", "m", "9"],
     ["Eligibility, contract, schedule", "vr"],
     ["Decision", "human"]
   ],
@@ -109,8 +125,9 @@ IMS.capacity = {
   /* Opportunity tracker (Module F). 15 fields; TBC where not known. */
   oppStages: ["Identified", "Validated", "Approved", "Implemented", "Measured"],
   opportunities: [
-    { id: "OP-01", title: "Assign qualified Italian interpreters to TTG", client: "TTG", language: "Italian", line: "TBC", cls: "Unused qualified capacity", evidence: "Italian demand on TTG; Italian interpreters not assigned to TTG (as described)", source: "Operations (described)", confidence: "Low", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Confirm TTG Italian demand and interpreter eligibility", due: "TBC", result: "Not measured" },
-    { id: "OP-02", title: "Make TTG demand visible", client: "TTG", language: "All", line: "TBC", cls: "Demand visibility gap", evidence: "Offered calls on TTG not known", source: "Operations (described)", confidence: "Low", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Find which system or report holds TTG offered calls", due: "TBC", result: "Not measured" },
+    { id: "OP-01", title: "Assign qualified Italian interpreters to TTG", client: "TTG", language: "Italian", line: "TBC", cls: "Unused qualified capacity", evidence: "325 Italian calls offered on TTG, 231 abandoned (1 Oct – 8 Nov); 9 Italian-speaking interpreters in Kalam", source: "IMS dashboard (Incorta, Kalam)", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Confirm TTG Italian demand and interpreter eligibility", due: "TBC", result: "Not measured" },
+    { id: "OP-02", title: "Cut TTG abandoned calls", client: "TTG", language: "All (Spanish 16,569)", line: "TBC", cls: "Unmet demand", evidence: "38,025 offered, 16,863 answered, 21,162 abandoned (1 Oct – 8 Nov)", source: "IMS dashboard (Incorta queues)", confidence: "High", impact: "Not measured", owner: "To be assigned", stage: "Validated", action: "Check TTG staffing by language and hour against idle capacity", due: "TBC", result: "Not measured" },
+    { id: "OP-04", title: "Use idle hours where calls are lost", client: "All", language: "Spanish, Mandarin, Korean first", line: "TBC", cls: "Unused qualified capacity", evidence: "29,348 h ready-idle and 27,984 calls abandoned in the same period", source: "IMS dashboard (Kalam, Incorta)", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Match idle hours by language and hour to abandoned calls", due: "TBC", result: "Not measured" },
     { id: "OP-03", title: "Add missing clients to the account database", client: "Several (TBC)", language: "TBC", line: "TBC", cls: "Data correction", evidence: "Client check report found clients missing in the database", source: "Client check report", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Re-run the check and list the clients", due: "TBC", result: "Not measured" }
   ],
 

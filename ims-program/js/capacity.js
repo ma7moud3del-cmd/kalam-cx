@@ -3,21 +3,22 @@
 (function () {
   const { $$, esc } = UI;
   const K = IMS.capacity;
-  const ST = { vr: ["dec", "Validation required"], na: ["risk", "Not available"], nm: ["cur", "Not measured"], desc: ["est", "As described"], human: ["fut", "People decide"] };
+  const ST = { m: ["ok", "Measured"], vr: ["dec", "Validation required"], na: ["risk", "Not available"], nm: ["cur", "Not measured"], desc: ["est", "As described"], human: ["fut", "People decide"] };
   const st = s => `<span class="cp-st s-${ST[s][0]}">${ST[s][1]}</span>`;
   const sysName = id => (IMS.systems.find(s => s.id === id) || { name: id }).name;
   const oppCount = stage => K.opportunities.filter(o => K.oppStages.indexOf(o.stage) >= K.oppStages.indexOf(stage)).length;
 
   function kpi(k) {
-    const v = k[1] === "tracker" ? `<b class="cp-v">${oppCount(k[0])}</b><span class="cp-st s-ok">From tracker</span>` : `<b class="cp-v na">—</b>${st(k[1])}`;
+    const v = k[1] === "tracker" ? `<b class="cp-v">${oppCount(k[0])}</b><span class="cp-st s-ok">From tracker</span>` : k[1] === "m" ? `<b class="cp-v">${esc(k[5])}</b>${st("m")}` : `<b class="cp-v na">—</b>${st(k[1])}`;
     return `<details class="cp-k"><summary><span class="cp-l">${esc(k[0])}</span>${v}</summary>
-      <dl><dt>Source</dt><dd>${esc(k[2])}</dd><dt>Definition</dt><dd>${esc(k[3])}</dd><dt>Period</dt><dd>${esc(k[4])}</dd><dt>Last update</dt><dd>${k[1] === "tracker" ? "26 Nov 2026" : "Not available"}</dd></dl></details>`;
+      <dl><dt>Source</dt><dd>${esc(k[2])}</dd><dt>Definition</dt><dd>${esc(k[3])}</dd><dt>Period</dt><dd>${esc(k[4])}</dd><dt>Last update</dt><dd>${k[1] === "tracker" ? "26 Nov 2026" : k[1] === "m" ? esc(K.asof) : "Not available"}</dd></dl></details>`;
   }
 
   /* ---- Data graph: the designed flow from sources to decision makers.
      Structure only (sources, database, modules, views, reports, roles). No client or interpreter data is drawn. */
   const SRC = ["accountdb", "kalam", "zoho", "incorta", "clientrep", "schedules", "timedoctor", "transparent"];
-  const graphTitle = `${SRC.length} sources · 0 connected`;
+  const LIVE = ["kalam", "incorta"];
+  const graphTitle = `${SRC.length} sources · ${LIVE.length} in use (IMS dashboard prototype)`;
   const MOD_VIEWS = { A: [1, 4], B: [3, 5], C: [2, 6], D: [8, 9], E: [6, 7], F: [10] };
   const MOD_REPS = { A: [2], B: [1], C: [0, 1], D: [3], E: [4], F: [4] };
   function layout() {
@@ -26,15 +27,15 @@
     const arc = (list, r, a0, a1) => list.map((x, i) => at(r, list.length === 1 ? (a0 + a1) / 2 : a0 + (a1 - a0) * i / (list.length - 1)));
     const add = (id, label, kind, p, sub) => N.push({ id, label, kind, x: p[0], y: p[1], sub: sub || "" });
     add("db", "Unified database", "db", [cx, cy], "Design · needs IT hosting");
-    arc(SRC, 400, 145, 215).forEach((p, i) => add("s-" + SRC[i], sysName(SRC[i]), "src", p, "Not connected"));
+    arc(SRC, 400, 145, 215).forEach((p, i) => add("s-" + SRC[i], sysName(SRC[i]), LIVE.includes(SRC[i]) ? "srcon" : "src", p, LIVE.includes(SRC[i]) ? "Feeding the IMS dashboard prototype" : "Not connected"));
     const mods = K.modules.map(m => m[0]);
     arc(mods, 150, -150, 150).forEach((p, i) => add("m-" + mods[i], "Module " + mods[i], "mod", p, K.modules[i][1]));
     arc(K.views, 305, -54, 48).forEach((p, i) => add("v-" + (i + 1), K.views[i][0], "view", p, "View " + (i + 1)));
     arc(K.reports, 325, 58, 134).forEach((p, i) => add("r-" + i, K.reports[i][0], "rep", p, K.reports[i][1] + " report"));
     arc(K.roles, 330, 228, 296).forEach((p, i) => add("p-" + K.roles[i].id, K.roles[i].name, "role", p, "Custom view"));
-    add("x-ttg", "TTG", "gap", at(235, 198), "Client · demand not visible");
-    add("x-ita", "Italian", "gap", at(225, 165), "Language · interpreters not assigned to TTG");
-    SRC.forEach(s => E.push(["s-" + s, "db", "off"]));
+    add("x-ttg", "TTG", "gap", at(235, 198), "Client · 21,162 of 38,025 calls abandoned");
+    add("x-ita", "Italian", "gap", at(225, 165), "Language · 231 of 325 TTG Italian calls abandoned");
+    SRC.forEach(s => E.push(["s-" + s, "db", LIVE.includes(s) ? "on" : "off"]));
     mods.forEach(m => { E.push(["db", "m-" + m, "on"]); MOD_VIEWS[m].forEach(v => E.push(["m-" + m, "v-" + v, "on"])); MOD_REPS[m].forEach(r => E.push(["m-" + m, "r-" + r, "on"])); });
     K.roles.forEach(r => r.views.forEach(v => E.push(["v-" + v, "p-" + r.id, "on"])));
     E.push(["x-ttg", "x-ita", "gap"], ["x-ttg", "m-B", "gap"], ["x-ita", "m-C", "gap"]);
@@ -44,7 +45,7 @@
     const { N, E } = layout(), byId = Object.fromEntries(N.map(n => [n.id, n]));
     const edges = E.map(([a, b, k], i) => { const p = byId[a], q = byId[b]; const mx = (p.x + q.x) / 2 + (q.y - p.y) * .12, my = (p.y + q.y) / 2 - (q.x - p.x) * .12;
       return `<path class="cx-e e-${k}" data-a="${a}" data-b="${b}" d="M${p.x.toFixed(1)},${p.y.toFixed(1)} Q${mx.toFixed(1)},${my.toFixed(1)} ${q.x.toFixed(1)},${q.y.toFixed(1)}" style="animation-delay:${(i % 9) * -.4}s"/>`; }).join("");
-    const size = { db: 28, mod: 22, src: 10, view: 9, rep: 9, role: 12, gap: 12 };
+    const size = { db: 28, mod: 22, src: 10, srcon: 12, view: 9, rep: 9, role: 12, gap: 12 };
     const nodes = N.map(n => { const s = size[n.kind]; const right = n.x >= 590, mid = n.kind === "db" || n.kind === "mod";
       return `<g class="cx-n n-${n.kind}" data-id="${n.id}" data-label="${esc(n.label)}" data-sub="${esc(n.sub)}" tabindex="0" transform="translate(${n.x.toFixed(1)},${n.y.toFixed(1)})">
         <rect x="${-s / 2}" y="${-s / 2}" width="${s}" height="${s}" rx="${n.kind === "db" ? 6 : 2}" transform="rotate(${n.kind === "db" ? 45 : 0})"/>
@@ -57,26 +58,26 @@
   function logLines() {
     return [
       ...K.opportunities.map(o => [o.id, `${o.stage.toLowerCase()} · ${o.client} ${o.language !== "All" ? o.language : ""} · confidence ${o.confidence.toLowerCase()}`, "y"]),
-      ...SRC.map(s => ["src", `${sysName(s)} · not connected`, "r"]),
+      ...SRC.map(s => ["src", `${sysName(s)} · ${LIVE.includes(s) ? "in use (prototype)" : "not connected"}`, LIVE.includes(s) ? "g" : "r"]),
       ["P09", "stage 1 data discovery · not started", "g"]
     ];
   }
 
   function render() {
     const hero = `<header class="up-hero cp-hero"><div class="ov-grid-bg"></div><div class="wrap">
-      <div class="up-draft"><b>DRAFT</b>Project 9 · design only · no data connected yet</div>
+      <div class="up-draft"><b>P09</b>First real figures from the IMS dashboard · 1 Oct – 8 Nov 2026</div>
       <h1>${esc(K.question.replace("already has?", ""))}<em>already has?</em></h1>
       <div class="cp-pr">${K.principles.map(p => `<div><b>${esc(p[0])}</b><span>${esc(p[1])}</span></div>`).join("")}</div>
     </div></header>`;
 
     /* header strip: design counts only (real), plus live-KPI tiles per panel */
     const allK = K.panels.flatMap(p => p.kpis);
-    const waiting = allK.filter(k => k[1] !== "tracker").length;
-    const strip = [["Modules", K.modules.length, "A–F"], ["Views", K.views.length, "designed"], ["Auto reports", K.reports.length, "from Stage 4"], ["Opportunities", K.opportunities.length, "identified"], ["KPIs waiting", waiting, "for data"]];
-    const tiles = K.panels.map(p => [p.id, p.kpis.filter(k => k[1] === "tracker").length, p.kpis.length]);
+    const waiting = allK.filter(k => !["tracker", "m"].includes(k[1])).length, n = x => x.toLocaleString("en-US");
+    const strip = [["Calls offered", n(K.real.total[0]), K.real.period], ["Abandoned", n(K.real.total[2]), Math.round(K.real.total[2] / K.real.total[0] * 100) + "%"], ["Ready but idle", n(K.real.hours.idle) + " h", "same period"], ["Opportunities", K.opportunities.length, "in tracker"], ["KPIs waiting", waiting, "for data"]];
+    const tiles = K.panels.map(p => [p.id, p.kpis.filter(k => ["tracker", "m"].includes(k[1])).length, p.kpis.length]);
     const dash = `<section class="cp-console" id="dash"><div class="wrap">
       <div class="cx-top">
-        <div class="cx-title"><b>DIRECTOR VIEW</b><span><i class="cx-rec"></i>DESIGN · ${esc(K.updated)}</span></div>
+        <div class="cx-title"><b>DIRECTOR VIEW</b><span><i class="cx-rec"></i>${esc(K.updated)}</span></div>
         <div class="cx-strip">${strip.map(s => `<div><small>${esc(s[0])}</small><b>${s[1]}</b><em>${esc(s[2])}</em></div>`).join("")}</div>
       </div>
       <div class="cx-tiles">${tiles.map(t => `<div><span>${t[0]}</span><small>${t[1]}/${t[2]} with data</small><i>${Array.from({ length: t[2] }, (_, j) => `<u class="${j < t[1] ? "on" : ""}"></u>`).join("")}</i></div>`).join("")}<div class="cx-tf"><span>F</span><small>${K.attention.length} open</small><i>${K.attention.map(() => `<u class="r"></u>`).join("")}</i></div></div>
@@ -89,12 +90,12 @@
           <div class="cx-log"><div class="cx-lh">signal log</div>${logLines().map(l => `<div><span>${esc(l[0])}</span> <b class="${l[2]}">${esc(l[1])}</b></div>`).join("")}</div>
         </div>
       </div>
-      <p class="cx-note">Every figure shows its source, definition, period and last update when tapped. No value is shown until its source is validated.</p>
+      <p class="cx-note">Tap any figure for its source, definition, period and last update. Measured values come from the IMS dashboard prototype; the rest wait for their source.</p>
     </div></section>`;
 
     const ttg = `<section class="sec up-sec" id="ttg"><div class="wrap">
       <div class="up-head"><span>Worked example</span><h2>TTG · Italian</h2></div>
-      <div class="cp-chain">${K.ttg.map((s, i) => `<div><span>${i + 1}</span><b>${esc(s[0])}</b>${st(s[1])}</div>`).join("")}</div>
+      <div class="cp-chain">${K.ttg.map((s, i) => `<div><span>${i + 1}</span>${s[2] ? `<strong>${esc(s[2])}</strong>` : ""}<b>${esc(s[0])}</b>${st(s[1])}</div>`).join("")}</div>
       <p class="up-note">Unassigned does not mean available: no move before eligibility, contract, schedule and commitments are checked.</p>
     </div></section>`;
 
@@ -165,7 +166,20 @@
       <p class="up-note">Saved in this browser for now. In the company tool each person's view is saved to their account and shows only the clients they may see.</p>
     </div></section>`;
 
-    return hero + dash + builder + ttg + platform + mods + views + data + plan + track;
+
+    const RD = K.real, mx = Math.max(...RD.clients.map(c => c[1])), mt = Math.max(...RD.ttgLangs.map(c => c[1]));
+    const bars = (rows, m) => rows.map(r => `<div class="rb"><span>${esc(r[0])}</span><div class="rb-t"><i class="a" style="width:${(r[2] / m * 100).toFixed(1)}%"></i><i class="x" style="width:${(r[3] / m * 100).toFixed(1)}%"></i></div><b>${r[1].toLocaleString("en-US")}</b><em>${r[1] ? Math.round(r[3] / r[1] * 100) : 0}% lost</em></div>`).join("");
+    const real = `<section class="sec up-sec" id="demand"><div class="wrap">
+      <div class="up-head"><span>Real data · ${esc(RD.period)}</span><h2>Where demand is lost</h2></div>
+      <div class="rd-kpis"><div><b>${RD.total[0].toLocaleString("en-US")}</b><span>calls offered</span></div><div><b>${RD.total[1].toLocaleString("en-US")}</b><span>answered</span></div><div class="bad"><b>${RD.total[2].toLocaleString("en-US")}</b><span>abandoned</span></div><div class="idle"><b>${RD.hours.idle.toLocaleString("en-US")} h</b><span>ready but idle</span></div><div><b>${RD.weekOcc[0]}</b><span>occupancy ${esc(RD.weekOcc[1])} · ${esc(RD.weekOcc[2])}</span></div></div>
+      <div class="rd-cols">
+        <div class="rd-card"><h4>By client</h4><div class="rd-key"><i class="a"></i>answered <i class="x"></i>abandoned</div>${bars(RD.clients, mx)}</div>
+        <div class="rd-card"><h4>TTG by language</h4><div class="rd-key"><i class="a"></i>answered <i class="x"></i>abandoned</div>${bars(RD.ttgLangs, mt)}</div>
+      </div>
+      <p class="up-note">Source: ${esc(K.source)}, data built ${esc(K.asof)}. Abandoned = offered calls not answered, as the queue records them (includes very short calls). Idle hours and abandoned calls can be in different languages and hours: matching them is Module E.</p>
+    </div></section>`;
+
+    return hero + dash + real + builder + ttg + platform + mods + views + data + plan + track;
   }
 
   function wireGraph() {
@@ -212,5 +226,5 @@
     paint();
   }
 
-  window.CHAPTERS.push({ id: "capacity", no: "09", title: "Demand vs Resources", nav: "Capacity", hero: true, render, wire, sections: [["dash", "Dashboard"], ["myview", "My view"], ["ttg", "TTG example"], ["platform", "Database & reports"], ["modules", "Modules"], ["views", "Views"], ["data", "Data"], ["stages", "Stages"], ["tracker", "Tracker"]] });
+  window.CHAPTERS.push({ id: "capacity", no: "09", title: "Demand vs Resources", nav: "Capacity", hero: true, render, wire, sections: [["dash", "Dashboard"], ["demand", "Real demand"], ["myview", "My view"], ["ttg", "TTG example"], ["platform", "Database & reports"], ["modules", "Modules"], ["views", "Views"], ["data", "Data"], ["stages", "Stages"], ["tracker", "Tracker"]] });
 })();
