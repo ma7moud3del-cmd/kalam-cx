@@ -14,7 +14,7 @@ IMS.program = {
   status: "Awaiting management approval (gate G0). Two initiatives in live use, operated personally; three pilots ready for approval.",
   statement: "Building a smarter, connected, measurable and sustainable operating environment for IMS.",
   message: "Transforming IMS from fragmented, manually coordinated processes into one integrated, company-owned operating environment.",
-  summary: "Eight projects and seven shared capabilities that connect Supervisors, ACMs, Workforce, Quality, Finance, Onboarding, IT and management on one platform, so IMS can grow without adding headcount.",
+  summary: "Nine projects and seven shared capabilities that connect Supervisors, ACMs, Workforce, Quality, Finance, Onboarding, IT and management on one platform, so IMS can grow without adding headcount.",
   growth: {
     target: "20% growth with current resources",
     source: "Company target, as stated by the program lead (26 Nov 2026)",
@@ -177,6 +177,8 @@ IMS.systems = [
   { id: "email", name: "Email", purpose: "Requests, reports, complaints", data: "Messages and attachments", owner: "IT", method: "Assessment (P03.13)", api: "Not verified", auth: "Not verified", status: "open", risk: "Mailbox access and retention rules" },
   { id: "sheets", name: "Spreadsheets & files", purpose: "Current manual tracking and reports", data: "Paid-hours files, trackers, schedules", owner: "Each team", method: "File drop to a shared drive", api: "n/a", auth: "Company drive", status: "partial", risk: "Formats change by hand" },
   { id: "accountdb", name: "Account database", purpose: "Interpreter-account assignments", data: "Account allocations", owner: "Onboarding (to confirm)", method: "To be assessed", api: "Not verified", auth: "Not verified", status: "open", risk: "Location and format to confirm" },
+  { id: "clientrep", name: "Client reports", purpose: "Demand data some clients send or publish", data: "Offered, answered, missed calls per client (varies)", owner: "ACMs (to confirm)", method: "To be assessed per client", api: "Not verified", auth: "Not verified", status: "open", risk: "Not available for every client" },
+  { id: "schedules", name: "Workforce schedules", purpose: "Who is scheduled when", data: "Shifts by interpreter and language", owner: "Workforce Management (to confirm)", method: "To be assessed", api: "Not verified", auth: "Not verified", status: "open", risk: "Location and format to confirm" },
   { id: "datadb", name: "Central data platform", purpose: "Proposed shared data model", data: "All validated program data", owner: "IT", method: "To be built", api: "n/a", auth: "Company sign-in", status: "open", risk: "Needs IT hosting decision" },
   { id: "portals", name: "Client portals (e.g. MasterWord)", purpose: "Applicant submission to clients", data: "Applicant forms and documents", owner: "Client", method: "Browser automation on the public portal", api: "No API used", auth: "Portal access", status: "verified", risk: "Portal changes can break the automation" }
 ];

@@ -60,7 +60,7 @@
       ${kpi(P.length, "Projects", `${P.filter(p => projStatus(p).key === "progress").length} in progress · ${P.filter(p => projStatus(p).key === "approval").length} awaiting approval · ${P.filter(p => projStatus(p).key === "planned").length} planned`, "Business outcomes, each with one accountable owner")}
       ${kpi(CAP.length, "Shared capabilities", `Used by ${new Set(CAP.flatMap(c => c.usedBy)).size} projects`, "Platform modules built once and shared by several projects")}
       ${kpi(INITS.length, "Initiatives", "By status:", "Sub-projects inside the projects and capabilities", breakdown, "wide")}
-      ${kpi(`${gatesPassed}<small>/${gateTotal}</small>`, "Stage gates passed", `${gatesPartly} partly passed · 8 gates × 8 projects`, "A gate counts only when its criteria are met and the steering committee records it")}
+      ${kpi(`${gatesPassed}<small>/${gateTotal}</small>`, "Stage gates passed", `${gatesPartly} partly passed · ${IMS.gates.length - 1} gates × ${IMS.projects.length} projects`, "A gate counts only when its criteria are met and the steering committee records it")}
       ${kpi(openDec.length, "Decisions needing action", `of ${IMS.decisions.length} · earliest ${esc(openDec[0] ? openDec[0][4] : "—")}`, "Open, awaiting approval or deferred decisions", "", "dec")}
       ${kpi(pilotsWaiting.length, "Pilots awaiting approval", esc(pilotsWaiting.join(" · ")) || "None", "Pilots whose initiatives are all awaiting approval")}
       ${kpi(crit + high, "High and critical risks", `${crit} critical · ${high} high, of ${IMS.risks.length}`, "Critical = high impact × high probability. High = score 6 (H×M or M×H)", "", "risk")}

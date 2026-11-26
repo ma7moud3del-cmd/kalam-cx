@@ -509,6 +509,62 @@ IMS.projects = [
     ["P08.11", "AI-Assisted Data Queries", "planned"],
     ["P08.12", "Management Decision Support", "planned"]
   ]
+},
+{
+  id: "P09", pain: "Clients missing in the database, qualified interpreters not assigned where demand is, demand not visible for some clients.", name: "Client Demand, Resource Utilization & Capacity Optimization", short: "Demand vs resources",
+  objective: "Show, per client and language, how much demand there is, who is assigned and qualified, and where existing capacity is not used.",
+  outcome: "IMS delivers more with the interpreters, Supervisors and tools it already has.",
+  depts: ["Operations", "Workforce Management", "Account Management", "Onboarding", "Management"], lead: "Operations",
+  owner: "To be assigned", ownerStatus: "to-name",
+  pillars: ["Revenue", "Performance", "Cost"],
+  stage: "Proposed · Stage 1 Data Discovery not started",
+  problem: "IMS cannot see in one place which clients have demand, in which languages, and whether qualified interpreters are assigned to them. Some clients are missing in the database, some qualified interpreters are not assigned to clients that need their language (TDG Italian example), and demand for some clients is not visible at all.",
+  current: ["Client demand seen per client report, if any", "Assignments kept in the account database", "One-off client check report", "Gaps found by chance (TDG Italian)", "No view of unused capacity"],
+  future: ["Six sources reconciled per client", "Demand by client, language and hour", "Interpreter-to-client alignment matrix", "Demand vs capacity gap per language", "Director dashboard in two minutes", "Opportunities tracked to measured result"],
+  flow: "workforce",
+  requirements: [
+    "Module A: client coverage and database accuracy, reconciling 6 sources, with a discrepancy record and an accuracy score",
+    "Module B: client demand visibility (offered, answered, missed, abandoned; by language, service line, hour; WoW, MoM, YoY)",
+    "A client without visible demand is flagged 'Demand Visibility Gap', never shown as zero",
+    "Module C: resource-to-client alignment matrix by language and eligibility",
+    "Module D: capacity utilization in 8 separate categories; no new targets without management approval",
+    "Module E: demand vs capacity gap matrix with 6 opportunity classes and data confidence",
+    "Module F: opportunity and action tracker (identified, validated, approved, implemented, measured)",
+    "Director dashboard: every KPI shows source, definition, period and last update",
+    "No interpreter is moved without checking eligibility, contract, schedule and commitments"
+  ],
+  automation: [
+    ["Reconcile client lists across sources and log discrepancies", "det"],
+    ["Flag clients with no visible demand data", "rule"],
+    ["Match qualified, unassigned interpreters to clients with demand in their language", "rule"],
+    ["Forecast demand peaks by client and language", "pred"],
+    ["Whether an interpreter is reassigned", "human"]
+  ],
+  systems: ["kalam", "incorta", "accountdb", "zoho", "clientrep", "schedules", "timedoctor", "transparent", "sheets"],
+  controls: ["Unassigned does not mean available: eligibility, contract and schedule checked first", "Missing data shown as 'Not available' or 'Validation required', never zero", "Each KPI has an owner, a definition and a source", "Targets set only by management"],
+  deliverables: ["Data discovery map (source per metric)", "Client coverage and accuracy report", "Demand visibility gap list", "Alignment and gap matrices", "Director two-minute dashboard", "Opportunity and action tracker"],
+  deps: ["P02", "F-DATA", "P06"], depText: "Reads the same sources as reporting (P02) and the data platform. Shares workforce data with P06.",
+  risks: ["R-17", "R-18", "R-05"],
+  kpis: [
+    ["Client database accuracy", "Records matching across sources / records checked", "TBM"],
+    ["Clients with visible demand", "Clients with demand data / active clients", "TBM"],
+    ["Qualified interpreters not assigned where demand exists", "Count by language and client", "TBM"],
+    ["Opportunities validated and measured", "Tracker items reaching 'measured'", "TBM"]
+  ],
+  baseline: "Stage 1 Data Discovery: client list from each of the 6 sources, demand data available per client, assignment snapshot.",
+  value: { operational: ["Qualified interpreters used where demand exists", "Demand gaps seen before they cost service", "One accurate client list"], financial: ["TBM: added delivery from existing capacity (not claimed until measured)"] },
+  roi: { volume: "TBM (active clients × languages)", cur: "TBM", next: "TBM", review: "TBM", impl: "TBM", recur: "TBM", hours: "TBM", capacity: "TBM", savings: "None claimed", roi: "TBM", payback: "TBM" },
+  initiatives: [
+    ["P09.1", "Data Discovery & Baseline", "planned", "Stage 1"],
+    ["P09.2", "Client Coverage & Database Accuracy", "planned", "Module A"],
+    ["P09.3", "Client Demand Visibility", "planned", "Module B"],
+    ["P09.4", "Resource-to-Client Alignment", "planned", "Module C"],
+    ["P09.5", "Capacity Utilization", "planned", "Module D"],
+    ["P09.6", "Demand vs Capacity Gap Analysis", "planned", "Module E"],
+    ["P09.7", "Opportunity & Action Tracker", "planned", "Module F"],
+    ["P09.8", "Director Two-Minute Dashboard", "planned", "Stage 3"],
+    ["P09.9", "Automated Refresh & Alerts", "planned", "Stage 4"]
+  ]
 }
 ];
 
@@ -586,8 +642,16 @@ IMS.projectDetail = {
     data: ["Validated measures from P02 and the data platform", "Program register, risks and decisions (this site's data)", "Benefits confirmed by Finance", "Alert thresholds set by each project owner"],
     stakeholders: ["Executive sponsor and steering committee", "Department heads", "Finance (benefit confirmation)", "IT and data owners"],
     kpiSrc: ["Time diary of management-pack preparation in Discovery", "Steering decision log", "Alert log"]
+  },
+  P09: {
+    scopeIn: ["Client list reconciliation across 6 sources", "Demand visibility per client and language", "Interpreter-to-client alignment", "Capacity utilization and gap analysis", "Director dashboard and opportunity tracker"],
+    scopeOut: ["Moving interpreters (an operational decision after checks)", "New utilization or occupancy targets (management only)", "Headcount or occupancy dashboards", "Client billing"],
+    data: ["Client list: account database, Kalam, Zoho, Incorta, client reports, finance list (to confirm)", "Demand: offered, answered, missed, abandoned per client (source per client TBC)", "Interpreter languages, qualifications and eligibility (Zoho / onboarding)", "Assignments (account database)", "Schedules and logged hours (WFM, Time Doctor)"],
+    stakeholders: ["Operations Director (dashboard user)", "Workforce Management", "ACMs (client demand)", "Onboarding (assignments)", "IT and data owners"],
+    kpiSrc: ["Reconciliation of 6 client lists (Stage 1)", "Demand source inventory per client", "Alignment matrix: Zoho languages vs account database", "Opportunity tracker"]
   }
 };
+
 IMS.projects.forEach(p => Object.assign(p, IMS.projectDetail[p.id] || {}));
 
 /* Foundations: shared prerequisites that are not projects */

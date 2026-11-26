@@ -23,6 +23,8 @@ IMS.roadmap = [
   ["Pilot B · Payment (read-only)", 4, 3.5, "P05", "pilot", "3 live cycles"],
   ["Pilot C · Onboarding activation", 4, 3.5, "P04", "pilot", "8–12 weeks"],
   ["Session Desk pilot", 4, 3, "P06", "pilot", "Needs client OK"],
+  ["Demand vs resources: data discovery", 1, 2, "P09", "plan", "Stage 1"],
+  ["Director dashboard (first version)", 3, 3, "P09", "build", "Stages 2–3"],
   ["Quality repository design", 5, 3, "P07", "plan", "Requirements"],
   ["Reporting hub build", 5, 5, "P02", "build", ""],
   ["Roll out validated pilots", 9, 4, "ALL", "run", "Per project"],
@@ -54,7 +56,8 @@ IMS.gateProgress = {
   P05: [1, 0, 0, 0, 0, 0, 0, 0],
   P06: [0, 0, 0, 1, 0, 0, 0, 0],
   P07: [0, 0, 0, 0, 0, 0, 0, 0],
-  P08: [0, 0, 0, 0, 0, 0, 0, 0]
+  P08: [0, 0, 0, 0, 0, 0, 0, 0],
+  P09: [0, 0, 0, 0, 0, 0, 0, 0]
 };
 IMS.gateNotes = {
   P02: "Prototype exists for the IMS performance report only.",
@@ -116,14 +119,16 @@ IMS.risks = [
   { id: "R-13", cat: "Operational", text: "Unpaid interpreters not tracked; they leave", impact: "H", prob: "M", owner: "Finance / Invoicing", mit: "Aging alert after one unpaid cycle", issue: "I-08" },
   { id: "R-14", cat: "Privacy", text: "Payment data seen by roles that should not see it", impact: "H", prob: "L", owner: "Finance + IT", mit: "Role-based access and audit log", issue: "" },
   { id: "R-15", cat: "Privacy", text: "AI applied to calls, audio or personal data without approval", impact: "H", prob: "L", owner: "Steering", mit: "Separate technical, legal, privacy and management approval", issue: "" },
-  { id: "R-16", cat: "Operational", text: "No measured baseline; benefits cannot be proven", impact: "H", prob: "H", owner: "Program manager", mit: "6-week Discovery measures every process in scope", issue: "I-06" }
+  { id: "R-16", cat: "Operational", text: "No measured baseline; benefits cannot be proven", impact: "H", prob: "H", owner: "Program manager", mit: "6-week Discovery measures every process in scope", issue: "I-06" },
+  { id: "R-17", cat: "Technical", text: "Demand not visible for some clients and read as zero demand", impact: "H", prob: "H", owner: "Workforce Management + ACMs", mit: "Flag as 'Demand Visibility Gap'; agree source or reporting per client", issue: "I-09" },
+  { id: "R-18", cat: "Operational", text: "Interpreters reassigned on dashboard data without eligibility, contract or schedule checks", impact: "H", prob: "M", owner: "Operations", mit: "Checks required before any reassignment; human decision only", issue: "" }
 ];
 
 /* Mitigation status per risk: not-started · planned · in-progress · done.
    Ratings were set by the program team on 26 Nov 2026; the steering committee reviews them monthly from G0. */
 IMS.MSTATUS = { "not-started": ["risk", "Not started"], planned: ["dec", "Planned"], "in-progress": ["est", "In progress"], done: ["ok", "Done"] };
 IMS.riskReview = { last: "26 Nov 2026 (program team)", next: "First steering review after G0 (Dec 2026, date TBC)", cadence: "Monthly" };
-const RISK_MIT = { "R-01": ["planned", "Handover plan written (chapter 08); waits for D-03 and D-04"], "R-02": ["not-started", "Waits for D-03"], "R-03": ["planned", "Co-design built into Pilot A"], "R-04": ["planned", "Feasibility check D-07 at G3"], "R-05": ["not-started", "Data owners not yet named (D-06)"], "R-06": ["not-started", "Hosting request open with IT since Oct 2026"], "R-07": ["not-started", "Consent not yet requested"], "R-08": ["not-started", "Privacy review needed before P01.10"], "R-09": ["not-started", "Waits for D-01 and D-08"], "R-10": ["planned", "Change plan written (chapter 06)"], "R-11": ["in-progress", "The MasterWord agent flags missing documents before submission"], "R-12": ["planned", "Pilot B designed; awaiting approval (D-10)"], "R-13": ["planned", "Aging alert in Pilot B design"], "R-14": ["planned", "Role-based access in the P05 requirements"], "R-15": ["planned", "Approval rule in AI governance (chapter 05)"], "R-16": ["planned", "Discovery proposed; waits for D-02"] };
+const RISK_MIT = { "R-01": ["planned", "Handover plan written (chapter 08); waits for D-03 and D-04"], "R-02": ["not-started", "Waits for D-03"], "R-03": ["planned", "Co-design built into Pilot A"], "R-04": ["planned", "Feasibility check D-07 at G3"], "R-05": ["not-started", "Data owners not yet named (D-06)"], "R-06": ["not-started", "Hosting request open with IT since Oct 2026"], "R-07": ["not-started", "Consent not yet requested"], "R-08": ["not-started", "Privacy review needed before P01.10"], "R-09": ["not-started", "Waits for D-01 and D-08"], "R-10": ["planned", "Change plan written (chapter 06)"], "R-11": ["in-progress", "The MasterWord agent flags missing documents before submission"], "R-12": ["planned", "Pilot B designed; awaiting approval (D-10)"], "R-13": ["planned", "Aging alert in Pilot B design"], "R-14": ["planned", "Role-based access in the P05 requirements"], "R-15": ["planned", "Approval rule in AI governance (chapter 05)"], "R-16": ["planned", "Discovery proposed; waits for D-02"], "R-17": ["not-started", "Part of P09 Stage 1 Data Discovery"], "R-18": ["planned", "Control written into P09"] };
 IMS.risks.forEach(r => { const m = RISK_MIT[r.id] || []; r.mstatus = m[0]; r.mnote = m[1]; r.review = IMS.riskReview.next; });
 
 IMS.issues = [
@@ -134,7 +139,8 @@ IMS.issues = [
   ["I-05", "MasterWord", "4 documents missing for 3 Argentina applicants", "Applications incomplete", "Request documents from applicants"],
   ["I-06", "All", "No measured baseline", "Benefits cannot be proven", "Approve 6-week Discovery"],
   ["I-07", "Payment", "Missing tasks and wrong amounts found only on complaint", "Late or missed pay; interpreters leave", "Transparent export + expected list each cycle"],
-  ["I-08", "Payment", "No tracking of interpreters never paid", "Unpaid 3–4 months before anyone knows", "Aging alert for unpaid balances"]
+  ["I-08", "Payment", "No tracking of interpreters never paid", "Unpaid 3–4 months before anyone knows", "Aging alert for unpaid balances"],
+  ["I-09", "Demand vs resources", "TDG Italian demand while Italian interpreters are not assigned to TDG; TDG offered calls not visible", "Qualified capacity possibly unused", "Validate TDG demand source and Italian eligibility (P09)"]
 ];
 
 IMS.change = {
@@ -231,7 +237,7 @@ IMS.continuity = {
     ["Session Desk hosting", "Free tiers (Vercel, Supabase)", "Free", "Company hosting approved by IT", 0],
     ["Kalam Learning hosting", "Free tiers", "Free", "Company-email sign-in, about $0–10 a month", 0],
     ["System access", "Personal logins", "—", "Service accounts (Kalam, Incorta, Zoho, Transparent)", 0],
-    ["Platform for 8 projects", "None", "—", "[IT estimate after Architecture gate]", 0],
+    ["Platform for 9 projects", "None", "—", "[IT estimate after Architecture gate]", 0],
     ["People", "1 person, alongside the day job", "Mahmoud's own time", "Sponsor, program manager, 1 owner per project, 1 backup per automation", 1]
   ]
 };
@@ -260,12 +266,12 @@ IMS.decisions = [
    Green needs evidence; a plan that is only written down is not green. */
 IMS.HEALTH = { G: ["ok", "On track"], A: ["est", "At risk"], R: ["risk", "Off track"], N: ["cur", "Not assessed"] };
 IMS.health = [
-  { area: "Scope", rating: "A", why: "8 projects and 7 capabilities defined by the program team; not yet approved by management (D-01, G0)", source: "Project register (this site)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
+  { area: "Scope", rating: "A", why: "9 projects and 7 capabilities defined by the program team; not yet approved by management (D-01, G0)", source: "Project register (this site)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
   { area: "Early results", rating: "G", why: "MasterWord: 28/28 submitted, 4.5 min per applicant measured. Kalam Learning live. Both personally operated", source: "Metrics M-01, M-02, M-08; batch reports", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
   { area: "Method", rating: "N", why: "Stage gates and Lean method defined, but not yet applied to any project", source: "Stage gate definitions (chapter 06)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
   { area: "Benefits", rating: "N", why: "No baseline measured, so no benefit can be verified yet (0 verified hours, $0 confirmed)", source: "Metrics M-11, M-12", owner: "Finance representative (to be named)", updated: "26 Nov 2026" },
   { area: "Schedule", rating: "A", why: "All dates are proposed and start on approval; Discovery not yet approved (D-02)", source: "Roadmap (chapter 06)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
-  { area: "Risk", rating: "A", why: "16 risks, 5 rated high impact and high probability; 8 open issues", source: "Risk register R-01 to R-16", owner: "Steering committee (to be formed)", updated: "26 Nov 2026" },
+  { area: "Risk", rating: "A", why: "18 risks, 5 rated high impact and high probability; 9 open issues", source: "Risk register R-01 to R-18", owner: "Steering committee (to be formed)", updated: "26 Nov 2026" },
   { area: "Budget", rating: "R", why: "AI tools paid personally; no company budget approved (D-03)", source: "Cost table (chapter 08)", owner: "Executive sponsor (to be named)", updated: "26 Nov 2026" },
   { area: "Resources", rating: "R", why: "One person builds and runs everything alongside the day job; no owners named (R-09)", source: "Governance table (chapter 06)", owner: "Executive sponsor (to be named)", updated: "26 Nov 2026" }
 ];
@@ -294,7 +300,8 @@ IMS.wins = {
   P05: "Paid right, every time",
   P06: "Coverage gaps seen before they happen",
   P07: "Fewer repeat complaints",
-  P08: "One trusted management view"
+  P08: "One trusted management view",
+  P09: "More delivered with the same people"
 };
 
 /* Initiative board: every status code belongs to exactly one column (checked by tools/validate.js) */

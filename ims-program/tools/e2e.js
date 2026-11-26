@@ -22,14 +22,16 @@ const check = (name, ok, detail = "") => { results.push([name, ok]); if (!ok) { 
 (async () => {
   await new Promise(r => server.listen(8765, r));
   const base = "http://localhost:8765/ims-program/";
-  const chapters = ["update", "overview", "case", "portfolio", "model", "tech", "delivery", "results", "decisions"];
-  const projects = ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08"];
+  const chapters = ["update", "overview", "case", "portfolio", "model", "tech", "delivery", "results", "decisions", "capacity"];
+  const projects = ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08", "P09"];
   const caps = ["C1", "C2", "C3", "C4", "C5", "C6", "C7"];
   const routes = [...chapters.map(c => "#/" + c), ...projects.map(p => "#/portfolio/" + p), ...caps.map(c => "#/portfolio/" + c)];
   const b = await chromium.launch();
   let clicks = 0;
   for (const [name, vp] of [["desktop", { width: 1440, height: 900 }], ["phone", { width: 390, height: 844 }]]) {
     const page = await b.newPage({ viewport: vp });
+    /* smooth scrolling makes buttons "unstable" mid-animation; tests scroll instantly */
+    await page.addInitScript(() => { const o = Element.prototype.scrollIntoView; Element.prototype.scrollIntoView = function (a) { return o.call(this, typeof a === "object" ? { ...a, behavior: "instant" } : a); }; });
     const errs = []; page.on("pageerror", e => errs.push("pageerror " + e.message)); page.on("console", m => { if (m.type() === "error" && !/fonts\.(googleapis|gstatic)/.test(m.text())) errs.push("console " + m.text()); });
     for (const r of routes) {
       await page.goto(base + r); await page.addStyleTag({ content: "html{scroll-behavior:auto!important}" }); await page.waitForTimeout(200);

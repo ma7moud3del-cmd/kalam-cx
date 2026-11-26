@@ -27,7 +27,7 @@
     } else if (c.hero) {
       html = c.render().replace("</header>", `</header><div class="subbar"><div class="wrap">${subnav(c)}</div></div>`);
     } else {
-      html = `<div class="chead"><div class="wrap"><div class="eyebrow">Chapter ${c.no} of 08</div><h1>${esc(c.title)}</h1><p>${esc(c.intro)}</p></div></div><div class="subbar"><div class="wrap">${subnav(c)}</div></div>` + c.render();
+      html = `<div class="chead"><div class="wrap"><div class="eyebrow">Chapter ${c.no} of ${String(CH.filter(x => /^\d/.test(x.no)).length).padStart(2, "0")}</div><h1>${esc(c.title)}</h1><p>${esc(c.intro)}</p></div></div><div class="subbar"><div class="wrap">${subnav(c)}</div></div>` + c.render();
     }
     const i = CH.indexOf(c), prev = CH[i - 1], next = CH[i + 1];
     html += `<div class="wrap"><div class="chfoot">${prev ? `<a href="#/${prev.id}"><span>← Previous chapter</span><b>${prev.no} ${esc(prev.title)}</b></a>` : ""}${next ? `<a class="nx" href="#/${next.id}"><span>Next chapter →</span><b>${next.no} ${esc(next.title)}</b></a>` : ""}</div></div>`;
