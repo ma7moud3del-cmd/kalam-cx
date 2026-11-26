@@ -522,3 +522,78 @@ IMS.capabilities = [
   { id: "C6", name: "Development & Performance Management", what: "IMS competency framework (draft, in the KALAM Way format) linked to evidence from the workspaces.", usedBy: ["P01", "P07"], initiatives: [["C6.1", "IMS competency framework (draft to validate with HR)", "planned"]] },
   { id: "C7", name: "Audit & Compliance Management", what: "Audit logs, access reviews and retention rules across all modules.", usedBy: ["P05", "P07", "P08"], initiatives: [["C7.1", "Audit log and access reviews", "planned"]] }
 ];
+
+/* ------------------------------------------------------------------
+   PROJECT DETAIL: scope, data, stakeholders and KPI sources.
+   Merged into each project record below, so the project register
+   above stays the only place a project is defined.
+   kpiSrc lines up with each project's kpis list (same order).
+   Exclusions are the program team's proposal; owners confirm at G2.
+   ------------------------------------------------------------------ */
+IMS.projectDetail = {
+  P01: {
+    scopeIn: ["Supervisor workspace and Daily Game Plan", "ACM workspace with team plans and completion", "Time Doctor productivity signals, after API and privacy validation", "Weekly productivity reporting"],
+    scopeOut: ["Changing Time Doctor settings or the employee monitoring policy", "Disciplinary decisions (always a person's decision)", "Interpreter scheduling and coverage (P06)", "Quality evaluations (P07)"],
+    data: ["Supervisor roster and ACM reporting lines (source to confirm: HR or Zoho)", "Recurring meetings and calendars (Teams, email)", "Open tasks and follow-ups (shared task engine, C1)", "Time Doctor activity: hours, idle time (TBC: API access and privacy review)", "Client follow-up list (Account Management)"],
+    stakeholders: ["Supervisors (users)", "ACMs (reviewers)", "Operations head", "HR (privacy review of productivity data)", "IT (Time Doctor access)"],
+    kpiSrc: ["2-week time diary in Discovery, then Daily Game Plan records", "Daily Game Plan: planned vs completed activities", "Task engine (C1): due date vs closed date", "2-week time diary in Discovery"]
+  },
+  P02: {
+    scopeIn: ["Catalogue of IMS reports with owner, frequency and recipients", "Automated pulls from approved sources", "Validation checks before a report is sent", "Scheduled distribution", "Company hosting of the reporting hub"],
+    scopeOut: ["Replacing Incorta or Kalam", "Client billing figures until Finance validates them", "The executive dashboard itself (P08)"],
+    data: ["Kalam session and task exports (endpoints partly verified)", "Incorta reports (access TBC)", "Client report templates and recipient lists", "Data dictionary for shared measures (owner per measure)"],
+    stakeholders: ["Report owners in Operations", "ACMs and clients (recipients)", "Management", "IT (hosting, database, sign-in)", "Data owners for Kalam and Incorta"],
+    kpiSrc: ["Time diary of report builders in Discovery", "Distribution log of the reporting hub", "Reissue log kept by report owners", "Validation log of the reporting hub"]
+  },
+  P03: {
+    scopeIn: ["Client workspace and account record", "Request, action and decision tracking with owner and due date", "Escalation management", "Assessment of Zoom, Teams, Slack and email integration"],
+    scopeOut: ["Changing how clients choose to contact IMS", "Contract and pricing changes", "Session delivery and coverage (P06)"],
+    data: ["Client list with account owner (Account Management)", "Requests and decisions from client channels (method TBC per channel)", "Escalation history (today in chats and email)", "Meeting notes and action items"],
+    stakeholders: ["ACMs and account owners", "Supervisors (who act on requests)", "Clients (consent for any channel automation)", "IT (channel access)", "Operations head"],
+    kpiSrc: ["Request log in the client workspace (after go-live); sample of chat history in Discovery", "Client workspace open-request report", "Escalation log"]
+  },
+  P04: {
+    scopeIn: ["Candidate pipeline from requisition to first task", "Onboarding checklists and hand-overs", "Activation alerts: first login, first task, inactive candidates", "Client portal submission (MasterWord), moved to company ownership"],
+    scopeOut: ["Recruitment sourcing and interview decisions", "Interpreter pay rates", "Training content itself (C4)"],
+    data: ["Candidate and onboarding records (Zoho, sheets)", "Kalam account creation, first login and first task dates", "Account database (login status)", "Client portal requirements and submission ledger"],
+    stakeholders: ["Recruitment and Onboarding team", "Training", "Supervisors (receiving new interpreters)", "Workforce Management (coverage needs)", "IT (account database access)"],
+    kpiSrc: ["Kalam first-task date vs training completion date", "Kalam task history 30 days after onboarding", "Onboarding checklist timestamps", "Batch report timestamps (measured on batch 2)"]
+  },
+  P05: {
+    scopeIn: ["Expected task list per interpreter and client", "Day 7 upload check against Transparent", "Acceptance tracking and reminders", "Concern cases with owner and deadline", "Unpaid balance aging alerts"],
+    scopeOut: ["Making or changing any payment (the pilot is read-only)", "Changing pay rates or contracts", "Client invoicing (possible later scope, MO-01)"],
+    data: ["Monthly paid-hours report (WFM)", "Transparent task export (method TBC)", "Interpreter payment method, including eCash cases (Invoicing)", "Payment concerns raised by interpreters (today by message)"],
+    stakeholders: ["Invoicing team", "Finance (approval and validation)", "Workforce Management (paid-hours report)", "ACMs and Supervisors (validation, reminders)", "Interpreters"],
+    kpiSrc: ["Correction log in the concern cases; replay of the last 3 cycles", "Concern case open date vs month close", "Transparent acceptance dates vs deadline", "Aging report from the payment status tracker", "Concern case log"]
+  },
+  P06: {
+    scopeIn: ["Real-time coverage view against demand", "Coverage gap, over- and under-staffing alerts", "Schedule adherence and attendance", "Client-specific rules", "Pre-scheduled sessions (Session Desk)"],
+    scopeOut: ["Changing employment contracts or shift policy", "Automatic acceptance of client sessions without client consent", "Payroll (P05 covers interpreter payment)"],
+    data: ["Kalam session and interval data", "Schedules and shifts (source TBC)", "Time Doctor login and activity (TBC)", "Client-specific coverage rules (Workforce Management)", "Pre-scheduled session requests (client platforms)"],
+    stakeholders: ["Workforce Management", "Supervisors", "ACMs (client rules)", "Clients (consent for session automation)", "IT"],
+    kpiSrc: ["Kalam interval data vs required coverage", "Schedule vs login data", "Session Desk log (pilot) and client confirmations", "Kalam interval data vs required coverage"]
+  },
+  P07: {
+    scopeIn: ["One quality repository for findings and complaints", "Classification and severity standard", "Root cause and corrective action tracking", "Links to coaching (P01) and refresher training (C4)"],
+    scopeOut: ["Changing the quality evaluation form", "AI analysis of call audio (needs separate approval, R-15)", "Disciplinary decisions"],
+    data: ["Complaints and client feedback (email, sheets)", "Quality evaluation results (source TBC)", "Interpreter, language and client for each finding", "Coaching and training records (P01, C4)"],
+    stakeholders: ["Quality team", "Supervisors (coaching)", "Training", "ACMs (client feedback)", "Interpreters"],
+    kpiSrc: ["Quality repository: same issue, same interpreter within 90 days", "Quality repository: log date vs closure date", "Quality repository: closed findings with root cause", "Quality repository vs Kalam Learning completion"]
+  },
+  P08: {
+    scopeIn: ["Executive dashboard fed by P02 data", "Executive alerts", "Program and automation benefits view", "Decision support for the steering committee"],
+    scopeOut: ["Building new data sources (each project owns its data)", "Financial statements (Finance systems)", "AI answers on data without a validated source"],
+    data: ["Validated measures from P02 and the data platform", "Program register, risks and decisions (this site's data)", "Benefits confirmed by Finance", "Alert thresholds set by each project owner"],
+    stakeholders: ["Executive sponsor and steering committee", "Department heads", "Finance (benefit confirmation)", "IT and data owners"],
+    kpiSrc: ["Time diary of management-pack preparation in Discovery", "Steering decision log", "Alert log"]
+  }
+};
+IMS.projects.forEach(p => Object.assign(p, IMS.projectDetail[p.id] || {}));
+
+/* Foundations: shared prerequisites that are not projects */
+IMS.foundations = [
+  { id: "F-DATA", name: "Data platform", what: "Company database and validated data model that the reporting, payment and workforce projects read from.", owner: "IT (to confirm)", gate: "G3" },
+  { id: "IT", name: "IT hosting and sign-in", what: "Company hosting, single sign-on and service accounts for every production system.", owner: "IT (to confirm)", gate: "G3" }
+];
+/* Capability owners are not appointed yet */
+IMS.capabilities.forEach(c => { if (!c.owner) c.owner = "To be assigned"; });

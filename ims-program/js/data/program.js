@@ -9,6 +9,8 @@ IMS.program = {
   period: "December 2026 – December 2027",
   months: 13,
   updated: "26 Nov 2026",
+  reportDate: "2026-11-26", /* the "as of" date of all statuses on the site */
+  start: "2026-12-01",      /* month 0 of every timeline */
   status: "Awaiting management approval (gate G0). Two initiatives in live use, operated personally; three pilots ready for approval.",
   statement: "Building a smarter, connected, measurable and sustainable operating environment for IMS.",
   message: "Transforming IMS from fragmented, manually coordinated processes into one integrated, company-owned operating environment.",

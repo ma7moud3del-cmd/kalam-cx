@@ -10,12 +10,20 @@
   const subnav = (c) => `<div class="subnav" role="navigation" aria-label="Sections in this chapter">${c.sections.map((s, i) => `<button data-sec="${s[0]}" class="${i ? "" : "on"}">${esc(s[1])}</button>`).join("")}</div>`;
 
   function render() {
-    const parts = location.hash.replace(/^#\/?/, "").split("/");
+    const parts = location.hash.replace(/^#\/?/, "").split("/").filter(Boolean);
+    const found = !parts[0] || CH.some(x => x.id === parts[0]);
     let c = CH.find(x => x.id === parts[0]) || CH[0];
     let html = "", title = c.title;
-    const proj = c.id === "portfolio" && parts[1] ? IMS.projects.find(p => p.id === parts[1].toUpperCase()) : null;
-    if (proj) {
-      const v = c.project(proj); html = v.head + v.body; title = proj.id + " " + proj.name;
+    const sub = c.id === "portfolio" && parts[1] ? parts[1].toUpperCase() : null;
+    const proj = sub ? IMS.projects.find(p => p.id === sub) : null;
+    const cap = sub && !proj ? IMS.capabilities.find(x => x.id === sub) : null;
+    if (!found || (sub && !proj && !cap) || parts.length > 2) {
+      html = `<div class="chead"><div class="wrap"><div class="eyebrow">Page not found</div><h1>This page does not exist</h1><p>The link <b>${esc(location.hash)}</b> does not match a chapter, project or capability.</p></div></div><section class="sec"><div class="wrap"><div class="card pad"><p>Go to <a href="#/overview">the program cockpit</a> or <a href="#/portfolio">the portfolio</a>.</p></div></div></section>`;
+      title = "Page not found"; c = { id: "", sections: [] };
+      main.innerHTML = html; document.title = title + " · IMS Transformation 2027";
+      $$("[data-ch]").forEach(a => a.classList.remove("on")); window.scrollTo(0, 0); return;
+    } else if (proj || cap) {
+      const v = proj ? c.project(proj) : c.capability(cap); html = v.head + v.body; title = proj ? proj.id + " " + proj.name : cap.id + " " + cap.name;
     } else if (c.hero) {
       html = c.render().replace("</header>", `</header><div class="subbar"><div class="wrap">${subnav(c)}</div></div>`);
     } else {
@@ -30,7 +38,9 @@
     $("#menubtn").setAttribute("aria-expanded", "false");
     window.scrollTo(0, 0);
     wire(c);
-    const goto = sessionStorage.getItem("goto"); if (goto) { sessionStorage.removeItem("goto"); const t = document.getElementById(goto); if (t) setTimeout(() => t.scrollIntoView(), 50); }
+    if (c.wire && !proj && !cap) c.wire();
+    let goto = null; try { goto = sessionStorage.getItem("goto"); sessionStorage.removeItem("goto"); } catch (e) { }
+    if (goto) { const t = document.getElementById(goto); if (t) { const tb = t.closest("table"); if (tb) tb.classList.add("unfold"); const tr = t.closest("tr"); if (tr) tr.classList.add("flash"); setTimeout(() => t.scrollIntoView({ block: "center" }), 50); } }
   }
 
   function wire(c) {
@@ -53,7 +63,12 @@
       (t.parentElement.scrollWidth > t.parentElement.clientWidth || getComputedStyle(t.parentElement).overflowX !== "visible" ? t.parentElement : t).insertAdjacentElement("afterend", b);
     });
     /* links to a section inside another chapter */
-    $$("[data-goto]").forEach(a => a.addEventListener("click", () => sessionStorage.setItem("goto", a.dataset.goto)));
+    $$("[data-goto]").forEach(a => a.addEventListener("click", () => { try { sessionStorage.setItem("goto", a.dataset.goto); } catch (e) { } if (a.getAttribute("href") === location.hash) render(); }));
+    /* decisions chapter: filter by status */
+    $$("#decf [data-dk]").forEach(b => b.addEventListener("click", () => { $$("#decf .fbtn").forEach(x => x.classList.toggle("on", x === b)); let n = 0; $$(".dcard[data-dk]").forEach(d => { const ok = b.dataset.dk === "all" || d.dataset.dk === b.dataset.dk; d.classList.toggle("hidden", !ok); if (ok) n++; }); $("#decnone").classList.toggle("hidden", n > 0); }));
+    /* project page section index highlights the section in view */
+    const toc = $$(".pj-toc [data-scroll]");
+    if (toc.length && "IntersectionObserver" in window) { const io = new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting) toc.forEach(b => b.classList.toggle("on", b.dataset.scroll === e.target.id)); }), { rootMargin: "-120px 0px -65% 0px" }); toc.forEach(b => { const t = document.getElementById(b.dataset.scroll); if (t) io.observe(t); }); }
 
     /* portfolio filters */
     const pf = $("#pfilters");

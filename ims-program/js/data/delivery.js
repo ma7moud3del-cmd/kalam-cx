@@ -15,8 +15,8 @@ IMS.phases = [
 /* [label, start, length, project, kind, note]  kind: run | pilot | build | plan | gate */
 IMS.roadmap = [
   ["Program approval and sponsor", 0, 1, "ALL", "gate", "G0"],
-  ["MasterWord automation to company account", 0, 4, "P04", "run", "In progress"],
-  ["Kalam Learning: company sign-in", 0, 4, "C4", "run", "In progress"],
+  ["MasterWord automation (live, personally operated)", 0, 4, "P04", "run", "Company handover: D-04", "running"],
+  ["Kalam Learning (live, personally operated)", 0, 4, "C4", "run", "Company sign-in planned", "running"],
   ["Payment baseline: last 3 cycles", 1, 2, "P05", "plan", "Discovery"],
   ["Reporting on company hosting", 2, 3, "P02", "build", "Needs IT"],
   ["Pilot A · Daily Game Plan", 4, 3, "P01", "pilot", "8–12 weeks"],
@@ -43,6 +43,8 @@ IMS.gates = [
   ["G7", "Rollout approved", "Sep 2027", "Go, change or stop decision logged"],
   ["G8", "Benefits confirmed", "Dec 2027", "Finance confirms the value categories; control plan and SOP in place"]
 ];
+/* Month offset of each gate from IMS.program.start (validated against the date text above) */
+IMS.gateAt = { G0: 0, G1: 2, G2: 3, G3: 4, G4: 5, G5: 5, G6: 8, G7: 9, G8: 12 };
 /* Gate progress per project for gates G1–G8: 2 = passed, 1 = partly, 0 = not yet */
 IMS.gateProgress = {
   P01: [0, 0, 0, 0, 0, 0, 0, 0],
@@ -116,6 +118,13 @@ IMS.risks = [
   { id: "R-15", cat: "Privacy", text: "AI applied to calls, audio or personal data without approval", impact: "H", prob: "L", owner: "Steering", mit: "Separate technical, legal, privacy and management approval", issue: "" },
   { id: "R-16", cat: "Operational", text: "No measured baseline; benefits cannot be proven", impact: "H", prob: "H", owner: "Program manager", mit: "6-week Discovery measures every process in scope", issue: "I-06" }
 ];
+
+/* Mitigation status per risk: not-started · planned · in-progress · done.
+   Ratings were set by the program team on 26 Nov 2026; the steering committee reviews them monthly from G0. */
+IMS.MSTATUS = { "not-started": ["risk", "Not started"], planned: ["dec", "Planned"], "in-progress": ["est", "In progress"], done: ["ok", "Done"] };
+IMS.riskReview = { last: "26 Nov 2026 (program team)", next: "First steering review after G0 (Dec 2026, date TBC)", cadence: "Monthly" };
+const RISK_MIT = { "R-01": ["planned", "Handover plan written (chapter 08); waits for D-03 and D-04"], "R-02": ["not-started", "Waits for D-03"], "R-03": ["planned", "Co-design built into Pilot A"], "R-04": ["planned", "Feasibility check D-07 at G3"], "R-05": ["not-started", "Data owners not yet named (D-06)"], "R-06": ["not-started", "Hosting request open with IT since Oct 2026"], "R-07": ["not-started", "Consent not yet requested"], "R-08": ["not-started", "Privacy review needed before P01.10"], "R-09": ["not-started", "Waits for D-01 and D-08"], "R-10": ["planned", "Change plan written (chapter 06)"], "R-11": ["in-progress", "The MasterWord agent flags missing documents before submission"], "R-12": ["planned", "Pilot B designed; awaiting approval (D-10)"], "R-13": ["planned", "Aging alert in Pilot B design"], "R-14": ["planned", "Role-based access in the P05 requirements"], "R-15": ["planned", "Approval rule in AI governance (chapter 05)"], "R-16": ["planned", "Discovery proposed; waits for D-02"] };
+IMS.risks.forEach(r => { const m = RISK_MIT[r.id] || []; r.mstatus = m[0]; r.mnote = m[1]; r.review = IMS.riskReview.next; });
 
 IMS.issues = [
   ["I-01", "All", "Program runs on one person's personal accounts and PC", "Stops if the builder is unavailable; company does not own the tools", "Handover plan: company accounts, repository, machine, backup operator"],
@@ -228,7 +237,9 @@ IMS.continuity = {
 };
 
 /* ---------------- DECISIONS ---------------- */
-/* [id, decision, why, decision-maker, milestone, consequence of delay, status] */
+/* [id, decision, why, decision-maker, required by, consequence of delay, status]
+   status: open · awaiting (submitted, awaiting approval) · approved · rejected · deferred · completed */
+IMS.DSTATUS = { open: ["dec", "Open", true], awaiting: ["est", "Awaiting approval", true], approved: ["ok", "Approved", false], rejected: ["risk", "Rejected", false], deferred: ["cur", "Deferred", true], completed: ["ok", "Completed", false] };
 IMS.decisions = [
   ["D-01", "Name an executive sponsor and steering group", "Someone must own the program and remove blockers", "Senior management", "Before G0 · Dec 2026", "No gate decisions can be taken; program stays informal", "open"],
   ["D-02", "Approve 6 weeks of Discovery", "Measure time, volume and errors so every target is a fact", "Sponsor", "G0 · Dec 2026", "No baseline; no benefit can be proven", "open"],
@@ -245,14 +256,18 @@ IMS.decisions = [
   ["D-13", "Long-term maintenance ownership", "Who maintains automations after 2027", "Sponsor + IT", "G7 · Sep 2027", "Benefits fade after rollout", "open"]
 ];
 
+/* Program health. Ratings: G on track · A at risk · R off track · N not assessed.
+   Green needs evidence; a plan that is only written down is not green. */
+IMS.HEALTH = { G: ["ok", "On track"], A: ["est", "At risk"], R: ["risk", "Off track"], N: ["cur", "Not assessed"] };
 IMS.health = [
-  ["Scope", "G", "8 projects and 7 shared capabilities defined, each tied to a company goal"],
-  ["Early results", "G", "MasterWord and Kalam Learning used on real work"],
-  ["Method", "G", "Lean Six Sigma and stage gates set for every project"],
-  ["Schedule", "A", "Plan starts on approval; Discovery not yet approved"],
-  ["Risk", "A", "16 risks, 8 open issues; client and IT dependencies"],
-  ["Budget", "R", "AI tools paid personally; no company budget yet"],
-  ["Resources", "R", "One person builds everything alongside the day job"]
+  { area: "Scope", rating: "A", why: "8 projects and 7 capabilities defined by the program team; not yet approved by management (D-01, G0)", source: "Project register (this site)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
+  { area: "Early results", rating: "G", why: "MasterWord: 28/28 submitted, 4.5 min per applicant measured. Kalam Learning live. Both personally operated", source: "Metrics M-01, M-02, M-08; batch reports", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
+  { area: "Method", rating: "N", why: "Stage gates and Lean method defined, but not yet applied to any project", source: "Stage gate definitions (chapter 06)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
+  { area: "Benefits", rating: "N", why: "No baseline measured, so no benefit can be verified yet (0 verified hours, $0 confirmed)", source: "Metrics M-11, M-12", owner: "Finance representative (to be named)", updated: "26 Nov 2026" },
+  { area: "Schedule", rating: "A", why: "All dates are proposed and start on approval; Discovery not yet approved (D-02)", source: "Roadmap (chapter 06)", owner: "Program manager (proposed)", updated: "26 Nov 2026" },
+  { area: "Risk", rating: "A", why: "16 risks, 5 rated high impact and high probability; 8 open issues", source: "Risk register R-01 to R-16", owner: "Steering committee (to be formed)", updated: "26 Nov 2026" },
+  { area: "Budget", rating: "R", why: "AI tools paid personally; no company budget approved (D-03)", source: "Cost table (chapter 08)", owner: "Executive sponsor (to be named)", updated: "26 Nov 2026" },
+  { area: "Resources", rating: "R", why: "One person builds and runs everything alongside the day job; no owners named (R-09)", source: "Governance table (chapter 06)", owner: "Executive sponsor (to be named)", updated: "26 Nov 2026" }
 ];
 
 /* Lean cuts (preserved) */
@@ -263,12 +278,13 @@ IMS.cuts = [
 ];
 
 /* One-screen plan used on the overview: 5 phases and a short win per project */
+/* Five program phases. from/to are month offsets from IMS.program.start; dates are calculated */
 IMS.plan = [
-  { step: "Approve", when: "Dec 2026", gate: "G0", what: "Sponsor, budget, 3 pilots" },
-  { step: "Discover", when: "Jan – Feb 2027", gate: "G1", what: "Measure today's baseline" },
-  { step: "Design", when: "Mar – Apr 2027", gate: "G2 · G3", what: "Future process and architecture" },
-  { step: "Pilot", when: "Apr – Aug 2027", gate: "G4 – G6", what: "3 pilots, measured results" },
-  { step: "Scale", when: "Sep – Dec 2027", gate: "G7 · G8", what: "Roll out, confirm benefits" }
+  { step: "Approve", from: 0, to: 1, gates: ["G0"], what: "Sponsor, budget, 3 pilots" },
+  { step: "Discover", from: 1, to: 3, gates: ["G1"], what: "Measure today's baseline" },
+  { step: "Design", from: 3, to: 4.5, gates: ["G2", "G3"], what: "Future process and architecture" },
+  { step: "Pilot", from: 4.5, to: 9, gates: ["G4", "G5", "G6"], what: "3 pilots, measured results" },
+  { step: "Scale", from: 9, to: 13, gates: ["G7", "G8"], what: "Roll out, confirm benefits" }
 ];
 IMS.wins = {
   P01: "More coaching, less chasing",
@@ -279,4 +295,55 @@ IMS.wins = {
   P06: "Coverage gaps seen before they happen",
   P07: "Fewer repeat complaints",
   P08: "One trusted management view"
+};
+
+/* Initiative board: every status code belongs to exactly one column (checked by tools/validate.js) */
+IMS.BOARD = [
+  { id: "planned", label: "Planned", statuses: ["planned"], tone: "cur" },
+  { id: "approval", label: "Awaiting approval", statuses: ["approval"], tone: "dec" },
+  { id: "build", label: "In build or pilot", statuses: ["prototype", "dev", "pilot", "poc"], tone: "fut" },
+  { id: "live", label: "Live", statuses: ["live-personal", "live-company"], tone: "est" },
+  { id: "blocked", label: "Blocked", statuses: ["blocked"], tone: "risk" }
+];
+
+/* Production readiness: what every automation needs before it is treated as company production.
+   Values: yes · partial · no. Checked against what exists on 26 Nov 2026. */
+IMS.READY = [
+  ["env", "Company-owned environment", "Runs on a company machine, account and hosting"],
+  ["bizOwner", "Accountable business owner", "Named person who owns the process and its results"],
+  ["techOwner", "Technical owner", "Named person or team in IT who maintains it"],
+  ["sop", "Documented procedure", "Runbook or SOP anyone trained can follow"],
+  ["backup", "Backup operator", "A second trained person who has run it alone"],
+  ["access", "Access controls", "Company sign-in, role-based access, no personal logins"],
+  ["monitor", "Monitoring", "Each run logged with time, cost and result; failures alert the owner"],
+  ["recovery", "Recovery", "Code, data and settings backed up; tested restore"]
+];
+IMS.readiness = [
+  { id: "P04.3", name: "MasterWord submission agent", status: "live-personal", env: "no", bizOwner: "no", techOwner: "no", sop: "partial", backup: "no", access: "no", monitor: "partial", recovery: "no", note: "Batch reports log each run; runbook drafted in the handover plan, not yet tested by a second person" },
+  { id: "C4.1", name: "Kalam Learning site", status: "live-personal", env: "no", bizOwner: "no", techOwner: "no", sop: "no", backup: "no", access: "no", monitor: "no", recovery: "partial", note: "Public site on free hosting; content kept in a code repository" },
+  { id: "P02.3", name: "IMS performance report (prototype)", status: "prototype", env: "no", bizOwner: "no", techOwner: "no", sop: "no", backup: "no", access: "no", monitor: "no", recovery: "no", note: "Runs on a personal PC; production plan waiting on IT" },
+  { id: "P06.16", name: "Session Desk (prototype)", status: "prototype", env: "no", bizOwner: "no", techOwner: "no", sop: "no", backup: "no", access: "partial", monitor: "no", recovery: "partial", note: "Free hosting tiers; sign-in exists, not company sign-in" }
+];
+
+/* Support and maintenance model after go-live (proposal, decided under D-13) */
+IMS.support = [
+  ["First line", "Business owner and trained backup operator", "Runs the process, answers users, logs problems"],
+  ["Second line", "Program team, then the IT application owner", "Fixes rules, prompts and data mappings; releases changes"],
+  ["Third line", "IT infrastructure and the vendor", "Hosting, sign-in, platform and AI service problems"],
+  ["Change control", "Steering committee for rule changes; IT for releases", "No change to payment or quality rules without the process owner"],
+  ["Review", "Monthly with the steering committee", "Incidents, run cost, results vs baseline, retirement of old trackers"]
+];
+
+/* ROI method used on every project page */
+IMS.roiMethod = {
+  steps: [
+    ["Hours saved per month", "Monthly volume × (current time − new time − human review time)"],
+    ["Capacity released", "Hours saved that are actually redeployed, confirmed by the process owner. Not cash."],
+    ["Cost avoided", "Costs that would have happened (overpayments, overtime, extra hires), reported separately"],
+    ["Cash savings", "Money that leaves the budget, confirmed by Finance only"],
+    ["Total cost", "Implementation + licences + hosting + maintenance + support + training"],
+    ["ROI", "(Finance-validated annual benefit − annual recurring cost) ÷ implementation cost"],
+    ["Payback", "Implementation cost ÷ monthly validated net benefit"]
+  ],
+  costLines: ["Implementation (build time)", "Licences and AI usage", "Hosting and infrastructure", "Maintenance", "Support", "Training"]
 };

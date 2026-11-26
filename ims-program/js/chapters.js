@@ -1,78 +1,14 @@
 /* Chapter renderers. Each returns HTML built only from IMS data. */
 window.CHAPTERS = (function () {
-  const { esc, fmt, ALL_INITS, STATUS_ORDER, countBy, projStatus, badge, pbadge, mtag, atype, plink, sbar, ticks, flow, sh, chart, key, table } = UI;
+  const { esc, fmt, ALL_INITS, STATUS_ORDER, countBy, projStatus, badge, pbadge, mtag, atype, plink, sbar, ticks, flow, sh, chart, key, table, monthLabel, monthOffset, span, riskScore, riskLevel, tone, ownerText } = UI;
   const P = IMS.projects, CAP = IMS.capabilities;
   const metric = id => IMS.metrics.find(m => m.id === id);
   const sec = (id, html) => `<section class="sec" id="${id}"><div class="wrap">${html}</div></section>`;
   const statusLegend = () => `<div class="legend">${STATUS_ORDER.map(k => `<span><i class="sb-${k}"></i>${IMS.STATUS[k].label}</span>`).join("")}</div>`;
   const colorKey = `<div class="keybar legend">${key("var(--cur)", "Current state")}${key("var(--fut)", "Proposed future state")}${key("var(--ok)", "Verified / measured")}${key("var(--est)", "Estimate or personally operated")}${key("var(--risk)", "Risk")}${key("var(--dec)", "Pending decision")}</div>`;
 
-  /* ============ 01 EXECUTIVE OVERVIEW ============ */
-  function overview() {
-    const G = IMS.program, inits = ALL_INITS(), byS = countBy(inits);
-    const ps = P.map(p => projStatus(p).key);
-    const pilots = [...new Set(inits.map(i => (i.note.match(/^Pilot [A-Z]/) || [])[0]).filter(Boolean))].sort();
-    const depts = [...new Set(P.flatMap(p => p.depts))];
-    const completed = inits.filter(i => IMS.STATUS[i.status].rank >= 6);
-    const kpis = [
-      [P.length, "Registered projects", `${inits.length} initiatives · ${CAP.length} shared capabilities`],
-      [ps.filter(x => x === "progress").length, "Active projects", "At least one initiative started"],
-      [completed.length, "Completed initiatives", `${completed.filter(i => i.status === "live-personal").length} live but personally operated · ${byS["live-company"] || 0} company-owned`],
-      [pilots.length, "Pilots", `${pilots.join(", ")} · all awaiting approval`],
-      [ps.filter(x => x === "approval").length, "Projects awaiting approval", "No work started; pilot ready"],
-      [depts.length, "Departments involved", depts.slice(0, 4).join(", ") + "…"],
-      [metric("M-10").value, "Processes assessed", "Recurring tasks reviewed with Lean"],
-      [metric("M-11").value + " h", "Verified hours released", `${metric("M-04").value} h estimated (MasterWord); no baseline validated yet`],
-      [metric("M-12").value, "Confirmed financial savings", "Nothing confirmed by Finance yet"],
-      [G.months + " months", "Program duration", G.period]
-    ];
-    const hero = `<header class="hero"><div class="wrap"><div class="grid"><div>
-      <div class="org"><img src="assets/mark.png" alt="Kalam"><span>${esc(G.org)}</span></div>
-      <h1>IMS Enterprise Operations <em>Transformation 2027</em></h1>
-      <p class="stmt">${esc(G.statement)}</p>
-      <p class="msg">${esc(G.message)}</p>
-      <div class="meta"><span class="chip"><span class="dot"></span>Status: <b>Awaiting approval</b></span><span class="chip">Period <b>${esc(G.period)}</b></span><span class="chip">Updated <b>${esc(G.updated)}</b></span></div>
-      <div class="ctas"><a class="btn pri" href="#/portfolio">View the portfolio →</a><a class="btn ghost" href="#/case">Read the business case</a><a class="btn ghost" href="#/decisions">What we need</a></div>
-    </div>
-    <div class="growth"><div class="k">Company target</div><div class="v">${esc(G.growth.target)}</div><p>${esc(G.growth.logic)}</p><small>${esc(G.growth.source)}</small></div>
-    </div></div></header>`;
-    const glance = sec("glance", sh("Program at a glance", "Where the program stands today", "Every number below is calculated from the project register and the metrics register. Estimates are labelled.") +
-      `<div class="kpis">${kpis.map(k => `<div class="kpi"><div class="v">${esc(k[0])}</div><div class="l">${esc(k[1])}</div><div class="s">${esc(k[2])}</div></div>`).join("")}</div>
-      <p class="note">${esc(G.summary)}</p><div style="margin-top:16px"><div class="eyebrow" style="margin-bottom:8px">How to read colours on this site</div>${colorKey}</div>`);
-    const vision = sec("vision", sh("Transformation vision", "From Kalam's vision to daily IMS work", "Every project traces back to the company vision and to the growth target.") +
-      `<div class="grid g2"><div class="cascade">
-        <div class="tier vis"><div class="k">Kalam CX<b>Company vision</b></div><div class="t">${esc(G.vision)}</div></div><div class="conn"></div>
-        <div class="tier"><div class="k">Kalam CX<b>Mission</b></div><div class="t">${esc(G.mission)}</div></div><div class="conn"></div>
-        <div class="tier"><div class="k">IMS<b>Program vision</b></div><div class="t">${esc(G.imsVision)}</div></div><div class="conn"></div>
-        <div class="tier goal"><div class="k">Company target<b>Growth</b></div><div class="t">${esc(G.growth.target)}</div></div><div class="conn"></div>
-        <div class="tier"><div class="k">What we deliver<b>${IMS.objectives.length} company goals</b></div><div class="t">${IMS.objectives.map(o => `<span class="pill">${esc(o[0])}</span>`).join("")}</div></div><div class="conn"></div>
-        <div class="tier"><div class="k">How<b>${P.length} projects</b></div><div class="t">${P.map(p => `<a class="pill" style="text-decoration:none" href="#/portfolio/${p.id}">${p.id} ${esc(p.short)}</a>`).join("")}</div></div>
-      </div>
-      <div><h3 style="margin-bottom:12px">What changes</h3>${G.fromTo.map(r => `<div class="ft"><div class="f">${esc(r[0])}</div><div class="ar">→</div><div class="t">${esc(r[1])}</div></div>`).join("")}
-      <h3 style="margin:22px 0 10px">How the program lives Kalam's values</h3><div class="grid g2">${G.values.map(v => `<div class="card pad" style="padding:14px 16px"><h4 style="color:var(--plum)">${esc(v[0])}</h4><p class="small muted">${esc(v[1])}</p></div>`).join("")}</div></div></div>`);
-    const goals = sec("goals", sh("Strategic objectives", "The five company goals", "Original wording kept. Each goal lists the projects that lead it (bold) or support it, and how progress is proven.") +
-      `<div class="grid g5">${IMS.objectives.map((o, i) => {
-        const lead = P.filter(p => p.pillars[0] === o[0]), sup = P.filter(p => p.pillars.slice(1).includes(o[0]));
-        return `<div class="card pad goal"><div class="n">GOAL ${String(i + 1).padStart(2, "0")}</div><h3>${esc(o[0])}</h3><p class="small muted">${esc(o[1])}</p>
-        <div class="projs">${lead.map(p => `<a href="#/portfolio/${p.id}" style="font-weight:700">${p.id}</a>`).join("")}${sup.map(p => `<a href="#/portfolio/${p.id}" style="background:var(--curL);color:var(--soft)">${p.id}</a>`).join("")}</div>
-        <div class="proof"><b>How we prove it:</b> ${esc(o[2])}</div></div>`; }).join("")}</div>`);
-    const highRisks = IMS.risks.filter(r => r.impact === "H" && r.prob === "H");
-    const hl = sec("highlights", sh("Executive highlights", "Achievements, pilots, risks and next milestones") +
-      `<div class="grid g4">
-      <div class="card pad hl"><h3><i style="background:var(--okL);color:var(--ok)">✓</i>Achieved</h3><ul>${["M-01", "M-02", "M-06", "M-08"].map(id => { const m = metric(id); return `<li><b>${esc(m.value)} ${esc(m.unit)}</b><span>${esc(m.name)} · ${mtag(m.status)}</span></li>`; }).join("")}</ul></div>
-      <div class="card pad hl"><h3><i style="background:var(--decL);color:var(--dec)">◷</i>Pilots ready</h3><ul>${pilots.map(pl => { const its = inits.filter(i => i.note === pl); return `<li><b>${pl} · ${esc(its[0].parentName)}</b><span>${its.length} initiatives · awaiting approval</span></li>`; }).join("")}</ul></div>
-      <div class="card pad hl"><h3><i style="background:var(--riskL);color:var(--risk)">!</i>Major risks</h3><ul>${highRisks.slice(0, 5).map(r => `<li><b>${r.id} · ${esc(r.cat)}</b><span>${esc(r.text)}</span></li>`).join("")}</ul></div>
-      <div class="card pad hl"><h3><i style="background:var(--futL);color:var(--fut)">→</i>Next milestones</h3><ul>${IMS.gates.slice(0, 4).map(g => `<li><b>${g[0]} · ${esc(g[1])}</b><span>${esc(g[2])} · ${esc(g[3])}</span></li>`).join("")}</ul></div>
-      </div>`);
-    const rows = STATUS_ORDER.map(k => [k, byS[k] || 0]);
-    const why = { "live-company": "Nothing is company-owned yet", "live-personal": "In real use, but on a personal PC and account", poc: "", pilot: "No pilot running yet", dev: "", prototype: "Built, not in production", approval: "Inside Pilots A, B and C", planned: "Defined; not started", blocked: "" };
-    const started = inits.filter(i => i.status !== "planned");
-    const status = sec("status", sh("Program status", "An honest view of every initiative", "A personally operated automation is never shown as company-owned. Progress percentages are not shown, because nothing has a measured baseline yet.") +
-      `<div class="grid g2"><div class="card pad"><h3 style="margin-bottom:12px">${inits.length} initiatives by status</h3>${sbar(byS)}<div class="statlist" style="margin-top:16px">${rows.map(r => `<div class="statrow"><span>${badge(r[0])}</span><span class="n">${r[1]}</span><span class="why">${esc(why[r[0]] || "")}</span></div>`).join("")}</div></div>
-      <div class="card pad"><h3 style="margin-bottom:10px">Everything that is not just "planned"</h3>${table(["ID", "Initiative", "Status"], started.map(i => [`<span class="mono small">${i.id}</span>`, `<b>${esc(i.name)}</b><br><span class="small">${esc(i.parentName)}${i.note ? " · " + esc(i.note) : ""}</span>`, badge(i.status)]))}</div></div>
-      <h3 style="margin:26px 0 10px">Program health</h3><div class="health">${IMS.health.map(h => `<div><b>${esc(h[0])}<span class="rag ${h[1]}">${{ G: "ON TRACK", A: "WATCH", R: "AT RISK" }[h[1]]}</span></b>${esc(h[2])}</div>`).join("")}</div>`);
-    return hero + glance + vision + goals + hl + status;
-  }
+  /* 01 Overview is rendered by js/overview.js (program cockpit). */
+  function overview() { return ""; }
 
   /* ============ 02 CURRENT STATE & BUSINESS CASE ============ */
   function caseCh() {
@@ -117,42 +53,66 @@ window.CHAPTERS = (function () {
       <span class="lab" style="margin-left:10px">Department</span><select class="fsel" id="pdept" aria-label="Filter by department"><option value="all">All departments</option>${depts.map(d => `<option>${esc(d)}</option>`).join("")}</select></div>
       <div class="pgrid" id="pgrid">${cards}</div><p class="note hidden" id="pnone">No project matches these filters.</p>`);
     const caps = sec("caps", sh("Shared capabilities", "Seven platform modules used by several projects", "These are built once and shared, so the projects do not each build their own task list, alerts or knowledge base.") +
-      `<div class="grid g3">${CAP.map(c => `<div class="card pad cap"><h4><span class="cid">${c.id}</span>${esc(c.name)}</h4><p>${esc(c.what)}</p><div class="small muted" style="margin-bottom:8px">Used by: ${c.usedBy.map(plink).join(", ")}</div>${c.initiatives.map(i => `<div style="display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:13px;padding:6px 0;border-top:1px solid var(--line)"><span>${esc(i[1])}${i[3] ? `<br><span class="muted small">${esc(i[3])}</span>` : ""}</span>${badge(i[2])}</div>`).join("")}</div>`).join("")}</div>`);
+      `<div class="grid g3">${CAP.map(c => `<div class="card pad cap"><h4><span class="cid">${c.id}</span><a href="#/portfolio/${c.id}" style="color:inherit">${esc(c.name)}</a></h4><p>${esc(c.what)}</p><div class="small muted" style="margin-bottom:8px">Used by: ${c.usedBy.map(plink).join(", ")}</div>${c.initiatives.map(i => `<div style="display:flex;justify-content:space-between;gap:8px;align-items:center;font-size:13px;padding:6px 0;border-top:1px solid var(--line)"><span>${esc(i[1])}${i[3] ? `<br><span class="muted small">${esc(i[3])}</span>` : ""}</span>${badge(i[2])}</div>`).join("")}</div>`).join("")}</div>`);
     return sum + projects + caps;
   }
 
-  /* ============ PROJECT DETAIL ============ */
+  /* ============ PROJECT DETAIL: 20 numbered sections ============ */
+  const sysTag = st => `<span class="mtag m-${st === "verified" ? "measured" : st === "partial" ? "estimate" : "open"}">${st === "verified" ? "Verified" : st === "partial" ? "Partly verified" : "Not verified"}</span>`;
+  const riskRows = ids => table(["ID", "Risk", "Level", "Owner", "Mitigation", "Mitigation status"], ids.map(id => IMS.risks.find(x => x.id === id)).sort((a, b) => riskScore(b) - riskScore(a)).map(r => { const l = riskLevel(r), m = IMS.MSTATUS[r.mstatus]; return [`<a class="mono small" href="#/delivery" data-goto="risk-${r.id}">${r.id}</a>`, `<b>${esc(r.text)}</b><br><span class="small">${esc(r.cat)} · impact ${r.impact}, probability ${r.prob}</span>`, `<span class="pm-rk lv-${l[0]}">${l[1]}</span>`, esc(r.owner), esc(r.mit), `${tone(m[0], m[1])}<br><span class="small muted">${esc(r.mnote)}</span>`]; }));
   function project(p) {
     const idx = P.indexOf(p), prev = P[idx - 1], next = P[idx + 1];
-    const s = projStatus(p);
+    const s = projStatus(p), gp = IMS.gateProgress[p.id];
+    const owned = p.ownerStatus === "named";
     const head = `<div class="chead"><div class="wrap"><div class="crumb"><a href="#/portfolio">03 Portfolio</a> / ${p.id}</div>
       <div class="eyebrow">Project ${p.id} · ${esc(p.lead)}</div><h1>${esc(p.name)}</h1><p>${esc(p.objective)}</p>
-      <div class="pmeta"><span class="badge t-${s.tone}">${s.label}</span><span class="chip">Owner <b>${esc(p.owner)}</b></span><span class="chip">Stage <b>${esc(p.stage)}</b></span><span class="chip">Goals <b>${esc(p.pillars.join(" · "))}</b></span></div>
-      <div class="subnav" style="margin-top:18px"></div></div></div>`;
-    const tabs = [["overview", "Overview"], ["subs", `Sub-projects (${p.initiatives.length})`], ["req", "Requirements & automation"], ["sys", "Systems & controls"], ["delivery", "Delivery & risks"], ["measure", "KPIs, value & ROI"]];
-    const gp = IMS.gateProgress[p.id];
-    const lifecycle = p.lifecycle ? `<h3 style="margin:24px 0 10px">${p.id === "P05" ? "Payment lifecycle: amounts tracked separately at each status" : "Interpreter lifecycle (14 steps)"}</h3>${p.id === "P05" ? `<div class="cycle">${p.lifecycle.map((x, i) => `${i ? "<i>→</i>" : ""}<span>${esc(x)}</span>`).join("")}</div>` : `<div class="lifecycle">${p.lifecycle.map(x => `<div class="${/first login|first task/i.test(x) ? "pil" : ""}">${esc(x)}</div>`).join("")}</div><p class="note">Blue steps are in Pilot C (awaiting approval).</p>`}` : "";
-    const cycle = p.cycle ? `<h3 style="margin:24px 0 10px">Continuous improvement cycle</h3><div class="cycle">${p.cycle.map((x, i) => `${i ? "<i>→</i>" : ""}<span>${esc(x)}</span>`).join("")}</div>` : "";
-    const pane = {
-      overview: `<div class="grid g2"><div class="card pad"><div class="eyebrow">Business problem</div><p style="margin-top:8px">${esc(p.problem)}</p></div><div class="card pad"><div class="eyebrow">Expected outcome</div><p style="margin-top:8px;font-weight:500">${esc(p.outcome)}</p><div style="margin-top:12px">${p.pillars.map((x, i) => `<span class="pill${i ? "" : " main"}">${esc(x)}</span>`).join("")}</div></div></div>
-        <h3 style="margin:24px 0 10px">Current process</h3>${flow(p.current, "cur")}
-        <h3 style="margin:22px 0 10px">Proposed future process</h3>${flow(p.future, "fut")}${lifecycle}${cycle}
-        ${p.note ? `<p class="note" style="margin-top:18px">${esc(p.note)}</p>` : ""}`,
-      subs: `<div class="card">${table(["ID", "Sub-project", "Status", "Note"], p.initiatives.map(i => [`<span class="mono small">${i[0]}</span>`, `<b>${esc(i[1])}</b>`, badge(i[2]), esc(i[3] || "")]))}</div>`,
-      req: `<div class="grid g2"><div class="card pad"><h3 style="margin-bottom:10px">Functional requirements</h3>${ticks(p.requirements)}</div><div class="card pad"><h3 style="margin-bottom:10px">Automation opportunities</h3>${p.automation.map(a => `<div style="display:flex;justify-content:space-between;gap:10px;padding:8px 0;border-bottom:1px solid var(--line);font-size:14px"><span>${esc(a[0])}</span>${atype(a[1])}</div>`).join("")}<p class="note">Types are defined in chapter 05 (AI governance). A rule or a fixed check is never called AI.</p></div></div>`,
-      sys: `<div class="grid g2"><div class="card pad"><h3 style="margin-bottom:10px">Systems involved</h3>${table(["System", "Integration status"], p.systems.map(id => { const sy = IMS.systems.find(x => x.id === id); return [`<b>${esc(sy.name)}</b><br><span class="small">${esc(sy.purpose)}</span>`, `<span class="mtag m-${sy.status === "verified" ? "measured" : sy.status === "partial" ? "estimate" : "open"}">${sy.status === "verified" ? "Verified" : sy.status === "partial" ? "Partly verified" : "Not verified"}</span>`]; }))}<p class="note"><a href="#/tech">Full integration register in chapter 05 →</a></p></div>
-        <div><div class="card pad"><h3 style="margin-bottom:10px">Human approvals and controls</h3>${ticks(p.controls, "dec")}</div><div class="card pad" style="margin-top:16px"><h3 style="margin-bottom:10px">Dependencies</h3><div style="display:flex;flex-wrap:wrap;gap:6px;margin-bottom:8px">${p.deps.map(d => `<span class="pill">${plink(d)}</span>`).join("")}</div><p class="small muted">${esc(p.depText)}</p></div></div></div>`,
-      delivery: `<div class="grid g2"><div class="card pad"><h3 style="margin-bottom:10px">Expected deliverables</h3>${ticks(p.deliverables)}</div><div class="card pad"><dl class="kv"><dt>Project owner</dt><dd>${esc(p.owner)}</dd><dt>Departments</dt><dd>${esc(p.depts.join(", "))}</dd><dt>Implementation stage</dt><dd>${esc(p.stage)}</dd><dt>Status</dt><dd>${s.label} · ${esc(s.detail)}</dd></dl></div></div>
-        <h3 style="margin:24px 0 10px">Stage gates</h3><div class="card">${table(IMS.gates.slice(1).map(g => g[0]), [gp.map(v => `<span class="mtag ${v === 2 ? "m-measured" : v === 1 ? "m-estimate" : "m-open"}">${v === 2 ? "Passed" : v === 1 ? "Partly" : "Not yet"}</span>`)])}</div>${IMS.gateNotes[p.id] ? `<p class="note">${esc(IMS.gateNotes[p.id])}</p>` : ""}
-        <h3 style="margin:24px 0 10px">Roadmap</h3><div class="card pad tbl">${gantt(IMS.roadmap.filter(r => r[3] === p.id))}</div>
-        <h3 style="margin:24px 0 10px">Risks</h3><div class="card">${table(["ID", "Risk", "Impact", "Probability", "Mitigation"], p.risks.map(id => { const r = IMS.risks.find(x => x.id === id); return [`<span class="mono small">${r.id}</span>`, `<b>${esc(r.text)}</b><br><span class="small">${esc(r.cat)}</span>`, `<span class="rate ${r.impact}">${r.impact}</span>`, `<span class="rate ${r.prob}">${r.prob}</span>`, esc(r.mit)]; }))}</div>`,
-      measure: `<div class="card">${table(["KPI", "Definition", "Baseline"], p.kpis.map(k => [`<b>${esc(k[0])}</b>`, esc(k[1]), fmt(k[2])]))}</div>
-        <div class="grid g2" style="margin-top:16px"><div class="card pad"><h3 style="margin-bottom:8px">Baseline measurement</h3><p class="small">${esc(p.baseline)}</p><h3 style="margin:16px 0 8px">Operational value</h3>${ticks(p.value.operational, "ok")}<h3 style="margin:16px 0 8px">Financial value</h3>${ticks(p.value.financial)}</div>
-        <div class="card pad"><h3 style="margin-bottom:8px">ROI measurement</h3><dl class="kv">${[["Monthly volume", "volume"], ["Current processing time", "cur"], ["Proposed processing time", "next"], ["Human review time", "review"], ["Implementation cost", "impl"], ["Recurring cost", "recur"], ["Hours saved", "hours"], ["Capacity released", "capacity"], ["Verified financial savings", "savings"], ["ROI", "roi"], ["Payback period", "payback"]].map(r => `<dt>${r[0]}</dt><dd>${fmt(p.roi[r[1]])}</dd>`).join("")}</dl></div></div>`
-    };
-    const body = `<section class="sec"><div class="wrap"><div class="tabs" role="tablist">${tabs.map((t, i) => `<button role="tab" data-tab="${t[0]}" class="${i ? "" : "on"}">${t[1]}</button>`).join("")}</div>
-      ${tabs.map((t, i) => `<div class="tabpane${i ? "" : " on"}" data-pane="${t[0]}">${pane[t[0]]}</div>`).join("")}
-      <div class="pnav">${prev ? `<a class="btn lt" href="#/portfolio/${prev.id}">← ${prev.id} ${esc(prev.short)}</a>` : "<span></span>"}<a class="btn lt" href="#/portfolio">All projects</a>${next ? `<a class="btn lt" href="#/portfolio/${next.id}">${next.id} ${esc(next.short)} →</a>` : "<span></span>"}</div></div></section>`;
+      <div class="pmeta"><span class="badge t-${s.tone}">${s.label}</span><span class="chip">Accountable owner <b>${owned ? esc(p.owner) : "To be assigned"}</b></span><span class="chip">Stage <b>${esc(p.stage)}</b></span><span class="chip">Goals <b>${esc(p.pillars.join(" · "))}</b></span></div></div></div>`;
+    const lifecycle = p.lifecycle ? `<h4 class="pj-h4">${p.id === "P05" ? "Payment lifecycle: amounts tracked separately at each status" : "Interpreter lifecycle (14 steps)"}</h4>${p.id === "P05" ? `<div class="cycle">${p.lifecycle.map((x, i) => `${i ? "<i>→</i>" : ""}<span>${esc(x)}</span>`).join("")}</div>` : `<div class="lifecycle">${p.lifecycle.map(x => `<div class="${/first login|first task/i.test(x) ? "pil" : ""}">${esc(x)}</div>`).join("")}</div><p class="note">Blue steps are in Pilot C (awaiting approval).</p>`}` : "";
+    const cycle = p.cycle ? `<h4 class="pj-h4">Continuous improvement cycle</h4><div class="cycle">${p.cycle.map((x, i) => `${i ? "<i>→</i>" : ""}<span>${esc(x)}</span>`).join("")}</div>` : "";
+    const TBC = `<span class="tbm" title="To Be Confirmed">TBC</span>`;
+    const secs = [
+      ["Project overview", `<div class="grid g2"><dl class="kv"><dt>Objective</dt><dd>${esc(p.objective)}</dd><dt>Expected outcome</dt><dd>${esc(p.outcome)}</dd><dt>Departments</dt><dd>${esc(p.depts.join(", "))}</dd><dt>Company goals</dt><dd>${p.pillars.map((x, i) => `<span class="pill${i ? "" : " main"}">${esc(x)}</span>`).join("")}</dd></dl>
+        <dl class="kv"><dt>Status</dt><dd>${s.label} · ${esc(s.detail)}</dd><dt>Stage</dt><dd>${esc(p.stage)}</dd><dt>Initiatives</dt><dd>${p.initiatives.length} · ${sbar(countBy(p.initiatives.map(i => ({ status: i[2] }))))}</dd></dl></div>
+        <details class="pj-more"><summary>All ${p.initiatives.length} initiatives</summary>${table(["ID", "Initiative", "Status", "Note"], p.initiatives.map(i => [`<span class="mono small">${i[0]}</span>`, `<b>${esc(i[1])}</b>`, badge(i[2]), esc(i[3] || "")]))}</details>`],
+      ["Business problem", `<p class="pj-lead">${esc(p.problem)}</p>`],
+      ["Current-state workflow", flow(p.current, "cur")],
+      ["Future-state workflow", flow(p.future, "fut") + lifecycle + cycle + (p.note ? `<p class="note">${esc(p.note)}</p>` : "")],
+      ["Scope and exclusions", `<div class="grid g2"><div><h4 class="pj-h4">In scope</h4>${ticks(p.scopeIn || [], "ok")}</div><div><h4 class="pj-h4">Out of scope</h4>${ticks(p.scopeOut || [], "risk")}</div></div><p class="note">Proposed by the program team. The project owner confirms scope at gate G2.</p>`],
+      ["Functional requirements", ticks(p.requirements)],
+      ["Systems and integrations", table(["System", "Purpose", "Integration method", "Status"], p.systems.map(id => { const sy = IMS.systems.find(x => x.id === id); return [`<b>${esc(sy.name)}</b>`, esc(sy.purpose), esc(sy.method), sysTag(sy.status)]; })) + `<p class="note">No integration is treated as available until IT verifies it (decision D-07). <a href="#/tech">Integration register →</a></p>`],
+      ["Data requirements", ticks(p.data || []) + `<p class="note">Access to each source is requested under decision D-06. Data owners are named per source.</p>`],
+      ["Automation opportunities", `${p.automation.map(a => `<div class="pj-auto"><span>${esc(a[0])}</span>${atype(a[1])}</div>`).join("")}<p class="note">A fixed rule or check is never called AI. Types are defined in chapter 05.</p>`],
+      ["Human approval and control points", ticks(p.controls, "dec")],
+      ["Dependencies", `<div class="pj-deps">${p.deps.map(d => `<span class="pill">${plink(d)}</span>`).join("")}</div><p class="small muted" style="margin-top:8px">${esc(p.depText)}</p>`],
+      ["Risks and mitigations", riskRows(p.risks)],
+      ["Accountable owner and stakeholders", `<div class="grid g2"><dl class="kv"><dt>Accountable owner</dt><dd>${owned ? esc(p.owner) : `${ownerText("")}<br><span class="small muted">${esc(p.owner)}. Named under decision D-08.</span>`}</dd><dt>Lead department</dt><dd>${esc(p.lead)}</dd><dt>Process owners</dt><dd>To be assigned (D-08)</dd><dt>Technical owner</dt><dd>IT, to be assigned (D-05)</dd></dl><div><h4 class="pj-h4">Stakeholders</h4>${ticks(p.stakeholders || [])}</div></div>`],
+      ["Deliverables", ticks(p.deliverables)],
+      ["KPIs and measurement definitions", table(["KPI", "Definition", "Data source"], p.kpis.map((k, i) => [`<b>${esc(k[0])}</b>`, esc(k[1]), esc((p.kpiSrc || [])[i] || "TBC")]))],
+      ["Current baseline", table(["KPI", "Baseline today"], p.kpis.map(k => [`<b>${esc(k[0])}</b>`, fmt(k[2])])) + `<p class="note"><b>How it will be measured:</b> ${esc(p.baseline)}</p>`],
+      ["Target outcomes", `<p class="pj-lead">${esc(p.outcome)}</p>${table(["KPI", "Target"], p.kpis.map(k => [`<b>${esc(k[0])}</b>`, /measured/.test(k[2]) ? `Keep at or below the measured level; formal target set at G2` : `<span class="tbm">TBM</span> Set at gate G2 from the measured baseline`]))}`],
+      ["Expected business value", `<div class="grid g2"><div><h4 class="pj-h4">Operational value</h4>${ticks(p.value.operational, "ok")}</div><div><h4 class="pj-h4">Financial value</h4>${ticks(p.value.financial)}<p class="note">Hours saved are not cash. Capacity released is not cost reduction. Only Finance confirms cash savings.</p></div></div>`],
+      ["ROI methodology", `<div class="grid g2"><div>${table(["Measure", "How it is calculated"], IMS.roiMethod.steps.map(r => [`<b>${esc(r[0])}</b>`, esc(r[1])]))}</div><div><dl class="kv">${[["Monthly volume", "volume"], ["Current processing time", "cur"], ["Proposed processing time", "next"], ["Human review time", "review"], ["Implementation cost", "impl"], ["Recurring cost", "recur"], ["Hours saved", "hours"], ["Capacity released", "capacity"], ["Verified cash savings", "savings"], ["ROI", "roi"], ["Payback period", "payback"]].map(r => `<dt>${r[0]}</dt><dd>${fmt(p.roi[r[1]])}</dd>`).join("")}</dl><p class="note">Costs to include: ${esc(IMS.roiMethod.costLines.join(", "))}. All TBM until Architecture (G3) and the pilot.</p></div></div>`],
+      ["Milestones and stage gates", `${table(["Gate", "Criteria", "Proposed date", "This project"], IMS.gates.slice(1).map((g, k) => [`<b>${g[0]}</b> ${esc(g[1])}`, esc(g[3]), monthLabel(IMS.gateAt[g[0]]), `<span class="mtag ${gp[k] === 2 ? "m-measured" : gp[k] === 1 ? "m-estimate" : "m-open"}">${gp[k] === 2 ? "Passed" : gp[k] === 1 ? "Partly" : "Not yet"}</span>`]))}${IMS.gateNotes[p.id] ? `<p class="note">${esc(IMS.gateNotes[p.id])}</p>` : ""}
+        <h4 class="pj-h4">Roadmap</h4>${IMS.roadmap.some(r => r[3] === p.id) ? `<div class="card pad tbl">${gantt(IMS.roadmap.filter(r => r[3] === p.id))}</div>` : `<p class="small muted">No workstream scheduled yet. Dates are set after Discovery (TBC).</p>`}`]
+    ];
+    const body = `<section class="sec pj"><div class="wrap pj-grid">
+      <nav class="pj-toc" aria-label="Sections of this project">${secs.map((x, i) => `<button data-scroll="s${i + 1}"><span>${String(i + 1).padStart(2, "0")}</span>${esc(x[0])}</button>`).join("")}</nav>
+      <div class="pj-body">${secs.map((x, i) => `<section class="card pad pj-sec" id="s${i + 1}"><h2><span>${String(i + 1).padStart(2, "0")}</span>${esc(x[0])}</h2>${x[1]}</section>`).join("")}
+      <div class="pnav">${prev ? `<a class="btn lt" href="#/portfolio/${prev.id}">← ${prev.id} ${esc(prev.short)}</a>` : "<span></span>"}<a class="btn lt" href="#/portfolio">All projects</a>${next ? `<a class="btn lt" href="#/portfolio/${next.id}">${next.id} ${esc(next.short)} →</a>` : "<span></span>"}</div></div></div></section>`;
+    return { head, body };
+  }
+
+  /* ============ CAPABILITY DETAIL ============ */
+  function capability(c) {
+    const head = `<div class="chead"><div class="wrap"><div class="crumb"><a href="#/portfolio">03 Portfolio</a> / ${c.id}</div>
+      <div class="eyebrow">Shared capability ${c.id}</div><h1>${esc(c.name)}</h1><p>${esc(c.what)}</p>
+      <div class="pmeta"><span class="chip">Owner <b>${esc(c.owner)}</b></span><span class="chip">Used by <b>${c.usedBy.length} projects</b></span></div></div></div>`;
+    const body = `<section class="sec"><div class="wrap"><div class="grid g2">
+      <div class="card pad"><h3 style="margin-bottom:10px">Initiatives</h3>${table(["ID", "Initiative", "Status", "Note"], c.initiatives.map(i => [`<span class="mono small">${i[0]}</span>`, `<b>${esc(i[1])}</b>`, badge(i[2]), esc(i[3] || "")]))}</div>
+      <div class="card pad"><h3 style="margin-bottom:10px">Used by</h3>${ticks(c.usedBy.map(id => { const p = P.find(x => x.id === id); return `${id} ${p.short}`; }))}<div style="margin-top:8px">${c.usedBy.map(id => `<span class="pill">${plink(id)}</span>`).join("")}</div>
+      <p class="note">Built once and shared, so projects do not each build their own. The owner is assigned under decision D-08.</p></div></div>
+      ${IMS.roadmap.some(r => r[3] === c.id) ? `<h3 style="margin:24px 0 10px">Roadmap</h3><div class="card pad tbl">${gantt(IMS.roadmap.filter(r => r[3] === c.id))}</div>` : ""}
+      <div class="pnav"><a class="btn lt" href="#/portfolio">All projects and capabilities</a></div></div></section>`;
     return { head, body };
   }
 
@@ -210,25 +170,27 @@ window.CHAPTERS = (function () {
 
   /* ============ 06 ROADMAP & GOVERNANCE ============ */
   function gantt(rows, phase) {
-    const M = IMS.months, todayPos = (0 + 0.85) / 13 * 100; /* 26 Nov 2026 sits just before Dec 2026 */
-    return `<div class="gantt"><div class="gh"><span></span>${M.map(m => `<span>${m}</span>`).join("")}</div>${rows.map(r => {
+    const N = IMS.program.months, rep = monthOffset(IMS.program.reportDate), today = monthOffset(new Date());
+    const state = r => phase ? "phase" : r[6] === "running" ? "running" : r[6] === "done" ? "done" : r[1] < Math.floor(rep) ? "delayed" : "proposed";
+    return `<div class="gantt"><div class="gh"><span></span>${Array.from({ length: N }, (_, i) => `<span>${monthLabel(i, i === 0 || i === N - 1)}</span>`).join("")}</div>${rows.map(r => {
       const [label, start, len] = r, kind = phase ? "phase" : r[4], note = phase ? (r[3] || "") : r[5];
-      const s0 = Math.floor(start) + 2, e0 = Math.min(15, Math.ceil(start + len) + 2);
-      return `<div class="gr" data-proj="${phase ? "" : r[3]}" data-kind="${kind}"><div class="gl">${esc(label)}${phase ? "" : `<small>${r[3] === "ALL" ? "Program" : esc(r[3])}</small>`}</div><div class="gb k-${kind}" style="grid-column:${s0}/${e0}" title="${esc(label)}">${esc(note || "")}</div></div>`;
-    }).join("")}</div>`;
+      const s0 = Math.floor(start) + 2, e0 = Math.min(N + 2, Math.ceil(start + len) + 2), st = state(r);
+      return `<div class="gr" data-proj="${phase ? "" : r[3]}" data-kind="${kind}"><div class="gl">${esc(label)}${phase ? "" : `<small>${r[3] === "ALL" ? "Program" : esc(r[3])} · ${span(start, start + len)}</small>`}</div><div class="gb k-${kind} s-${st}" style="grid-column:${s0}/${e0}" title="${esc(label)} · ${span(start, start + len)}${st === "proposed" ? " · proposed dates" : st === "delayed" ? " · start date passed, not started" : ""}">${esc(note || "")}</div></div>`;
+    }).join("")}${today >= 0 && today <= N ? `<i class="g-today" style="left:calc(240px + (100% - 240px) * ${today / N})" title="Today"></i>` : ""}</div>`;
   }
   function delivery() {
     const road = sec("roadmap", sh("Program roadmap", "December 2026 to December 2027", "Durations start on approval. Each pilot is measured for at least 4 weeks before a go, change or stop decision.") +
       `<div class="card pad tbl">${gantt(IMS.phases, true)}</div><p class="note">Program phases. Enterprise expansion continues into 2028.</p>
       <div class="filters" id="rfilters" style="margin-top:22px"><span class="lab">Show</span>${[["all", "All workstreams"], ["pilot", "Pilots"], ["build", "Builds"], ["run", "Running now"], ["plan", "Planning"]].map((f, i) => `<button class="fbtn${i ? "" : " on"}" data-k="${f[0]}">${f[1]}</button>`).join("")}</div>
-      <div class="card pad tbl">${gantt(IMS.roadmap)}</div><div class="legend" style="margin-top:10px">${key("var(--est)", "Running now (personally operated)")}${key("var(--fut)", "Pilot")}${key("var(--navy3)", "Build")}${key("#8A96AA", "Planning")}${key("var(--dec)", "Approval gate")}</div>`);
+      <div class="card pad tbl">${gantt(IMS.roadmap)}</div><div class="legend" style="margin-top:10px">${key("var(--est)", "Running now (personally operated)")}${key("var(--fut)", "Pilot")}${key("var(--navy3)", "Build")}${key("#8A96AA", "Planning")}${key("var(--dec)", "Approval gate")}<span><i class="lg-prop"></i>Hatched = proposed dates, not committed until G0</span></div>`);
     const G = IMS.gates;
     const gates = sec("gates", sh("Stage gates", "Approval criteria for every project", "A project only moves on when the gate criteria are met and the steering committee records the decision.") +
       `<div class="gates">${G.map(g => `<div class="gate"><b>${g[0]}</b><h4>${esc(g[1])}</h4><span>${esc(g[2])}</span><p class="small muted" style="margin-top:4px">${esc(g[3])}</p></div>`).join("")}</div>
       <h3 style="margin:22px 0 10px">Where each project stands</h3><div class="card">${table(["Project", ...G.slice(1).map(g => g[0] + " " + g[1])], P.map(p => [plink(p.id), ...IMS.gateProgress[p.id].map(v => `<i class="p${v}" title="${v === 2 ? "Passed" : v === 1 ? "Partly" : "Not yet"}"></i>`)]), "gm")}</div>
       <div class="legend" style="margin-top:8px"><span><i style="background:var(--ok);border-radius:50%"></i>Passed</span><span><i style="background:var(--est);border-radius:50%"></i>Partly</span><span><i style="border:2px solid var(--line2);border-radius:50%;background:#fff"></i>Not yet</span></div>`);
     const deps = sec("dependencies", sh("Project dependencies", "What has to come first", "Projects share infrastructure and data. Reporting and management intelligence depend on data quality; payment control depends on task data and validation rules.") +
-      `<div class="card pad deps">${P.map(p => `<div class="dep"><span class="fr">${plink(p.id)}</span><span class="muted">needs</span><div class="to">${p.deps.map(plink).join("")}</div></div>`).join("")}</div>`);
+      `<div class="card pad deps">${P.map(p => `<div class="dep"><span class="fr">${plink(p.id)}</span><span class="muted">needs</span><div class="to">${p.deps.map(plink).join("")}</div></div>`).join("")}</div>
+      <div class="grid g2" style="margin-top:16px">${IMS.foundations.map(f => `<div class="card pad"><div class="eyebrow">Foundation · gate ${f.gate}</div><h3 style="margin:4px 0 6px">${esc(f.name)}</h3><p class="small muted">${esc(f.what)}</p><p class="small" style="margin-top:6px">Owner: ${esc(f.owner)} · needed by ${P.filter(p => p.deps.includes(f.id)).map(p => p.id).join(", ")}</p></div>`).join("")}</div>`);
     const gov = sec("governance", sh("Governance", "Who decides, who delivers") +
       `<div class="card">${table(["Role", "Who", "Responsibility"], IMS.governance.map(g => [`<b>${esc(g[0])}</b>`, esc(g[1]), esc(g[2])]))}</div>
       <h3 style="margin:24px 0 10px">RACI</h3><div class="card">${table(["Activity", ...IMS.raci.roles], IMS.raci.rows.map(r => [`<b>${esc(r[0])}</b>`, ...r.slice(1).map(x => `<b class="${x}">${x}</b>`)]), "raci")}</div>
@@ -237,12 +199,18 @@ window.CHAPTERS = (function () {
     const cats = [...new Set(IMS.risks.map(r => r.cat))];
     const risks = sec("risks", sh("Risk register", `${IMS.risks.length} risks · ${IMS.issues.length} open issues`, "Impact and probability are initial ratings by the program team, reviewed monthly by the steering committee.") +
       `<div class="filters" id="kfilters"><span class="lab">Category</span><button class="fbtn on" data-c="all">All</button>${cats.map(c => `<button class="fbtn" data-c="${esc(c)}">${esc(c)}</button>`).join("")}</div>
-      <div class="card">${table(["ID", "Category", "Risk", "Impact", "Prob.", "Owner", "Mitigation", "Issue"], IMS.risks.map(r => [`<span class="mono small">${r.id}</span>`, esc(r.cat), `<b>${esc(r.text)}</b>`, `<span class="rate ${r.impact}">${r.impact}</span>`, `<span class="rate ${r.prob}">${r.prob}</span>`, esc(r.owner), esc(r.mit), r.issue ? `<span class="mono small">${r.issue}</span>` : "—"]), "risktbl")}</div>
+      <div class="card">${table(["ID", "Category", "Risk", "Impact", "Prob.", "Level", "Owner", "Mitigation", "Mitigation status", "Issue"], [...IMS.risks].sort((a, b) => riskScore(b) - riskScore(a)).map(r => { const l = riskLevel(r), m = IMS.MSTATUS[r.mstatus]; return [`<span class="mono small" id="risk-${r.id}">${r.id}</span>`, esc(r.cat), `<b>${esc(r.text)}</b>`, `<span class="rate ${r.impact}">${r.impact}</span>`, `<span class="rate ${r.prob}">${r.prob}</span>`, `<span class="pm-rk lv-${l[0]}">${l[1]}</span>`, esc(r.owner), esc(r.mit), `${tone(m[0], m[1])}<br><span class="small muted">${esc(r.mnote)}</span>`, r.issue ? `<span class="mono small">${r.issue}</span>` : "—"]; }), "risktbl")}</div>
+      <p class="note">Last reviewed: ${esc(IMS.riskReview.last)}. Next review: ${esc(IMS.riskReview.next)}. Level = impact × probability (critical = high × high).</p>
       <h3 style="margin:24px 0 10px">Open issues</h3><div class="card">${table(["ID", "Area", "Issue", "Impact", "Needed"], IMS.issues.map(i => [`<span class="mono small">${i[0]}</span>`, esc(i[1]), `<b>${esc(i[2])}</b>`, esc(i[3]), esc(i[4])]))}</div>`);
+    const RD = IMS.READY, rv = { yes: ["ok", "Yes"], partial: ["est", "Partly"], no: ["risk", "No"] };
+    const ready = sec("readiness", sh("Production readiness", "What every automation needs before it is company production", "Nothing moves to production while it depends on one person's account, laptop or memory. Each automation is checked against the same eight criteria.") +
+      `<div class="card">${table(["Automation", "Status", ...RD.map(r => r[1]), "Note"], IMS.readiness.map(a => [`<b>${esc(a.name)}</b><br><span class="mono small">${a.id}</span>`, badge(a.status), ...RD.map(r => `<span class="rd rd-${a[r[0]]}" title="${esc(r[2])}">${rv[a[r[0]]][1]}</span>`), `<span class="small">${esc(a.note)}</span>`]), "readytbl")}</div>
+      <div class="grid g4" style="margin-top:16px">${RD.map(r => `<div class="card pad" style="padding:14px 16px"><h4 style="color:var(--plum)">${esc(r[1])}</h4><p class="small muted" style="margin-top:4px">${esc(r[2])}</p></div>`).join("")}</div>
+      <h3 style="margin:24px 0 10px">Support and maintenance model (proposal, decided under D-13)</h3><div class="card">${table(["Level", "Who", "What"], IMS.support.map(r => [`<b>${esc(r[0])}</b>`, esc(r[1]), esc(r[2])]))}</div>`);
     const C = IMS.change;
     const change = sec("change", sh("Change management", "How people adopt the new way of working") +
       `<div class="grid g2"><div class="card">${table(["Group", "What changes", "Approach"], C.groups.map(g => [`<b>${esc(g[0])}</b>`, esc(g[1]), esc(g[2])]))}</div><div class="card pad"><h3 style="margin-bottom:12px">Adoption steps</h3>${C.steps.map((s, i) => `<div style="display:grid;grid-template-columns:34px 1fr;gap:10px;margin-bottom:10px"><span class="mono" style="font-weight:700;color:var(--plum2)">${String(i + 1).padStart(2, "0")}</span><div><b style="font-size:14px">${esc(s[0])}</b><div class="small muted">${esc(s[1])}</div></div></div>`).join("")}</div></div>`);
-    return road + gates + deps + gov + risks + change;
+    return road + gates + deps + gov + risks + ready + change;
   }
 
   /* ============ 07 RESULTS ============ */
@@ -291,7 +259,9 @@ window.CHAPTERS = (function () {
   function decisions() {
     const D = IMS.decisions, C = IMS.continuity;
     const dec = sec("decisions", sh("Management decisions", `${D.length} decisions needed`, "Each decision shows why it is needed, who takes it, by when, and what happens if it waits.") +
-      `<div class="grid g2">${D.map(d => `<div class="card dcard"><div class="did">${d[0]}</div><div><h3>${esc(d[1])}</h3><dl><dt>Why</dt><dd>${esc(d[2])}</dd><dt>Decision-maker</dt><dd>${esc(d[3])}</dd><dt>Needed by</dt><dd>${esc(d[4])}</dd><dt>If delayed</dt><dd class="delay">${esc(d[5])}</dd></dl></div></div>`).join("")}</div>`);
+      `<div class="filters" id="decf"><span class="lab">Show</span><button class="fbtn on" data-dk="all">All (${D.length})</button>${Object.keys(IMS.DSTATUS).map(k => `<button class="fbtn" data-dk="${k}">${IMS.DSTATUS[k][1]} (${D.filter(d => d[6] === k).length})</button>`).join("")}</div>
+      <div class="grid g2">${D.map(d => { const st = IMS.DSTATUS[d[6]]; return `<div class="card dcard" data-dk="${d[6]}" id="dec-${d[0]}"><div class="did">${d[0]}</div><div><div style="display:flex;justify-content:space-between;gap:10px;align-items:flex-start"><h3>${esc(d[1])}</h3>${tone(st[0], st[1])}</div><dl><dt>Why it matters</dt><dd>${esc(d[2])}</dd><dt>Decision owner</dt><dd>${esc(d[3])}</dd><dt>Required by</dt><dd>${esc(d[4])}</dd><dt>Impact if delayed</dt><dd class="delay">${esc(d[5])}</dd></dl></div></div>`; }).join("")}</div>
+      <p class="note hidden" id="decnone">No decision has this status yet.</p>`);
     const next = sec("next", sh("Next steps", "The first 30 days after approval") +
       `<div class="card pad">${flow(["Sponsor and steering named (D-01)", "Discovery approved and started (D-02)", "Company AI account and budget (D-03)", "Data access requests sent (D-06)", "Process owners named for pilots (D-08)", "MasterWord handover begins (D-04)"], "fut")}</div>`);
     const cost = sec("cost", sh("What it will cost", "Cost model and today's costs", "Placeholders in brackets are confirmed with the vendor and IT before approval. Rows in red are paid personally today.") +
@@ -312,5 +282,5 @@ window.CHAPTERS = (function () {
     { id: "delivery", no: "06", title: "Roadmap, Governance & Delivery", nav: "Roadmap", intro: "The 13-month plan, stage gates, dependencies, governance, risks and change management.", render: delivery, sections: [["roadmap", "Roadmap"], ["gates", "Stage gates"], ["dependencies", "Dependencies"], ["governance", "Governance"], ["risks", "Risks"], ["change", "Change"]] },
     { id: "results", no: "07", title: "Results, Evidence & Business Value", nav: "Results", intro: "What has been delivered so far, the evidence behind it, and how value is measured. Estimates and measured results are always labelled.", render: results, sections: [["masterword", "MasterWord"], ["learning", "Kalam Learning"], ["payment", "Payment pilot"], ["others", "Other projects"], ["benefits", "Benefits"], ["roi", "ROI"], ["metrics", "Metrics"]] },
     { id: "decisions", no: "08", title: "Management Decisions", nav: "Decisions", intro: "What management needs to approve or provide, what it will cost, and how the work becomes company-owned.", render: decisions, sections: [["decisions", "Decisions"], ["next", "Next steps"], ["cost", "Cost"], ["continuity", "Continuity"]] }
-  ].map(c => Object.assign(c, { project, gantt, colorKey }));
+  ].map(c => Object.assign(c, { project, capability, gantt, colorKey }));
 })();
