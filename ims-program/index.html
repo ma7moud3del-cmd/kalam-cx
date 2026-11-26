@@ -1,0 +1,722 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>IMS Program 2027</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --dark:#2B0E2C; --plum:#4B154A; --mid:#79417F; --lav:#E7DBFF; --yel:#FCEFA5; --yel2:#F6DE6A;
+  --light:#F7F3FA; --card:#FFFFFF; --border:#E2D7EA; --body:#1F1422; --soft:#5E5161;
+  --red:#B4302F; --redbg:#FBEBEB; --green:#1E7B45; --greenbg:#E3F4EA;
+  --shadow:0 1px 2px rgba(43,14,44,.06),0 8px 24px rgba(43,14,44,.07);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;scroll-padding-top:76px}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--light);color:var(--body);font-size:15px;line-height:1.5;-webkit-font-smoothing:antialiased}
+img{max-width:100%;display:block}
+.wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+h1,h2,h3{letter-spacing:-.5px;line-height:1.15}
+.eyebrow{font-size:12px;font-weight:700;letter-spacing:2.5px;text-transform:uppercase;color:var(--mid)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:50;background:rgba(43,14,44,.92);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);border-bottom:1px solid rgba(255,255,255,.08)}
+.nav .wrap{display:flex;align-items:center;gap:20px;height:60px}
+.brand{display:flex;align-items:center;gap:10px;color:#fff;font-weight:700;font-size:15px;text-decoration:none;white-space:nowrap}
+.brand img{width:30px;height:30px}
+.links{display:flex;gap:4px;margin-left:auto;overflow-x:auto;scrollbar-width:none}
+.links::-webkit-scrollbar{display:none}
+.links a{color:#E9DDEF;text-decoration:none;font-size:13px;font-weight:500;padding:7px 12px;border-radius:99px;white-space:nowrap;transition:.15s}
+.links a:hover,.links a.on{background:rgba(252,239,165,.14);color:var(--yel)}
+
+/* hero */
+.hero{background:radial-gradient(ellipse at 88% 0%,#6A2A66 0%,#2B0E2C 60%);color:#F7F2FA;padding:56px 0 64px;position:relative;overflow:hidden}
+.hero:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;border:1px solid rgba(252,239,165,.12)}
+.hero .eyebrow{color:var(--yel)}
+.hero h1{font-size:clamp(34px,5vw,56px);font-weight:800;letter-spacing:-1.5px;margin:12px 0 14px}
+.hero h1 span{color:var(--yel)}
+.hero p.lead{font-size:clamp(16px,1.6vw,19px);color:#DCCDE3;max-width:760px}
+.meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.pill{display:inline-flex;align-items:center;gap:6px;font-size:12px;font-weight:600;padding:5px 12px;border-radius:99px;background:rgba(255,255,255,.08);color:#EBDDF0;border:1px solid rgba(255,255,255,.1)}
+.pill b{color:var(--yel)}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:40px}
+.kpi{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:20px;padding:22px 22px 20px}
+.kpi .v{font-size:clamp(32px,3.6vw,44px);font-weight:800;color:var(--yel);letter-spacing:-1px;line-height:1}
+.kpi .l{font-size:13.5px;color:#DCCDE3;margin-top:10px}
+.kpi .s{font-size:11.5px;color:#B9A5C2;margin-top:6px}
+
+/* sections */
+section{padding:64px 0 8px}
+.sh{display:flex;align-items:flex-end;justify-content:space-between;gap:20px;margin-bottom:24px;flex-wrap:wrap}
+.sh h2{font-size:clamp(26px,3vw,34px);font-weight:700;color:var(--plum);margin-top:6px}
+.sh p{color:var(--soft);max-width:560px;font-size:14px}
+.card{background:var(--card);border:1px solid var(--border);border-radius:20px;box-shadow:var(--shadow)}
+.grid{display:grid;gap:18px}
+.g2{grid-template-columns:1fr 1fr}.g3{grid-template-columns:repeat(3,1fr)}.g5{grid-template-columns:repeat(5,1fr)}
+.muted{color:var(--soft)}
+.note{font-size:12px;color:var(--soft);font-style:italic;margin-top:12px}
+
+/* status chips */
+.chip{display:inline-flex;align-items:center;gap:6px;font-size:11.5px;font-weight:700;padding:4px 10px;border-radius:99px;white-space:nowrap}
+.chip:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.st-prog{background:var(--yel);color:var(--plum)}
+.st-prop{background:var(--lav);color:var(--plum)}
+.st-pilot{background:#fff;color:var(--mid);border:1.5px solid #CDB6D8}
+.st-future{background:#EFEAF2;color:var(--soft)}
+
+/* pillars */
+.pillar{padding:20px;position:relative;overflow:hidden}
+.pillar .n{width:40px;height:40px;border-radius:50%;display:grid;place-items:center;font-weight:800;background:var(--plum);color:#fff;margin-bottom:14px}
+.pillar:nth-child(even) .n{background:var(--yel);color:var(--plum)}
+.pillar h3{font-size:17px;color:var(--plum)}
+.pillar p{font-size:13px;color:var(--soft);margin-top:6px;min-height:58px}
+.pillar .cnt{margin-top:12px;font-size:12px;font-weight:600;color:var(--mid)}
+.dots{display:flex;gap:4px;margin-top:6px;flex-wrap:wrap}
+.dots i{width:10px;height:10px;border-radius:3px;background:#EADFF0}
+.dots i.m{background:var(--plum)}.dots i.a{background:#C9AFD6}
+
+/* status board */
+.board{display:grid;grid-template-columns:1.1fr 2fr;gap:18px}
+.donut-card{padding:26px;display:flex;flex-direction:column;align-items:center;justify-content:center}
+.legend{display:grid;gap:10px;width:100%;margin-top:22px}
+.legend div{display:flex;align-items:center;gap:10px;font-size:13.5px}
+.legend b{margin-left:auto;font-size:15px;color:var(--plum)}
+.legend i{width:12px;height:12px;border-radius:4px}
+.pain{padding:18px 18px 16px;display:flex;flex-direction:column}
+.pain h3{font-size:15.5px;color:var(--plum)}
+.pain p{font-size:12.5px;color:var(--soft);margin:6px 0 12px;flex:1}
+.fix{font-size:12px;font-weight:600;background:var(--yel);color:var(--plum);border-radius:10px;padding:7px 10px}
+
+/* waste bars */
+.waste{padding:26px}
+.bar{display:grid;grid-template-columns:200px 1fr 34px;align-items:center;gap:12px;margin:9px 0;font-size:13.5px}
+.bar .t{height:22px;background:#F1EAF5;border-radius:8px;overflow:hidden}
+.bar .f{height:100%;border-radius:8px;background:linear-gradient(90deg,var(--mid),var(--plum));width:0;transition:width 1.1s cubic-bezier(.2,.8,.2,1)}
+.bar b{color:var(--plum);text-align:right}
+.darkbox{background:var(--dark);color:#F2E9F5;border-radius:20px;padding:26px}
+.darkbox .eyebrow{color:var(--yel)}
+.darkbox h4{font-size:17px;margin-top:16px}
+.darkbox p{font-size:13px;color:#CDBBD5}
+
+/* projects */
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:18px}
+.filters button{font:600 13px Poppins,sans-serif;border:1px solid var(--border);background:#fff;color:var(--plum);padding:8px 14px;border-radius:99px;cursor:pointer;transition:.15s}
+.filters button.on{background:var(--plum);color:#fff;border-color:var(--plum)}
+.filters button span{opacity:.6;margin-left:4px}
+.pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:18px}
+.proj{padding:22px;display:flex;flex-direction:column;cursor:pointer;transition:transform .15s,box-shadow .15s;text-align:left;font:inherit;color:inherit}
+.proj:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(43,14,44,.06),0 14px 34px rgba(43,14,44,.12)}
+.proj .top{display:flex;justify-content:space-between;align-items:center;gap:10px}
+.proj .id{font-size:11.5px;font-weight:700;color:var(--mid);letter-spacing:1px}
+.proj h3{font-size:18px;color:var(--plum);margin:10px 0 6px}
+.proj .pain-l{font-size:13px;color:var(--soft);min-height:40px}
+.stage{margin:16px 0 6px}
+.steps{display:flex;gap:4px}
+.steps i{flex:1;height:7px;border-radius:99px;background:#EDE4F2}
+.steps i.on{background:var(--plum)}
+.st-prog-c .steps i.on{background:linear-gradient(90deg,var(--mid),var(--plum))}
+.stage .lbl{display:flex;justify-content:space-between;font-size:12px;margin-top:6px;color:var(--soft)}
+.stage .lbl b{color:var(--plum)}
+.kv{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:12.5px;margin-top:12px;border-top:1px dashed var(--border);padding-top:12px}
+.kv dt{color:var(--soft)}
+.kv dd{color:var(--body);font-weight:500}
+.kv dd.warn{color:var(--red)}
+.pillars-tag{display:flex;gap:6px;margin-top:12px;flex-wrap:wrap}
+.ptag{font-size:11px;font-weight:600;padding:3px 9px;border-radius:7px;background:#F3ECF7;color:var(--mid)}
+.ptag.main{background:var(--plum);color:#fff}
+.more{margin-top:auto;padding-top:14px;font-size:12.5px;font-weight:600;color:var(--mid)}
+
+/* modal */
+.modal{position:fixed;inset:0;background:rgba(27,8,28,.6);display:none;align-items:flex-start;justify-content:center;z-index:100;padding:40px 16px;overflow:auto}
+.modal.open{display:flex}
+.sheet{background:#fff;border-radius:24px;max-width:880px;width:100%;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.sheet .hd{background:radial-gradient(ellipse at 90% 0%,#6A2A66 0%,#2B0E2C 65%);color:#fff;padding:28px 30px}
+.sheet .hd h3{font-size:26px;margin:10px 0 6px}
+.sheet .hd p{color:#D8C7DF;font-size:14px}
+.sheet .bd{padding:26px 30px 30px}
+.x{float:right;background:rgba(255,255,255,.12);border:0;color:#fff;width:36px;height:36px;border-radius:50%;font-size:20px;cursor:pointer}
+table.ba{width:100%;border-collapse:separate;border-spacing:0;font-size:13.5px;margin-top:8px}
+table.ba th{text-align:left;font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);padding:10px 12px;border-bottom:2px solid var(--border)}
+table.ba td{padding:11px 12px;border-bottom:1px solid var(--border);vertical-align:top}
+table.ba td:first-child{font-weight:600;color:var(--plum);width:24%}
+table.ba td.b{color:#7A1F1F;background:#FDF4F4}
+table.ba td.a{color:var(--green);background:#F2FAF5;font-weight:500}
+.tbm{color:#A08AA8;font-style:italic;font-weight:400}
+
+/* roadmap */
+.gantt{padding:22px 22px 14px;overflow-x:auto}
+.gt{min-width:900px;display:grid;grid-template-columns:250px 1fr}
+.months{display:grid;grid-template-columns:repeat(13,1fr);gap:3px;margin-bottom:8px}
+.months div{font-size:11.5px;font-weight:700;text-align:center;padding:6px 0;border-radius:8px;background:var(--plum);color:#fff}
+.months div.y26{background:#EFEAF2;color:var(--soft)}
+.grow{display:contents}
+.gname{font-size:13px;font-weight:600;color:var(--plum);padding:9px 10px 9px 0;display:flex;align-items:center;border-top:1px solid #F1EAF5}
+.glane{position:relative;border-top:1px solid #F1EAF5;height:42px;background:repeating-linear-gradient(90deg,transparent 0,transparent calc(100%/13 - 1px),#F3EDF6 calc(100%/13 - 1px),#F3EDF6 calc(100%/13))}
+.gbar{position:absolute;top:8px;height:26px;border-radius:9px;font-size:11px;font-weight:700;display:flex;align-items:center;padding:0 10px;white-space:nowrap;overflow:hidden}
+.gb-dec{background:var(--yel);color:var(--plum)}
+.gb-prog{background:var(--yel2);color:var(--plum)}
+.gb-mid{background:var(--mid);color:#fff}
+.gb-prop{background:var(--lav);color:var(--plum)}
+.gb-pilot{background:var(--plum);color:#fff}
+.gb-dark{background:var(--dark);color:#fff}
+.gb-fut{background:#B58BC0;color:#fff}
+.today{position:absolute;top:-34px;bottom:0;width:2px;background:var(--red);z-index:2}
+.today:before{content:"Today";position:absolute;top:-2px;left:6px;font-size:10.5px;font-weight:700;color:var(--red)}
+
+/* results */
+.spot{display:grid;grid-template-columns:1.25fr 1fr;gap:18px}
+.vs{padding:26px}
+.vsrow{margin:18px 0}
+.vsrow .lab{display:flex;justify-content:space-between;font-size:13px;margin-bottom:6px}
+.vsrow .lab b{font-size:15px}
+.track{height:34px;border-radius:10px;background:#F4EEF7;overflow:hidden}
+.track .f{height:100%;border-radius:10px;width:0;transition:width 1.2s cubic-bezier(.2,.8,.2,1);display:flex;align-items:center;padding-left:12px;font-size:12px;font-weight:700;color:#fff;white-space:nowrap}
+.f.before{background:linear-gradient(90deg,#D46B6A,var(--red))}
+.f.after{background:linear-gradient(90deg,#3FA36B,var(--green))}
+.big3{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-top:22px}
+.big3 div{background:var(--light);border-radius:14px;padding:14px}
+.big3 b{display:block;font-size:26px;font-weight:800;color:var(--plum);letter-spacing:-.5px}
+.big3 span{font-size:12px;color:var(--soft)}
+.flow{display:flex;gap:10px;align-items:stretch;margin-top:14px}
+.flow .s{flex:1;background:#fff;border:1px solid var(--border);border-radius:14px;padding:12px;font-size:12px;position:relative}
+.flow .s b{display:block;font-size:13px;color:var(--plum);margin-bottom:3px}
+.flow .s em{display:block;font-style:normal;font-weight:700;margin-top:6px;color:var(--mid)}
+.flow .s.bad{background:var(--redbg);border-color:#EBC1C1}.flow .s.bad b,.flow .s.bad em{color:#7A1F1F}
+.flow .s.hi{background:var(--yel);border-color:var(--yel2)}
+.flow .s:not(:last-child):after{content:"›";position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:var(--mid);font-weight:800;font-size:18px;z-index:1}
+.dflow .s:after{display:none}
+.dflow .s{background:rgba(255,255,255,.06);border-color:rgba(255,255,255,.12);color:#D8C7DF}
+.dflow .s b{color:#fff}.dflow .s em{color:var(--yel)}
+.dflow .s.hi{background:var(--yel);color:var(--plum)}.dflow .s.hi b,.dflow .s.hi em{color:var(--plum)}
+.shots{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:18px}
+.shot{padding:14px;overflow:hidden}
+.shot img{border-radius:12px;border:1px solid var(--border);cursor:zoom-in}
+.shot h4{font-size:14.5px;color:var(--plum);margin:12px 4px 4px}
+.flags{display:flex;gap:6px;flex-wrap:wrap;margin:8px 4px 4px}
+.flag{font-size:11.5px;font-weight:600;padding:4px 9px;border-radius:7px}
+.flag.r{background:var(--redbg);color:var(--red)}.flag.y{background:#FFF6D6;color:#7A5B00}.flag.g{background:var(--greenbg);color:var(--green)}
+
+/* payment */
+.tl{position:relative;display:grid;grid-template-columns:repeat(6,1fr);gap:10px;padding-top:26px;margin-top:8px}
+.tl:before{content:"";position:absolute;left:8px;right:8px;top:9px;height:3px;background:#DCC8E5;border-radius:3px}
+.tl div{position:relative;font-size:12.5px;color:var(--soft)}
+.tl div:before{content:"";position:absolute;top:-23px;left:0;width:16px;height:16px;border-radius:50%;background:var(--plum);border:3px solid #fff;box-shadow:0 0 0 1px #DCC8E5}
+.tl div.red:before{background:var(--red)}
+.tl b{display:block;color:var(--plum);font-size:14px}
+.tl div.red b{color:var(--red)}
+.pp{display:grid;grid-template-columns:repeat(5,1fr);gap:12px;margin-top:18px}
+.pp .c{border-radius:16px;padding:16px;font-size:12.5px}
+.pp .c h4{font-size:14px;margin-bottom:6px}
+.pp .bad{background:var(--redbg);border:1px solid #EBC1C1}.pp .bad h4{color:#7A1F1F}
+.pp .good{background:var(--greenbg);border:1px solid #A9D8BC}.pp .good h4{color:var(--green)}
+.pp .found{display:block;margin-top:10px;font-weight:700}
+.pp .bad .found{color:var(--red)}.pp .good .found{color:var(--green)}
+.toggle{display:inline-flex;background:#EFE6F4;border-radius:99px;padding:4px;margin-bottom:18px}
+.toggle button{font:600 13px Poppins,sans-serif;border:0;background:transparent;color:var(--plum);padding:8px 18px;border-radius:99px;cursor:pointer}
+.toggle button.on{background:var(--plum);color:#fff}
+
+/* costs */
+.costs{padding:8px 0}
+.crow{display:grid;grid-template-columns:1.4fr 1.3fr 1fr 1.6fr;gap:14px;padding:14px 22px;border-bottom:1px solid var(--border);font-size:13.5px;align-items:center}
+.crow.h{font-size:11.5px;letter-spacing:1px;text-transform:uppercase;color:var(--mid);font-weight:700;border-bottom:2px solid var(--border)}
+.crow:last-child{border-bottom:0}
+.crow .i{font-weight:600;color:var(--plum)}
+.personal{background:#FFF6D6;color:#7A1F1F;font-weight:700;padding:3px 9px;border-radius:7px;font-size:12px;display:inline-block}
+.ph{background:#F3ECF7;border:1px dashed #C9AFD6;color:var(--mid);padding:2px 8px;border-radius:7px;font-size:12px;font-weight:600}
+.issue{display:grid;grid-template-columns:62px 1fr auto;gap:14px;padding:14px 20px;border-bottom:1px solid var(--border);align-items:start}
+.issue:last-child{border-bottom:0}
+.issue .iid{font-weight:700;color:var(--mid);font-size:12.5px;padding-top:2px}
+.issue h4{font-size:14px;color:var(--plum)}
+.issue p{font-size:12.5px;color:var(--soft);margin-top:3px}
+.issue p b{color:var(--body);font-weight:600}
+.ist{font-size:11px;font-weight:700;padding:3px 9px;border-radius:99px;background:var(--redbg);color:var(--red)}
+.decisions{display:grid;grid-template-columns:repeat(5,1fr);gap:14px;margin-top:22px}
+.dec{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.12);border-radius:18px;padding:18px}
+.dec .n{width:38px;height:38px;border-radius:50%;background:var(--yel);color:var(--plum);display:grid;place-items:center;font-weight:800;margin-bottom:12px}
+.dec h4{font-size:15.5px;color:#fff}
+.dec p{font-size:12.5px;color:#CDBBD5;margin-top:5px}
+
+footer{padding:48px 0 60px;color:var(--soft);font-size:12.5px}
+footer .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px;flex-wrap:wrap;border-top:1px solid var(--border);padding-top:24px}
+footer img{height:40px;width:auto}
+
+.lightbox{position:fixed;inset:0;background:rgba(15,4,16,.88);display:none;align-items:center;justify-content:center;z-index:120;padding:20px;cursor:zoom-out}
+.lightbox.open{display:flex}
+.lightbox img{max-height:92vh;border-radius:12px}
+
+.reveal{opacity:0;transform:translateY(14px);transition:opacity .6s ease,transform .6s ease}
+.reveal.in{opacity:1;transform:none}
+
+
+/* stand-now 4 columns */
+.four{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.col{padding:22px;border-top:5px solid var(--plum)}
+.col.c1{border-top-color:var(--green)}.col.c2{border-top-color:var(--yel2)}.col.c3{border-top-color:var(--red)}.col.c4{border-top-color:var(--mid)}
+.col h3{font-size:18px;color:var(--plum);display:flex;align-items:center;gap:10px}
+.col h3 .ic{width:30px;height:30px;border-radius:10px;display:grid;place-items:center;font-size:15px}
+.c1 .ic{background:var(--greenbg);color:var(--green)}.c2 .ic{background:#FFF6D6;color:#7A5B00}.c3 .ic{background:var(--redbg);color:var(--red)}.c4 .ic{background:#F3ECF7;color:var(--mid)}
+.col ul{list-style:none;margin-top:14px;display:grid;gap:10px}
+.col li{font-size:13px;color:var(--soft);padding-left:14px;position:relative}
+.col li:before{content:"";position:absolute;left:0;top:8px;width:6px;height:6px;border-radius:50%;background:#C9AFD6}
+.col li b{color:var(--body);font-weight:600;display:block}
+/* goals */
+.goals{display:grid;gap:14px}
+.goal{display:grid;grid-template-columns:220px 1fr 1fr 1fr;gap:0;overflow:hidden}
+.goal>div{padding:18px 20px;border-left:1px solid var(--border);font-size:13px;color:var(--soft)}
+.goal>div:first-child{border-left:0;background:var(--plum);color:#fff}
+.goal:nth-child(even)>div:first-child{background:var(--dark)}
+.goal .gn{font-size:12px;font-weight:700;letter-spacing:2px;color:var(--yel)}
+.goal h3{font-size:20px;margin:6px 0 4px}
+.goal .gl{font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:var(--mid);margin-bottom:6px}
+.goal ul{list-style:none;display:grid;gap:6px}
+.goal li{padding-left:12px;position:relative}
+.goal li:before{content:"";position:absolute;left:0;top:8px;width:5px;height:5px;border-radius:50%;background:var(--mid)}
+.goal .done li:before{background:var(--green)}
+.kway{display:grid;grid-template-columns:1.1fr 1.9fr;gap:18px;margin-top:18px}
+.comp{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-top:14px}
+.comp div{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:12px;padding:10px 12px;font-size:12px;color:#E4D6EA}
+.comp div b{display:block;color:var(--yel);font-size:11px;letter-spacing:1px}
+@media (max-width:1020px){.four{grid-template-columns:1fr 1fr}.goal{grid-template-columns:1fr 1fr}.goal>div:first-child{grid-column:1/-1}.kway{grid-template-columns:1fr}}
+@media (max-width:640px){.four,.goal,.comp{grid-template-columns:1fr}.goal>div{border-left:0;border-top:1px solid var(--border)}}
+@media (max-width:1020px){
+  .kpis{grid-template-columns:1fr 1fr}
+  .g5,.decisions,.pp{grid-template-columns:1fr 1fr}
+  .board,.spot,.g2{grid-template-columns:1fr}
+  .g3{grid-template-columns:1fr 1fr}
+}
+@media (max-width:640px){
+  .wrap{padding:0 16px}
+  .brand span{display:none}
+  .hero{padding:40px 0 44px}
+  .kpis{gap:10px}.kpi{padding:16px;border-radius:16px}
+  .g3,.g5,.decisions,.pp,.shots{grid-template-columns:1fr}
+  .pgrid{grid-template-columns:1fr}
+  .bar{grid-template-columns:120px 1fr 26px;font-size:12px}
+  .flow{flex-direction:column}.flow .s:not(:last-child):after{content:"⌄";right:auto;left:50%;top:auto;bottom:-16px;transform:translateX(-50%)}
+  .tl{grid-template-columns:1fr 1fr;row-gap:34px}
+  .tl:before{display:none}
+  .crow{grid-template-columns:1fr 1fr;padding:14px 16px}
+  .crow.h{display:none}
+  .big3{grid-template-columns:1fr}
+  section{padding:48px 0 4px}
+  .sheet .hd,.sheet .bd{padding:22px 18px}
+  table.ba{font-size:12.5px}
+  table.ba td{padding:9px 8px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;scroll-behavior:auto!important}.reveal{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+
+<nav class="nav"><div class="wrap">
+  <a class="brand" href="#top"><img src="assets/mark.png" alt="Kalam"><span>IMS Program 2027</span></a>
+  <div class="links" id="links">
+    <a href="#stand">Status</a><a href="#goals">Goals</a><a href="#overview">Pain &amp; waste</a><a href="#projects">Projects</a><a href="#roadmap">Roadmap</a><a href="#results">Results</a><a href="#payment">Payment</a><a href="#costs">Costs &amp; risks</a><a href="#decisions">Decisions</a>
+  </div>
+</div></nav>
+
+<header class="hero" id="top"><div class="wrap">
+  <div class="eyebrow">IMS Operations · Future Group · Program dashboard</div>
+  <h1>Operations Automation <span>Program 2027</span></h1>
+  <p class="lead">IMS Operations moves from a team that reacts to requests to a business partner that runs its work as a measured investment. Remove the waste first, automate second, measure before and after.</p>
+  <div class="meta">
+    <span class="pill">Updated <b id="updated"></b></span>
+    <span class="pill">Method <b>Lean Six Sigma (DMAIC)</b></span>
+    <span class="pill">Aligned with <b>The KALAM Way</b></span>
+  </div>
+  <div class="kpis" id="kpis"></div>
+</div></header>
+
+<main>
+<section id="stand"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">Where we stand now</div><h2>Done, depending, to improve, and the benefit</h2></div><p>The honest picture on DATE_X. Nothing on a personal account is counted as finished.</p></div>
+  <div class="four" id="four"></div>
+</div></section>
+
+<section id="goals"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">How we serve the company</div><h2>Five goals: what we did, what comes next, how we prove it</h2></div><p>Each goal has delivered work, planned work and one measure we will report to management every month.</p></div>
+  <div class="goals" id="goallist"></div>
+  <div class="kway">
+    <div class="card" style="padding:24px"><div class="eyebrow">The KALAM Way</div><h3 style="font-size:20px;color:var(--plum);margin:8px 0">From a service team to a business partner</h3><p class="muted" style="font-size:13.5px">The KALAM people handbook positions every function as a business partner that manages its work as an investment, with AI and technology skills at every level. This program does the same for IMS Operations, and builds an IMS Operations competency framework in the KALAM format (5 levels, 10 standard headings).</p></div>
+    <div class="darkbox"><div class="eyebrow">Proposed IMS Operations competencies (draft, to validate with HR)</div><div class="comp" id="comp"></div></div>
+  </div>
+</div></section>
+
+<section id="overview"><div class="wrap">
+  <div class="sh" ><div><div class="eyebrow">Where we stand</div><h2>The portfolio at a glance</h2></div><p>Two projects are running now. Two are built as prototypes and need company implementation. Three pilots are proposed next.</p></div>
+  <div class="board">
+    <div class="card donut-card"><svg id="donut" width="210" height="210" viewBox="0 0 210 210" role="img" aria-label="Projects by status"></svg><div class="legend" id="legend"></div></div>
+    <div class="grid g3" id="pains"></div>
+  </div>
+
+  <div class="sh" style="margin-top:48px"><div><div class="eyebrow">Lean review</div><h2>Where the waste is</h2></div><p>26 recurring IMS tasks checked against the eight Lean wastes. Our classification, to confirm in process walks.</p></div>
+  <div class="grid" style="grid-template-columns:1.6fr 1fr">
+    <div class="card waste" id="waste"></div>
+    <div class="darkbox"><div class="eyebrow">What it means</div>
+      <h4>Rework</h4><p>Work is done twice: re-typed, re-checked, re-sent.</p>
+      <h4>Waiting</h4><p>People wait on each other because work moves by message.</p>
+      <h4>Errors found late</h4><p>Mistakes surface after payment or submission, when they cost the most.</p>
+      <h4 style="color:var(--yel)">Root cause</h4><p>No shared record, and work coordinated through chats.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">Project tracker</div><h2>Every project, one card</h2></div><p>Click a card for before and after, owner, blockers and value. Progress follows the stage: Idea, Design, Prototype, Pilot, Live.</p></div>
+  <div class="filters" id="filters"></div>
+  <div class="pgrid" id="pgrid"></div>
+</div></section>
+
+<section id="roadmap"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">12-month plan</div><h2>Roadmap, Dec 2026 to Dec 2027</h2></div><p>Proposed durations. The plan starts on approval. Each pilot is measured four weeks after go-live before rollout.</p></div>
+  <div class="card gantt"><div class="gt" id="gantt"></div></div>
+</div></section>
+
+<section id="results"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">Results so far · In progress</div><h2>MasterWord applicant submission</h2></div><p>New interpreters submitted to the MasterWord portal. 28 applicants, 2 batches, 6 languages, both submitted 23 Nov 2026.</p></div>
+  <div class="spot">
+    <div class="card vs">
+      <div class="eyebrow">Time per applicant</div>
+      <div class="vsrow"><div class="lab"><span>Before, by hand <span class="muted">(team estimate)</span></span><b style="color:var(--red)">~100 min</b></div><div class="track"><div class="f before" data-w="100">1 person, every step by hand</div></div></div>
+      <div class="vsrow"><div class="lab"><span>After, automated <span class="muted">(measured, batch 2)</span></span><b style="color:var(--green)">4.5 min</b></div><div class="track"><div class="f after" data-w="4.5"></div></div></div>
+      <div class="big3">
+        <div><b>28 / 28</b><span>confirmed by MasterWord first time</span></div>
+        <div><b>~50 h</b><span>staff time released across 2 batches (capacity, not cash)</span></div>
+        <div><b>Same day</b><span>turnaround, was 3–4 days per batch</span></div>
+      </div>
+      <p class="note">Before: 1 person for 3–4 days or 4 people for a shift per batch (24–32 h, team estimate). Batch 2 ran 12 applicants in 54 minutes. Batch 1 included setup and pauses, so it is not used as the measure.</p>
+    </div>
+    <div class="darkbox">
+      <div class="eyebrow">How it works now</div>
+      <div class="flow dflow" style="flex-direction:column">
+        <div class="s"><b>Drop the batch folder</b>Applicant list and documents<em>2 min, human</em></div>
+        <div class="s"><b>Automation runs every step</b>Match files, redact CVs, fill forms, upload, confirm<em>~4.5 min per applicant</em></div>
+        <div class="s"><b>Report is written</b>Missing or wrong documents flagged first<em>Automatic</em></div>
+        <div class="s hi"><b>1 person reviews</b>The only human decision<em>Minutes</em></div>
+      </div>
+    </div>
+  </div>
+  <div class="card" style="padding:22px;margin-top:18px">
+    <div class="eyebrow">Before · why one batch took 24–32 hours</div>
+    <div class="flow">
+      <div class="s"><b>Find the files</b>Open every file to see whose it is<em>~15 min</em></div>
+      <div class="s"><b>Redact the CV</b>Remove phone, email, address<em>~20 min</em></div>
+      <div class="s"><b>Type the form</b>Every field typed into the portal<em>~25 min</em></div>
+      <div class="s"><b>Upload 7 documents</b>Pick the right category for each<em>~25 min</em></div>
+      <div class="s bad"><b>Fix it later</b>Gaps found after submission<em>~15 min</em></div>
+    </div>
+    <p class="note">Step minutes split the team's 24–32 hour estimate (~100 min × 16 applicants ≈ 27 h). To be confirmed by timing one manual application.</p>
+  </div>
+  <div class="shots">
+    <div class="card shot"><img src="assets/report1.jpg" alt="Batch 1 report"><h4>Batch 1 report · Argentina, 16 applicants</h4>
+      <div class="flags"><span class="flag r">4 missing documents, 3 applicants</span><span class="flag y">8 name differences checked</span><span class="flag g">16 / 16 submitted</span></div></div>
+    <div class="card shot"><img src="assets/report2.jpg" alt="Batch 2 report"><h4>Batch 2 report · Egypt and Pakistan, 12 applicants</h4>
+      <div class="flags"><span class="flag r">Wrong document: file held 9 other people's certificates</span><span class="flag y">Data conflicts flagged</span><span class="flag g">12 / 12 submitted</span></div></div>
+  </div>
+  <p class="note">Report images are copies of the real batch reports with names shortened and emails hidden. Click to enlarge.</p>
+
+  <div class="sh" style="margin-top:48px"><div><div class="eyebrow">In progress</div><h2>Kalam Learning, staff training website</h2></div><p>Training that used to live only in Zoom sessions is now self-paced, tested and open any time.</p></div>
+  <div class="grid g2">
+    <div class="card" style="padding:22px">
+      <div class="eyebrow">Before</div>
+      <div class="flow"><div class="s"><b>Live Zoom only</b>New joiners wait for the next session</div><div class="s"><b>Recordings on a laptop</b>Not used again</div><div class="s bad"><b>No test</b>Learning not checked</div></div>
+      <div class="eyebrow" style="margin-top:20px">After</div>
+      <div class="flow"><div class="s"><b>Self-paced site</b>Any time, any device</div><div class="s"><b>Short videos + lessons</b>By topic</div><div class="s hi"><b>Tests and final exam</b>Self-marking</div></div>
+    </div>
+    <div class="card" style="padding:22px">
+      <div class="eyebrow">Live today</div>
+      <div class="big3" style="grid-template-columns:1fr 1fr;margin-top:12px">
+        <div><b>2</b><span>trainings live</span></div><div><b>30</b><span>videos, about 5.3 hours</span></div>
+        <div><b>54</b><span>test questions + 20-task exam</span></div><div><b>$0</b><span>running cost today</span></div>
+      </div>
+      <p class="note">Still to do: company-email sign-in and progress per person (about $0–10 a month), then the next trainings.</p>
+    </div>
+  </div>
+</div></section>
+
+<section id="payment"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">Pilot B · about 390 interpreters a month</div><h2>Interpreter payment</h2></div><p>Today problems surface only when interpreters complain. The pilot finds them on day 7, before acceptance, and starts read-only on the last 3 cycles.</p></div>
+  <div class="toggle" id="ptoggle"><button class="on" data-v="today">Today</button><button data-v="prop">Proposed</button></div>
+  <div class="card" style="padding:24px">
+    <div class="tl" id="ptl"></div>
+    <div class="pp" id="pcards"></div>
+    <p id="pnote" style="margin-top:18px;font-weight:600;color:var(--plum);font-size:14px"></p>
+  </div>
+</div></section>
+
+<section id="costs"><div class="wrap">
+  <div class="sh"><div><div class="eyebrow">Resources</div><h2>What it costs, and who pays</h2></div><p>Today the program's tools, data and costs sit on one person's accounts. Moving them to the company protects the work and the data.</p></div>
+  <div class="card costs" id="costtable"></div>
+
+  <div class="sh" style="margin-top:48px"><div><div class="eyebrow">Issues and risks</div><h2>What is in the way</h2></div><p id="issuecount"></p></div>
+  <div class="card" id="issues"></div>
+</div></section>
+
+<section id="decisions" style="padding-bottom:0"><div class="wrap">
+  <div class="darkbox" style="padding:34px;border-radius:24px;background:radial-gradient(ellipse at 90% 0%,#6A2A66 0%,#2B0E2C 60%)">
+    <div class="eyebrow">What we need from management</div>
+    <h2 style="font-size:clamp(26px,3vw,34px);margin-top:8px;color:#fff">Five decisions to start in January</h2>
+    <div class="decisions" id="decs"></div>
+  </div>
+</div></section>
+</main>
+
+<footer><div class="wrap"><img src="assets/wordmark.png" alt="Kalam, a Future Group company"><div>IMS Operations · Program 2027 · Figures marked TBM are still to be measured. Estimates are labelled.</div></div></footer>
+
+<div class="modal" id="modal" role="dialog" aria-modal="true"><div class="sheet" id="sheet"></div></div>
+<div class="lightbox" id="lightbox"><img alt=""></div>
+
+<script>
+/* ===== DATA: edit here to update the dashboard ===== */
+const DATA = {
+  updated: "26 Nov 2026",
+  pillars: [
+    ["Revenue","Deliver and bill more of the demand we already have"],
+    ["Cost","Fewer overpayments, less overtime, hires avoided"],
+    ["Performance","Faster work, fewer manual hours, on-time reports"],
+    ["People morale","Interpreters paid right and on time; supervisors coach, not chase"],
+    ["Quality","Fewer repeat complaints, accurate data and billing"]
+  ],
+  stand: [
+    ["Accomplished","✓",[["MasterWord submission automated","28 of 28 applicants submitted and confirmed, 2 batches, same day"],["CV redaction automated","28 of 28 CVs cleaned and checked before upload"],["Kalam Learning live","2 trainings, 30 videos, 54 test questions, 20-task exam"],["Payment process mapped","Current cycle documented from the process owner; 5 failure points named"],["Program designed","11 projects, 5 goals, Lean waste review of 26 tasks"]]],
+    ["Depending on","⏳",[["Management","Sponsor, Discovery approval, tool budget"],["IT","Company hosting, database, sign-in, service accounts"],["Clients","Permission to automate session acceptance"],["Invoicing team","Transparent task export and last 3 payment cycles"],["Onboarding team","Missing documents for 3 applicants"]]],
+    ["Needs improvement","!",[["Personal accounts","Tools, data and Claude costs sit on one person's accounts"],["No baseline","Times, volumes and error rates are not measured yet"],["One builder","All build work depends on one person, alongside the day job"],["Timing logs","Per-step times not recorded yet; start on next batch"]]],
+    ["Benefits so far","★",[["~50 staff hours released","Over 2 MasterWord batches (capacity, not cash)"],["Errors caught before submission","4 missing and 1 wrong document flagged up front"],["Days to hours","Batch turnaround from 3–4 days to the same day"],["Training on demand","New joiners no longer wait for a live session"]]]
+  ],
+  goals: [ // [goal, done[], next[], measure]
+    ["Revenue",["Faster onboarding: MasterWord applicants submitted the same day"],["Pre-scheduled sessions on company hosting","Onboarding activation tracking (Pilot C)","Client communication hub"],"Sessions delivered on time with proof · days to first production task"],
+    ["Cost",["~50 staff hours released over 2 MasterWord batches"],["Payment reconciliation to stop over- and under-payment","Overtime and coverage planning","Company accounts instead of personal spend"],"Staff hours released · overpayments avoided (reported separately, never added)"],
+    ["Performance",["Batch time from 24–32 h of work to about 1 h plus review"],["IMS performance dashboard on company hosting","Supervisor Daily Game Plan (Pilot A)"],"Reports on time and correct first time · supervisor time on people"],
+    ["People morale",["Kalam Learning: self-paced training with tests"],["Payment: problems caught on day 7, before interpreters complain (Pilot B)","Payment status visible to interpreters","IMS competency framework"],"Payments correct and on time first time · payment complaints per cycle"],
+    ["Quality",["28 of 28 applications confirmed first time; gaps flagged before submission"],["Quality and complaints tracking","Standard SOPs and knowledge base"],"Repeat complaint rate · first-time-right rate per process"]
+  ],
+  competencies: [["Revenue","Service delivery & client SLAs"],["Revenue","Workforce & coverage planning"],["Morale","People leadership & coaching"],["Quality","Quality & continuous improvement"],["Morale","Payment accuracy & control"],["Performance","Data, reporting & analytics"],["Revenue","Client communication & partnership"],["Performance","AI, automation & technology"],["Cost","Operations excellence & business value"]],
+  stages: ["Idea","Design","Prototype","Pilot","Live"],
+  status: {
+    prog:{label:"In progress",color:"#F6DE6A"},
+    prop:{label:"Proposal · needs implementation",color:"#C7B2F0"},
+    pilot:{label:"Planned pilot",color:"#79417F"},
+    future:{label:"Future plan",color:"#D9CDE0"}
+  },
+  projects: [
+    {id:"P04.3",name:"MasterWord applicant submission",pain:"Applicants submitted by hand: 3–4 days per batch, gaps found late",status:"prog",stage:3,main:"Cost",also:["Revenue","Performance"],owner:"Mahmoud Adel",start:"23 Nov 2026",target:"31 Mar 2027",next:"Log start and stop times on the next batch; chase 4 missing documents; extend to full onboarding",block:"Runs on a personal setup and a personal Claude account",value:"~50 staff hours released over 2 batches (capacity, not cash)",
+     ba:[["Time per batch","24–32 person-hours (estimate)","~1 h machine time + review"],["Time per applicant","~100 min (estimate)","4.5 min (measured)"],["People","1 person 3–4 days, or 4 people 1 shift","1 person reviews the report"],["Accuracy","Not measured; gaps found after submission","28 / 28 confirmed first time; 28 / 28 CVs redacted"],["Deadline","3–4 days per batch","Same day (23 Nov 2026)"]]},
+    {id:"K-L",name:"Kalam Learning (staff training)",pain:"Training only live on Zoom; recordings unused; no tests",status:"prog",stage:3,main:"People morale",also:["Performance","Quality"],owner:"Mahmoud Adel · trainer Mohamed Fawzy (WFM)",start:"19 Nov 2026",target:"TBM",next:"Company-email sign-in and progress per person; next trainings",block:"Public site on a personal account; no sign-in yet",value:"2 trainings live, 30 videos (~5.3 h) + 21 expert lessons",
+     ba:[["Availability","Next live session","Any time, any device"],["Content","Recordings on a laptop","30 videos, 54 test questions, 20-task exam"],["Trainer time","Every session","Once; learners self-serve"],["Learning checked","No","Self-marking tests"]]},
+    {id:"P02.5",name:"IMS performance dashboard",pain:"Scattered reports rebuilt by hand from many exports",status:"prop",stage:2,main:"Performance",also:["Revenue","Cost"],owner:"Mahmoud Adel (builder) · IT (hosting)",start:"",target:"",next:"IT decision on company hosting, database and sign-in",block:"Runs on a personal PC and account; waiting on IT since Oct 2026",value:"Not claimed until live",
+     ba:[["Report build time","TBM","TBM (automatic daily refresh)"],["Numbers agree across reports","No","One source"]]},
+    {id:"P09",name:"Pre-scheduled sessions (Session Desk)",pain:"Sessions loaded, accepted, assigned and proven by hand",status:"prop",stage:2,main:"Revenue",also:["Performance","Quality"],owner:"Mahmoud Adel",start:"",target:"",next:"Agree a pilot account; get client permission for platform automation",block:"Free hosting tier; client permission not yet given",value:"Not claimed until live",
+     ba:[["Sessions missed or unproven","TBM","TBM"],["Time to load and assign","TBM","TBM"]]},
+    {id:"P01.2",name:"Supervisor Daily Game Plan",pain:"Supervisor day consumed by admin and follow-up",status:"pilot",stage:0,main:"Performance",also:["People morale","Quality"],owner:"To be named",next:"Approve as Pilot A",block:"No owner yet",value:"",ba:[["Admin hours per supervisor","TBM","TBM"]]},
+    {id:"P05.2",name:"Payment reconciliation",pain:"Wrong, late or disputed interpreter payments",status:"pilot",stage:1,main:"People morale",also:["Revenue","Cost"],owner:"Invoicing team (to confirm)",next:"Get the last 3 payment cycles and the Transparent task export",block:"Payment data access; Finance owner",value:"",
+     ba:[["When problems are found","When the interpreter complains","Day 7 upload check"],["Paid correctly first time","TBM","TBM"],["Unpaid balances tracked","No","Alert after 1 cycle"]]},
+    {id:"P04.6",name:"Onboarding activation tracking",pain:"Long onboarding; interpreters who never start",status:"pilot",stage:0,main:"Revenue",also:["Cost","Performance"],owner:"Onboarding (to be named)",next:"Approve as Pilot C; share 6 months of onboarding records",block:"Data across Zoho, sheets and platforms",value:"",ba:[["Days to first task","TBM","TBM"],["Never start","TBM","TBM"]]},
+    {id:"P03",name:"Client communication hub",pain:"Client requests lost across Zoom, Teams, Slack, email",status:"future",stage:0,main:"Revenue",also:["Performance","Quality"],block:"Client consent per channel"},
+    {id:"P06",name:"Workforce & coverage",pain:"Coverage does not match demand; manual VTO",status:"future",stage:0,main:"Revenue",also:["Cost","Performance"]},
+    {id:"P07",name:"Quality & complaints",pain:"Repeat complaints; coaching not tracked",status:"future",stage:0,main:"Quality",also:["Revenue"]},
+    {id:"P08",name:"Management view",pain:"No single view for management",status:"future",stage:0,main:"Performance",also:["Quality"],block:"Needs the data platform first"},
+    {id:"P10",name:"Knowledge, training & adoption",pain:"SOPs scattered; uneven practice",status:"future",stage:0,main:"Quality",also:["People morale"]},
+    {id:"P11",name:"Development & performance",pain:"Development not linked to evidence",status:"future",stage:0,main:"People morale",also:["Performance"],block:"HR ownership"}
+  ],
+  pains: [
+    ["Scattered reports","Rebuilt by hand from Kalam, Incorta, WFM and QA files","Dashboard"],
+    ["Supervisor workload","Days go to chasing and reporting, not coaching","Daily Game Plan"],
+    ["Payment issues","Found only when interpreters complain","Payment control"],
+    ["Long onboarding","Hand-offs by message; documents missing","Onboarding + MasterWord"],
+    ["Interpreter experience","Chasing status through chats and groups","Self-service status"],
+    ["No baseline","Time, volume and errors not measured","Discovery (6 weeks)"]
+  ],
+  waste: [["Extra-processing",14],["Waiting",13],["Defects (errors)",13],["Motion (searching)",8],["Unused talent",6],["Moving files",4],["Overproduction",1],["Work piling up",1]],
+  roadmap: [ // [name, startMonthIndex (0 = Dec 2026), lengthInMonths, style, label]
+    ["Approve program and sponsor",0,1.3,"dec","Decision"],
+    ["Discovery: measure the baseline",1,2.5,"mid","6 weeks"],
+    ["MasterWord: finish and extend",0,4,"prog","In progress"],
+    ["Kalam Learning: next steps",0,4,"prog","In progress"],
+    ["Dashboard on company hosting",2,4,"prop","Needs IT"],
+    ["Session Desk pilot",4,3,"prop","Needs client OK"],
+    ["Pilot A: Daily Game Plan",4,3,"pilot","8–12 weeks"],
+    ["Pilot B: Payment (read-only)",4,3.5,"pilot","8–12 weeks"],
+    ["Pilot C: Onboarding activation",4,3.5,"pilot","8–12 weeks"],
+    ["Measure pilots, go or stop",7.5,1.5,"mid","Results"],
+    ["Roll out what works",9,4,"dark","Per project"],
+    ["Next wave: clients, quality, workforce",10,3,"fut","Plan"]
+  ],
+  payment: {
+    today:{tl:[["Day 4–5","WFM builds the report; ACMs validate"],["Day 7","Invoicing uploads one task per client into Transparent"],["Deadline","Interpreter must accept every task"],["Day 12","Transfer"],["Day 15","Money arrives"],["Day 20+","Anything wrong moves to day 20 or next month",1]],
+      cards:[["Missing tasks","A client task is never uploaded","Found when the interpreter complains"],["Wrong amounts","Task differs from the report","Found when the interpreter complains"],["Late acceptance","Interpreters don't know the deadline","Found after, in the invoicing report"],["Small amounts","Need an eCash transfer","Found when money doesn't arrive"],["Silent losses","Never accepts; unpaid 3–4 months","Sometimes only after they leave"]],
+      note:"Then: interpreter → supervisor → invoicing → back again, by message, until fixed or moved to next month. Nobody tracks it."},
+    prop:{tl:[["Day 1–3","Report built from paid-hours data; ACMs review exceptions only"],["Day 5","Expected task list sent with the report"],["Day 7","Upload check: missing or wrong tasks flagged"],["Deadline","Reminders; supervisor sees who hasn't accepted"],["Day 12–15","Paid; eCash set up in advance"],["Every cycle","Alert for anyone unpaid one cycle"]],
+      cards:[["Missing tasks","Compared with the expected list","Caught on day 7, not months later"],["Wrong amounts","Amount checked against the report","Caught on day 7, before acceptance"],["Late acceptance","Reminders before the deadline","Prevented"],["Small amounts","eCash planned before transfer","Prevented"],["Silent losses","Aging alert per interpreter","Caught after 1 cycle"]],
+      note:"Every concern becomes a case with an owner and a deadline. Humans still decide: ACMs approve exceptions, Invoicing approves payment."}
+  },
+  costs: [ // [item, today, who pays today, needed, personal?]
+    ["Claude (AI) subscription","Personal plan · [amount per month]","Mahmoud, personally","Company plan with seats for the program team",1],
+    ["Claude credits for automated runs","[amount per month]","Mahmoud, personally","Company credit budget with a monthly cap",1],
+    ["Session Desk hosting","Free tiers (Vercel, Supabase)","Free","Company hosting approved by IT"],
+    ["Dashboard pipeline","Runs on Mahmoud's own PC","Mahmoud","IT server, database, company sign-in",1],
+    ["Kalam Learning hosting","Free tiers","Free","Company-email sign-in, about $0–10 a month"],
+    ["System access","Personal logins","—","Service accounts (Kalam, Incorta, Zoho, Transparent)"],
+    ["People","1 person, alongside the day job","Mahmoud's own time","Sponsor, program lead, 1 owner per project",1]
+  ],
+  issues: [ // [id, project, issue, impact, needed, status]
+    ["I-01","All","Program runs on one person's personal accounts and PC","Stops if he is unavailable; company does not own the tools","Sponsor and small team; move tools to company accounts","Open"],
+    ["I-02","MasterWord, Dashboard","Claude subscription and credits paid personally","No company control of usage or data","Company-paid plan and credit budget","Open"],
+    ["I-03","Dashboard","Production plan waiting on IT","Dashboard stays a prototype","Hosting, database and sign-in decision","Open"],
+    ["I-04","Session Desk","Client permission needed for platform automation","Auto-accept cannot go live","Written client consent per platform","Open"],
+    ["I-05","MasterWord","4 documents missing for 3 Argentina applicants","Applications incomplete at MasterWord","Request documents from applicants","Open"],
+    ["I-06","All","No measured baseline (times, volumes, errors)","Benefits cannot be proven","Approve 6-week Discovery","Open"],
+    ["I-07","Payment","Missing tasks and wrong amounts found only on complaint","Late or missed pay; interpreters leave","Transparent export + expected list each cycle","Open"],
+    ["I-08","Payment","No tracking of interpreters never paid","Unpaid 3–4 months before anyone knows","Aging alert for unpaid balances","Open"]
+  ],
+  decisions: [
+    ["Name a sponsor","One senior owner and a small steering group"],
+    ["Approve 6 weeks of Discovery","Measure time, volume and errors so every target is a fact"],
+    ["Fund the tools","Company Claude plan and credits; end personal payment"],
+    ["IT support","Hosting, company sign-in and service accounts"],
+    ["Approve 3 pilots","Daily Game Plan, payment (read-only), onboarding activation"]
+  ]
+};
+/* ===== END DATA ===== */
+
+const $=s=>document.querySelector(s), el=(t,c,h)=>{const e=document.createElement(t);if(c)e.className=c;if(h!=null)e.innerHTML=h;return e};
+const esc=s=>String(s??"").replace(/[&<>"]/g,c=>({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;"}[c]));
+const fmt=s=>esc(s).replace(/\[([^\]]+)\]/g,'<span class="ph">$1</span>').replace(/\bTBM\b/g,'<span class="tbm">TBM</span>');
+const P=DATA.projects, cnt=k=>P.filter(p=>p.status===k).length;
+
+$("#updated").textContent=DATA.updated;
+// KPIs
+[[P.length,"projects in the portfolio",`${cnt("prog")} in progress · ${cnt("prop")} proposals · ${cnt("pilot")} pilots · ${cnt("future")} future`],
+ ["28/28","MasterWord applicants confirmed first time","2 batches, 23 Nov 2026"],
+ ["~95%","less time per applicant","~100 min by hand → 4.5 min automated"],
+ ["~390","interpreters paid each month","in scope for the payment pilot"]]
+ .forEach(k=>$("#kpis").append(el("div","kpi reveal",`<div class="v">${k[0]}</div><div class="l">${k[1]}</div><div class="s">${k[2]}</div>`)));
+
+
+$("#stand .sh p").textContent=`The honest picture on ${DATA.updated}. Nothing on a personal account is counted as finished.`;
+DATA.stand.forEach((c,i)=>$("#four").append(el("div",`card col c${i+1} reveal`,`<h3><span class="ic">${c[1]}</span>${c[0]}</h3><ul>${c[2].map(x=>`<li><b>${esc(x[0])}</b>${esc(x[1])}</li>`).join("")}</ul>`)));
+DATA.goals.forEach((g,i)=>{const pr=P.filter(p=>p.main===g[0]).map(p=>p.name);
+  $("#goallist").append(el("div","card goal reveal",`<div><div class="gn">GOAL ${i+1}</div><h3>${g[0]}</h3><div style="font-size:12px;color:#DCCDE3">${esc(DATA.pillars[i][1])}</div></div>
+  <div class="done"><div class="gl" style="color:var(--green)">Delivered</div><ul>${g[1].map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+  <div><div class="gl">Next</div><ul>${g[2].map(x=>`<li>${esc(x)}</li>`).join("")}</ul></div>
+  <div><div class="gl">How we prove it</div><div style="color:var(--body);font-weight:500">${esc(g[3])}</div><div style="margin-top:10px;font-size:12px">${pr.length} project${pr.length===1?"":"s"} lead${pr.length===1?"s":""} on this goal</div></div>`));});
+DATA.competencies.forEach(c=>$("#comp").append(el("div","",`<b>${c[0].toUpperCase()}</b>${c[1]}`)));
+// pillars (section removed)
+if($("#pillars"))
+DATA.pillars.forEach((p,i)=>{
+  const main=P.filter(x=>x.main===p[0]), also=P.filter(x=>(x.also||[]).includes(p[0]));
+  const dots=main.map(()=>'<i class="m"></i>').join("")+also.map(()=>'<i class="a"></i>').join("");
+  $("#pillars").append(el("div","card pillar reveal",`<div class="n">${i+1}</div><h3>${p[0]}</h3><p>${p[1]}</p><div class="cnt">${main.length} main · ${also.length} supporting</div><div class="dots">${dots}</div>`));
+});
+
+// donut
+(function(){
+  const keys=Object.keys(DATA.status), tot=P.length, R=80, C=2*Math.PI*R; let off=0, svg="";
+  svg+=`<circle cx="105" cy="105" r="${R}" fill="none" stroke="#F1EAF5" stroke-width="26"/>`;
+  keys.forEach(k=>{const n=cnt(k), len=C*n/tot;
+    svg+=`<circle cx="105" cy="105" r="${R}" fill="none" stroke="${DATA.status[k].color}" stroke-width="26" stroke-dasharray="${len-3} ${C-len+3}" stroke-dashoffset="${-off}" transform="rotate(-90 105 105)"/>`; off+=len;
+    $("#legend").append(el("div","",`<i style="background:${DATA.status[k].color}"></i>${DATA.status[k].label}<b>${n}</b>`));});
+  svg+=`<text x="105" y="102" text-anchor="middle" font-size="44" font-weight="800" fill="#4B154A" font-family="Poppins">${tot}</text><text x="105" y="128" text-anchor="middle" font-size="13" fill="#5E5161" font-family="Poppins">projects</text>`;
+  $("#donut").innerHTML=svg;
+})();
+DATA.pains.forEach(p=>$("#pains").append(el("div","card pain reveal",`<h3>${p[0]}</h3><p>${p[1]}</p><div class="fix">Fix: ${p[2]}</div>`)));
+const wmax=Math.max(...DATA.waste.map(w=>w[1]));
+DATA.waste.forEach(w=>$("#waste").append(el("div","bar",`<span>${w[0]}</span><div class="t"><div class="f" data-w="${w[1]/wmax*100}"></div></div><b>${w[1]}</b>`)));
+$("#waste").insertAdjacentHTML("afterbegin",'<div class="eyebrow" style="margin-bottom:8px">Tasks (out of 26) showing each waste</div>');
+
+// projects
+let filter="all";
+const filt=[["all","All"],...Object.keys(DATA.status).map(k=>[k,DATA.status[k].label.split(" ·")[0]])];
+function drawFilters(){ $("#filters").innerHTML=""; filt.forEach(f=>{const b=el("button",filter===f[0]?"on":"",`${f[1]}<span>${f[0]==="all"?P.length:cnt(f[0])}</span>`);b.onclick=()=>{filter=f[0];drawFilters();drawProjects();};$("#filters").append(b);});}
+function chip(k){return `<span class="chip st-${k}">${DATA.status[k].label}</span>`}
+function drawProjects(){
+  const g=$("#pgrid"); g.innerHTML="";
+  P.filter(p=>filter==="all"||p.status===filter).forEach(p=>{
+    const steps=DATA.stages.map((s,i)=>`<i class="${i<=p.stage?"on":""}"></i>`).join("");
+    const kv=[p.owner&&["Owner",esc(p.owner)],p.next&&["Next",fmt(p.next)],p.block&&["Blocker",fmt(p.block),"warn"]].filter(Boolean)
+      .map(r=>`<dt>${r[0]}</dt><dd class="${r[2]||""}">${r[1]}</dd>`).join("");
+    const c=el("button","card proj st-"+p.status+"-c",`<div class="top"><span class="id">${p.id}</span>${chip(p.status)}</div>
+      <h3>${esc(p.name)}</h3><div class="pain-l">${esc(p.pain)}</div>
+      <div class="stage"><div class="steps">${steps}</div><div class="lbl"><span>Stage</span><b>${DATA.stages[p.stage]}</b></div></div>
+      <div class="pillars-tag"><span class="ptag main">${p.main}</span>${(p.also||[]).map(a=>`<span class="ptag">${a}</span>`).join("")}</div>
+      ${kv?`<dl class="kv">${kv}</dl>`:""}<div class="more">${p.ba?"Before and after →":"Details →"}</div>`);
+    c.onclick=()=>openProject(p); g.append(c);
+  });
+}
+function openProject(p){
+  const rows=(p.ba||[]).map(r=>`<tr><td>${esc(r[0])}</td><td class="b">${fmt(r[1])}</td><td class="a">${fmt(r[2])}</td></tr>`).join("");
+  const steps=DATA.stages.map((s,i)=>`<i class="${i<=p.stage?"on":""}"></i>`).join("");
+  $("#sheet").innerHTML=`<div class="hd"><button class="x" aria-label="Close">×</button>${chip(p.status)}<h3>${esc(p.name)}</h3><p>${esc(p.pain)}</p></div>
+   <div class="bd">
+    <div class="stage" style="margin-top:0"><div class="steps">${steps}</div><div class="lbl">${DATA.stages.map((s,i)=>`<span style="${i===p.stage?"color:var(--plum);font-weight:700":""}">${s}</span>`).join("")}</div></div>
+    <dl class="kv" style="font-size:13.5px;margin-top:18px">
+     <dt>Main outcome</dt><dd>${p.main}${(p.also||[]).length?` · also ${p.also.join(", ")}`:""}</dd>
+     ${p.owner?`<dt>Owner</dt><dd>${esc(p.owner)}</dd>`:""}
+     ${p.start?`<dt>Started</dt><dd>${esc(p.start)}${p.target?` · target ${fmt(p.target)}`:""}</dd>`:""}
+     ${p.next?`<dt>Next step</dt><dd>${fmt(p.next)}</dd>`:""}
+     ${p.block?`<dt>Blocker</dt><dd class="warn">${fmt(p.block)}</dd>`:""}
+     ${p.value?`<dt>Value so far</dt><dd>${fmt(p.value)}</dd>`:""}
+    </dl>
+    ${rows?`<div class="eyebrow" style="margin-top:24px">Before and after</div><table class="ba"><tr><th>Measure</th><th>Before</th><th>After</th></tr>${rows}</table>`:`<p class="note">Before and after measures are set during Discovery.</p>`}
+   </div>`;
+  $("#modal").classList.add("open"); document.body.style.overflow="hidden";
+  $("#sheet .x").onclick=closeModal;
+}
+function closeModal(){$("#modal").classList.remove("open");document.body.style.overflow="";}
+$("#modal").onclick=e=>{if(e.target.id==="modal")closeModal()};
+document.addEventListener("keydown",e=>{if(e.key==="Escape"){closeModal();$("#lightbox").classList.remove("open")}});
+drawFilters(); drawProjects();
+
+// roadmap
+(function(){
+  const months=["Dec","Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"], g=$("#gantt");
+  g.append(el("div","",'')); g.append(el("div","months",months.map((m,i)=>`<div class="${i===0?"y26":""}">${m}${i===0?" ’26":i===1?" ’27":""}</div>`).join("")));
+  // today marker: 26 Nov 2026 is just before Dec → place at start
+  const now=new Date(), base=new Date(2026,11,1);
+  const pos=Math.max(0,Math.min(13,(now.getFullYear()-2026)*12+now.getMonth()-11+(now.getDate()-1)/30));
+  DATA.roadmap.forEach((r,i)=>{
+    g.append(el("div","gname",esc(r[0])));
+    const lane=el("div","glane");
+    lane.append(el("div","gbar gb-"+r[3],esc(r[4])));
+    const b=lane.lastChild; b.style.left=`calc(${r[1]/13*100}% + 3px)`; b.style.width=`calc(${r[2]/13*100}% - 6px)`;
+    if(i===0&&now>=base){const t=el("div","today");t.style.left=`${pos/13*100}%`;lane.append(t);}
+    g.append(lane);
+  });
+})();
+
+// payment
+function drawPay(v){
+  const d=DATA.payment[v];
+  $("#ptl").innerHTML=d.tl.map(t=>`<div class="${t[2]?"red":""}"><b>${t[0]}</b>${t[1]}</div>`).join("");
+  $("#pcards").innerHTML=d.cards.map(c=>`<div class="c ${v==="today"?"bad":"good"}"><h4>${c[0]}</h4>${c[1]}<span class="found">${c[2]}</span></div>`).join("");
+  $("#pnote").textContent=d.note;
+  document.querySelectorAll("#ptoggle button").forEach(b=>b.classList.toggle("on",b.dataset.v===v));
+}
+document.querySelectorAll("#ptoggle button").forEach(b=>b.onclick=()=>drawPay(b.dataset.v)); drawPay("today");
+
+// costs
+$("#costtable").innerHTML=`<div class="crow h"><span>Item</span><span>Today</span><span>Who pays today</span><span>Needed</span></div>`+
+  DATA.costs.map(c=>`<div class="crow"><span class="i">${esc(c[0])}</span><span>${fmt(c[1])}</span><span>${c[4]?`<span class="personal">${esc(c[2])}</span>`:esc(c[2])}</span><span>${esc(c[3])}</span></div>`).join("");
+// issues
+const open=DATA.issues.filter(i=>i[5]==="Open").length;
+$("#issuecount").textContent=`${open} open issues. Each one names what is needed and from whom.`;
+$("#issues").innerHTML=DATA.issues.map(i=>`<div class="issue"><span class="iid">${i[0]}</span><div><h4>${esc(i[2])}</h4><p>${esc(i[1])} · Impact: ${esc(i[3])}</p><p><b>Needed:</b> ${esc(i[4])}</p></div><span class="ist" style="${i[5]!=="Open"?"background:var(--greenbg);color:var(--green)":""}">${i[5]}</span></div>`).join("");
+// decisions
+DATA.decisions.forEach((d,i)=>$("#decs").append(el("div","dec reveal",`<div class="n">${i+1}</div><h4>${d[0]}</h4><p>${d[1]}</p>`)));
+
+// lightbox
+document.querySelectorAll(".shot img").forEach(im=>im.onclick=()=>{$("#lightbox img").src=im.src;$("#lightbox").classList.add("open")});
+$("#lightbox").onclick=()=>$("#lightbox").classList.remove("open");
+
+// animations
+const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add("in");e.target.querySelectorAll?.("[data-w]").forEach(f=>f.style.width=f.dataset.w+"%");if(e.target.dataset.w)e.target.style.width=e.target.dataset.w+"%";io.unobserve(e.target);}}),{threshold:.15});
+document.querySelectorAll(".reveal,.waste,.vs").forEach(x=>io.observe(x));
+// nav highlight
+const secs=[...document.querySelectorAll("main section")];
+addEventListener("scroll",()=>{let cur="";secs.forEach(s=>{if(s.getBoundingClientRect().top<120)cur=s.id});document.querySelectorAll("#links a").forEach(a=>a.classList.toggle("on",a.getAttribute("href")==="#"+cur));},{passive:true});
+</script>
+</body>
+</html>
