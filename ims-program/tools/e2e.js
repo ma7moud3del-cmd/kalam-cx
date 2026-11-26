@@ -22,7 +22,7 @@ const check = (name, ok, detail = "") => { results.push([name, ok]); if (!ok) { 
 (async () => {
   await new Promise(r => server.listen(8765, r));
   const base = "http://localhost:8765/ims-program/";
-  const chapters = ["overview", "case", "portfolio", "model", "tech", "delivery", "results", "decisions"];
+  const chapters = ["update", "overview", "case", "portfolio", "model", "tech", "delivery", "results", "decisions"];
   const projects = ["P01", "P02", "P03", "P04", "P05", "P06", "P07", "P08"];
   const caps = ["C1", "C2", "C3", "C4", "C5", "C6", "C7"];
   const routes = [...chapters.map(c => "#/" + c), ...projects.map(p => "#/portfolio/" + p), ...caps.map(c => "#/portfolio/" + c)];
