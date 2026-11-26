@@ -32,12 +32,12 @@
     arc(K.views, 305, -54, 48).forEach((p, i) => add("v-" + (i + 1), K.views[i][0], "view", p, "View " + (i + 1)));
     arc(K.reports, 325, 58, 134).forEach((p, i) => add("r-" + i, K.reports[i][0], "rep", p, K.reports[i][1] + " report"));
     arc(K.roles, 330, 228, 296).forEach((p, i) => add("p-" + K.roles[i].id, K.roles[i].name, "role", p, "Custom view"));
-    add("x-tdg", "TDG", "gap", at(235, 198), "Client · demand not visible");
-    add("x-ita", "Italian", "gap", at(225, 165), "Language · interpreters not assigned to TDG");
+    add("x-ttg", "TTG", "gap", at(235, 198), "Client · demand not visible");
+    add("x-ita", "Italian", "gap", at(225, 165), "Language · interpreters not assigned to TTG");
     SRC.forEach(s => E.push(["s-" + s, "db", "off"]));
     mods.forEach(m => { E.push(["db", "m-" + m, "on"]); MOD_VIEWS[m].forEach(v => E.push(["m-" + m, "v-" + v, "on"])); MOD_REPS[m].forEach(r => E.push(["m-" + m, "r-" + r, "on"])); });
     K.roles.forEach(r => r.views.forEach(v => E.push(["v-" + v, "p-" + r.id, "on"])));
-    E.push(["x-tdg", "x-ita", "gap"], ["x-tdg", "m-B", "gap"], ["x-ita", "m-C", "gap"]);
+    E.push(["x-ttg", "x-ita", "gap"], ["x-ttg", "m-B", "gap"], ["x-ita", "m-C", "gap"]);
     return { N, E };
   }
   function graph() {
@@ -92,9 +92,9 @@
       <p class="cx-note">Every figure shows its source, definition, period and last update when tapped. No value is shown until its source is validated.</p>
     </div></section>`;
 
-    const tdg = `<section class="sec up-sec" id="tdg"><div class="wrap">
-      <div class="up-head"><span>Worked example</span><h2>TDG · Italian</h2></div>
-      <div class="cp-chain">${K.tdg.map((s, i) => `<div><span>${i + 1}</span><b>${esc(s[0])}</b>${st(s[1])}</div>`).join("")}</div>
+    const ttg = `<section class="sec up-sec" id="ttg"><div class="wrap">
+      <div class="up-head"><span>Worked example</span><h2>TTG · Italian</h2></div>
+      <div class="cp-chain">${K.ttg.map((s, i) => `<div><span>${i + 1}</span><b>${esc(s[0])}</b>${st(s[1])}</div>`).join("")}</div>
       <p class="up-note">Unassigned does not mean available: no move before eligibility, contract, schedule and commitments are checked.</p>
     </div></section>`;
 
@@ -165,7 +165,7 @@
       <p class="up-note">Saved in this browser for now. In the company tool each person's view is saved to their account and shows only the clients they may see.</p>
     </div></section>`;
 
-    return hero + dash + builder + tdg + platform + mods + views + data + plan + track;
+    return hero + dash + builder + ttg + platform + mods + views + data + plan + track;
   }
 
   function wireGraph() {
@@ -212,5 +212,5 @@
     paint();
   }
 
-  window.CHAPTERS.push({ id: "capacity", no: "09", title: "Demand vs Resources", nav: "Capacity", hero: true, render, wire, sections: [["dash", "Dashboard"], ["myview", "My view"], ["tdg", "TDG example"], ["platform", "Database & reports"], ["modules", "Modules"], ["views", "Views"], ["data", "Data"], ["stages", "Stages"], ["tracker", "Tracker"]] });
+  window.CHAPTERS.push({ id: "capacity", no: "09", title: "Demand vs Resources", nav: "Capacity", hero: true, render, wire, sections: [["dash", "Dashboard"], ["myview", "My view"], ["ttg", "TTG example"], ["platform", "Database & reports"], ["modules", "Modules"], ["views", "Views"], ["data", "Data"], ["stages", "Stages"], ["tracker", "Tracker"]] });
 })();

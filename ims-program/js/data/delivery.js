@@ -140,7 +140,7 @@ IMS.issues = [
   ["I-06", "All", "No measured baseline", "Benefits cannot be proven", "Approve 6-week Discovery"],
   ["I-07", "Payment", "Missing tasks and wrong amounts found only on complaint", "Late or missed pay; interpreters leave", "Transparent export + expected list each cycle"],
   ["I-08", "Payment", "No tracking of interpreters never paid", "Unpaid 3–4 months before anyone knows", "Aging alert for unpaid balances"],
-  ["I-09", "Demand vs resources", "TDG Italian demand while Italian interpreters are not assigned to TDG; TDG offered calls not visible", "Qualified capacity possibly unused", "Validate TDG demand source and Italian eligibility (P09)"]
+  ["I-09", "Demand vs resources", "TTG Italian demand while Italian interpreters are not assigned to TTG; TTG offered calls not visible", "Qualified capacity possibly unused", "Validate TTG demand source and Italian eligibility (P09)"]
 ];
 
 IMS.change = {

@@ -41,19 +41,19 @@ IMS.capacity = {
       ["Added delivery", "nm", "Module F (measured stage)", "Extra hours delivered from existing capacity", "Monthly"] ] }
   ],
   attention: [
-    ["TDG Italian: qualified Italian interpreters not assigned to TDG", "OP-01"],
-    ["TDG offered calls not visible", "OP-02"],
+    ["TTG Italian: qualified Italian interpreters not assigned to TTG", "OP-01"],
+    ["TTG offered calls not visible", "OP-02"],
     ["Clients missing in the account database", "OP-03"],
     ["Demand source unknown for some clients", "R-17"],
     ["No owner named for Project 9 or its data sources", "R-09"]
   ],
 
   /* Worked example. Each step: [what, status] (status: vr · na · desc) */
-  tdg: [
-    ["Italian demand on TDG", "desc"],
-    ["TDG offered calls", "na"],
+  ttg: [
+    ["Italian demand on TTG", "desc"],
+    ["TTG offered calls", "na"],
     ["Italian interpreters qualified", "vr"],
-    ["Assigned to TDG", "desc"],
+    ["Assigned to TTG", "desc"],
     ["Eligibility, contract, schedule", "vr"],
     ["Decision", "human"]
   ],
@@ -109,8 +109,8 @@ IMS.capacity = {
   /* Opportunity tracker (Module F). 15 fields; TBC where not known. */
   oppStages: ["Identified", "Validated", "Approved", "Implemented", "Measured"],
   opportunities: [
-    { id: "OP-01", title: "Assign qualified Italian interpreters to TDG", client: "TDG", language: "Italian", line: "TBC", cls: "Unused qualified capacity", evidence: "Italian demand on TDG; Italian interpreters not assigned to TDG (as described)", source: "Operations (described)", confidence: "Low", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Confirm TDG Italian demand and interpreter eligibility", due: "TBC", result: "Not measured" },
-    { id: "OP-02", title: "Make TDG demand visible", client: "TDG", language: "All", line: "TBC", cls: "Demand visibility gap", evidence: "Offered calls on TDG not known", source: "Operations (described)", confidence: "Low", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Find which system or report holds TDG offered calls", due: "TBC", result: "Not measured" },
+    { id: "OP-01", title: "Assign qualified Italian interpreters to TTG", client: "TTG", language: "Italian", line: "TBC", cls: "Unused qualified capacity", evidence: "Italian demand on TTG; Italian interpreters not assigned to TTG (as described)", source: "Operations (described)", confidence: "Low", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Confirm TTG Italian demand and interpreter eligibility", due: "TBC", result: "Not measured" },
+    { id: "OP-02", title: "Make TTG demand visible", client: "TTG", language: "All", line: "TBC", cls: "Demand visibility gap", evidence: "Offered calls on TTG not known", source: "Operations (described)", confidence: "Low", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Find which system or report holds TTG offered calls", due: "TBC", result: "Not measured" },
     { id: "OP-03", title: "Add missing clients to the account database", client: "Several (TBC)", language: "TBC", line: "TBC", cls: "Data correction", evidence: "Client check report found clients missing in the database", source: "Client check report", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Re-run the check and list the clients", due: "TBC", result: "Not measured" }
   ],
 

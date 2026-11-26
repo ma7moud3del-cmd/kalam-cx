@@ -518,8 +518,8 @@ IMS.projects = [
   owner: "To be assigned", ownerStatus: "to-name",
   pillars: ["Revenue", "Performance", "Cost"],
   stage: "Proposed · Stage 1 Data Discovery not started",
-  problem: "IMS cannot see in one place which clients have demand, in which languages, and whether qualified interpreters are assigned to them. Some clients are missing in the database, some qualified interpreters are not assigned to clients that need their language (TDG Italian example), and demand for some clients is not visible at all.",
-  current: ["Client demand seen per client report, if any", "Assignments kept in the account database", "One-off client check report", "Gaps found by chance (TDG Italian)", "No view of unused capacity"],
+  problem: "IMS cannot see in one place which clients have demand, in which languages, and whether qualified interpreters are assigned to them. Some clients are missing in the database, some qualified interpreters are not assigned to clients that need their language (TTG Italian example), and demand for some clients is not visible at all.",
+  current: ["Client demand seen per client report, if any", "Assignments kept in the account database", "One-off client check report", "Gaps found by chance (TTG Italian)", "No view of unused capacity"],
   future: ["Six sources reconciled per client", "Demand by client, language and hour", "Interpreter-to-client alignment matrix", "Demand vs capacity gap per language", "Director dashboard in two minutes", "Opportunities tracked to measured result"],
   flow: "workforce",
   requirements: [
