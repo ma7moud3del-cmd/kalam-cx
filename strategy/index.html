@@ -1,189 +1,339 @@
-<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<title>KALAM CEO Dashboard</title>
-<link rel="icon" href="../ims-program/assets/mark.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
-<style>
-:root{--plum:#4B154A;--plum2:#79417F;--plum3:#F3E9F3;--yel:#FFC629;--ink:#1d1424;--mut:#6f6476;--line:#e9e1ec;--bg:#faf7fb;--card:#fff;
---g:#1f9d63;--a:#e8a317;--r:#d0384d;--n:#a59dab;--gbg:#e3f5ec;--abg:#fdf1d8;--rbg:#fbe3e7;--nbg:#efedf1}
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KALAM Strategic Transformation Command Center</title>
+<meta name="description" content="KALAM company-wide strategic transformation 2027-2028: five goals, COPC, Great Place to Work and KALAM Way.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>@property --h{syntax:'<number>';inherits:true;initial-value:300}
+:root{--bg:#0c0612;--bg2:#160b1f;--pn:rgba(255,255,255,.045);--ln:rgba(255,255,255,.12);--ln2:rgba(255,255,255,.2);--tx:#f6f0f9;--mut:#c4b5ce;--dim:#9a8ba5;
+--plum:#4B154A;--plum2:#79417F;--pl:#e0b1e6;--yel:#FFC629;--g:#3ddc97;--a:#ffa94d;--r:#ff6b85;--n:#a294ad;--b:#82b8ff;--h:300;--rad:18px}
 *{box-sizing:border-box;margin:0;padding:0}
-body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45}
-a{color:inherit}
-header{background:linear-gradient(120deg,#2b0a2a,var(--plum) 55%,#6a2a68);color:#fff;padding:18px 24px 0;position:relative;overflow:hidden}
-header:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,198,41,.28),transparent 65%)}
-.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
-.top img{height:34px;background:#fff;border-radius:8px;padding:4px}
-.top h1{font-size:19px;font-weight:700;letter-spacing:.2px}
-.top small{display:block;font-weight:400;opacity:.75;font-size:12px}
-.meta{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
-.pill{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);white-space:nowrap}
-.pill.y{background:var(--yel);color:var(--plum);border-color:var(--yel)}
-nav{display:flex;gap:4px;margin-top:16px;overflow-x:auto;position:relative;z-index:1;scrollbar-width:none}
-nav button{font:600 13px Poppins;color:#fff;opacity:.7;background:none;border:0;padding:10px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
-nav button.on{opacity:1;background:var(--bg);color:var(--plum)}
-nav button span{display:inline-block;width:20px;height:20px;line-height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:11px;margin-right:6px;text-align:center}
-nav button.on span{background:var(--yel);color:var(--plum)}
-main{max-width:1280px;margin:0 auto;padding:20px 24px 60px}
-.scr{display:none}.scr.on{display:block;animation:f .35s ease}
-@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
-h2{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--plum2);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
-h2 b{background:var(--plum);color:var(--yel);width:22px;height:22px;border-radius:6px;display:inline-grid;place-items:center;font-size:11px;letter-spacing:0}
-.grid{display:grid;gap:12px}
-.g5{grid-template-columns:repeat(5,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
-@media(max-width:1000px){.g5,.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}}
-@media(max-width:640px){.g5,.g4,.g3,.g2{grid-template-columns:1fr}main{padding:16px}header{padding:14px 16px 0}.meta{margin-left:0}}
-.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(75,21,74,.04)}
-.card.dark{background:var(--plum);color:#fff;border-color:var(--plum)}
-.k{font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}
-.dark .k{color:#e6cfe6}
-.big{font-size:34px;font-weight:800;line-height:1.05;margin:6px 0 2px;color:var(--plum)}
-.dark .big{color:var(--yel)}
-.big.na{font-size:17px;font-weight:700;color:var(--n);letter-spacing:.5px;margin:12px 0 8px}
-.sub{font-size:12px;color:var(--mut)}
-.dark .sub{color:#ead8ea}
-.st{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.5px}
-.st:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
-.sV{background:var(--gbg);color:var(--g)}.sP{background:var(--abg);color:#b07605}.sN{background:var(--nbg);color:#7b7381}.sE{background:var(--rbg);color:var(--r)}
-.src{font-size:10.5px;color:var(--mut);margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
-.dark .src{color:#dcc3dc;border-color:rgba(255,255,255,.2)}
-.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
-.goal{position:relative;overflow:hidden}
-.goal .n{position:absolute;right:10px;top:4px;font-size:48px;font-weight:800;color:var(--plum3)}
-.goal h3{font-size:14px;position:relative}
-.bar{height:8px;border-radius:99px;background:var(--nbg);overflow:hidden;margin-top:6px}
-.bar i{display:block;height:100%;border-radius:99px}
-.hatch{background:repeating-linear-gradient(45deg,#e4dfe8 0 6px,#f3f0f5 6px 12px)}
-.ring{width:96px;height:96px}
-.prio{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
-.prio:last-child{border:0}
-.prio .num{width:30px;height:30px;border-radius:9px;background:var(--plum);color:var(--yel);display:grid;place-items:center;font-weight:800}
-.prio b{display:block;font-size:13.5px}
-.prio small{color:var(--mut);font-size:11.5px}
-.tag{font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--plum3);color:var(--plum);white-space:nowrap}
-.cert{display:flex;gap:14px;align-items:center}
-.seal{width:64px;height:64px;border-radius:50%;border:3px dashed var(--plum2);display:grid;place-items:center;font-weight:800;color:var(--plum);font-size:12px;text-align:center;flex:none;line-height:1.1}
-.seal.gp{border-color:#d0384d;color:#d0384d}
-.dark .seal{border-color:var(--yel);color:var(--yel)}
-/* heatmap */
-.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
-.filters button{font:600 12px Poppins;border:1px solid var(--line);background:#fff;color:var(--plum);padding:6px 12px;border-radius:99px;cursor:pointer}
-.filters button.on{background:var(--plum);color:#fff;border-color:var(--plum)}
-.heat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
-@media(max-width:900px){.heat{grid-template-columns:repeat(2,1fr)}}
-.cell{border-radius:14px;padding:14px;cursor:pointer;border:2px solid transparent;min-height:112px;display:flex;flex-direction:column;transition:transform .15s}
-.cell:hover{transform:translateY(-2px);border-color:var(--plum2)}
-.cell.dim{opacity:.22}
-.cell h4{font-size:13px;line-height:1.25}
-.cell .dei{margin-top:auto;display:flex;gap:4px;padding-top:10px}
-.cell .dei span{flex:1;font-size:10px;font-weight:700;text-align:center;border-radius:5px;padding:3px 0;background:rgba(255,255,255,.7);color:#a59dab}.cell .dei span.lP{background:#79417F;color:#fff;opacity:.6}.cell .dei span.lV{background:#4B154A;color:#fff}
-.cR{background:var(--rbg)}.cA{background:var(--abg)}.cG{background:var(--gbg)}.cN{background:var(--nbg);color:#6f6476}
-.cR h4{color:#9b1f33}.cA h4{color:#8a5c00}
-.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:10px}
-.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-2px;margin-right:5px}
-/* matrix */
-.mx{width:100%;border-collapse:separate;border-spacing:6px}
-.mx th{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut);text-align:left;padding:4px 6px}
-.mx td{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;vertical-align:top;font-size:12px}
-.mx td.gl{background:var(--plum);color:#fff;font-weight:700;font-size:13px;width:17%}
-.mx td.gl small{display:block;color:var(--yel);font-weight:600;font-size:10.5px}
-.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:6px;margin:2px 2px 0 0;background:var(--plum3);color:var(--plum)}
-.chip.g{background:#fde7ea;color:#a3283b}.chip.k{background:#fff3cf;color:#7a5600}
-@media(max-width:760px){.mxw{overflow-x:auto}.mx{min-width:720px}}
-/* flow */
-.flow{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap}
-.step{flex:1;min-width:92px;border-radius:10px;padding:8px;font-size:11.5px;font-weight:600;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:2px}
-.step small{font-weight:400;font-size:10px;opacity:.8}
-.sm{background:#fbe3e7;color:#8e1c2e}.sa{background:#e3f5ec;color:#11683f}.sh{background:var(--plum3);color:var(--plum)}
-.arrow{align-self:center;color:var(--plum2);font-weight:800}
-/* gantt */
-.gantt{display:grid;grid-template-columns:200px 1fr;gap:8px 12px;align-items:center}
-@media(max-width:640px){.gantt{grid-template-columns:1fr}}
-.gl2 b{display:block;font-size:13px}.gl2 small{color:var(--mut);font-size:11px}
-.track{position:relative;height:34px;background:#fff;border:1px solid var(--line);border-radius:10px}
-.seg{position:absolute;top:4px;bottom:4px;border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;transition:all .4s}
-.now{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--yel)}
-.opt{border-radius:16px;padding:16px;border:2px solid var(--line);background:#fff;position:relative}
-.opt.rec{border-color:var(--plum)}
-.opt.rec:after{content:"Recommended";position:absolute;top:-11px;right:14px;background:var(--yel);color:var(--plum);font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px}
-.lvl{display:flex;gap:3px;margin-top:3px}.lvl i{flex:1;height:7px;border-radius:3px;background:var(--nbg)}.lvl i.on{background:var(--plum2)}
-.dec{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
-.dec:last-child{border:0}
-.dec .q{flex:none;width:26px;height:26px;border-radius:50%;background:var(--yel);color:var(--plum);display:grid;place-items:center;font-weight:800;font-size:12px}
-/* modal */
-.mod{position:fixed;inset:0;background:rgba(29,20,36,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
-.mod.on{display:flex}
-.box{background:#fff;border-radius:18px;max-width:620px;width:100%;max-height:88vh;overflow:auto;padding:22px}
-.box h3{font-size:18px;color:var(--plum);margin-bottom:6px}
-.kv{display:grid;grid-template-columns:130px 1fr;gap:8px 12px;margin-top:14px;font-size:13px}
-.kv dt{font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.6px;padding-top:2px}
-.x{float:right;border:0;background:var(--plum3);color:var(--plum);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer}
-.foot{margin-top:28px;font-size:11px;color:var(--mut);display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
-.btn{font:600 12px Poppins;border:0;background:var(--yel);color:var(--plum);padding:8px 14px;border-radius:99px;cursor:pointer}
-svg text{font-family:Poppins}
-@media print{nav,.btn{display:none}.scr{display:block!important;page-break-after:always}header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
-
-/* ===== v0.2 additions ===== */
-.sC{background:#e6eefc;color:#2a5bb8}.sS{background:#fdf1d8;color:#b07605}.sR{background:#f3e9f3;color:#79417F}
-.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
-.tbl th{text-align:left;font-size:10.5px;text-transform:uppercase;letter-spacing:.6px;color:var(--mut);padding:8px;border-bottom:2px solid var(--line);white-space:nowrap}
-.tbl td{padding:8px;border-bottom:1px solid var(--line);vertical-align:top}
-.tbl tr.clk{cursor:pointer}.tbl tr.clk:hover td{background:var(--plum3)}
+html{scroll-behavior:smooth}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--tx);font-size:14px;line-height:1.5;min-height:100vh;overflow-x:hidden;
+background-image:radial-gradient(1200px 600px at 75% -10%,rgba(121,65,127,.35),transparent 60%),radial-gradient(900px 500px at -10% 110%,rgba(255,198,41,.07),transparent 60%),
+linear-gradient(rgba(255,255,255,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.025) 1px,transparent 1px);
+background-size:auto,auto,44px 44px,44px 44px;background-attachment:fixed}
+a{color:var(--yel)}
+button{font:inherit;color:inherit;cursor:pointer;background:none;border:0}
+h1{font-size:30px;line-height:1.2;font-weight:700;letter-spacing:-.4px}
+h1 em{font-style:normal;color:var(--yel)}
+h2{font-size:19px;font-weight:700;letter-spacing:-.2px}
+h3{font-size:15px;font-weight:700}
+h4{font-size:12px;text-transform:uppercase;letter-spacing:1px;color:var(--pl);font-weight:700;margin-bottom:8px}
+small,.mut{color:var(--mut)}
+.dim{color:var(--dim)}
+/* ---------- shell ---------- */
+#side{position:fixed;left:0;top:0;bottom:0;width:248px;padding:18px 14px;border-right:1px solid var(--ln);background:rgba(12,6,18,.82);backdrop-filter:blur(14px);display:flex;flex-direction:column;gap:14px;z-index:20;overflow-y:auto}
+.brand{display:flex;gap:10px;align-items:center}
+.brand img{width:34px;height:34px;border-radius:9px;background:#fff;padding:3px}
+.brand b{display:block;font-size:13px;letter-spacing:.4px}
+.brand span{font-size:10.5px;color:var(--mut);text-transform:uppercase;letter-spacing:1.2px}
+#ctx{border:1px solid var(--ln);border-radius:16px;padding:12px;background:rgba(255,255,255,.03);display:grid;grid-template-columns:54px 1fr;gap:10px;align-items:center}
+#ctx .orb{--s:54px}
+#ctx dl{font-size:10.5px;line-height:1.35}
+#ctx dt{color:var(--dim);text-transform:uppercase;letter-spacing:.8px;font-size:9px}
+#ctx dd{color:var(--tx);font-weight:600;margin-bottom:3px}
+#nav{display:flex;flex-direction:column;gap:3px}
+#nav button{display:flex;gap:10px;align-items:center;text-align:left;padding:9px 10px;border-radius:12px;font-size:13px;color:var(--mut);font-weight:500;transition:background .2s,color .2s}
+#nav button i{font-style:normal;width:24px;height:24px;display:grid;place-items:center;border-radius:8px;background:rgba(255,255,255,.06);font-size:10.5px;font-weight:700;color:var(--pl);flex:none}
+#nav button:hover{background:rgba(255,255,255,.06);color:var(--tx)}
+#nav button.on{background:linear-gradient(90deg,rgba(255,198,41,.16),rgba(255,198,41,.02));color:#fff;box-shadow:inset 3px 0 0 var(--yel)}
+#nav button.on i{background:var(--yel);color:var(--plum)}
+.side-foot{margin-top:auto;font-size:10.5px;color:var(--dim);line-height:1.45}
+.side-foot button{border:1px solid var(--ln2);border-radius:10px;padding:7px 10px;font-size:11.5px;margin-top:8px;width:100%;color:var(--tx)}
+#main{margin-left:248px;padding:26px 30px 90px;max-width:1500px}
+.page{display:none;animation:pin .45s ease}
+.page.on{display:block}
+@keyframes pin{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:none}}
+.phead{display:flex;justify-content:space-between;gap:20px;align-items:flex-end;margin-bottom:18px;flex-wrap:wrap}
+.phead p{color:var(--mut);max-width:760px;margin-top:6px;font-size:14px}
+.eyebrow{font-size:11px;text-transform:uppercase;letter-spacing:2px;color:var(--yel);font-weight:600;margin-bottom:6px}
+.pills{display:flex;gap:6px;flex-wrap:wrap}
+.pill{font-size:11px;padding:4px 10px;border-radius:99px;border:1px solid var(--ln2);color:var(--mut)}
+/* ---------- panels ---------- */
+.pn{background:linear-gradient(180deg,rgba(255,255,255,.065),rgba(255,255,255,.025));border:1px solid var(--ln);border-radius:var(--rad);padding:18px;box-shadow:0 12px 34px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.07);position:relative;min-width:0}
+.pn+.pn,.grid+.pn,.pn+.grid,.grid+.grid{margin-top:16px}
+.grid{display:grid;gap:16px}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g5{grid-template-columns:repeat(5,minmax(0,1fr))}
+.span2{grid-column:span 2}
+.ph{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.ph p{font-size:12.5px;color:var(--mut)}
+/* ---------- status ---------- */
+.st{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:600;padding:3px 9px;border-radius:99px;white-space:nowrap;border:1px solid transparent;line-height:1.3}
+.st::before{content:'';width:6px;height:6px;border-radius:50%;background:currentColor}
+.sV{color:var(--g);background:rgba(61,220,151,.12);border-color:rgba(61,220,151,.3)}
+.sC{color:var(--b);background:rgba(130,184,255,.12);border-color:rgba(130,184,255,.3)}
+.sS{color:var(--a);background:rgba(255,169,77,.12);border-color:rgba(255,169,77,.3)}
+.sR{color:var(--pl);background:rgba(224,177,230,.1);border-color:rgba(224,177,230,.3)}
+.sN{color:var(--n);background:rgba(162,148,173,.1);border-color:rgba(162,148,173,.3)}
+.sE{color:var(--r);background:rgba(255,107,133,.08);border-color:rgba(255,107,133,.35);border-style:dashed}
+.sP{color:var(--yel);background:rgba(255,198,41,.12);border-color:rgba(255,198,41,.35)}
+.sA{color:#d8cde0;background:rgba(255,255,255,.06);border-color:var(--ln2);border-style:dashed}
+.sM{color:var(--g);background:rgba(61,220,151,.08);border-color:rgba(61,220,151,.25)}
+.xCo{color:var(--g);background:rgba(61,220,151,.12)}.xPa{color:var(--a);background:rgba(255,169,77,.12)}.xMi{color:var(--r);background:rgba(255,107,133,.12)}.xNa{color:var(--n);background:rgba(162,148,173,.1)}
+.kD{color:var(--b);background:rgba(130,184,255,.12)}.kI{color:var(--a);background:rgba(255,169,77,.12)}.kE{color:var(--g);background:rgba(61,220,151,.12)}.kG{color:var(--r);background:rgba(255,107,133,.12)}
+.dot{width:9px;height:9px;border-radius:50%;display:inline-block;flex:none}
+.cR{background:var(--r)}.cA{background:var(--a)}.cG{background:var(--g)}.cN{background:var(--n)}
+/* ---------- tips ---------- */
+.tip{border-bottom:1px dotted var(--pl);cursor:help}
+#tipbox{position:fixed;z-index:90;max-width:280px;background:#241431;border:1px solid var(--ln2);color:var(--tx);font-size:12px;padding:9px 11px;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.5);pointer-events:none;opacity:0;transition:opacity .15s;display:none}
+#tipbox.on{opacity:1;display:block}
+#tipbox b{color:var(--yel)}
+/* ---------- orb ---------- */
+.orb{--s:180px;width:var(--s);height:var(--s);flex:none;position:relative;border-radius:50% 50% 48% 52%/55% 52% 48% 45%;transition:--h 1.2s ease;
+background:radial-gradient(circle at 33% 27%,rgba(255,255,255,.95) 0 3%,rgba(255,255,255,.4) 8%,transparent 20%),
+radial-gradient(circle at 68% 80%,hsla(calc(var(--h) + 50),95%,72%,.55),transparent 42%),
+radial-gradient(circle at 50% 45%,hsla(var(--h),70%,58%,.9),hsla(var(--h),72%,32%,.95) 62%,hsla(var(--h),80%,14%,1));
+box-shadow:0 0 calc(var(--s)*.35) hsla(var(--h),85%,62%,.45),inset calc(var(--s)*-.08) calc(var(--s)*-.1) calc(var(--s)*.22) rgba(0,0,0,.5),inset calc(var(--s)*.06) calc(var(--s)*.07) calc(var(--s)*.16) rgba(255,255,255,.2);
+animation:morph 9s ease-in-out infinite,flo 6s ease-in-out infinite}
+.orb::after{content:'';position:absolute;inset:-10%;border-radius:50%;border:1px solid hsla(var(--h),90%,75%,.35);opacity:0}
+.orb.ping::after{animation:ping 1s ease-out}
+@keyframes morph{0%,100%{border-radius:50% 50% 48% 52%/55% 52% 48% 45%}33%{border-radius:56% 44% 53% 47%/47% 56% 44% 53%}66%{border-radius:45% 55% 44% 56%/53% 45% 55% 47%}}
+@keyframes flo{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes ping{0%{opacity:.9;transform:scale(.9)}100%{opacity:0;transform:scale(1.5)}}
+.orbwrap{position:relative;width:340px;height:340px;display:grid;place-items:center;margin:auto}
+.orbwrap .ring{position:absolute;inset:18px;border-radius:50%;border:1px dashed rgba(255,255,255,.16);animation:spin 60s linear infinite}
+.orbwrap .ring.r2{inset:52px;border-style:solid;border-color:rgba(255,198,41,.14);animation-duration:40s;animation-direction:reverse}
+@keyframes spin{to{transform:rotate(360deg)}}
+.orbwrap .orb{--s:150px}
+.orbit{position:absolute;font-size:10.5px;font-weight:600;padding:5px 9px;border-radius:99px;background:rgba(22,11,31,.9);border:1px solid var(--ln2);white-space:nowrap;transform:translate(-50%,-50%);cursor:pointer;transition:border-color .2s,background .2s}
+.orbit:hover{border-color:var(--yel);background:#2a1638}
+.orbit b{color:var(--yel);margin-right:4px}
+.orbcap{position:absolute;bottom:-4px;left:50%;transform:translateX(-50%);text-align:center;font-size:11px;color:var(--mut);width:100%}
+/* ---------- overview ---------- */
+.hero{display:grid;grid-template-columns:1.25fr 1fr;gap:20px;align-items:center;padding:26px;overflow:hidden}
+.hero .lead{font-size:14.5px;color:var(--mut);margin:12px 0 18px;max-width:640px;font-style:italic}
+.dest{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:10px}
+.dest div{border:1px solid var(--ln);border-radius:14px;padding:12px;background:rgba(255,255,255,.035)}
+.dest b{display:block;font-size:20px;color:var(--yel);line-height:1.2}
+.dest span{font-size:11.5px;color:var(--mut);display:block;margin:4px 0 6px}
+.dest .st{display:inline-flex;margin:0;white-space:normal}.dest .tip{display:inline;margin:0}
+.qnav{display:flex;gap:6px;flex-wrap:wrap;margin:16px 0}
+.qnav a{text-decoration:none;font-size:11.5px;color:var(--mut);border:1px solid var(--ln);padding:6px 10px;border-radius:99px;background:rgba(255,255,255,.03)}
+.qnav a:hover{color:#fff;border-color:var(--yel)}
+.qnav a b{color:var(--yel);margin-right:4px}
+.q{scroll-margin-top:16px}
+.qh{display:flex;gap:12px;align-items:center;margin-bottom:14px}
+.qn{font-size:12px;font-weight:800;color:var(--plum);background:var(--yel);border-radius:9px;width:30px;height:30px;display:grid;place-items:center;flex:none}
+.chain{display:flex;align-items:stretch;gap:0;overflow-x:auto;padding:4px 0 8px}
+.chain>div{flex:1 0 112px;text-align:center;padding:12px 8px;border:1px solid var(--ln);border-radius:14px;background:rgba(255,255,255,.04);font-size:12px;position:relative}
+.chain>div b{display:block;font-size:13px;color:#fff}
+.chain>div span{color:var(--mut);font-size:10.5px}
+.chain>div.hl{border-color:var(--yel);background:rgba(255,198,41,.08)}
+.chain>i{flex:0 0 26px;align-self:center;height:2px;background:linear-gradient(90deg,var(--plum2) 50%,transparent 50%);background-size:10px 2px;animation:dash 1s linear infinite}
+@keyframes dash{to{background-position:10px 0}}
+.callout{border-left:3px solid var(--yel);background:rgba(255,198,41,.07);padding:10px 14px;border-radius:0 12px 12px 0;font-size:13px;margin-top:12px}
+.callout b{color:var(--yel)}
+.quote{font-size:14px;font-style:italic;color:#fff;border-left:3px solid var(--plum2);padding-left:12px}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.chip{font-size:11.5px;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.06);border:1px solid var(--ln);white-space:nowrap}
+button.chip:hover,.chip.cl:hover{border-color:var(--yel);cursor:pointer}
+.chip.y{background:rgba(255,198,41,.14);border-color:rgba(255,198,41,.4);color:var(--yel)}
+.gcard{border-radius:14px;padding:12px;border:1px solid var(--ln);background:rgba(255,255,255,.035);cursor:pointer;transition:transform .2s,border-color .2s}
+.gcard:hover{transform:translateY(-2px);border-color:var(--yel)}
+.gcard .gn{font-size:10px;font-weight:800;color:var(--plum);background:var(--yel);border-radius:6px;padding:2px 6px}
+.gcard h3{margin:8px 0 4px;font-size:14px}
+.gcard p{font-size:11.5px;color:var(--mut)}
+.gflow{display:grid;grid-template-columns:150px 1fr 1fr 1.3fr 1.1fr 1.3fr;gap:0;align-items:stretch}
+.gflow>div{padding:10px 12px;border-bottom:1px solid var(--ln);font-size:12px;position:relative;min-width:0}
+.gflow .hd{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:var(--dim);font-weight:700;border-bottom:1px solid var(--ln2)}
+.gflow .gc{font-weight:700;font-size:13px;cursor:pointer}
+.gflow .gc span{display:inline-block;font-size:10px;font-weight:800;color:var(--plum);background:var(--yel);border-radius:6px;padding:1px 6px;margin-right:6px}
+.gflow>div:not(.hd):not(.gc)::before{content:'';position:absolute;left:-6px;top:50%;width:10px;height:2px;background:var(--plum2)}
+.big{font-size:30px;font-weight:800;line-height:1.05;letter-spacing:-.5px}
+.stat{border:1px solid var(--ln);border-radius:14px;padding:14px;background:rgba(255,255,255,.035);min-width:0}
+.stat .big{color:#fff}
+.stat .big.y{color:var(--yel)}.stat .big.r{color:var(--r)}.stat .big.g{color:var(--g)}
+.stat p{font-size:11.5px;color:var(--mut);margin:4px 0 8px}
+.heat{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px}
+.cell{border-radius:12px;padding:10px;cursor:pointer;font-size:12px;font-weight:600;border:1px solid var(--ln);transition:transform .15s,opacity .2s;min-height:70px;display:flex;flex-direction:column;justify-content:space-between;text-align:left}
+.cell:hover{transform:scale(1.03)}
+.cell small{font-weight:500;font-size:10.5px}
+.cell.R{background:linear-gradient(135deg,rgba(255,107,133,.32),rgba(255,107,133,.12));border-color:rgba(255,107,133,.5)}
+.cell.A{background:linear-gradient(135deg,rgba(255,169,77,.28),rgba(255,169,77,.08));border-color:rgba(255,169,77,.45)}
+.cell.G{background:linear-gradient(135deg,rgba(61,220,151,.28),rgba(61,220,151,.08))}
+.cell.N{background:repeating-linear-gradient(45deg,rgba(255,255,255,.04) 0 6px,rgba(255,255,255,.015) 6px 12px);border-style:dashed;color:var(--mut)}
+.cell.dimmed{opacity:.2}
+.seg{display:inline-flex;border:1px solid var(--ln2);border-radius:10px;overflow:hidden;flex-wrap:wrap}
+.seg button{padding:6px 11px;font-size:11.5px;color:var(--mut)}
+.seg button.on{background:var(--yel);color:var(--plum);font-weight:700}
+.legend{display:flex;gap:12px;flex-wrap:wrap;font-size:11px;color:var(--mut);align-items:center}
+.legend span{display:inline-flex;gap:5px;align-items:center}
+.meter{height:10px;border-radius:99px;background:rgba(255,255,255,.08);overflow:hidden;display:flex}
+.meter i{display:block;height:100%}
+.mrow{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,2fr) 70px;gap:10px;align-items:center;font-size:12px;padding:6px 0}
+.mrow b{text-align:right;font-size:12px}
+.bars .mrow{grid-template-columns:minmax(0,1.2fr) minmax(0,2fr) 40px}
+.fl{display:flex;align-items:center;gap:6px;flex-wrap:wrap;font-size:12px}
+.fl .box{padding:7px 10px;border-radius:10px;border:1px solid var(--ln);background:rgba(255,255,255,.04)}
+.fl .box.m{border-color:rgba(255,107,133,.4)}
+.fl .box.a{border-color:rgba(61,220,151,.45);background:rgba(61,220,151,.07)}
+.fl .box.c{border-color:rgba(255,198,41,.5);background:rgba(255,198,41,.08)}
+.fl .ar{color:var(--yel);font-weight:700}
+/* ---------- tables ---------- */
 .tw{overflow-x:auto}
-.ach{display:grid;grid-template-columns:1.1fr 1fr;gap:14px}
-.ach>*{min-width:0}@media(max-width:900px){.ach{grid-template-columns:1fr}}
-.q4{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
-@media(max-width:640px){.q4{grid-template-columns:1fr}.q4 div{grid-column:auto!important}}
-.q4 div{background:var(--bg);border-radius:10px;padding:8px 10px;font-size:12px}
-.q4 b{display:block;font-size:10px;text-transform:uppercase;letter-spacing:.6px;color:var(--plum2);margin-bottom:2px}
-.val{display:flex;flex-wrap:wrap;gap:6px}
-.val span{white-space:nowrap;font-size:11px;font-weight:600;padding:4px 9px;border-radius:99px;border:1px solid var(--line);background:#fff}
-.val span i{font-style:normal;font-weight:700;margin-right:4px}
-.val .m{border-color:#9fd9bd;background:#effaf4;color:#11683f}.val .q{border-color:#e2cfe2;background:#faf4fa;color:var(--plum)}.val .x{border-color:#f0c9cf;background:#fdf3f4;color:#9b1f33}
-.stepper{display:flex;flex-wrap:wrap;gap:4px;margin-top:10px}.stepper span{min-width:70px}.cert>div{min-width:0}
-.stepper span{flex:1;font-size:9.5px;font-weight:700;text-align:center;padding:5px 2px;border-radius:6px;background:var(--nbg);color:#8a8290;text-transform:uppercase;letter-spacing:.3px}
+.tbl{width:100%;border-collapse:collapse;font-size:12.5px}
+.tbl th{text-align:left;font-size:10px;text-transform:uppercase;letter-spacing:.8px;color:var(--dim);padding:8px;border-bottom:1px solid var(--ln2);white-space:nowrap;font-weight:700}
+.tbl td{padding:8px;border-bottom:1px solid var(--ln);vertical-align:top}
+.tbl tr.clk{cursor:pointer}.tbl tr.clk:hover td{background:rgba(255,255,255,.04)}
+.tbl .id{font-weight:700;color:var(--yel);white-space:nowrap}
+.sbar{display:inline-block;height:8px;border-radius:99px;background:linear-gradient(90deg,var(--plum2),var(--yel));vertical-align:middle}
+/* ---------- cards ---------- */
+.cards{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:12px}
+.card{border:1px solid var(--ln);border-radius:14px;padding:14px;background:rgba(255,255,255,.035);min-width:0}
+.card.clk{cursor:pointer;transition:border-color .2s,transform .2s}
+.card.clk:hover{border-color:var(--yel);transform:translateY(-2px)}
+.card h3{margin-bottom:6px;display:flex;gap:8px;align-items:flex-start;justify-content:space-between}
+.card p{font-size:12px;color:var(--mut)}
+.kv{display:grid;grid-template-columns:118px minmax(0,1fr);gap:5px 10px;font-size:12px;margin-top:10px}
+.kv dt{color:var(--dim);font-size:10px;text-transform:uppercase;letter-spacing:.6px;font-weight:700;padding-top:2px}
+.kv dd{min-width:0}
+.stepper{display:flex;gap:4px;margin-top:10px;flex-wrap:wrap}
+.stepper span{flex:1 1 90px;font-size:9.5px;font-weight:700;text-align:center;padding:6px 3px;border-radius:7px;background:rgba(255,255,255,.06);color:var(--dim);text-transform:uppercase;letter-spacing:.3px}
 .stepper span.on{background:var(--yel);color:var(--plum)}
-.dark .stepper span{background:rgba(255,255,255,.12);color:#e6cfe6}.dark .stepper span.on{background:var(--yel);color:var(--plum)}
-.alert{display:flex;gap:10px;align-items:center;background:#fff;border:1px solid var(--line);border-left:4px solid var(--r);border-radius:12px;padding:10px 12px;font-size:12.5px}
-.alert.a{border-left-color:var(--a)}.alert.p{border-left-color:var(--plum)}
-.alert b{color:var(--plum)}
-.goalcard{border-top:5px solid var(--plum)}
-.kv2{display:grid;grid-template-columns:110px 1fr;gap:4px 10px;font-size:12px;margin-top:10px}
-.kv2 dt{color:var(--mut);font-size:10.5px;text-transform:uppercase;letter-spacing:.5px;font-weight:600;padding-top:1px}
-.cov{display:flex;gap:2px;align-items:center}.cov i{width:10px;height:10px;border-radius:3px;background:var(--nbg)}.cov i.on{background:var(--plum)}
-.conf{font-size:10px;font-weight:700;padding:2px 6px;border-radius:5px;text-transform:uppercase}
-.cH{background:var(--gbg);color:var(--g)}.cM{background:var(--abg);color:#b07605}.cL{background:var(--nbg);color:#7b7381}
-.score{display:inline-block;min-width:28px;text-align:center;font-weight:800;color:#fff;background:var(--plum);border-radius:7px;padding:2px 6px}
-.dots{display:inline-flex;gap:2px}.dots i{width:7px;height:7px;border-radius:50%;background:var(--nbg)}.dots i.on{background:var(--plum2)}
+.tag{font-size:10px;font-weight:700;padding:2px 7px;border-radius:6px;background:rgba(255,255,255,.08);color:var(--pl);white-space:nowrap}
+.gapnote{background:repeating-linear-gradient(45deg,rgba(255,255,255,.035) 0 8px,rgba(255,255,255,.015) 8px 16px);border:1px dashed var(--ln2);border-radius:12px;padding:10px 12px;font-size:12px;color:var(--mut)}
+/* ---------- map ---------- */
+#mapwrap{overflow-x:auto;position:relative}
+#tmap{position:relative;min-width:1020px;display:grid;grid-template-columns:repeat(7,minmax(0,1fr));gap:16px;padding:6px 4px 10px}
+#tmap svg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#tmap .col h4{text-align:center;margin-bottom:10px}
+#tmap .col{display:flex;flex-direction:column;gap:6px;position:relative;z-index:1}
+.mn{font-size:11px;padding:6px 8px;border-radius:9px;border:1px solid var(--ln);background:rgba(22,11,31,.92);text-align:left;line-height:1.3;transition:opacity .25s,border-color .25s,background .25s;color:var(--tx)}
+.mn:hover{border-color:var(--pl)}
+.mn.hl{border-color:var(--yel);background:#2b1838;box-shadow:0 0 0 1px rgba(255,198,41,.3),0 0 18px rgba(255,198,41,.15)}
+.mn.sel{background:var(--yel);color:var(--plum);font-weight:700}
+.mn.fade{opacity:.22}
+#tmap path{fill:none;stroke:var(--yel);stroke-width:1.4;stroke-opacity:.7;stroke-dasharray:5 5;animation:flow 1.2s linear infinite}
+@keyframes flow{to{stroke-dashoffset:-20}}
+#mpanel h3{font-size:16px}
+.scope{display:flex;flex-wrap:wrap;gap:4px;align-items:center;font-size:11.5px}
+.scope span{padding:5px 9px;border-radius:9px;background:rgba(255,255,255,.06);border:1px solid var(--ln)}
+.scope i{color:var(--yel);font-style:normal}
+/* ---------- process ---------- */
+.pmap{overflow-x:auto;border:1px solid var(--ln);border-radius:14px;background:rgba(0,0,0,.18)}
+.pmap svg{display:block;min-width:820px;width:100%;height:auto}
+.pmap .lane{fill:rgba(255,255,255,.025)}
+.pmap .lane.alt{fill:rgba(255,255,255,.05)}
+.pmap .lt{fill:var(--pl);font-size:11px;font-weight:700}
+.pmap .nd rect,.pmap .nd polygon{fill:#22132e;stroke:rgba(255,255,255,.3);stroke-width:1}
+.pmap .nd.start rect,.pmap .nd.end rect{fill:#3b1d45;stroke:var(--pl)}
+.pmap .nd.ctrl rect{stroke:var(--g);stroke-width:1.5}
+.pmap .nd.dec polygon{fill:#2a1a10;stroke:var(--a)}
+.pmap .nd.pain rect,.pmap .nd.pain polygon{stroke:var(--r);stroke-width:1.6;fill:#2c121c}
+.pmap .nd.new rect,.pmap .nd.new polygon{stroke:var(--yel);stroke-width:1.8}
+.pmap .nd text{fill:#f6f0f9;font-size:10.5px;font-family:Poppins,sans-serif}
+.pmap .ed{fill:none;stroke:rgba(255,255,255,.45);stroke-width:1.3}
+.pmap .ed.ho{stroke:var(--yel);stroke-dasharray:5 4;animation:flow 1.2s linear infinite}
+.pmap .el{fill:var(--mut);font-size:9.5px}
+.pmap .badge{font-size:9px;font-weight:700}
+.sipoc{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.sipoc div{border:1px solid var(--ln);border-radius:10px;padding:8px;font-size:11.5px;background:rgba(255,255,255,.03)}
+.sipoc b{display:block;color:var(--yel);font-size:10px;text-transform:uppercase;letter-spacing:1px}
+.pdca{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px}
+.pdca div{border-radius:10px;padding:8px;font-size:11.5px;background:rgba(121,65,127,.18);border:1px solid rgba(224,177,230,.2)}
+.pdca b{display:block;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--pl)}
+.plist li{font-size:12px;margin:0 0 5px 16px}
+/* ---------- matrix ---------- */
+.mx svg{width:100%;height:auto;display:block}
+.mx text{fill:var(--mut);font-size:10px;font-family:Poppins,sans-serif}
+.mx circle{cursor:pointer}
+/* ---------- gantt ---------- */
+.gantt{display:grid;gap:6px}
+.grow{display:grid;grid-template-columns:200px minmax(0,1fr);gap:10px;align-items:center;font-size:12px}
+.gtrack{position:relative;height:26px;background:rgba(255,255,255,.04);border-radius:8px}
+.gbar{position:absolute;top:3px;bottom:3px;border-radius:6px;display:flex;align-items:center;padding:0 8px;font-size:10.5px;font-weight:700;color:#fff;transition:left .5s,width .5s;white-space:nowrap;overflow:hidden}
+/* ---------- org ---------- */
 .org{display:flex;flex-direction:column;align-items:center;gap:6px;margin:10px 0}
-.org .lvl2{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
-.org span{font-size:10.5px;font-weight:600;padding:5px 8px;border-radius:8px;background:var(--plum3);color:var(--plum);text-align:center}
-.org span.top{background:var(--plum);color:#fff}.org span.ch{background:#fff;border:1px dashed var(--plum2)}
-.org .ln{width:2px;height:10px;background:var(--plum2)}
-.dcol h4{font-size:12px;text-transform:uppercase;letter-spacing:.8px;margin-bottom:6px}
-.chk{width:22px;height:22px;border-radius:6px;display:grid;place-items:center;font-weight:800;font-size:12px;flex:none}
-.chk.ok{background:var(--gbg);color:var(--g)}.chk.wait{background:var(--abg);color:#b07605}
-.cat{font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:6px;color:#fff;white-space:nowrap}
-.gapnote{background:repeating-linear-gradient(45deg,#faf7fb 0 8px,#f3eef6 8px 16px);border:1px dashed #cfc3d6;border-radius:12px;padding:10px 12px;font-size:12px;color:#5b5163}
-</style>
-</head>
-<body>
-<header>
-  <div class="top">
-    <img src="../ims-program/assets/mark.png" alt="Kalam">
-    <h1>KALAM 2027–2028 · Company-Wide Assessment &amp; Transformation<small>CEO dashboard · Five goals · Three frameworks · One plan</small></h1>
-    <div class="meta"><span class="pill y">v0.2 · For management review</span><span class="pill">Data as of 27 Nov 2026</span><button class="btn" onclick="window.print()">Export PDF</button></div>
-  </div>
-  <nav id="nav"></nav>
-</header>
+.org .lv{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
+.org span{font-size:10px;font-weight:600;padding:5px 8px;border-radius:8px;background:rgba(121,65,127,.3);text-align:center}
+.org span.top{background:var(--yel);color:var(--plum)}.org span.pt{background:transparent;border:1px dashed var(--pl)}
+.org .ln{width:2px;height:10px;background:var(--pl)}
+.opt.rec{border-color:var(--yel);box-shadow:0 0 0 1px rgba(255,198,41,.35)}
+/* ---------- modal ---------- */
+#mod{position:fixed;inset:0;background:rgba(5,2,8,.72);backdrop-filter:blur(6px);display:none;z-index:80;padding:30px 16px;overflow-y:auto}
+#mod.on{display:block}
+#box{max-width:760px;margin:auto;background:#1a0e23;border:1px solid var(--ln2);border-radius:20px;padding:22px;position:relative;animation:pin .3s ease}
+#box .x{position:absolute;right:14px;top:12px;font-size:22px;color:var(--mut)}
+#box h3{font-size:18px;margin-bottom:6px;padding-right:30px}
+/* ---------- chat ---------- */
+#chatbtn{position:fixed;right:20px;bottom:20px;z-index:60;display:flex;gap:8px;align-items:center;padding:8px 14px 8px 8px;border-radius:99px;background:#24132f;border:1px solid var(--ln2);box-shadow:0 10px 30px rgba(0,0,0,.5);font-size:12.5px;font-weight:600}
+#chatbtn .orb{--s:30px}
+#chat{position:fixed;right:20px;bottom:76px;width:370px;max-width:calc(100vw - 32px);height:500px;max-height:calc(100vh - 110px);z-index:61;background:#170c20;border:1px solid var(--ln2);border-radius:18px;box-shadow:0 20px 50px rgba(0,0,0,.6);display:none;flex-direction:column;overflow:hidden}
+#chat.on{display:flex}
+#chat header{padding:12px 14px;border-bottom:1px solid var(--ln);display:flex;justify-content:space-between;align-items:center}
+#chat header small{display:block;font-size:10.5px}
+#clog{flex:1;overflow-y:auto;padding:12px;display:flex;flex-direction:column;gap:8px}
+.msg{font-size:12.5px;padding:9px 11px;border-radius:12px;max-width:92%;line-height:1.45}
+.msg.u{align-self:flex-end;background:var(--plum2)}
+.msg.b{align-self:flex-start;background:rgba(255,255,255,.06);border:1px solid var(--ln)}
+.msg.b.na{border-color:rgba(255,107,133,.4)}
+.msg button{color:var(--yel);font-size:11.5px;text-decoration:underline;margin-top:4px}
+#csug{display:flex;gap:5px;flex-wrap:wrap;padding:0 12px 8px}
+#csug button{font-size:10.5px;border:1px solid var(--ln2);border-radius:99px;padding:4px 8px;color:var(--mut)}
+#cform{display:flex;gap:6px;padding:10px;border-top:1px solid var(--ln)}
+#cin{flex:1;background:rgba(255,255,255,.06);border:1px solid var(--ln2);border-radius:10px;padding:8px 10px;color:var(--tx);font:inherit;font-size:12.5px;min-width:0}
+#cform button{background:var(--yel);color:var(--plum);font-weight:700;border-radius:10px;padding:0 14px}
+/* ---------- refs ---------- */
+.ref{display:flex;gap:12px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--ln)}
+.ref .tag{margin-top:2px}
+.ref a{font-weight:600;word-break:break-word}
+/* ---------- responsive ---------- */
+@media(max-width:1200px){.g5{grid-template-columns:repeat(3,minmax(0,1fr))}.g4{grid-template-columns:repeat(2,minmax(0,1fr))}.gflow{grid-template-columns:130px 1fr 1fr 1.2fr 1fr 1.2fr}}
+@media(max-width:900px){
+ #side{position:sticky;top:0;bottom:auto;width:100%;flex-direction:row;align-items:center;padding:8px 10px;gap:8px;overflow:visible;border-right:0;border-bottom:1px solid var(--ln)}
+ .brand span,.side-foot,#ctx dl{display:none}
+ .brand b{display:none}
+ #ctx{padding:0;border:0;background:none;grid-template-columns:auto}
+ #ctx .orb{--s:30px}
+ #nav{flex-direction:row;overflow-x:auto;flex:1;min-width:0;scrollbar-width:none}
+ #nav button{white-space:nowrap;padding:7px 9px;font-size:12px}
+ #nav button i{display:none}
+ #main{margin-left:0;padding:16px 16px 90px}
+ .hero{grid-template-columns:1fr;padding:18px}
+ .orbwrap{width:290px;height:290px}
+ .g2,.g3,.g4,.g5{grid-template-columns:minmax(0,1fr)}
+ .span2{grid-column:auto}
+ .dest{grid-template-columns:repeat(3,minmax(0,1fr));gap:6px}.dest div{padding:9px}.dest b{font-size:16px}.dest span{font-size:10px}.dest .st{font-size:9px;padding:2px 6px}
+ h1{font-size:23px}
+ .gflow{display:block}
+ .gflow .hd{display:none}
+ .gflow>div{border:0;padding:3px 0}
+ .gflow>div::before{display:none}
+ .gflow .gc{margin-top:12px;padding-top:12px;border-top:1px solid var(--ln2)}
+ .gflow>div[data-l]::after{content:attr(data-l);display:block;font-size:9.5px;color:var(--dim);text-transform:uppercase;letter-spacing:.8px;order:-1}
+ .gflow>div[data-l]{display:flex;flex-direction:column}
+ .sipoc{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .pdca{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+ .grow{grid-template-columns:110px minmax(0,1fr)}
+ .kv{grid-template-columns:96px minmax(0,1fr)}
+ .mrow{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 56px}
+ .orbit{font-size:9.5px;padding:4px 7px}
+}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation:none!important;transition:none!important;scroll-behavior:auto!important}}
+@media print{
+ :root{--bg:#fff;--tx:#1d1222;--mut:#4d4255;--dim:#6b6072;--ln:#ddd;--ln2:#ccc;--pl:#79417F}
+ body{background:#fff!important;color:#1d1222}
+ #side,#chatbtn,#chat,#mod,.qnav,.seg{display:none!important}
+ #main{margin:0;padding:0}
+ .page{display:block!important;break-before:page;animation:none}
+ .pn,.card,.stat{background:#fff!important;box-shadow:none!important;border-color:#ddd!important}
+ .orb{display:none}
+ .stat .big,.chain>div b{color:#1d1222!important}
+}
+</style></head><body>
+<aside id="side"><div class="brand"><img src="../ims-program/assets/mark.png" alt="KALAM"><div><b>KALAM</b><span>Command Center</span></div></div>
+<div id="ctx"></div><nav id="nav" aria-label="Pages"></nav>
+<div class="side-foot">Data as of 27 Nov 2026 · for management review.<br>Unknown values show “Not assessed” or “Awaiting management approval”.<button id="pdf">Export PDF</button></div></aside>
 <main id="main"></main>
-<div class="mod" id="mod"><div class="box" id="box"></div></div>
-
-<script>
-// ===== DATA · v0.2 · every figure carries a source, period and validation status =====
+<div id="mod" role="dialog" aria-modal="true" aria-label="Details"><div id="box"></div></div>
+<div id="tipbox" role="tooltip"></div>
+<button id="chatbtn" aria-label="Open the dashboard guide"><span class="orb"></span>Ask the guide</button>
+<div id="chat" role="dialog" aria-label="Dashboard guide"><header><div><b>Dashboard guide</b><small class="mut">Answers only from this dashboard’s data</small></div><button id="chatx" aria-label="Close guide">×</button></header>
+<div id="clog" aria-live="polite"><div class="msg b">Ask about the goals, COPC, GPTW, a project or a process. If the answer isn’t in the dashboard, I’ll say so.</div></div><div id="csug"></div>
+<form id="cform"><input id="cin" placeholder="Ask a question…" aria-label="Your question" autocomplete="off"><button>Ask</button></form></div>
+<script>// ===== DATA · v0.2 · every figure carries a source, period and validation status =====
 // Validation statuses (V0.2 vocabulary)
 const S={V:['sV','Verified'],C:['sC','Calculated'],S:['sS','Estimated'],R:['sR','Proposed'],N:['sN','Not assessed'],E:['sE','Evidence required']};
 const st=k=>`<span class="st ${S[k][0]}">${S[k][1]}</span>`;
@@ -249,7 +399,7 @@ const done=[
   who:'IMS; Kalam CX training content',
   delivered:['2 trainings','30 videos (about 5.3 hours)','54 quiz questions','Final exam'],
   kpis:[['Training content','Not recorded','30 videos · 54 questions','—','V'],['Running cost','Not recorded','$0','—','V'],['Onboarding cycle time','Baseline not available','Not yet measured','—','E'],['Completion rate','—','Not yet measured','—','E']],
-  before:['Previous training process not documented (evidence required)'],
+  before:['Trainer-led sessions','Manual scheduling','No standard test'],
   after:[['Self-paced videos','a'],['Quizzes','a'],['Final exam','c']],
   value:[['m','Cost','$0 running cost'],['q','Employees','learn at own pace'],['q','Quality','same content for everyone'],['x','Speed','not yet measured']],
   sus:{sustained:'Too early',owner:'IMS',control:'Final exam',replicable:'Yes: other Kalam functions',note:'Completion and pass-rate data needed before benefits can be claimed.'},
@@ -455,11 +605,11 @@ const scnNote=['Estimated window. Assumes owners are named in month 1 and budget
 // ---------- Team models ----------
 const roles=['Executive Sponsor','Transformation Program Lead','COPC Readiness & Quality Lead','HR & GPTW Lead','Operational Excellence Lead','Data & Performance Analyst','Automation / Technology Lead','Finance Representative','Department Champions'];
 const opts=[
- {k:'A',t:'Existing employees, assigned roles',c:1,cap:1,r:4,b:2,hc:'0 new · 9 roles added to current jobs',wl:'Added to current jobs; load to measure in Phase 1',
+ {k:'A',t:'Existing employees, assigned roles',c:1,cap:1,r:4,b:2,hc:'0 new · 9 roles added to current jobs',wl:'+10–20% on each role holder',
   d:'All roles held part-time by current managers.',fit:[1,1,1,1,1,1,1,1,1]},
- {k:'B',t:'Small central team + champions',c:2,cap:3,r:2,b:4,hc:'3 full-time core (internal moves first) + part-time champions',wl:'Champions part-time; share of time to agree',
+ {k:'B',t:'Small central team + champions',c:2,cap:3,r:2,b:4,hc:'3 full-time core (internal moves first) + part-time champions',wl:'Champions about 10% of their time',
   d:'Program lead, COPC/quality lead and data analyst full-time; other roles part-time.',fit:[1,2,2,1,1,2,1,1,1],rec:true},
- {k:'C',t:'Dedicated transformation office',c:4,cap:4,r:2,b:4,hc:'About 6 full-time (proposed)',wl:'Full-time team',
+ {k:'C',t:'Dedicated transformation office',c:4,cap:4,r:2,b:4,hc:'About 7 full-time',wl:'Full-time team',
   d:'Every lead role full-time, reporting to the sponsor.',fit:[1,2,2,2,2,2,2,1,1]}
 ];
 
@@ -471,280 +621,643 @@ const decisions={approved:[
 
 const risks=[['Key-person dependency','Automations run on one person’s accounts','I8'],['No baselines','Targets and ROI cannot be proven without Phase 1 data','I1'],['Interpreter attrition','Late or wrong payments that nobody tracks','I2']];
 
-// ===== RENDER · v0.2 =====
-const screens=[['overview','CEO overview'],['done','Accomplishments'],['goals','Five goals'],['heat','Where we stand'],['frame','Frameworks'],['plan','Improvement plan'],['road','Roadmap'],['team','Team & resources'],['dec','Decisions']];
-const nav=document.getElementById('nav'),main=document.getElementById('main');
-nav.innerHTML=screens.map((s,i)=>`<button data-s="${s[0]}"${i?'':' class="on"'}><span>${i+1}</span>${s[1]}</button>`).join('');
-nav.onclick=e=>{const b=e.target.closest('button');if(b)go(b.dataset.s)};
-function go(id){nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.s==id));document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id==id));history.replaceState(null,'','#'+id);scrollTo({top:0,behavior:'smooth'})}
+// ===== Command Center data (builds on the v0.2 data above) =====
+S.P=['sP','In progress'];S.A=['sA','Awaiting management approval'];S.M=['sM','Stated by management'];
+// status rule: MasterWord and e-learning in progress; IMS dashboard and pre-scheduling are proposals
+done.find(d=>d.id=='mw').status='In progress';done.find(d=>d.id=='el').status='In progress';
+done.find(d=>d.id=='dash').status='Proposal (awaiting IT)';done.find(d=>d.id=='sd').status='Proposal';
+done.find(d=>d.id=='mw').kpis[4]=['Time per batch','24–32 h, or 1 person 1–3 days (two team estimates)','Batch 2: 54 min · Batch 1: 2 h 42 min incl. setup','See reconciliation','S'];
+opts.find(o=>o.k=='C').hc='About 6 full-time (proposed)';
+const VERSION2='Command Center v1.0';
 
-const ring=(v,t,col,label,tc='#4B154A')=>{const r=40,c=2*Math.PI*r,p=t?v/t:0;return `<svg class="ring" viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" fill="none" stroke="#efedf1" stroke-width="10"/>${t?`<circle cx="48" cy="48" r="${r}" fill="none" stroke="${col}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c*p} ${c}" transform="rotate(-90 48 48)"/>`:''}<text x="48" y="${label?46:53}" text-anchor="middle" font-size="${t?20:12}" font-weight="800" fill="${t?tc:'#a59dab'}">${t?v:'N/A'}</text>${label?`<text x="48" y="62" text-anchor="middle" font-size="9" fill="${tc=='#fff'?'#ead8ea':'#6f6476'}">${label}</text>`:''}</svg>`};
-const cnt=k=>areas.filter(a=>a.s==k).length;
-const assessed=areas.filter(a=>a.s!='N').length;
-const sCls=s=>s=='R'?'sE':s=='A'?'sP':s=='G'?'sV':'sN';
-const sTxt=s=>({R:'Critical gap',A:'Improvement required',G:'Performing well',N:'Not assessed'})[s];
-const lvl=x=>x=='N'?'No evidence':x=='P'?'Partly':'Yes';
-const cov=a=>[a.d,a.i,a.e].filter(x=>x!='N').length;
-const confT={H:'High',M:'Medium',L:'Low'};
-const certSteps=['Strategic goal','Assessment in progress','Gap closure','Certification ready','Certified'];
-const stepper=(on)=>`<div class="stepper">${certSteps.map((s,i)=>`<span class="${i==on?'on':''}">${s}</span>`).join('')}</div>`;
-const catTag=c=>`<span class="cat" style="background:${CAT[c][1]}">${CAT[c][0]}</span>`;
-const goalChip=g=>`<span class="chip">G${g} ${goals[g-1].t}</span>`;
-const ranked=[...plan].sort((a,b)=>b.score-a.score);
-const top5=['wfm','cx','pay','perf','data'].map(id=>areas.find(a=>a.id==id));
-const cntStatus=s=>done.filter(d=>d.status==s).length;
-let h='';
+const KALAM={
+ vision:'Redefine the future of business communication and become the world’s most trusted partner in business process outsourcing, through seamless operations and cutting-edge technology.',
+ mission:'Delivering innovative, scalable and people-driven solutions that foster growth, efficiency and global connectivity.',
+ values:['Empowerment','Respect & Inclusion','Customer Centric','Innovation','Accountability'],
+ src:'KALAM vision, mission and values as recorded in the IMS program file (ims-program/js/data/program.js)'};
 
-// ===== 1 OVERVIEW =====
-h+=`<section class="scr on" id="overview">
-<div class="grid g3" style="margin-top:6px">
- <div class="alert"><b>${cnt('R')} critical gaps</b>&nbsp;backed by data: workforce, customer experience, payment, coaching</div>
- <div class="alert a"><b>${cnt('N')} of ${areas.length} areas</b>&nbsp;not assessed yet. Phase 1 closes this.</div>
- <div class="alert p"><b>${decisions.pending.length} decisions</b>&nbsp;are waiting for management</div>
-</div>
-<h2><b>A</b>What we have achieved</h2>
-<div class="grid g4">
- <div class="card"><div class="k">MasterWord: submitted &amp; confirmed</div><div class="big">28/28</div><div class="sub">2 batches · CVs redacted 28/28</div><div class="row" style="margin-top:8px"><span class="tag">Ongoing</span>${st('V')}</div></div>
- <div class="card"><div class="k">MasterWord: per applicant</div><div class="big">4.5 min</div><div class="sub">vs 24–32 h per batch before</div><div class="row" style="margin-top:8px">${st('C')}<span class="st sS">Before: estimate</span></div></div>
- <div class="card"><div class="k">Kalam CX e-learning</div><div class="big">30</div><div class="sub">videos · 54 questions · $0 running cost</div><div class="row" style="margin-top:8px"><span class="tag">Ongoing</span>${st('V')}</div></div>
- <div class="card"><div class="k">Initiatives by status</div><div class="row" style="gap:10px;margin-top:6px">${statusOrder.map(s=>`<div style="text-align:center"><div style="font-size:22px;font-weight:800;color:${cntStatus(s)?'var(--plum)':'var(--n)'}">${cntStatus(s)}</div><div style="font-size:9.5px;color:var(--mut);max-width:60px;line-height:1.2">${s}</div></div>`).join('')}</div><div class="src">Nothing is marked completed until its benefit is sustained</div></div>
-</div>
+// per-goal story: current → target → improvements → departments → benefit
+const gx={
+ 1:{now:'Revenue baseline not received',nowS:'E',tgt:'+20% with current resources',tgtS:'M',succ:'Revenue grows 20% without adding headcount.',ben:'More revenue from the same people and cost base',depts:['Finance','Sales / BD','Operations','WFM']},
+ 2:{now:'Occupancy 24.1%',nowS:'V',tgt:'35.3% (existing IMS target)',tgtS:'V',succ:'Interpreters spend their logged-in time on calls, and manual admin and rework drop.',ben:'Lower cost per answered call; capacity for growth',depts:['WFM','Operations','Finance','Technology']},
+ 3:{now:'Trust Index not yet measured',nowS:'N',tgt:'Awaiting management approval',tgtS:'A',succ:'GPTW certification (strategic goal). People feel trusted, fairly paid and developed.',ben:'Lower attrition; easier hiring',depts:['HR','Operations','All managers']},
+ 4:{now:'TTG calls answered 44%',nowS:'V',tgt:'Awaiting management approval',tgtS:'A',succ:'Clients get their calls answered, agreed SLAs and a monthly report.',ben:'Client retention and growth',depts:['Operations','WFM','Account management','Quality']},
+ 5:{now:'COPC readiness not assessed',nowS:'N',tgt:'Certification-ready (strategic goal)',tgtS:'R',succ:'COPC CX Standard certification (strategic goal). Errors are caught before clients see them.',ben:'Consistent quality that clients can trust',depts:['Quality','Operations','WFM','Technology']}};
 
-<h2><b>B</b>Where we stand</h2>
-<div class="grid g5">
- <div class="card dark"><div class="k">Organizational health</div><div class="row" style="margin-top:8px">${ring(assessed,areas.length,'#FFC629','of '+areas.length,'#fff')}<div><div class="sub">areas with some evidence</div><div class="sub" style="margin-top:6px"><b style="color:#fff">0</b> fully evidenced</div></div></div><div class="src">Overall score: NOT ASSESSED until the Phase 1 baseline</div></div>
- <div class="card"><div class="k">COPC readiness</div><div class="big na">NOT ASSESSED</div><div class="row"><b style="color:var(--r);font-size:20px">${copc.filter(c=>copcRow(c[0]).state=='Gap found').length}</b><span class="sub">&nbsp;of ${copc.length} items already show a gap</span></div><div class="src">COPC CX Standard R8.0 · internal view, not an official score</div></div>
- <div class="card"><div class="k">GPTW Trust Index</div><div class="big na">NOT YET MEASURED</div><div class="bar hatch"></div><div class="sub" style="margin-top:8px">${gptw.filter(g=>g.ev=='V').length} of 5 dimensions have a warning signal</div><div class="src">An internal survey is not the official Trust Index</div></div>
- <div class="card"><div class="k">KALAM Way</div><div class="row" style="margin-top:8px">${ring(3,4,'#79417F','books')}<div class="sub">3 books documented.<br><b style="color:var(--r)">No operations book</b><br>Implemented: not assessed</div></div></div>
- <div class="card"><div class="k">Five goals with a baseline</div><div class="big">${goals.filter(g=>g.base!=null).length}<span style="font-size:18px;color:var(--mut)">/5</span></div><div class="bar"><i style="width:40%;background:var(--a)"></i></div><div class="sub" style="margin-top:6px">Targets approved: 1 of 5 (+20% growth)</div></div>
-</div>
+// ---------- Glossary (plain-English tooltips) ----------
+const GL={
+ 'COPC':'An international standard for running customer-service and contact-centre operations. An independent audit decides certification.',
+ 'GPTW':'Great Place to Work: a global organisation that certifies employers based on a confidential employee survey.',
+ 'Trust Index':'The official Great Place to Work employee survey. Only GPTW can produce this score.',
+ 'KALAM Way':'KALAM’s own way of working: vision, values and competency books for each function.',
+ 'KPI':'Key performance indicator: one number that shows whether something is getting better.',
+ 'Baseline':'Where a number stands today, measured before any change, so improvement can be proven.',
+ 'Occupancy':'Share of logged-in time an interpreter spends on calls. Low occupancy means paid time is idle.',
+ 'Abandoned':'A call the client’s customer hung up on before an interpreter answered.',
+ 'CAPA':'Corrective and preventive action: fix the problem, then stop it happening again.',
+ 'SLA':'Service-level agreement: the service promise agreed with a client, such as answer speed.',
+ 'WFM':'Workforce management: forecasting demand and scheduling the right people at the right time.',
+ 'ACM':'Account manager in Operations, responsible for a client account and its team.',
+ 'Approach':'COPC term: is there a designed, written way of doing this?',
+ 'Deployment':'COPC term: is the designed way actually used everywhere, every time?',
+ 'SIPOC':'Suppliers, inputs, process, outputs, customers: a one-line summary of who feeds a process and who uses its result.',
+ 'PDCA':'Plan, do, check, act: a simple cycle for improving work step by step.',
+ 'Swimlane':'A row in a process map showing which team does each step.',
+ 'Handoff':'A point where work passes from one team to another. Delays and errors often happen here.',
+ 'Human checkpoint':'A step where a person reviews and approves what an automation produced before it goes further.',
+ 'Evidence':'A document, report or record that shows something is really done, not just planned.',
+ 'Documented':'Written down.','Implemented':'Actually used in daily work.','Experienced':'Employees or clients say they feel it.',
+ 'Pre-scheduling':'Booking interpretation sessions in advance instead of on demand.',
+ 'Transparent':'The platform used to send payment tasks to interpreters.',
+ 'TTG':'A KALAM client account.'};
 
-<h2><b>C</b>Where we are going</h2>
-<div class="grid g5">${goals.map(g=>`<div class="card goal" data-g="${g.n}" style="cursor:pointer"><div class="n">${g.n}</div><h3>${g.t}</h3><div class="sub">${g.kpi}</div>${g.base!=null?`<div class="big" style="font-size:26px">${g.base}${g.unit}</div>`:`<div class="big na">BASELINE NEEDED</div>`}<div class="sub">Target: <b style="color:var(--plum)">${g.tgt}</b></div>${st(g.ev)}</div>`).join('')}</div>
-<div class="grid g2" style="margin-top:12px">
- <div class="card dark cert"><div class="seal">COPC<br>R8.0</div><div style="flex:1"><div class="k">Company strategic goal</div><b style="font-size:15px">COPC CX Standard certification</b>${stepper(0)}</div></div>
- <div class="card cert"><div class="seal gp">GPTW</div><div style="flex:1"><div class="k">Company strategic goal</div><b style="font-size:15px">Great Place to Work certification</b>${stepper(0)}</div></div>
-</div>
+// ---------- COPC: categories in plain words ----------
+const COPCCAT=[
+ {k:'1.0',t:'Leadership & planning',plain:'Leaders set direction, plan the business, set targets and review results regularly.',show:'Approved business plan, targets per goal, monthly review minutes, rules for using AI.',owner:'CEO office'},
+ {k:'2.0',t:'Designing the service',plain:'The service and the customer journey are designed on purpose, with clear tasks, change control and a continuity plan.',show:'Customer-journey maps, key process definitions, written tasks, change log, tested continuity plan.',owner:'Operations + Quality'},
+ {k:'3.0',t:'Running the operation',plain:'People are hired, trained, verified, coached and scheduled well; quality, knowledge, vendors and data are managed.',show:'Recruiting and training records, coaching coverage, forecasts and schedules, quality checks, CAPA log, data controls.',owner:'Operations, HR, WFM, QA'},
+ {k:'4.0',t:'Results',plain:'The operation proves results: customer experience, client experience, key processes, and meeting targets.',show:'Months of measured results against targets for every required metric.',owner:'All departments'},
+ {k:'BPO',t:'Outsourcing (BPO) items',plain:'Extra items for companies that serve clients: sales, client onboarding, relationships, invoicing and client reports.',show:'Client onboarding plan, SLA register, invoicing controls, monthly client reports.',owner:'Account management + Finance'}];
+// item status: Co Compliant · Pa Partial · Mi Missing · Na Not assessed  (internal view from evidence; not an official COPC result)
+const CST={Co:['xCo','Compliant'],Pa:['xPa','Partial'],Mi:['xMi','Missing'],Na:['xNa','Not assessed']};
+const copcSt={
+ '1.3':['Pa','One company target approved (+20%); four goals have no approved target or owner.'],
+ '1.4':['Pa','Results reviewed in management meetings; no written rules for AI and automation use evidenced.'],
+ '2.2':['Pa','TTG: 56% of offered calls abandoned (1 Oct – 8 Nov).'],
+ '2.4':['Pa','No written daily operating routine; KALAM Way has no operations book.'],
+ '2.6':['Mi','Automations run on one person’s personal accounts; no failover or continuity plan evidenced.'],
+ '3.1':['Pa','Seats file: 2 pending and 1 failed to onboard (one team); stage times not measured.'],
+ '3.2':['Pa','E-learning built (30 videos, 54 questions); completion not yet measured.'],
+ '3.3':['Pa','Final exam exists in e-learning; annual reverification not evidenced.'],
+ '3.4':['Pa','Coaching: 48 of 156 required sessions done (Oct, one team).'],
+ '3.5':['Pa','Coaching coverage about 31%; absenteeism data not reviewed here.'],
+ '3.7':['Pa','Occupancy 24.1% vs 35.3% target; TTG Italian 231 of 325 calls abandoned.'],
+ '3.8':['Pa','Complaint log in use (148 complaints); top causes repeat.'],
+ '3.9':['Pa','No regular journey-improvement routine evidenced.'],
+ '3.12':['Pa','16 separate source files; tracker missing a "missed" status.'],
+ '3.13':['Pa','46 CAPA entries; closure and effectiveness not tracked.'],
+ '3.16':['Pa','Interpreter payment issues not logged (internal mapping: payment controls).'],
+ '3.17':['Pa','Client reports built by hand from separate files.'],
+ '4.1':['Pa','Customer-experience results measured for abandonment; below expectations for TTG.']};
+const copcOwner=id=>{const a=areas.find(x=>x.copc.includes(id));return a?a.dept:({'1':'CEO office','2':'Operations','3':'Operations','4':'All departments'}[id[0]]||'Account management')};
+const copcItem=id=>{const c=copc.find(x=>x[0]==id);const s=copcSt[id]||['Na','No evidence reviewed yet.'];return {id,t:c?c[1]:id,cat:c?c[3]:'',st:s[0],ev:s[1],owner:copcOwner(id)}};
+const redItems=['3.7','4.1','2.2','3.16','3.12','3.4','3.5'];// linked to red areas
+const critical=id=>(copcSt[id]&&copcSt[id][0]=='Mi')||redItems.includes(id);
 
-<div class="grid g2" style="margin-top:4px">
- <div><h2><b>D</b>What we are missing: top 5</h2>
-  <div class="card">${top5.map((a,i)=>`<div class="prio" data-a="${a.id}"><div class="num">${i+1}</div><div><b>${a.t}</b><small>${a.evid[0]}</small></div><span class="st ${sCls(a.s)}">${a.s=='R'?'Critical':'Improve'}</span></div>`).join('')}</div></div>
- <div><h2><b>E</b>How we will get there</h2>
-  <div class="card"><div class="k">Roadmap · realistic window, estimated</div>
-   <div style="display:flex;gap:3px;margin:10px 0 6px">${phases.map((p,i)=>`<div style="flex:${scn[1][i]};background:${p.col};color:#fff;border-radius:6px;padding:6px 4px;font-size:10px;font-weight:700;text-align:center;${p.now?'outline:3px solid var(--yel)':''}">P${i+1}</div>`).join('')}</div>
-   <div class="sub">Now: <b style="color:var(--plum)">Phase 1 · Baseline &amp; governance</b> · about ${scn[1].reduce((a,b)=>a+b)} months in total (estimated)</div>
-   <dl class="kv2"><dt>Team</dt><dd>Option B recommended: 3 core + champions (proposed)</dd><dt>First 3 moves</dt><dd>${ranked.slice(0,3).map(p=>p.t).join(' · ')}</dd><dt>Budget</dt><dd>Finance to price after Phase 1</dd></dl></div>
-  </div></div>
-</div>
-</section>`;
+// ---------- Departments, standards and links per initiative (for the transformation map) ----------
+const DEPTS=['CEO office','Operations','WFM','Finance','HR','Quality','Training','Technology','Account management'];
+const STD={
+ 'C:1.2':'COPC 1.2 Business planning','C:1.3':'COPC 1.3 Setting targets','C:1.4':'COPC 1.4 Reviewing performance & AI use','C:2.1':'COPC 2.1 Customer information','C:2.4':'COPC 2.4 Defining tasks','C:2.6':'COPC 2.6 Business continuity',
+ 'C:3.1':'COPC 3.1 Recruiting','C:3.2':'COPC 3.2 Training','C:3.3':'COPC 3.3 Verifying skills','C:3.4':'COPC 3.4 Coaching','C:3.5':'COPC 3.5 Staff performance','C:3.6':'COPC 3.6 Employee experience',
+ 'C:3.7':'COPC 3.7 Workload','C:3.8':'COPC 3.8 Quality','C:3.12':'COPC 3.12 Data integrity','C:3.13':'COPC 3.13 Corrective action','C:3.16':'COPC 3.16 Client relations & invoicing','C:3.17':'COPC 3.17 Client reports','C:4.1':'COPC 4.1 CX results','C:ALL':'COPC all 32 items',
+ 'G:Credibility':'GPTW Credibility','G:Respect':'GPTW Respect','G:Fairness':'GPTW Fairness','G:Pride':'GPTW Pride','G:Camaraderie':'GPTW Camaraderie',
+ 'K:Alignment':'KALAM Way: vision & values','K:Competency':'KALAM Way: competency books','K:Performance':'KALAM Way: performance'};
+const LINK={
+ I1:{std:['C:1.2','C:1.3','G:Credibility','K:Alignment'],dep:['CEO office','Finance','HR','Operations']},
+ I2:{std:['C:3.16','C:3.12','C:3.13','G:Fairness','G:Respect','G:Credibility'],dep:['Operations','Finance','HR','Technology']},
+ I3:{std:['C:3.7','C:4.1','G:Fairness'],dep:['WFM','Operations','Account management']},
+ I4:{std:['C:3.4','C:3.5','G:Respect','K:Performance'],dep:['Operations','Quality','HR']},
+ I5:{std:['C:3.12','C:3.17','G:Credibility'],dep:['Technology','WFM']},
+ I6:{std:['C:3.8','C:3.13','G:Pride'],dep:['Quality','Operations','Training']},
+ I7:{std:['C:3.1','C:3.2','C:3.3','G:Respect'],dep:['HR','Operations','Training']},
+ I8:{std:['C:2.6','C:1.4'],dep:['Technology','Operations']},
+ I9:{std:['C:2.4','C:3.2','G:Fairness','K:Competency'],dep:['Operations','HR']},
+ I10:{std:['C:3.6','G:Credibility','G:Respect','G:Fairness','G:Pride','G:Camaraderie'],dep:['HR']},
+ I11:{std:['C:ALL'],dep:['Quality']},
+ I12:{std:['C:2.6'],dep:['CEO office','Technology','Operations']},
+ I13:{std:['C:2.1','C:3.16','C:3.17'],dep:['Account management','Operations']},
+ I14:{std:['C:3.12','K:Alignment'],dep:['Technology','Operations','WFM']}};
+{const I2=plan.find(p=>p.id=='I2');I2.t='Interpreter payment cycle controls';I2.dept='Operations (WFM)';I2.support='Finance / Invoicing, HR, Technology';}
+// worked example
+const PAYX={
+ scope:['Payment data validation','Invoice verification','Approval','Payment processing','Reconciliation','Complaint handling'],
+ gaps:['Issues are found only when interpreters complain','No log, owner or ageing for payment issues','Fixes slip to day 20 or the next month','Small amounts need a separate eCash route'],
+ imp:['Completeness check on the hours report before upload','Second-level ACM check before the day-7 upload','Automatic reminder before the acceptance deadline','Issue log with owner and ageing; monthly root-cause report'],
+ out:['Fewer late or wrong payments (to measure: issues per cycle, ageing in days)','Interpreters trust that pay is right and on time','Less back-and-forth work for WFM, ACMs and Finance'],
+ depts:'Operations (WFM, ACMs) · Finance / Invoicing · HR · Technology'};
 
-// ===== 2 ACCOMPLISHMENTS =====
-h+=`<section class="scr" id="done">
-<h2><b>1</b>Status of every initiative</h2>
-<div class="card"><div class="row" style="gap:18px;justify-content:space-around">${statusOrder.map(s=>`<div style="text-align:center;min-width:80px"><div class="big" style="color:${cntStatus(s)?'var(--plum)':'var(--n)'}">${cntStatus(s)}</div><div class="sub">${s}</div></div>`).join('')}</div>
-<div class="src">Ongoing: MasterWord automation, Kalam e-learning · Awaiting approval: IMS performance dashboard (IT) · Proposed: Session Desk for pre-scheduled sessions</div></div>
-${done.map((d,ix)=>`
-<h2><b>${ix+2}</b>${d.t} <span class="tag" style="margin-left:6px">${d.status}</span></h2>
-<div class="ach">
- <div class="card">
-  <div class="q4"><div><b>Problem</b>${d.problem}</div><div><b>Objective</b>${d.objective}</div><div><b>What we did</b>${d.did}</div><div><b>Who</b>${d.who}</div><div style="grid-column:span 2"><b>Delivered</b>${d.delivered.join(' · ')}</div></div>
-  <div class="k" style="margin-top:14px">Before</div>
-  <div class="flow" style="margin:6px 0 10px">${d.before.map((s,i)=>`${i?'<div class="arrow">›</div>':''}<div class="step sm">${s}${/not documented/.test(s)?'':'<small>manual</small>'}</div>`).join('')}</div>
-  <div class="k">After</div>
-  <div class="flow" style="margin-top:6px">${d.after.map((s,i)=>`${i?'<div class="arrow">›</div>':''}<div class="step ${s[1]=='a'?'sa':'sh'}">${s[0]}<small>${s[1]=='a'?'automated':'new control'}</small></div>`).join('')}</div>
+// ---------- Operations / IMS: 12 improvement areas ----------
+const OWN=['Pure Ops','Ops+Quality','Ops+Training','Ops+Finance','Ops+HR','Ops+Tech','Cross-functional'];
+const opsAreas=[
+ {t:'Recruitment & onboarding',o:'Ops+HR',s:'A',ev:'Seats file: 66 of 79 in production (one team); stage times not measured',copc:['3.1','3.3'],g:[1,3],ini:'I7'},
+ {t:'Activation & readiness',o:'Ops+Training',s:'N',ev:'Not assessed: time from training to first call not recorded',copc:['3.2','3.3'],g:[1,3],ini:'I7'},
+ {t:'Pre-scheduling',o:'Pure Ops',s:'A',ev:'3,510 tracker rows; no "missed" status; Session Desk is a proposal',copc:['3.7','3.12'],g:[4,2],ini:'I3'},
+ {t:'Workforce & utilization',o:'Pure Ops',s:'R',ev:'Occupancy 24.1% vs 35.3% target; 29,348 h idle vs 13,138 h talk',copc:['3.7'],g:[1,2],ini:'I3'},
+ {t:'Hours fulfilment',o:'Pure Ops',s:'N',ev:'Not assessed: definition of fulfilled hours to be agreed',copc:['3.5','3.7'],g:[1,4],ini:'I3'},
+ {t:'Interpreter payment',o:'Ops+Finance',s:'R',ev:'Issues untracked; fixes slip to day 20 or next month',copc:['3.16','3.12'],g:[2,3],ini:'I2'},
+ {t:'Interpreter complaints',o:'Ops+HR',s:'N',ev:'Not assessed: no tracking of complaints raised by interpreters',copc:['3.6'],g:[3],ini:'I10'},
+ {t:'Quality & performance',o:'Ops+Quality',s:'R',ev:'Coaching 48 of 156 (Oct, one team); accuracy top complaint cause (46)',copc:['3.4','3.8'],g:[4,5],ini:'I4'},
+ {t:'Training & development',o:'Ops+Training',s:'A',ev:'E-learning in progress: 30 videos, 54 questions',copc:['3.2'],g:[3,5],ini:'I9'},
+ {t:'Client experience',o:'Cross-functional',s:'R',ev:'TTG: 56% of offered calls abandoned',copc:['4.1','2.1'],g:[4,1],ini:'I13'},
+ {t:'Reporting & visibility',o:'Ops+Tech',s:'A',ev:'16 separate source files; IMS dashboard is a proposal awaiting IT',copc:['3.12','3.17'],g:[2,5],ini:'I5'},
+ {t:'Automation & AI',o:'Ops+Tech',s:'A',ev:'Automations run on personal accounts; no approval route',copc:['2.6','1.4'],g:[2,5],ini:'I8'}];
+
+// ---------- Automation & AI (main 2027 focus) ----------
+const NM='Not measured yet (baseline in Phase 1)';
+const autos=[
+ {t:'MasterWord enrolment',st:'P',manual:'Read each CV, match files, redact, fill form, upload',auto:'Run reads, matches, redacts, fills and submits; flags missing documents',ctrl:['Person reviews flagged applicants','Run report checked per batch'],ai:'Reading and matching applicant documents',sys:'MasterWord portal, applicant files',dep:'Operations, Recruitment',risk:'Runs on a personal account → move to company account, runbook, backup operator',m:{time:'≈12–60 h avoided over 2 batches (Estimated)',acc:'Not measured (no accuracy % claimed)',err:'3 of 28 missing-document cases caught before submission',cap:'≈1.5–7.5 person-days (Estimated)',fin:'Not measured'},r:{imp:3,fea:3,risk:2,eff:1},deps:'Company account (I8)'},
+ {t:'Payment validation & reminders',st:'R',manual:'WFM builds the report; ACMs check by eye; issues handled by message',auto:'Completeness check, exception list, deadline reminders, issue log',ctrl:['ACM approves exceptions','Finance approves upload'],ai:'Flag unusual hours or amounts for review',sys:'Kalam app, Transparent, paid-hours file',dep:'Operations, Finance, HR, Technology',risk:'Wrong pay if rules are wrong → second-level check stays human',m:{time:NM,acc:NM,err:NM,cap:NM,fin:NM},r:{imp:3,fea:3,risk:3,eff:1},deps:'Status definitions (I2)'},
+ {t:'Pre-scheduled session booking',st:'R',manual:'Sheet entry with free-text dates; manual assignment',auto:'Booking form, validation, suggested match, app confirmation',ctrl:['Scheduler confirms every match'],ai:'Suggest best-fit interpreter by language and availability',sys:'Session Desk prototype, Kalam app',dep:'Operations, Technology',risk:'Missed sessions if app fails → reminder plus daily exception list',m:{time:NM,acc:NM,err:NM,cap:NM,fin:NM},r:{imp:2,fea:2,risk:2,eff:2},deps:'IT hosting; Session Desk approval'},
+ {t:'Automated reporting pipeline',st:'R',manual:'Export each report, copy to sheets, chart by hand',auto:'Pipeline joins 16 sources and refreshes one dashboard',ctrl:['Report owner signs off definitions'],ai:'Plain-language summary of weekly changes',sys:'Incorta, Kalam call logs, trackers',dep:'Technology, WFM, Operations',risk:'Wrong numbers spread fast → data checks and one owner per KPI',m:{time:NM,acc:NM,err:NM,cap:NM,fin:NM},r:{imp:3,fea:2,risk:2,eff:3},deps:'IT production approval (I5)'},
+ {t:'Complaint classification & CAPA',st:'R',manual:'QA types categories; CAPA closure not followed',auto:'Suggested category, owner, due date and reminders',ctrl:['QA confirms category','Verify fix before closing'],ai:'Suggest category and likely root cause from complaint text',sys:'QA complaint log',dep:'Quality, Operations',risk:'Wrong category → QA confirms each one',m:{time:NM,acc:NM,err:NM,cap:NM,fin:NM},r:{imp:2,fea:3,risk:2,eff:1},deps:'CAPA statuses (I6)'},
+ {t:'Forecast & schedule support',st:'R',manual:'Schedules built without interval forecasts by language',auto:'Interval forecast by language and client; coverage alerts',ctrl:['WFM approves every schedule'],ai:'Forecast demand from call history',sys:'Incorta history, WFM tool (to decide)',dep:'WFM, Operations',risk:'Bad forecast → compare with actuals weekly',m:{time:NM,acc:NM,err:NM,cap:NM,fin:NM},r:{imp:3,fea:2,risk:3,eff:2},deps:'Data model (I5)'},
+ {t:'E-learning & readiness check',st:'P',manual:'Trainer-led sessions',auto:'Self-paced videos, quizzes and final exam',ctrl:['Trainer reviews failed exams'],ai:'Not used',sys:'Kalam Learning',dep:'Training, Operations',risk:'Low completion → track completion and pass rates',m:{time:NM,acc:NM,err:NM,cap:NM,fin:'$0 running cost (Verified)'},r:{imp:2,fea:3,risk:1,eff:1},deps:'Completion tracking'},
+ {t:'Onboarding stage tracker',st:'R',manual:'Status in files; no timestamps',auto:'Timestamp each stage; alert when an SLA is missed',ctrl:['HR owns each stage'],ai:'Not needed',sys:'Seats file, MasterWord, Kalam Learning',dep:'HR, Operations, Training',risk:'Double entry → one source of status',m:{time:NM,acc:NM,err:NM,cap:NM,fin:NM},r:{imp:2,fea:3,risk:1,eff:1},deps:'Stage definitions (I7)'}];
+autos.forEach(a=>a.score=a.r.imp+a.r.fea+a.r.risk-a.r.eff);
+
+// ---------- Process maps: [id, lane, col, type(+* new / ! pain), text] ----------
+const PROC=[
+ {id:'pay',t:'Interpreter payment cycle',ini:'I2',g:[2,3],copc:'3.16, 3.12, 3.13',
+  cur:{lanes:['WFM','ACM / Operations','Finance / Invoicing','Interpreter'],
+   n:[['s',0,0,'start','Month closes'],['a',0,1,'step','Build hours report (day 4–5)'],['b',1,2,'step','ACM checks hours'],['c',2,3,'step','Upload tasks to Transparent (day 7)'],['d',3,4,'dec','Accepted on time?'],['e',2,5,'step','Transfer (day 12)'],['f',3,6,'end','Paid (day 15)'],['g',3,5,'step!','Issue: missing task, wrong amount, late, eCash'],['h',1,6,'step!','Back-and-forth by message; no log'],['i',2,7,'end!','Fixed by day 20 or next month']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d'],['d','e','Yes'],['e','f'],['d','g','No'],['g','h'],['h','i']]},
+  fut:{lanes:['WFM','ACM / Operations','Finance / Invoicing','Interpreter','Technology'],
+   n:[['s',0,0,'start','Month closes'],['a',4,1,'step*','Auto-build report + completeness check'],['b',0,2,'ctrl*','Review exceptions only'],['c',1,3,'ctrl*','Second-level ACM check'],['d',2,4,'step','Upload to Transparent (day 7)'],['e',4,5,'step*','Reminder before acceptance deadline'],['f',3,6,'dec','Accepted on time?'],['g',2,7,'step','Transfer (day 12) + eCash rule'],['h',3,8,'end','Paid (day 15)'],['i',0,7,'step*','Issue log: owner + ageing'],['j',1,8,'ctrl*','Monthly root-cause report']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d'],['d','e'],['e','f'],['f','g','Yes'],['g','h'],['f','i','No'],['i','j']]},
+  sipoc:['WFM, Kalam app, Finance','Logged hours, rates, interpreter details','Validate → verify → approve → pay → reconcile','Correct payment on time','Interpreters'],
+  fmea:[['Missing task in upload','Interpreter not paid','Completeness check before upload'],['Wrong amount','Rework and lost trust','Second-level ACM check'],['Late acceptance','Payment slips a month','Reminder before deadline'],['Issue not followed','Repeat complaints','Issue log with owner and ageing']],
+  pdca:['Define statuses and checks','Run one cycle with the log','Count issues and ageing','Fix the top cause; repeat monthly'],
+  pain:['No record of issues','Fixes depend on who remembers','Interpreters chase payments'],gain:['Every issue owned and aged','Checks happen before money moves','Monthly root cause']},
+ {id:'pre',t:'Pre-scheduled sessions',ini:'I3',g:[4,2],copc:'3.7, 3.12',
+  cur:{lanes:['Client','Scheduling team','Interpreter','Reporting'],
+   n:[['s',0,0,'start','Client requests a session'],['a',1,1,'step!','Sheet entry (free-text dates)'],['b',1,2,'step','Assign interpreter by hand'],['c',2,3,'step','Session happens'],['d',1,4,'dec','Status?'],['e',3,5,'step','Completed / pending / cancelled'],['f',3,6,'step!','No "missed" status'],['g',3,7,'end','Monthly count by hand']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d'],['d','e'],['e','f'],['f','g']]},
+  fut:{lanes:['Client','Scheduling team','Interpreter','Session Desk (proposal)'],
+   n:[['s',0,0,'start','Client requests a session'],['a',3,1,'step*','Booking form with validation'],['b',3,2,'step*','Suggest matching interpreter'],['c',1,3,'ctrl*','Scheduler confirms match'],['d',2,4,'step*','App confirmation + reminder'],['e',2,5,'step','Session happens'],['f',1,6,'dec','Completed?'],['g',3,7,'step*','Status incl. "missed"'],['h',3,8,'end*','Fulfilment report (auto)']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d'],['d','e'],['e','f'],['f','g'],['g','h']]},
+  sipoc:['Clients, scheduling team','Session request: date, language, duration','Book → match → confirm → deliver → close','Delivered session with a clear status','Clients, Finance (billing)'],
+  fmea:[['Wrong date entered','Missed session','Validated date field'],['No interpreter confirms','Client let down','Reminder + exception list'],['Missed not recorded','Hidden failures','"Missed" status']],
+  pdca:['Agree statuses and fields','Pilot with one client','Track fulfilment and missed','Scale to all clients'],
+  pain:['3,510 rows with mixed date formats','493 pending, 693 cancelled; missed unknown'],gain:['One status per session','Automatic fulfilment report']},
+ {id:'onb',t:'Interpreter onboarding',ini:'I7',g:[1,3],copc:'3.1, 3.2, 3.3',
+  cur:{lanes:['Recruitment / HR','Operations','Training','Interpreter'],
+   n:[['s',0,0,'start','Candidate recruited'],['a',0,1,'step','Collect applicant files'],['b',0,2,'step','MasterWord enrolment (automated)'],['c',2,3,'step','Trainer-led training'],['d',1,4,'dec','Ready?'],['e',1,5,'step','Seat & activation'],['f',3,6,'end','First production call'],['g',0,5,'step!','Pending / failed: no follow-up owner']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d'],['d','e','Yes'],['e','f'],['d','g','No']]},
+  fut:{lanes:['Recruitment / HR','Operations','Training','Interpreter','Technology'],
+   n:[['s',0,0,'start','Candidate recruited'],['a',4,1,'step*','Stage tracker: timestamp each step'],['b',0,2,'step','MasterWord enrolment (automated)'],['c',2,3,'step*','Self-paced e-learning + exam'],['d',2,4,'ctrl*','Readiness check'],['e',1,5,'dec','Ready within SLA?'],['f',1,6,'step','Seat & activation'],['g',3,7,'step','First production call'],['h',0,8,'end*','30-day check-in'],['i',2,6,'step*','Targeted retraining']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d'],['d','e'],['e','f','Yes'],['f','g'],['g','h'],['e','i','No'],['i','d']]},
+  sipoc:['Recruitment, MasterWord, Training','Applicant files, training content','Recruit → enrol → train → verify → activate','Interpreter taking calls','Operations, clients'],
+  fmea:[['Missing documents','Enrolment delayed','Automated missing-document check'],['Training not finished','Late activation','Completion tracking'],['Stuck in pending','Lost capacity','Stage SLA alert']],
+  pdca:['Map stages and SLAs','Timestamp the next intake','Measure days to first call','Remove the slowest step'],
+  pain:['Offer-to-first-call time not measured','2 pending, 1 failed (one team) with no owner'],gain:['Each stage timed with an SLA','30-day check-in']},
+ {id:'cmp',t:'Complaint lifecycle',ini:'I6',g:[4,5],copc:'3.8, 3.13',
+  cur:{lanes:['Client','Quality (QA)','Supervisor','Interpreter'],
+   n:[['s',0,0,'start','Client complains'],['a',1,1,'step','QA logs category'],['b',1,2,'dec','CAPA needed?'],['c',2,3,'step','Supervisor addresses'],['d',3,4,'step','Interpreter informed'],['e',1,5,'end!','Closure not tracked']],
+   e:[['s','a'],['a','b'],['b','c','Yes'],['c','d'],['d','e'],['b','e','No']]},
+  fut:{lanes:['Client','Quality (QA)','Supervisor','Interpreter','Account management'],
+   n:[['s',0,0,'start','Client complains'],['a',1,1,'ctrl*','Log within 24 h'],['b',1,2,'step*','Classify (AI suggests, QA confirms)'],['c',1,3,'dec','Repeat cause?'],['d',1,4,'step*','Root cause + CAPA (owner, due date)'],['e',2,5,'step*','Coaching within 48 h'],['f',3,6,'step','Interpreter acts on feedback'],['g',1,7,'ctrl*','Verify it worked'],['h',4,8,'end*','Close + inform client'],['i',2,8,'ctrl*','Monthly trend review']],
+   e:[['s','a'],['a','b'],['b','c'],['c','d','Yes'],['c','e','No'],['d','e'],['e','f'],['f','g'],['g','h'],['g','i']]},
+  sipoc:['Clients, QA','Complaint details, call record','Log → classify → fix → coach → verify → close','Closed complaint, lower repeat rate','Clients, interpreters'],
+  fmea:[['Complaint logged late','Evidence lost','24-hour logging rule'],['Same cause repeats','Client trust drops','Root cause on repeats'],['CAPA never closed','No improvement','Owner, due date, verification']],
+  pdca:['Pareto of top causes','Fix the top cause','Track repeats by cause','Standardise what worked'],
+  pain:['Top causes repeat: accuracy 46, camera 40','Log went 9 days stale'],gain:['Every CAPA owned, dated and verified','Client told when closed']},
+ {id:'aut',t:'Automation approval',ini:'I8',g:[2,5],copc:'2.6, 1.4',
+  cur:{lanes:['Employee','Manager','IT / Security'],
+   n:[['s',0,0,'start','Idea'],['a',0,1,'step','Build on personal tools'],['b',0,2,'step','Run it alone'],['c',0,3,'end!','No review, no backup, personal cost']],
+   e:[['s','a'],['a','b'],['b','c']]},
+  fut:{lanes:['Employee','Manager / Sponsor','IT / Security / Data','Finance'],
+   n:[['s',0,0,'start','Idea'],['a',0,1,'step*','One-page business case'],['b',1,2,'dec','Worth it?'],['c',2,3,'ctrl*','IT, security & data review'],['d',0,4,'step*','Pilot with human checkpoint'],['e',1,5,'ctrl*','Measure before / after'],['f',1,6,'dec','Approve?'],['g',3,7,'step*','Company account & cost'],['h',2,8,'step*','Runbook + backup operator'],['i',1,9,'end*','Monthly monitoring']],
+   e:[['s','a'],['a','b'],['b','c','Yes'],['c','d'],['d','e'],['e','f'],['f','g','Yes'],['g','h'],['h','i']]},
+  sipoc:['Employees, IT, Finance','Idea, process data','Propose → review → pilot → measure → approve → run','Approved, owned, backed-up automation','Departments, clients'],
+  fmea:[['Owner leaves','Work stops','Backup operator + runbook'],['Data exposed','Privacy breach','Security and data review'],['Automation makes errors','Wrong output reaches clients','Human checkpoint in pilot']],
+  pdca:['Write the approval steps','Run one automation through them','Check time, errors and risk','Make it the standard route'],
+  pain:['Automations on personal accounts','Claude subscription paid personally'],gain:['Company-owned tools','Every automation has a backup']}];
+
+// ---------- GPTW ----------
+const TRUST=[
+ {d:'Credibility',plain:'People believe what leaders tell them and get the information they need.',exp:'Clear goals, honest updates, one version of the numbers.',cur:'Data in 16 separate files; one company target stated',curS:'V',well:'Management agreed a growth target and automation vision (26 Nov)',miss:'Goal owners and regular updates',own:'CEO office + HR',meas:'Trust Index Credibility statements (after survey); internal pulse (I10)'},
+ {d:'Respect',plain:'People feel supported, developed and listened to.',exp:'Regular coaching, training, involvement in decisions.',cur:'Coaching 48 of 156 required sessions (Oct, one team)',curS:'V',well:'Self-paced e-learning being built; wellness check-ins (794)',miss:'Coaching coverage; development paths for operations',own:'Operations + HR',meas:'Coaching coverage %; Trust Index Respect statements'},
+ {d:'Fairness',plain:'Pay, schedules and growth are fair for everyone.',exp:'Correct pay on time, fair schedules, clear promotion rules.',cur:'Payment issues not tracked; fixes slip to day 20 or next month',curS:'V',well:'Payment cycle has fixed dates (day 7, 12, 15)',miss:'Payment issue log; career levels for operations',own:'Operations + Finance + HR',meas:'Payment issues per cycle; Trust Index Fairness statements'},
+ {d:'Pride',plain:'People are proud of their work, their team and the company.',exp:'People see the value of their work for clients.',cur:'Not measured',curS:'N',well:'Compliments are logged (24 in the complaint log)',miss:'Any measure of pride',own:'HR',meas:'Trust Index Pride statements'},
+ {d:'Camaraderie',plain:'People enjoy working together and feel part of a team.',exp:'Teams that welcome newcomers and celebrate together.',cur:'Not measured',curS:'N',well:'Not assessed',miss:'Any measure of team belonging',own:'HR + all managers',meas:'Trust Index Camaraderie statements'}];
+const EXT=[
+ ['Employee satisfaction','Not measured','N'],['Interpreter satisfaction','Not measured; payment complaints reported by management','N'],['Engagement','Not measured','N'],
+ ['Retention','Attrition rate not provided (seats file: 10 of 79 inactive, one team)','E'],['Recognition','Not assessed','N'],['Trust','Official Trust Index: NOT YET MEASURED','N'],
+ ['Fairness','Payment issues untracked','V'],['Development','Coaching about 31%; e-learning in progress','V'],['Communication','Not assessed','N'],['Wellbeing','794 wellness check-ins (3 Jun – 9 Nov)','V']];
+const GJ=['Confirm Egypt eligibility and rules with GPTW','Internal pulse survey (I10)','Official Trust Index survey','Culture Brief (company questionnaire)','GPTW decides certification'];
+
+// ---------- KALAM Way elements: D documented, I implemented, E experienced: Y / P / N / G(gap) ----------
+const KWE=[
+ {t:'Vision',d:'Y',i:'N',e:'N',src:'IMS program file',c:'COPC 1.1 · GPTW Credibility'},
+ {t:'Mission',d:'Y',i:'N',e:'N',src:'IMS program file',c:'COPC 1.1 · GPTW Pride'},
+ {t:'Values',d:'Y',i:'N',e:'N',src:'IMS program file',c:'GPTW Respect, Credibility'},
+ {t:'Talent (recruiting)',d:'N',i:'P',e:'N',src:'Seats file; MasterWord run report',c:'COPC 3.1'},
+ {t:'Competency',d:'P',i:'N',e:'N',src:'KALAM Way Books (3 functions)',c:'COPC 3.2, 3.3'},
+ {t:'Career levels',d:'P',i:'N',e:'N',src:'KALAM Way Books: 5 levels each',c:'GPTW Fairness · COPC 3.6'},
+ {t:'Progression',d:'P',i:'N',e:'N',src:'KALAM Way Books',c:'GPTW Fairness'},
+ {t:'Succession',d:'G',i:'G',e:'G',src:'No evidence found',c:'COPC 2.6'},
+ {t:'Leadership development',d:'N',i:'N',e:'N',src:'Not assessed',c:'COPC 1.1 · GPTW Credibility'},
+ {t:'Performance',d:'N',i:'P',e:'N',src:'Kalam coaching log',c:'COPC 3.4, 3.5 · GPTW Fairness'},
+ {t:'Culture',d:'N',i:'N',e:'N',src:'Not assessed (needs survey)',c:'GPTW all five'}];
+
+// ---------- References ----------
+const REFS=[
+ ['Official','COPC standards (COPC Inc.)','https://www.copc.com/copc-standards/','Public page. Could not be opened from this build environment.'],
+ ['Official','Great Place to Work (global)','https://www.greatplacetowork.com/','Public site. Could not be opened from this build environment.'],
+ ['Official','Great Place to Work certification','https://www.greatplacetowork.com/certify','Public page. Egypt-specific rules not verified from this environment.'],
+ ['Official','KALAM Way Books','https://kalam.cx/kalam-way-books','Public KALAM page: Business Development, Creative and Media Buying books. Exact section links not available.'],
+ ['Licensed','COPC CX Standard for Contact Centers, Release 8.0 v1.0','','Licensed copy held by KALAM management. Not public.'],
+ ['Licensed','COPC CX Standard for Customer Operations, Release 8.0 v1.0','','Licensed copy held by KALAM management. Not public.'],
+ ['Licensed','COPC Performance Improvement Criteria, Release 7.0','','Licensed copy held by KALAM management. Not public.'],
+ ['Internal','IMS dashboard sources (Incorta, Kalam call logs, 16 files)','','Occupancy, abandonment, capacity, 1 Oct – 8 Nov 2026.'],
+ ['Internal','QA Complaint Log','','Dec 2023 – 10 Nov 2026.'],['Internal','Kalam coaching log (one team)','','Sep – 9 Nov 2026.'],
+ ['Internal','Seats file (one team)','','3 Nov 2026.'],['Internal','Pre-Scheduled Tracker','','3,510 rows.'],['Internal','IMS Paid Hours validation','','October 2026.'],
+ ['Internal','MasterWord run report & submitted-applicants file','','23 Nov 2026.'],['Internal','TOPS PDCA guide','','Used as a model for the daily operating routine.'],
+ ['Interpretation','Mapping of KALAM areas to COPC items and GPTW dimensions','','KALAM’s internal reading, not an official COPC or GPTW assessment.'],
+ ['Interpretation','Item statuses (Compliant / Partial / Missing / Not assessed)','','Internal view from available evidence. No item is marked Compliant before the formal internal assessment (I11).']];
+
+// ---------- Page registry & orb context ----------
+const PAGES=[
+ {id:'ov',t:'Management overview',n:'Overview',h:300,here:'Management overview',work:'Five goals → 2028',link:'All departments',next:'COPC readiness'},
+ {id:'copc',t:'COPC readiness',n:'COPC',h:268,here:'COPC CX Standard R8.0',work:'Internal gap view',link:'Quality, Operations, WFM',next:'Great Place to Work'},
+ {id:'gptw',t:'Great Place to Work',n:'GPTW',h:330,here:'GPTW Trust Model',work:'Baseline survey (I10)',link:'HR, all managers',next:'KALAM Way'},
+ {id:'kw',t:'KALAM Way',n:'KALAM Way',h:285,here:'KALAM Way',work:'Operations book (I9)',link:'HR, Operations',next:'Transformation map'},
+ {id:'map',t:'Transformation map',n:'Map',h:45,here:'Transformation map',work:'Payment cycle example',link:'Ops · Finance · HR · Tech',next:'Operations & IMS'},
+ {id:'ops',t:'Operations & IMS',n:'Operations',h:310,here:'Operations & IMS (Phase 1)',work:'Automation & AI 2027',link:'Operations + partners',next:'Delivered projects'},
+ {id:'proj',t:'Delivered projects',n:'Delivered',h:150,here:'Delivered projects',work:'MasterWord automation',link:'IMS, Recruitment, IT',next:'Roadmap & benefits'},
+ {id:'road',t:'Roadmap & benefits',n:'Roadmap',h:205,here:'Roadmap 2027–2028',work:'Phase 1: baseline',link:'Executive sponsor',next:'References'},
+ {id:'ref',t:'References',n:'References',h:240,here:'Sources',work:'Official vs internal',link:'All pages',next:'Management overview'}];
+
+// ===== Command Center render =====
+const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
+const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const T=(w,k)=>`<span class="tip" tabindex="0" data-tip="${esc(GL[k||w]||'')}">${w}</span>`;
+const cs=k=>`<span class="st ${CST[k][0]}">${CST[k][1]}</span>`;
+const G=n=>goals.find(g=>g.n==n),P=id=>plan.find(p=>p.id==id),A=id=>areas.find(a=>a.id==id);
+const GF={1:'Revenue Growth',2:'Cost Reduction & Operational Efficiency',3:'Employee Experience, Engagement & Retention',4:'Client Satisfaction & Customer Experience',5:'Quality & Operational Excellence'};
+const SL={R:'Critical gap',A:'Needs work',G:'On track',N:'Not assessed'};
+const gchip=n=>`<button class="chip cl" data-g="${n}">G${n} ${G(n).t}</button>`;
+const ichip=id=>`<button class="chip cl" data-p="${id}">${id}</button>`;
+const goChip=(pg,t)=>`<button class="chip y" data-go="${pg}">${t} →</button>`;
+const sec=(n,q,body)=>`<section class="pn q" id="q${n}"><div class="qh"><span class="qn">${String(n).padStart(2,'0')}</span><h2>${q}</h2></div>${body}</section>`;
+const stat=(v,l,s,c='')=>`<div class="stat"><div class="big ${c}">${v}</div><p>${l}</p>${s?st(s):''}</div>`;
+const stepper=i=>`<div class="stepper">${['Strategic goal','Assessment in progress','Gap closure','Certification ready','Certified'].map((s,k)=>`<span class="${k==i?'on':''}">${s}</span>`).join('')}</div>`;
+const meter=(l,v,max,txt,col='var(--yel)')=>`<div class="mrow"><span>${l}</span><div class="meter"><i style="width:${max?Math.max(v/max*100,v?3:0):0}%;background:${col}"></i></div><b>${txt}</b></div>`;
+function donut(seg,label,sub){const tot=seg.reduce((a,s)=>a+s[0],0),R=52,C=2*Math.PI*R;let off=0;
+ const arcs=seg.filter(s=>s[0]).map(s=>{const l=s[0]/tot*C;const r=`<circle r="${R}" cx="70" cy="70" fill="none" stroke="${s[1]}" stroke-width="16" stroke-dasharray="${l} ${C-l}" stroke-dashoffset="${-off}" transform="rotate(-90 70 70)"/>`;off+=l;return r}).join('');
+ return `<div style="display:flex;gap:16px;align-items:center;flex-wrap:wrap"><svg viewBox="0 0 140 140" width="140" height="140" role="img" aria-label="${esc(label)}"><circle r="${R}" cx="70" cy="70" fill="none" stroke="rgba(255,255,255,.07)" stroke-width="16"/>${arcs}<text x="70" y="68" text-anchor="middle" fill="#fff" font-size="22" font-weight="800">${label}</text><text x="70" y="86" text-anchor="middle" fill="#bfb0c9" font-size="9">${sub}</text></svg>
+ <div class="legend" style="flex-direction:column;align-items:flex-start">${seg.map(s=>`<span><i class="dot" style="background:${s[1]}"></i>${s[2]}: <b style="color:#fff">${s[0]}</b></span>`).join('')}</div></div>`}
+
+// ================= 1 · OVERVIEW =================
+function pOv(){
+ const orbits=goals.map((g,i)=>{const a=(-90+i*72)*Math.PI/180,x=50+40*Math.cos(a),y=50+42*Math.sin(a);return `<button class="orbit" data-g="${g.n}" style="left:${x}%;top:${y}%"><b>G${g.n}</b>${g.t}</button>`}).join('');
+ const Q=['Where is KALAM going?','Vision, mission and goals','What does success look like?','Where do we stand?','What are we missing?','What do COPC and GPTW require?','How do we compare?','What must each department improve?','How will automation and AI help?','What business value will we get?'];
+ const sumS={R:0,A:0,N:0,G:0};areas.forEach(a=>sumS[a.s]++);
+ const nItems=Object.keys(copcSt).length,nPa=Object.values(copcSt).filter(x=>x[0]=='Pa').length,nMi=Object.values(copcSt).filter(x=>x[0]=='Mi').length;
+ const deptRows=DEPTS.map(d=>{const inv=plan.filter(p=>LINK[p.id].dep.includes(d));return {d,inv}}).sort((a,b)=>b.inv.length-a.inv.length);
+ const maxInv=Math.max(...deptRows.map(r=>r.inv.length));
+ return `
+<section class="pn hero">
+ <div>
+  <div class="eyebrow">KALAM strategic transformation · 2027 → 2028</div>
+  <h1>One company plan: five goals, three standards, <em>measured</em> progress</h1>
+  <p class="lead">“${KALAM.vision}”</p>
+  <div class="dest">
+   <div><b>+20%</b><span>Growth with current resources</span>${st('M')}</div>
+   <div><b>COPC</b><span>${T('COPC')} CX Standard certification</span><span class="st sR">Strategic goal</span></div>
+   <div><b>GPTW</b><span>${T('Great Place to Work','GPTW')} certification</span><span class="st sR">Strategic goal</span></div>
+  </div>
+  <p class="dim" style="font-size:11px;margin-top:10px">Destination: 2028. Both certifications are goals, not achievements. Data as of ${ASOF}.</p>
  </div>
- <div class="card">
-  <div class="tw"><table class="tbl"><tr><th>KPI</th><th>Before</th><th>After</th><th>Status</th></tr>${d.kpis.map(k=>`<tr><td><b>${k[0]}</b></td><td>${k[1]}</td><td>${k[2]}${k[3]!='—'?`<div class="sub">${k[3]}</div>`:''}</td><td>${st(k[4])}</td></tr>`).join('')}</table></div>
-  <div class="k" style="margin-top:12px">Business value</div>
-  <div class="val" style="margin-top:6px">${d.value.map(v=>`<span class="${v[0]}"><i>${v[1]}</i>${v[2]}</span>`).join('')}</div>
-  <div class="legend" style="margin-top:6px"><span><i style="background:#effaf4;border:1px solid #9fd9bd"></i>measured</span><span><i style="background:#faf4fa;border:1px solid #e2cfe2"></i>qualitative</span><span><i style="background:#fdf3f4;border:1px solid #f0c9cf"></i>not yet proven</span></div>
-  <dl class="kv2" style="margin-top:12px"><dt>Sustained?</dt><dd><b>${d.sus.sustained}</b></dd><dt>Owner</dt><dd>${d.sus.owner}</dd><dt>Control</dt><dd>${d.sus.control}</dd><dt>Replicable</dt><dd>${d.sus.replicable}</dd></dl>
-  <div class="gapnote" style="margin-top:10px">${d.sus.note}</div>
-  <div class="src">${d.src}</div>
- </div>
-</div>`).join('')}
-${(()=>{const d=done[0];return `<h2><b>✓</b>MasterWord: reconciled figures</h2><div class="card"><svg viewBox="0 0 460 150" width="100%" style="max-width:640px"><text x="0" y="38" font-size="12" font-weight="600" fill="#6f6476">Before</text><rect x="70" y="20" width="${28/32*330}" height="30" rx="7" fill="#fbe3e7"/><rect x="70" y="20" width="${24/32*330}" height="30" rx="7" fill="#d0384d"/><text x="${70+28/32*330+8}" y="40" font-size="14" font-weight="800" fill="#d0384d">24–32 h</text><text x="0" y="98" font-size="12" font-weight="600" fill="#6f6476">After</text><rect x="70" y="80" width="${0.9/32*330+4}" height="30" rx="7" fill="#1f9d63"/><text x="${70+0.9/32*330+14}" y="100" font-size="14" font-weight="800" fill="#1f9d63">0.9 h (batch 2, 12 applicants)</text><text x="70" y="140" font-size="11" fill="#6f6476">Before: team estimate per batch · After: measured elapsed time</text></svg>
-<div class="row" style="gap:8px"><span class="tag">16 + 12 = 28 applicants</span><span class="tag">28 submitted &amp; confirmed</span><span class="tag">25 complete · 3 flagged</span><span class="tag">Status: Ongoing, not completed</span></div></div>`})()}
-</section>`;
+ <div class="orbwrap"><div class="ring"></div><div class="ring r2"></div><div class="orb" id="bigorb"></div>${orbits}<div class="orbcap">Tap a goal</div></div>
+</section>
+<nav class="qnav" aria-label="Ten questions">${Q.map((q,i)=>`<a href="#q${i+1}" data-q="${i+1}"><b>${i+1}</b>${q}</a>`).join('')}</nav>
 
-// ===== 3 GOALS =====
-h+=`<section class="scr" id="goals">
-<h2><b>1</b>Five company goals · the strategic pillars</h2>
-<div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(230px,1fr))">${goals.map(g=>`<div class="card goalcard" id="goal${g.n}">
- <div class="row"><span class="num" style="width:30px;height:30px;border-radius:9px;background:var(--plum);color:var(--yel);display:grid;place-items:center;font-weight:800">${g.n}</span><h3 style="font-size:15px">${g.t}</h3></div>
- <div class="sub" style="margin-top:6px">${g.focus}</div>
- <div class="row" style="margin-top:10px;align-items:flex-end;gap:14px"><div><div class="k">Current</div>${g.cur!=null?`<div class="big" style="font-size:28px">${g.cur}${g.unit}</div>`:'<div class="big na" style="margin:6px 0 0">NO BASELINE</div>'}</div><div><div class="k">Target</div><div style="font-weight:800;color:var(--plum);font-size:16px">${g.tgt}</div></div></div>
- ${g.base!=null&&parseFloat(g.tgt)?`<div class="bar"><i style="width:${g.cur/parseFloat(g.tgt)*100}%;background:var(--a)"></i></div><div class="sub">Gap: ${(parseFloat(g.tgt)-g.cur).toFixed(1)} pts</div>`:'<div class="bar hatch"></div><div class="sub">Gap: cannot be calculated yet</div>'}
- <dl class="kv2"><dt>KPI</dt><dd>${g.kpi}</dd><dt>Definition</dt><dd>${g.def}</dd><dt>Baseline</dt><dd>${g.base!=null?g.base+g.unit:'Measure in Phase 1'}</dd><dt>Target date</dt><dd>${g.date}</dd><dt>Trend</dt><dd>One period only</dd><dt>Source</dt><dd>${g.src}</dd><dt>Period</dt><dd>${g.per}</dd><dt>Owner</dt><dd>${g.owner}</dd><dt>Departments</dt><dd>${g.dept}</dd><dt>Initiatives</dt><dd>${g.ini.map(i=>`<span class="chip" data-p="${i}" style="cursor:pointer">${i} ${plan.find(p=>p.id==i).t}</span>`).join('')}</dd></dl>
- <div class="row" style="margin-top:8px">${st(g.ev)}<span class="st ${S[g.tgtS][0]}">Target: ${S[g.tgtS][1]}</span></div>
- <div class="src">${g.fact}</div></div>`).join('')}</div>
-</section>`;
+${sec(1,Q[0],`<div class="chain">
+ <div class="hl"><b>Vision</b><span>Trusted BPO partner</span></div><i></i>
+ <div><b>5 goals</b><span>Revenue · cost · people · clients · quality</span></div><i></i>
+ <div><b>3 standards</b><span>COPC · GPTW · KALAM Way</span></div><i></i>
+ <div><b>17 areas</b><span>Company improvement areas</span></div><i></i>
+ <div><b>9 departments</b><span>Each owns its part</span></div><i></i>
+ <div><b>14 initiatives</b><span>What we change</span></div><i></i>
+ <div><b>${T('KPIs','KPI')}</b><span>How we measure</span></div><i></i>
+ <div class="hl"><b>Business benefit</b><span>Growth, cost, trust</span></div></div>
+ <div class="callout"><b>Operations / IMS is Phase 1 of the company plan,</b> not the strategy itself. Every department has a part. ${goChip('map','Explore the map')}</div>
+ <div class="grid g2" style="margin-top:14px"><div class="card"><h3>COPC certification</h3>${stepper(0)}</div><div class="card"><h3>GPTW certification</h3>${stepper(0)}</div></div>`)}
 
-// ===== 4 WHERE WE STAND (heatmap) =====
-h+=`<section class="scr" id="heat">
-<h2><b>1</b>Company health map · ${areas.length} areas · click any area</h2>
-<div class="filters" id="flt"><button class="on" data-f="all">All frameworks</button><button data-f="C">COPC</button><button data-f="G">GPTW</button><button data-f="K">KALAM Way</button></div>
-<div class="heat">${['R','A','G','N'].flatMap(s=>areas.filter(a=>a.s==s)).map(a=>`<div class="cell c${a.s}" data-a="${a.id}" data-fw="${a.fw.join('')}"><div class="row" style="justify-content:space-between"><h4>${a.t}</h4><span class="conf c${a.conf}">${confT[a.conf]}</span></div>${a.s!='N'?`<div class="sub" style="margin-top:4px;color:inherit;opacity:.85">${a.evid[0]}</div>`:''}<div class="dei">${[['D',a.d],['I',a.i],['E',a.e]].map(z=>`<span class="l${z[1]}" title="${{D:'Documented',I:'Implemented',E:'Experienced'}[z[0]]}">${z[0]}</span>`).join('')}</div></div>`).join('')}</div>
-<div class="legend"><span><i style="background:var(--rbg);border:1px solid var(--r)"></i>Critical gap</span><span><i style="background:var(--abg);border:1px solid var(--a)"></i>Improvement required</span><span><i style="background:var(--gbg);border:1px solid var(--g)"></i>Performing well</span><span><i style="background:var(--nbg)"></i>Not assessed</span><span><b>D</b> Documented · <b>I</b> Implemented · <b>E</b> Experienced &nbsp;<i style="background:#4B154A"></i>evidenced <i style="background:#79417F;opacity:.6"></i>partly <i style="background:#fff;border:1px solid #ddd"></i>none</span><span>Tag = assessment confidence</span></div>
-<h2><b>2</b>Evidence coverage</h2>
-<div class="grid g3">
- <div class="card"><div class="k">Areas by status</div><svg viewBox="0 0 300 40" width="100%" style="margin-top:10px">${(()=>{let x=0,o='';[['R','#d0384d'],['A','#e8a317'],['G','#1f9d63'],['N','#c9c3cd']].forEach(([k,c])=>{const w=cnt(k)/areas.length*300;if(w){o+=`<rect x="${x}" y="0" width="${w-2}" height="40" rx="6" fill="${c}"/><text x="${x+w/2}" y="25" text-anchor="middle" font-size="13" font-weight="800" fill="#fff">${cnt(k)}</text>`;x+=w}});return o})()}</svg><div class="sub" style="margin-top:6px">${cnt('R')} red · ${cnt('A')} amber · ${cnt('G')} green · ${cnt('N')} grey</div></div>
- <div class="card"><div class="k">Evidence levels covered</div><div class="big">${areas.reduce((s,a)=>s+cov(a),0)}<span style="font-size:18px;color:var(--mut)">/${areas.length*3}</span></div><div class="bar"><i style="width:${areas.reduce((s,a)=>s+cov(a),0)/(areas.length*3)*100}%;background:var(--plum2)"></i></div><div class="sub" style="margin-top:6px">Documented, implemented and experienced checks with any evidence</div></div>
- <div class="card"><div class="k">Data needed to finish</div><div class="sub" style="margin-top:6px">Finance: revenue &amp; cost · HR: attrition, survey · Clients: SLAs, CSAT · Leadership: plans, review minutes</div></div>
-</div>
-<h2><b>3</b>Evidence behind the red areas</h2>
-<div class="grid g2">
- <div class="card"><div class="k">Capacity: idle vs talk hours</div>
- <svg viewBox="0 0 440 120" width="100%"><rect x="0" y="10" width="420" height="34" rx="8" fill="#efedf1"/><rect x="0" y="10" width="${13138/29348*420}" height="34" rx="8" fill="#4B154A"/><text x="10" y="32" font-size="12" font-weight="700" fill="#fff">13,138 h talk</text><text x="410" y="32" font-size="12" font-weight="700" fill="#4B154A" text-anchor="end">29,348 h idle</text>
- <rect x="0" y="66" width="420" height="34" rx="8" fill="#fbe3e7"/><rect x="0" y="66" width="${(38025-21162)/38025*420}" height="34" rx="8" fill="#d0384d"/><text x="10" y="88" font-size="12" font-weight="700" fill="#fff">TTG 44% answered</text><text x="410" y="88" font-size="12" font-weight="700" fill="#d0384d" text-anchor="end">56% abandoned</text></svg>
- <div class="src">Incorta + Kalam, 1 Oct – 8 Nov 2026 · ${st('V')}</div></div>
- <div class="card"><div class="k">Coaching done vs required (one team)</div>
- <svg viewBox="0 0 440 120" width="100%">${[['Sep',49,142],['Oct',48,156],['Nov*',10,166]].map((m,i)=>`<text x="0" y="${24+i*36}" font-size="12" font-weight="600" fill="#6f6476">${m[0]}</text><rect x="44" y="${10+i*36}" width="${m[2]/166*320}" height="22" rx="6" fill="#efedf1"/><rect x="44" y="${10+i*36}" width="${m[1]/166*320}" height="22" rx="6" fill="#79417F"/><text x="${44+m[2]/166*320+6}" y="${26+i*36}" font-size="12" font-weight="700" fill="#4B154A">${m[1]}/${m[2]}</text>`).join('')}</svg>
- <div class="src">Kalam coaching log · *Nov to 9 Nov · ${st('V')}</div></div>
-</div>
-</section>`;
+${sec(2,Q[1],`<div class="grid g2">
+ <div><h4>Vision</h4><p class="quote">${KALAM.vision}</p><h4 style="margin-top:14px">Mission</h4><p class="quote">${KALAM.mission}</p>
+  <h4 style="margin-top:14px">Values</h4><div class="chips">${KALAM.values.map(v=>`<span class="chip">${v}</span>`).join('')}</div><p class="dim" style="font-size:10.5px;margin-top:8px">Source: ${KALAM.src}</p></div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;align-content:start">${goals.map(g=>`<div class="gcard" data-g="${g.n}"><span class="gn">GOAL ${g.n}</span><h3>${GF[g.n]}</h3><p>${g.kpi}</p></div>`).join('')}</div></div>
+ <p class="dim" style="font-size:11px;margin-top:10px">The five goals are agreed with management. Targets other than +20% are awaiting management approval.</p>`)}
 
-// ===== 5 FRAMEWORKS =====
-const goalMap=[
- {g:1,c:['1.2','3.7','4.5'],p:['Pride','Credibility'],k:['Business alignment']},
- {g:2,c:['2.4','3.9','3.12'],p:['Fairness'],k:['Accountability']},
- {g:3,c:['3.4','3.5','3.6'],p:['Respect','Fairness','Camaraderie'],k:['Values','Career architecture']},
- {g:4,c:['2.1','2.2','4.1'],p:['Pride'],k:['Service philosophy']},
- {g:5,c:['3.8','3.13','3.10'],p:['Credibility'],k:['Competencies']}
-];
-const cName=id=>{const c=copc.find(x=>x[0]==id);return c?id+' '+c[1]:id};
-h+=`<section class="scr" id="frame">
-<h2><b>1</b>One strategy · three frameworks</h2>
-<div class="grid g3" style="margin-bottom:6px">
- <div class="card"><span class="chip">COPC R8.0</span><b style="display:block;margin-top:6px">How we operate</b><div class="sub">Operations, CX, workforce, quality, results</div></div>
- <div class="card"><span class="chip g">Great Place to Work</span><b style="display:block;margin-top:6px">How our people experience it</b><div class="sub">Trust Model, five dimensions</div></div>
- <div class="card"><span class="chip k">KALAM Way</span><b style="display:block;margin-top:6px">Who we are</b><div class="sub">Values, competencies, careers</div></div>
-</div>
-<div class="mxw"><table class="mx"><tr><th>Goal</th><th>COPC items</th><th>GPTW</th><th>KALAM Way</th><th>Initiatives</th><th>Outcome measure</th></tr>
-${goalMap.map(r=>{const g=goals[r.g-1];return `<tr><td class="gl"><small>GOAL ${g.n}</small>${g.t}</td><td>${r.c.map(x=>`<span class="chip">${cName(x)}</span>`).join('')}</td><td>${r.p.map(x=>`<span class="chip g">${x}</span>`).join('')}</td><td>${r.k.map(x=>`<span class="chip k">${x}</span>`).join('')}</td><td>${g.ini.map(i=>`<span class="chip" data-p="${i}" style="cursor:pointer">${i}</span>`).join('')}</td><td>${g.kpi}</td></tr>`}).join('')}
-</table></div>
+${sec(3,Q[2],`<div class="gflow">
+ <div class="hd">Goal</div><div class="hd">Current</div><div class="hd">Target 2028</div><div class="hd">Improvements</div><div class="hd">Departments</div><div class="hd">Benefit</div>
+ ${goals.map(g=>{const x=gx[g.n];return `<div class="gc" data-g="${g.n}"><span>G${g.n}</span>${GF[g.n]}<div class="dim" style="font-weight:400;font-size:11px;margin-top:4px">${x.succ}</div></div>
+ <div data-l="Current"><b>${x.now}</b><br>${st(x.nowS)}</div><div data-l="Target 2028"><b>${x.tgt}</b><br>${st(x.tgtS)}</div>
+ <div data-l="Improvements"><div class="chips">${plan.filter(p=>p.goal.includes(g.n)).sort((a,b)=>b.score-a.score).slice(0,4).map(p=>ichip(p.id)).join('')}</div></div>
+ <div data-l="Departments">${x.depts.join(' · ')}</div><div data-l="Benefit">${x.ben}</div>`}).join('')}</div>`)}
 
-<h2><b>2</b>COPC CX Standard R8.0 · requirement-level readiness</h2>
-<div class="grid g4" style="margin-bottom:10px">
- <div class="card"><div class="k">Items</div><div class="big">${copc.length}</div><div class="sub">${copc.reduce((s,c)=>s+c[2],0).toLocaleString()} points (BPO)</div></div>
- <div class="card"><div class="k">Gap found</div><div class="big" style="color:var(--r)">${copc.filter(c=>copcRow(c[0]).state=='Gap found').length}</div><div class="sub">from existing evidence</div></div>
- <div class="card"><div class="k">Not assessed</div><div class="big" style="color:var(--n)">${copc.filter(c=>copcRow(c[0]).state=='Not assessed').length}</div><div class="sub">scored in Phase 1 (I11)</div></div>
- <div class="card"><div class="k">To certify</div><div class="big" style="font-size:22px">95% + 100%</div><div class="sub">of points · approach in cat. 1–3, plus the 4.5 rule</div></div>
-</div>
-<div class="card"><svg viewBox="0 0 1000 60" width="100%" preserveAspectRatio="none" style="height:60px">${(()=>{let x=0,o='';const cats=[['1.0 Leadership & Planning',460],['2.0 Designing & Implementing',440],['3.0 Managing Processes',1100],['4.0 Results',2000],['BPO items',200]];const cols=['#4B154A','#79417F','#a3628f','#e8a317','#c9b8cc'];const tot=cats.reduce((s,c)=>s+c[1],0);cats.forEach((c,i)=>{const w=c[1]/tot*1000;o+=`<rect x="${x}" y="0" width="${w-3}" height="60" rx="8" fill="${cols[i]}"/><text x="${x+10}" y="26" font-size="15" font-weight="700" fill="#fff">${c[1]}</text><text x="${x+10}" y="46" font-size="11" fill="#fff">${w>120?c[0]:c[0].split(' ')[0]}</text>`;x+=w});return o})()}</svg>
-<div class="filters" id="cflt" style="margin-top:12px"><button class="on" data-f="all">All items</button><button data-f="Gap found">Gap found</button><button data-f="Not assessed">Not assessed</button></div>
-<div class="tw"><table class="tbl" id="ctbl"><tr><th>Item</th><th>Pts</th><th>Current state</th><th>Evidence</th><th>Gap · risk</th><th>Action</th><th>Owner</th><th>Deadline</th><th>Readiness</th></tr>
-${copc.map(c=>{const r=copcRow(c[0]),a=r.area,p=a?plan.find(x=>x.id==a.ini):null;return `<tr class="clk" data-st="${r.state}" ${a?`data-a="${a.id}"`:''}><td><b>${c[0]}</b> ${c[1]}</td><td>${c[2]}</td><td>${r.state=='Gap found'?a.t+': '+sTxt(a.s).toLowerCase():'Not assessed'}</td><td>${r.state=='Gap found'?a.evid[0]:'Evidence required'}</td><td>${r.state=='Gap found'?a.gap:'Unknown until scored'}</td><td>${p?p.id+' '+p.t:'I11 Internal COPC gap assessment'}</td><td>${a?a.dept:'Quality'} <span class="sub">(proposed)</span></td><td>Phase ${p?p.phase:1}</td><td><span class="st ${r.state=='Gap found'?'sE':'sN'}">${r.state}</span></td></tr>`}).join('')}
-</table></div><div class="src">COPC CX Standard for Contact Centers R8.0 v1.0 (Feb 2026; used in baseline audits from 1 May 2026; required for all certifications from 1 Jan 2027). Item scope for an interpretation BPO to be confirmed with COPC.</div></div>
+${sec(4,Q[3],`<div class="grid g4">${stat('24.1%',T('Occupancy')+' vs 35.3% target (W46)','V','r')}${stat('56%','TTG calls '+T('abandoned','Abandoned')+' (1 Oct – 8 Nov)','V','r')}${stat('31%','Required coaching done (48 of 156, Oct, one team)','C','y')}${stat('16','Separate report files, no single source','V')}</div>
+ <div class="ph" style="margin-top:16px"><div><h3>17 company areas</h3><p>Tap an area for evidence, owner and the fix.</p></div><div class="seg" id="hflt">${[['all','All'],['C','COPC'],['G','GPTW'],['K','KALAM Way']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
+ <div class="heat">${areas.map(a=>`<button class="cell ${a.s}" data-a="${a.id}" data-fw="${a.fw.join('')}"><span>${a.t}</span><small>${SL[a.s]} · ${a.dept}</small></button>`).join('')}</div>
+ <div class="legend" style="margin-top:10px"><span><i class="dot cR"></i>Critical gap ${sumS.R}</span><span><i class="dot cA"></i>Needs work ${sumS.A}</span><span><i class="dot cN"></i>Not assessed ${sumS.N}</span><span><i class="dot cG"></i>On track ${sumS.G}</span></div>`)}
 
-<h2><b>3</b>Great Place to Work · Trust Model</h2>
-<div class="grid g5">${gptw.map(g=>`<div class="card"><div class="k" style="color:#a3283b">${g.d}</div><div class="sub" style="margin:6px 0">${g.q}</div><div style="font-size:12.5px;font-weight:600">${g.sig}</div><div style="margin-top:8px">${g.ev=='V'?'<span class="st sE">Warning signal</span>':st('N')}</div><div class="src">Actions: ${g.act}</div></div>`).join('')}</div>
-<div class="gapnote" style="margin-top:10px"><b>Official Trust Index: NOT YET MEASURED.</b> Egypt eligibility, participation rules, Culture Brief and timeline still need to be confirmed with the official Great Place to Work provider. The official site could not be reached from this environment.</div>
+${sec(5,Q[4],`<div class="grid g2"><div class="bars">
+ ${meter('Goals with a measured '+T('baseline','Baseline'),2,5,'2 of 5')}
+ ${meter('Goals with an approved company target',1,5,'1 of 5')}
+ ${meter('Goals with a named owner',0,5,'0 of 5','var(--r)')}
+ ${meter('Company areas assessed',10,17,'10 of 17')}
+ ${meter('COPC items formally assessed',0,32,'0 of 32','var(--r)')}
+ ${meter('Official Trust Index',0,1,'Not yet','var(--r)')}</div>
+ <div><h4>Evidence still needed</h4><div class="chips">${['Revenue baseline (Finance)','Client SLAs & satisfaction','Employee survey','Continuity plan & risk register','Onboarding stage times','Attrition rate'].map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+ <div class="callout">Phase 1 measures every missing ${T('baseline','Baseline')} first (${'<button class="chip cl" data-p="I1">I1</button>'}). No figure is invented in the meantime.</div></div></div>`)}
 
-<h2><b>4</b>KALAM Way Books · documented, implemented, experienced</h2>
-<div class="grid g4">${kway.map(k=>`<div class="card" ${k.gap?'style="border-color:var(--r)"':''}><b>${k.b}</b><div class="dei" style="display:flex;gap:4px;margin-top:10px">${[['Documented',k.d],['Implemented',k.i],['Experienced',k.e]].map(z=>`<span style="flex:1;font-size:10px;font-weight:700;text-align:center;border-radius:5px;padding:4px 0;${z[1]=='V'?'background:#4B154A;color:#fff':'background:var(--nbg);color:#8a8290'}">${z[0]}</span>`).join('')}</div><div class="sub" style="margin-top:8px">${k.gap?'<b style="color:var(--r)">No book. Action: I9</b>':'5 competency levels · practice not yet assessed'}</div></div>`).join('')}</div>
-</section>`;
+${sec(6,Q[5],`<div class="grid g3">
+ <div class="card"><h3>COPC ${st('R')}</h3><p>A world standard for running customer operations. Each requirement needs a designed way of working (${T('Approach')}) that is used everywhere (${T('Deployment')}), then months of proven results.</p><div class="chips" style="margin:10px 0">${COPCCAT.map(c=>`<span class="chip">${c.k} ${c.t}</span>`).join('')}</div>${goChip('copc','COPC page')}</div>
+ <div class="card"><h3>Great Place to Work ${st('R')}</h3><p>Employees answer a confidential survey (${T('Trust Index')}). The company also describes its people practices. GPTW decides certification.</p><div class="chips" style="margin:10px 0">${TRUST.map(t=>`<span class="chip">${t.d}</span>`).join('')}</div>${goChip('gptw','GPTW page')}</div>
+ <div class="card"><h3>KALAM Way</h3><p>KALAM’s own vision, values and competency books. It ties both standards to how KALAM works day to day.</p><div class="chips" style="margin:10px 0"><span class="chip">3 competency books</span><span class="chip">5 levels each</span><span class="chip">No operations book yet</span></div>${goChip('kw','KALAM Way page')}</div></div>`)}
 
-// ===== 6 IMPROVEMENT PLAN =====
-h+=`<section class="scr" id="plan">
-<h2><b>1</b>What we are planning to do · ${plan.length} initiatives · ranked</h2>
-<div class="filters" id="pflt"><button class="on" data-f="all">All</button>${Object.entries(CAT).map(([k,v])=>`<button data-f="${k}">${v[0]} (${plan.filter(p=>p.cat==k).length})</button>`).join('')}</div>
-<div class="card"><div class="tw"><table class="tbl"><tr><th>#</th><th>Initiative</th><th>Type</th><th>Impact</th><th>Risk</th><th>Urgency</th><th>Effort</th><th>Cert.</th><th>Score</th><th>Goals</th><th>Owner dept.</th><th>Phase</th></tr>
-${ranked.map((p,i)=>{const d=n=>`<span class="dots">${[1,2,3].map(x=>`<i class="${x<=n?'on':''}"></i>`).join('')}</span>`;return `<tr class="clk" data-p="${p.id}" data-cat="${p.cat}"><td><b>${i+1}</b></td><td><b>${p.id}</b> ${p.t}</td><td>${catTag(p.cat)}</td><td>${d(p.r.imp)}</td><td>${d(p.r.risk)}</td><td>${d(p.r.urg)}</td><td>${d(p.r.eff)}</td><td>${d(p.r.cert)}</td><td><span class="score">${p.score}</span></td><td>${p.goal.map(g=>'G'+g).join(' ')}</td><td>${p.dept}</td><td>P${p.phase}</td></tr>`}).join('')}
-</table></div><div class="src">Ranking is proposed (team judgement, scale 1–3) and needs validation in Phase 1. Score = impact + risk + urgency + certification − effort. Click a row for its full plan. Budgets and dates: Finance and owners to set; shown as phases until approved.</div></div>
-<h2><b>2</b>Not everything is automation</h2>
-<div class="grid g3">
- <div class="card"><div class="k">Policy, routine or people</div><div class="big">${plan.filter(p=>!/data model|forecast|intelligence|continuity/i.test(p.t)).length}</div><div class="sub">changes to routines, ownership, training, measures</div></div>
- <div class="card"><div class="k">Technology needed</div><div class="big">${plan.filter(p=>/data model|forecast|intelligence|continuity/i.test(p.t)).length}</div><div class="sub">data model, forecasting, continuity, integrated system</div></div>
- <div class="card"><div class="k">Quick wins (phase 1–2)</div><div class="big" style="color:var(--g)">${plan.filter(p=>p.cat=='QW').length}</div><div class="sub">${plan.filter(p=>p.cat=='QW').map(p=>p.t).join(' · ')}</div></div>
-</div>
-</section>`;
+${sec(7,Q[6],`<div class="grid g2"><div class="card"><h3>Against COPC (32 items, internal view)</h3>${donut([[0,'#3ddc97','Compliant'],[nPa,'#ffa94d','Partial'],[nMi,'#ff6b85','Missing'],[32-nItems,'#6f6479','Not assessed']],nItems+'/32','items with evidence')}<p class="dim" style="font-size:11px;margin-top:8px">No item is marked Compliant before the formal internal assessment. Not an official COPC score.</p></div>
+ <div class="card"><h3>Against GPTW (5 dimensions)</h3>${donut([[3,'#82b8ff','Signal found'],[2,'#6f6479','Not measured']],'3/5','dimensions with a signal')}<p class="dim" style="font-size:11px;margin-top:8px">Official Trust Index: NOT YET MEASURED.</p></div></div>
+ <div class="gapnote" style="margin-top:12px">Comparison with other companies: <b>not available</b>. This dashboard holds no benchmark data, so KALAM is compared with the standards only.</div>`)}
 
-// ===== 7 ROADMAP =====
-h+=`<section class="scr" id="road">
-<h2><b>1</b>One company-wide roadmap · five phases</h2>
-<div class="filters" id="scn"><button data-k="0">Fast-track</button><button class="on" data-k="1">Realistic</button><button data-k="2">Conservative</button></div>
-<div class="card"><div class="gantt" id="gantt"></div><div class="src" id="scnote"></div></div>
-<h2><b>2</b>What each phase delivers</h2>
-<div class="card"><div class="tw"><table class="tbl"><tr><th>Phase</th><th>Deliverables</th><th>Milestone</th><th>Owner (proposed)</th><th>Depends on</th><th>Initiatives</th><th>KPI</th><th>Exit criteria</th><th>Budget</th></tr>
-${phases.map((p,i)=>`<tr><td><b>${p.t}</b></td><td>${p.del}</td><td>${p.ms}</td><td>${p.own}</td><td>${p.dep}</td><td>${plan.filter(x=>x.phase==i+1).map(x=>`<span class="chip" data-p="${x.id}" style="cursor:pointer">${x.id}</span>`).join('')||'—'}</td><td>${p.kpi}</td><td>${p.exit}</td><td><span class="st sE">To price</span></td></tr>`).join('')}
-</table></div></div>
-<h2><b>3</b>Two certification journeys on one roadmap</h2>
-<div class="grid g2">
- <div class="card"><span class="chip">COPC</span>${stepper(0)}<div class="flow" style="margin-top:10px">${[['Baseline audit','P1'],['Gap closure','P2–3'],['Readiness check','P4'],['Certification audit','P5']].map((s,i)=>`${i?'<div class="arrow">›</div>':''}<div class="step sh">${s[0]}<small>${s[1]}</small></div>`).join('')}</div><div class="src">Pass mark: 95% of points, 100% on approach (cat. 1–3), plus the item 4.5 results rule. Duration: confirm with COPC.</div></div>
- <div class="card"><span class="chip g">GPTW</span>${stepper(0)}<div class="flow" style="margin-top:10px">${[['Internal survey','P1'],['Fix top gaps','P2–3'],['Eligibility check','P4'],['Trust Index + Culture Brief','P5']].map((s,i)=>`${i?'<div class="arrow">›</div>':''}<div class="step sh">${s[0]}<small>${s[1]}</small></div>`).join('')}</div><div class="src">Shared with COPC: the Phase 1 baseline, employee experience (COPC 3.6) and coaching (3.4). Egypt timeline: confirm with GPTW.</div></div>
-</div>
-</section>`;
+${sec(8,Q[7],`<div class="tw"><table class="tbl"><thead><tr><th>Department</th><th>Initiatives involved</th><th>Must improve (top initiatives)</th></tr></thead><tbody>
+ ${deptRows.map(r=>`<tr><td><b>${r.d}</b></td><td style="min-width:120px"><span class="sbar" style="width:${r.inv.length/maxInv*90}px"></span> ${r.inv.length}</td><td><div class="chips">${r.inv.sort((a,b)=>b.score-a.score).slice(0,3).map(p=>`<button class="chip cl" data-p="${p.id}">${p.id} ${p.t}</button>`).join('')}</div></td></tr>`).join('')}</tbody></table></div>`)}
 
-// ===== 8 TEAM & RESOURCES =====
-const lv=n=>`<div class="lvl">${[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
-const fitT=['','Part-time','Full-time'];
-h+=`<section class="scr" id="team">
-<h2><b>1</b>Three team models</h2>
-<div class="grid g3">${opts.map(o=>`<div class="opt${o.rec?' rec':''}"><div class="k">Model ${o.k}</div><b style="font-size:14px">${o.t}</b><div class="sub" style="margin:6px 0 8px">${o.d}</div>
-<div class="org"><span class="top">Executive sponsor</span><div class="ln"></div><span class="${o.k=='A'?'ch':''}">Program lead${o.k=='A'?' (part-time)':''}</span><div class="ln"></div><div class="lvl2">${o.k=='C'?'<span>COPC/Quality</span><span>HR/GPTW</span><span>Op. excellence</span><span>Data</span><span>Automation</span>':o.k=='B'?'<span>COPC/Quality</span><span>Data analyst</span>':'<span class="ch">Existing managers</span>'}</div><div class="ln"></div><span class="ch">Department champions</span></div>
-<dl class="kv2"><dt>Headcount</dt><dd>${o.hc}</dd><dt>Workload</dt><dd>${o.wl}</dd><dt>Cost</dt><dd>Finance to price</dd></dl>
-<div class="k" style="margin-top:8px">Cost</div>${lv(o.c)}<div class="k" style="margin-top:6px">Capacity</div>${lv(o.cap)}<div class="k" style="margin-top:6px">Delivery risk</div>${lv(o.r)}<div class="k" style="margin-top:6px">Expected benefit</div>${lv(o.b)}</div>`).join('')}</div>
-<div class="src">Proposed. These are not approved headcount, and no role assumes new recruitment until current capacity is checked in Phase 1.</div>
-<h2><b>2</b>Roles by model</h2>
-<div class="card"><div class="tw"><table class="tbl"><tr><th>Role</th>${opts.map(o=>`<th>Model ${o.k}</th>`).join('')}<th>Can an existing employee fill it?</th></tr>
-${roles.map((r,i)=>`<tr><td><b>${r}</b></td>${opts.map(o=>`<td>${fitT[o.fit[i]]}</td>`).join('')}<td>${i==0?'Yes: a member of management':'To check in Phase 1'}</td></tr>`).join('')}
-</table></div></div>
-<h2><b>3</b>Investment</h2>
-<div class="grid g3">
- <div class="card"><div class="k">Current tool cost</div><div class="big na">NOT PROVIDED</div><div class="sub">Claude subscription, paid personally</div>${st('E')}</div>
- <div class="card"><div class="k">Budget requested</div><div class="big na">AFTER PHASE 1</div><div class="sub">depends on the team model</div>${st('R')}</div>
- <div class="card"><div class="k">Verified savings to date</div><div class="big na">NONE CLAIMED</div><div class="sub">time saved is measured; money is not</div>${st('E')}</div>
-</div>
-</section>`;
+${sec(9,Q[8],`<div class="grid g3">${[['MasterWord enrolment','Read, match, redact, type every applicant','Automated run + missing-document check','P','4.5 min per applicant (Calculated)'],['Interpreter payment','Checks by eye; issues by message','Completeness check, reminders, issue log','R','Benefit to measure'],['Reporting','16 files built by hand','One refreshed dashboard','R','Awaiting IT approval']].map(a=>`<div class="card"><h3>${a[0]} ${st(a[3])}</h3><div class="fl" style="margin-top:8px"><span class="box m">${a[1]}</span><span class="ar">→</span><span class="box a">${a[2]}</span></div><p style="margin-top:8px">${a[4]}</p></div>`).join('')}</div>
+ <div class="chips" style="margin-top:12px"><span class="chip">${T('Human checkpoint')} on every automation</span><span class="chip">Company accounts, not personal</span><span class="chip">Measured before and after</span><span class="chip">One approval route</span>${goChip('ops','Automation & AI')}</div>`)}
 
-// ===== 9 DECISIONS =====
-h+=`<section class="scr" id="dec">
-<h2><b>1</b>Decisions required from management</h2>
-<div class="grid g2">
- <div class="card dcol"><h4 style="color:var(--g)">Already approved · ${decisions.approved.length}</h4>${decisions.approved.map(d=>`<div class="dec"><div class="chk ok">✓</div><div><b>${d[0]}</b><div class="sub">${d[1]}</div></div></div>`).join('')}</div>
- <div class="card dcol"><h4 style="color:#b07605">Awaiting approval · ${decisions.pending.length}</h4>${decisions.pending.map((d,i)=>`<div class="dec"><div class="chk wait">${i+1}</div><div>${d}</div></div>`).join('')}</div>
-</div>
-<h2><b>2</b>Top risks</h2>
-<div class="grid g3">${risks.map(r=>`<div class="card"><div class="row"><div class="q" style="width:26px;height:26px;border-radius:50%;background:var(--rbg);color:var(--r);display:grid;place-items:center;font-weight:800">!</div><b>${r[0]}</b></div><div class="sub" style="margin-top:6px">${r[1]}</div><div class="src">Mitigation: <span class="chip" data-p="${r[2]}" style="cursor:pointer">${r[2]} ${plan.find(p=>p.id==r[2]).t}</span></div></div>`).join('')}</div>
-<h2><b>3</b>Reference</h2>
-<div class="card"><div class="sub">The master reference document holds the full detail behind every screen. This dashboard shows its latest validated figures.</div><div class="row" style="margin-top:8px"><span class="tag">Master Plan ${VERSION}</span><span class="tag">Owner: IMS</span><span class="tag">Sponsor: awaiting approval</span><span class="tag">Status: for management review</span></div></div>
-</section>`;
+${sec(10,Q[9],`<div class="grid g2"><div><h4>Value proven so far</h4><div class="grid g2" style="gap:8px">${stat('28/28','MasterWord applicants submitted and confirmed','V','g')}${stat('4.5 min','Per applicant (batch 2: 54 min ÷ 12)','C','g')}${stat('$0','E-learning running cost','V','g')}${stat('3 of 28','Missing-document cases caught before submission','V','g')}</div></div>
+ <div><h4>Value expected (by goal)</h4>${goals.map(g=>`<div class="mrow" style="grid-template-columns:44px minmax(0,1fr)"><span class="tag">G${g.n}</span><span>${gx[g.n].ben}</span></div>`).join('')}
+ <div class="gapnote" style="margin-top:8px">Money value is not claimed until baselines exist. How it will be measured: revenue, cost per answered call and attrition, from the Phase 1 baseline (I1).</div></div></div>`)}`}
 
-main.innerHTML=h+`<div class="foot"><span>Sources: IMS dashboard (Incorta, Kalam), QA complaint log, MasterWord run report, Pre-Scheduled Tracker, KALAM Way Books, COPC CX Standard R8.0. Statuses: Verified · Calculated · Estimated · Proposed · Not assessed · Evidence required. Certification marks are shown as strategic goals only; official COPC and GPTW logo files are to be supplied from their brand owners.</span><span>KALAM · Future Group · ${VERSION} · ${ASOF}</span></div>`;
+// ================= 2 · COPC =================
+function pCopc(){
+ const items=copc.map(c=>copcItem(c[0]));
+ const cnt=k=>items.filter(i=>i.st==k).length;
+ const mapped=new Set();plan.forEach(p=>LINK[p.id].std.filter(s=>s.startsWith('C:')&&s!='C:ALL').forEach(s=>mapped.add(s.slice(2))));
+ const crit=items.filter(i=>critical(i.id));
+ const inis=id=>plan.filter(p=>LINK[p.id].std.includes('C:'+id)).map(p=>p.id);
+ const cats=COPCCAT.map(c=>{const it=items.filter(i=>i.cat==c.k);return {...c,it}});
+ return `<div class="phead"><div><div class="eyebrow">Standard 1 of 3</div><h1>COPC CX Standard · Release 8.0</h1><p>${T('COPC')} is a world standard for running customer operations. Certification is a <b>strategic goal</b> for KALAM. Statuses below are an internal view from the evidence we hold, not an official COPC result.</p></div><div>${stepper(0)}</div></div>
+ <div class="grid g4">${stat(mapped.size+' of 32','Requirement coverage: items our initiatives address','C','y')}${stat(items.filter(i=>i.st!='Na').length+' of 32','Evidence coverage: items with evidence reviewed','C')}${stat(crit.length,'Critical gaps (missing, or linked to a red area)','C','r')}${stat('0','Items marked Compliant (waits for the formal assessment, I11)','N')}</div>
+ <div class="grid g2"><div class="pn"><div class="ph"><h3>Readiness by category</h3><div class="legend"><span><i class="dot" style="background:var(--g)"></i>Compliant</span><span><i class="dot cA"></i>Partial</span><span><i class="dot cR"></i>Missing</span><span><i class="dot cN"></i>Not assessed</span></div></div>
+  ${cats.map(c=>{const n=c.it.length,f=k=>c.it.filter(i=>i.st==k).length;return `<div class="mrow"><span><b>${c.k}</b> ${c.t}</span><div class="meter">${[['Co','var(--g)'],['Pa','var(--a)'],['Mi','var(--r)'],['Na','#5e5468']].map(s=>`<i style="width:${f(s[0])/n*100}%;background:${s[1]}"></i>`).join('')}</div><b>${n} items</b></div>`}).join('')}</div>
+ <div class="pn"><h3>How official scoring works</h3><div class="gapnote" style="margin-top:10px">The official scoring rules are <b>not public</b>. They are in the licensed COPC standard that KALAM management holds. In plain words, every requirement is checked for a designed way of working (${T('Approach')}) and whether it is used everywhere (${T('Deployment')}), and the operation must prove results over time. COPC decides certification after its own audit. <b>This dashboard shows no score out of 100.</b></div>
+  <h4 style="margin-top:14px">Certification roadmap</h4><div class="stepper">${['Internal gap assessment (I11) · Phase 1','Close critical gaps · Phase 2','Run and measure results · Phase 3','Internal mock audit · Phase 4','COPC audit · Phase 5'].map((s,i)=>`<span class="${i?'':'on'}" style="text-transform:none;font-size:10px">${s}</span>`).join('')}</div><p class="dim" style="font-size:11px;margin-top:6px">Timing: awaiting management approval.</p></div></div>
+ <div class="pn"><h3 style="margin-bottom:12px">The five categories in plain words</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card"><h3><span>${c.k} · ${c.t}</span></h3><p>${c.plain}</p><dl class="kv"><dt>KALAM must show</dt><dd>${c.show}</dd><dt>Our status</dt><dd>${f('Pa')?cs('Pa')+' '+f('Pa'):''} ${f('Mi')?cs('Mi')+' '+f('Mi'):''} ${f('Na')?cs('Na')+' '+f('Na'):''}</dd><dt>Owner</dt><dd>${c.owner}</dd></dl></div>`}).join('')}</div></div>
+ <div class="pn"><div class="ph"><div><h3>All 32 requirements</h3><p>Evidence, owner and the initiatives that close each gap.</p></div><div class="seg" id="cflt">${[['all','All'],['Pa','Partial'],['Mi','Missing'],['Na','Not assessed'],['crit','Critical']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
+ <div class="tw"><table class="tbl" id="ctbl"><thead><tr><th>Item</th><th>Requirement</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Initiatives</th></tr></thead><tbody>
+ ${items.map(i=>`<tr data-st="${i.st}" data-cr="${critical(i.id)?1:0}"><td class="id">${i.id}${critical(i.id)?' <span class="st sE">Critical</span>':''}</td><td>${i.t}</td><td>${cs(i.st)}</td><td class="mut">${i.ev}</td><td>${i.owner}</td><td><div class="chips">${inis(i.id).map(ichip).join('')||'<span class="dim">I11</span>'}</div></td></tr>`).join('')}</tbody></table></div></div>
+ <div class="pn"><h3 style="margin-bottom:10px">Every initiative mapped to COPC</h3><div class="cards">${plan.map(p=>`<div class="card clk" data-p="${p.id}"><h3><span>${p.id} · ${p.t}</span></h3><div class="chips">${LINK[p.id].std.filter(s=>s.startsWith('C:')).map(s=>`<span class="chip">${STD[s]}</span>`).join('')}</div></div>`).join('')}</div></div>`}
 
-// ---- gantt
-function gantt(k){const m=scn[k],tot=m.reduce((a,b)=>a+b,0);let x=0;
- document.getElementById('gantt').innerHTML=phases.map((p,i)=>{const l=x/tot*100,w=m[i]/tot*100;x+=m[i];return `<div class="gl2"><b>${p.t}</b><small>${p.d}</small></div><div class="track"><div class="seg" style="left:${l}%;width:${w}%;background:${p.col}">&nbsp;${m[i]} mo${p.now?' · now':''}</div>${p.now?`<div class="now" style="left:calc(${l}% + 2px)"></div>`:''}</div>`}).join('')+`<div></div><div class="sub">Total: ${tot} months · ${S.S[1].toLowerCase()}, not committed</div>`;
- document.getElementById('scnote').textContent=scnNote[k]}
-gantt(1);
-const tog=(id,fn)=>document.getElementById(id).onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#'+id+' button').forEach(z=>z.classList.toggle('on',z==b));fn(b)};
-tog('scn',b=>gantt(+b.dataset.k));
-tog('flt',b=>{const f=b.dataset.f;document.querySelectorAll('.cell').forEach(c=>c.classList.toggle('dim',f!='all'&&!c.dataset.fw.includes(f)))});
-tog('cflt',b=>{const f=b.dataset.f;document.querySelectorAll('#ctbl tr[data-st]').forEach(r=>r.style.display=(f=='all'||r.dataset.st==f)?'':'none')});
-tog('pflt',b=>{const f=b.dataset.f;document.querySelectorAll('tr[data-cat]').forEach(r=>r.style.display=(f=='all'||r.dataset.cat==f)?'':'none')});
+// ================= 3 · GPTW =================
+function pGptw(){
+ const pts=TRUST.map((t,i)=>{const a=(-90+i*72)*Math.PI/180;return [150+105*Math.cos(a),140+105*Math.sin(a)]});
+ const poly=pts.map(p=>p.join(',')).join(' ');
+ return `<div class="phead"><div><div class="eyebrow">Standard 2 of 3</div><h1>Great Place to Work</h1><p>${T('GPTW')} certifies employers using a confidential employee survey, the ${T('Trust Index')}, plus a company questionnaire. Certification is a <b>strategic goal</b>. No score is shown because none has been measured.</p></div><div>${stepper(0)}</div></div>
+ <div class="grid g4">${stat('Not yet','Official Trust Index: NOT YET MEASURED','N','r')}${stat('3 of 5','Trust dimensions with an indirect signal','C')}${stat('4 of 10','Experience topics with any evidence','C')}${stat('I10','Next step: internal baseline survey','R','y')}</div>
+ <div class="grid g2"><div class="pn"><h3>The Trust Model</h3><svg viewBox="0 0 300 280" style="width:100%;max-width:420px;display:block;margin:auto" role="img" aria-label="Trust model with five dimensions, none measured">
+  <polygon points="${poly}" fill="rgba(121,65,127,.12)" stroke="rgba(224,177,230,.4)" stroke-dasharray="4 4"/>
+  ${pts.map(p=>`<line x1="150" y1="140" x2="${p[0]}" y2="${p[1]}" stroke="rgba(255,255,255,.12)"/>`).join('')}
+  <circle cx="150" cy="140" r="34" fill="#22132e" stroke="rgba(255,255,255,.2)"/><text x="150" y="137" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">No score</text><text x="150" y="150" text-anchor="middle" fill="#bfb0c9" font-size="8">survey not run</text>
+  ${TRUST.map((t,i)=>`<g class="tdim" data-d="${i}" style="cursor:pointer"><circle cx="${pts[i][0]}" cy="${pts[i][1]}" r="22" fill="${t.curS=='V'?'rgba(130,184,255,.25)':'rgba(255,255,255,.06)'}" stroke="${t.curS=='V'?'#82b8ff':'rgba(255,255,255,.3)'}" stroke-dasharray="${t.curS=='V'?'0':'3 3'}"/><text x="${pts[i][0]}" y="${pts[i][1]+3}" text-anchor="middle" fill="#fff" font-size="8.5" font-weight="700">${t.d}</text></g>`).join('')}</svg>
+  <div class="legend" style="justify-content:center"><span><i class="dot" style="background:#82b8ff"></i>Indirect signal found</span><span><i class="dot cN"></i>Not measured</span></div></div>
+ <div class="pn"><h3>Certification journey (Egypt)</h3><div style="margin-top:10px">${GJ.map((s,i)=>`<div class="mrow" style="grid-template-columns:30px minmax(0,1fr) auto"><span class="qn" style="width:26px;height:26px;font-size:11px;${i?'background:rgba(255,255,255,.1);color:#fff':''}">${i+1}</span><span>${s}</span>${i==0?st('E'):st('R')}</div>`).join('')}</div>
+  <div class="gapnote" style="margin-top:10px">Steps follow the general GPTW process. Egypt-specific eligibility, fees and timing are <b>not verified</b>: the GPTW website could not be opened from this build environment. Confirm with GPTW before planning dates.</div>
+  <div class="callout">Surveys are confidential. The plan uses team-level results only, with no monitoring of individuals.</div></div></div>
+ <div class="pn"><h3 style="margin-bottom:12px">Five dimensions: expected, current, experienced</h3><div class="cards" id="tcards">${TRUST.map((t,i)=>`<div class="card" data-dc="${i}"><h3><span>${t.d}</span>${st(t.curS)}</h3><p>${t.plain}</p><dl class="kv"><dt>Expected</dt><dd>${t.exp}</dd><dt>Current</dt><dd>${t.cur}</dd><dt>Experienced</dt><dd>${st('N')} survey needed</dd><dt>Working well</dt><dd>${t.well}</dd><dt>Missing</dt><dd>${t.miss}</dd><dt>Owner</dt><dd>${t.own}</dd><dt>Measure</dt><dd>${t.meas}</dd></dl></div>`).join('')}</div></div>
+ <div class="pn"><h3 style="margin-bottom:12px">Employee and interpreter experience</h3><div class="heat">${EXT.map(e=>`<div class="cell ${e[2]=='V'?'A':'N'}" style="cursor:default"><span>${e[0]}</span><small>${e[1]}</small></div>`).join('')}</div>
+ <p class="dim" style="font-size:11px;margin-top:8px">Amber = some evidence exists; striped = not measured.</p></div>`}
 
-// ---- drill-downs
-const mod=document.getElementById('mod'),box=document.getElementById('box');
-document.addEventListener('click',e=>{
- if(e.target==mod||e.target.closest('.x')){mod.classList.remove('on');return}
- const p=e.target.closest('[data-p]');if(p){openP(p.dataset.p);return}
- const a=e.target.closest('[data-a]');if(a){openA(a.dataset.a);return}
- const g=e.target.closest('[data-g]');if(g){go('goals');setTimeout(()=>document.getElementById('goal'+g.dataset.g).scrollIntoView({behavior:'smooth',block:'center'}),350)}
-});
-document.addEventListener('keydown',e=>{if(e.key=='Escape')mod.classList.remove('on')});
-function openA(id){const a=areas.find(z=>z.id==id),p=plan.find(x=>x.id==a.ini);
- box.innerHTML=`<button class="x" aria-label="Close">×</button><span class="st ${sCls(a.s)}">${sTxt(a.s)}</span> <span class="conf c${a.conf}">Confidence: ${confT[a.conf]}</span><h3 style="margin-top:8px">${a.t}</h3><div>${a.gap}</div>
- ${a.evid.length?`<ul style="margin:12px 0 0 18px;font-size:13px">${a.evid.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
- <dl class="kv"><dt>Source</dt><dd>${a.src}</dd><dt>Evidence levels</dt><dd>Documented: ${lvl(a.d)} · Implemented: ${lvl(a.i)} · Experienced: ${lvl(a.e)}</dd><dt>COPC R8.0</dt><dd>${a.copc.map(cName).join(' · ')}</dd><dt>GPTW</dt><dd>${a.gptw}</dd><dt>KALAM Way</dt><dd>${a.kw}</dd><dt>Goals</dt><dd>${a.goal.map(goalChip).join('')}</dd><dt>Initiative</dt><dd><span class="chip" data-p="${p.id}" style="cursor:pointer">${p.id} ${p.t}</span></dd><dt>Owner</dt><dd>${a.dept} (proposed, awaiting approval)</dd><dt>Target date</dt><dd>Phase ${p.phase} · date set after baseline</dd><dt>Progress</dt><dd><div class="bar hatch" style="width:160px"></div><span class="sub">Not started</span></dd></dl>`;
- mod.classList.add('on')}
-function openP(id){const p=plan.find(x=>x.id==id),a=areas.find(z=>z.id==p.area);
- box.innerHTML=`<button class="x" aria-label="Close">×</button>${catTag(p.cat)} <span class="score">${p.score}</span><h3 style="margin-top:8px">${p.id} · ${p.t}</h3>
- <div class="grid g2" style="margin-top:8px"><div class="alert" style="font-size:12px"><div><b>Now</b><br>${p.now}</div></div><div class="alert p" style="font-size:12px;border-left-color:var(--g)"><div><b>Future</b><br>${p.fut}</div></div></div>
- <dl class="kv"><dt>Deliverables</dt><dd>${p.del.join(' · ')}</dd><dt>Steps</dt><dd>${p.steps.map((s,i)=>`${i+1}. ${s}`).join('<br>')}</dd><dt>Department</dt><dd>${p.dept}</dd><dt>Owner</dt><dd>Awaiting approval</dd><dt>Supporting</dt><dd>${p.support}</dd><dt>Resources</dt><dd>${p.res}</dd><dt>Budget</dt><dd><span class="st sE">To price (Finance)</span></dd><dt>Dates</dt><dd>Phase ${p.phase} · start and end set after baseline</dd><dt>Success KPI</dt><dd>${p.kpi}</dd><dt>Benefit</dt><dd>${p.ben} <span class="st sR">Proposed</span></dd><dt>Goals</dt><dd>${p.goal.map(goalChip).join('')}</dd><dt>Frameworks</dt><dd>${p.fw}</dd><dt>Area</dt><dd>${a?`<span class="st ${sCls(a.s)}" data-a="${a.id}" style="cursor:pointer">${a.t}</span>`:'—'}</dd></dl>`;
- mod.classList.add('on')}
-const hs=location.hash.slice(1);if(screens.some(s=>s[0]==hs))go(hs);
+// ================= 4 · KALAM WAY =================
+function pKw(){
+ const cell=(v,k)=>v=='Y'?`<span class="st ${k}">Yes</span>`:v=='P'?`<span class="st sS">Partly</span>`:v=='G'?`<span class="st kG">Gap</span>`:`<span class="dim">—</span>`;
+ const overall=e=>e.d=='G'?['kG','Gap']:e.e=='Y'?['kE','Experienced']:e.i=='Y'||e.i=='P'?['kI','Implemented (partly)']:e.d=='Y'||e.d=='P'?['kD','Documented']:['sN','Not assessed'];
+ return `<div class="phead"><div><div class="eyebrow">Standard 3 of 3</div><h1>KALAM Way</h1><p>KALAM’s own way of working. Each element is checked three ways: ${T('Documented')}, ${T('Implemented')} and ${T('Experienced')}.</p></div><a class="chip y" href="https://kalam.cx/kalam-way-books" target="_blank" rel="noopener">KALAM Way Books ↗</a></div>
+ <div class="pn"><div class="tw"><table class="tbl"><thead><tr><th>Element</th><th>Documented</th><th>Implemented</th><th>Experienced</th><th>Status</th><th>Source</th><th>Links to</th></tr></thead><tbody>
+ ${KWE.map(e=>{const o=overall(e);return `<tr><td><b>${e.t}</b></td><td>${cell(e.d,'kD')}</td><td>${cell(e.i,'kI')}</td><td>${cell(e.e,'kE')}</td><td><span class="st ${o[0]}">${o[1]}</span></td><td class="mut">${/Books/.test(e.src)?`<a href="https://kalam.cx/kalam-way-books" target="_blank" rel="noopener">${e.src}</a>`:e.src}</td><td class="mut">${e.c}</td></tr>`}).join('')}</tbody></table></div>
+ <p class="dim" style="font-size:11px;margin-top:8px">Exact section links inside the KALAM Way Books are not available, so each row links to the books page. Implemented and experienced need evidence from Phase 1.</p></div>
+ <div class="grid g2"><div class="pn"><h3>Competency books</h3><div style="margin-top:10px">${kway.map(k=>`<div class="mrow" style="grid-template-columns:minmax(0,1.4fr) minmax(0,2fr)"><span>${k.b}</span><div style="display:flex;gap:3px">${[1,2,3,4,5].map(l=>`<i style="flex:1;height:18px;border-radius:4px;background:${k.gap?'repeating-linear-gradient(45deg,rgba(255,107,133,.25) 0 4px,transparent 4px 8px)':'linear-gradient(90deg,var(--plum2),var(--pl))'};opacity:${k.gap?1:.4+l*.12}" title="Level ${l}"></i>`).join('')}</div></div>`).join('')}</div>
+  <div class="callout"><b>Gap:</b> no operations / interpretation book. Initiative ${'<button class="chip cl" data-p="I9">I9</button>'} drafts one in the same format.</div></div>
+ <div class="pn"><h3>How KALAM Way connects the standards</h3><svg viewBox="0 0 320 210" style="width:100%;max-width:400px;display:block;margin:8px auto" role="img" aria-label="KALAM Way links COPC and GPTW">
+  <path d="M160 40 L60 165 L260 165 Z" fill="none" stroke="var(--yel)" stroke-opacity=".5" stroke-dasharray="5 5" style="animation:flow 1.4s linear infinite"/>
+  <circle cx="160" cy="40" r="32" fill="#4B154A" stroke="#FFC629"/><text x="160" y="44" text-anchor="middle" fill="#fff" font-size="10" font-weight="700">KALAM Way</text>
+  <circle cx="60" cy="165" r="32" fill="#22132e" stroke="#e0b1e6"/><text x="60" y="169" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">COPC</text>
+  <circle cx="260" cy="165" r="32" fill="#22132e" stroke="#e0b1e6"/><text x="260" y="169" text-anchor="middle" fill="#fff" font-size="11" font-weight="700">GPTW</text></svg>
+  <dl class="kv"><dt>KALAM Way ↔ COPC</dt><dd>Competency books → 3.2 Training, 3.3 Verifying skills; performance → 3.4 Coaching, 3.5 Staff performance</dd><dt>KALAM Way ↔ GPTW</dt><dd>Values → Credibility, Respect; career levels → Fairness</dd><dt>COPC ↔ GPTW</dt><dd>3.6 Employee experience ↔ Trust Index; 3.4 Coaching ↔ Respect</dd></dl></div></div>`}
 
-</script>
-</body>
-</html>
+// ================= 5 · TRANSFORMATION MAP =================
+const MCOL=['Goal','Standard requirement','Department','Area','Project','KPI','Benefit'];
+const chainOf=p=>{const L=LINK[p.id];return [p.goal.map(g=>'g:'+g),L.std.map(s=>'s:'+s),L.dep.map(d=>'d:'+d),['a:'+p.area],['p:'+p.id],['k:'+p.id],['b:'+p.id]]};
+let mapSel='p:I2';
+function mapNodes(){const cols=MCOL.map(()=>new Map());
+ plan.forEach(p=>chainOf(p).forEach((ids,c)=>ids.forEach(id=>{if(!cols[c].has(id))cols[c].set(id,mLabel(id))})));
+ cols[0]=new Map([...cols[0]].sort());cols[1]=new Map([...cols[1]].sort((a,b)=>Object.keys(STD).indexOf(a[0].slice(2))-Object.keys(STD).indexOf(b[0].slice(2))));
+ cols[2]=new Map([...cols[2]].sort((a,b)=>DEPTS.indexOf(a[0].slice(2))-DEPTS.indexOf(b[0].slice(2))));return cols}
+function mLabel(id){const [t,...r]=id.split(':'),v=r.join(':');return t=='g'?`G${v} ${G(v).t}`:t=='s'?STD[v]:t=='d'?v:t=='a'?A(v).t:t=='p'?`${v} ${P(v).t}`:t=='k'?P(v).kpi:P(v).ben}
+function pMap(){const cols=mapNodes();
+ return `<div class="phead"><div><div class="eyebrow">The key view</div><h1>Transformation map</h1><p>Every change traced from a company goal to the business benefit. Tap any box to see what it connects to.</p></div><div class="legend"><span><i class="dot" style="background:var(--yel)"></i>Selected chain</span></div></div>
+ <div class="pn"><div id="mapwrap"><div id="tmap"><svg id="msvg"></svg>${cols.map((m,c)=>`<div class="col"><h4>${MCOL[c]}</h4>${[...m].map(([id,l])=>`<button class="mn" data-mn="${esc(id)}">${esc(l)}</button>`).join('')}</div>`).join('')}</div></div>
+ <p class="dim" style="font-size:11px;margin-top:6px">Swipe sideways on small screens. Links are KALAM’s internal mapping.</p></div>
+ <div class="pn" id="mpanel"></div>`}
+function mapSelect(id){mapSel=id;const inits=plan.filter(p=>chainOf(p).flat().includes(id));const on=new Set(inits.flatMap(p=>chainOf(p).flat()));
+ $$('#tmap .mn').forEach(b=>{const k=b.dataset.mn;b.classList.toggle('sel',k==id);b.classList.toggle('hl',on.has(k)&&k!=id);b.classList.toggle('fade',!on.has(k))});
+ drawMap(inits);$('#mpanel').innerHTML=mapPanel(id,inits)}
+function drawMap(inits){const svg=$('#msvg'),box=$('#tmap');if(!svg||!box.offsetWidth)return;inits=inits||plan.filter(p=>chainOf(p).flat().includes(mapSel));
+ const r0=box.getBoundingClientRect(),pos={};$$('#tmap .mn').forEach(b=>{const r=b.getBoundingClientRect();pos[b.dataset.mn]={l:r.left-r0.left,r:r.right-r0.left,y:r.top-r0.top+r.height/2}});
+ const seen=new Set();let d='';inits.forEach(p=>{const ch=chainOf(p);for(let c=0;c<6;c++)ch[c].forEach(a=>ch[c+1].forEach(b=>{const k=a+'>'+b;if(seen.has(k)||!pos[a]||!pos[b])return;seen.add(k);const A1=pos[a],B1=pos[b],mx=(A1.r+B1.l)/2;d+=`<path d="M${A1.r} ${A1.y} C${mx} ${A1.y},${mx} ${B1.y},${B1.l} ${B1.y}"/>`}))});
+ svg.setAttribute('viewBox',`0 0 ${box.offsetWidth} ${box.offsetHeight}`);svg.innerHTML=d}
+function mapPanel(id,inits){
+ if(id=='p:I2')return `<div class="ph"><div><div class="eyebrow">Worked example</div><h3>Interpreter payment cycle</h3></div><div class="chips">${[2,3,5].map(gchip).join('')}</div></div>
+ <div class="scope">${PAYX.scope.map((s,i)=>`${i?'<i>→</i>':''}<span>${s}</span>`).join('')}</div>
+ <div class="grid g3" style="margin-top:14px"><div class="card"><h4>Current gaps</h4><ul class="plist">${PAYX.gaps.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card"><h4>Required improvement</h4><ul class="plist">${PAYX.imp.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card"><h4>Outcomes</h4><ul class="plist">${PAYX.out.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+ <dl class="kv"><dt>Departments</dt><dd>${PAYX.depts}</dd><dt>Goals</dt><dd>G2 Cost & efficiency · G3 People (employee experience) · G5 Operational excellence</dd><dt>Standards</dt><dd>COPC 3.16, 3.12, 3.13 (internal mapping) · GPTW Fairness, Respect, Credibility</dd><dt>KPI</dt><dd>${P('I2').kpi} ${st('N')}</dd></dl>
+ <div class="chips" style="margin-top:12px"><button class="chip y" data-proc="pay">See the payment process map →</button>${ichip('I2')}</div>`;
+ const grp=c=>[...new Set(inits.flatMap(p=>chainOf(p)[c]))].filter(x=>x!=id).map(mLabel);
+ return `<div class="ph"><div><div class="eyebrow">${MCOL[['g','s','d','a','p','k','b'].indexOf(id[0])]}</div><h3>${esc(mLabel(id))}</h3></div><span class="pill">${inits.length} initiative${inits.length==1?'':'s'}</span></div>
+ <div class="grid g3">${[0,1,2,3,4,6].filter(c=>c!=['g','s','d','a','p','k','b'].indexOf(id[0])).map(c=>`<div class="card"><h4>${MCOL[c]}</h4><div class="chips">${grp(c).map(x=>`<span class="chip">${esc(x)}</span>`).join('')||'<span class="dim">—</span>'}</div></div>`).join('')}</div>
+ <div class="chips" style="margin-top:12px">${inits.map(p=>ichip(p.id)).join('')}<button class="chip y" data-mn="p:I2">Back to the payment example</button></div>`}
+
+// ================= 6 · OPERATIONS / IMS =================
+let procSel='pay',procView='both';
+function pOps(){const cnt=OWN.map(o=>[o,opsAreas.filter(a=>a.o==o).length]);const mx=Math.max(...cnt.map(c=>c[1]));
+ const ranked=[...autos].sort((a,b)=>b.score-a.score);
+ return `<div class="phead"><div><div class="eyebrow">Phase 1 of the company plan</div><h1>Operations & IMS</h1><p>Twelve improvement areas. Every one involves Operations; most need a partner department. <b>Technology is the enabler, not the goal.</b></p></div></div>
+ <div class="grid g2"><div class="pn"><h3 style="margin-bottom:8px">Who owns the 12 areas</h3><div class="bars">${cnt.map(c=>meter(c[0],c[1],mx,c[1],c[0]=='Pure Ops'?'var(--yel)':'var(--pl)')).join('')}</div></div>
+ <div class="pn"><h3 style="margin-bottom:8px">Status of the 12 areas</h3>${donut([['R','#ff6b85','Critical gap'],['A','#ffa94d','Needs work'],['N','#6f6479','Not assessed']].map(s=>[opsAreas.filter(a=>a.s==s[0]).length,s[1],s[2]]),'12','areas')}</div></div>
+ <div class="pn"><h3 style="margin-bottom:12px">Improvement areas</h3><div class="cards">${opsAreas.map(a=>`<div class="card clk" data-p="${a.ini}"><h3><span><i class="dot c${a.s}"></i> ${a.t}</span><span class="tag">${a.o}</span></h3><p>${a.ev}</p><div class="chips" style="margin-top:8px">${a.g.map(g=>`<span class="chip">G${g}</span>`).join('')}<span class="chip">COPC ${a.copc.join(', ')}</span><span class="chip y">${a.ini}</span></div></div>`).join('')}</div></div>
+ <div class="pn"><div class="ph"><div><div class="eyebrow">Main 2027 focus</div><h2>Automation & AI</h2><p>Manual work → automated, with a person approving at every control point.</p></div></div>
+ <div class="grid g2"><div class="mx"><h4>Priority: impact vs effort</h4>${matrix()}</div><div><h4>Ranking (team judgement, proposed)</h4><div class="tw"><table class="tbl"><thead><tr><th>#</th><th>Automation</th><th>Score</th><th>Depends on</th></tr></thead><tbody>${ranked.map((a,i)=>`<tr><td class="id">${i+1}</td><td>${a.t} ${st(a.st)}</td><td><span class="sbar" style="width:${a.score*10}px"></span> ${a.score}</td><td class="mut">${a.deps}</td></tr>`).join('')}</tbody></table></div><p class="dim" style="font-size:10.5px;margin-top:6px">Score = impact + feasibility + risk reduced − effort (each 1–3).</p></div></div>
+ <div class="cards" style="margin-top:14px">${autos.map(a=>`<div class="card"><h3><span>${a.t}</span>${st(a.st)}</h3><div class="fl"><span class="box m">${a.manual}</span><span class="ar">→</span><span class="box a">${a.auto}</span></div>
+  <dl class="kv"><dt>${T('Human checkpoint')}</dt><dd>${a.ctrl.join(' · ')}</dd><dt>AI opportunity</dt><dd>${a.ai}</dd><dt>Systems</dt><dd>${a.sys}</dd><dt>Departments</dt><dd>${a.dep}</dd><dt>Risk & safeguard</dt><dd>${a.risk}</dd>${mrows(a.m)}</dl></div>`).join('')}</div></div>
+ <div class="pn" id="procs"><div class="ph"><div><div class="eyebrow">How the work flows</div><h2>Process maps: today vs future</h2><p>${T('Swimlanes','Swimlane')} show who does each step; yellow dashed lines are ${T('handoffs','Handoff')}.</p></div>
+  <div style="display:flex;gap:8px;flex-wrap:wrap"><div class="seg" id="pseg">${PROC.map(p=>`<button data-k="${p.id}" class="${p.id==procSel?'on':''}">${p.t}</button>`).join('')}</div><div class="seg" id="vseg">${[['cur','Today'],['fut','Future'],['both','Side by side']].map(v=>`<button data-v="${v[0]}" class="${v[0]==procView?'on':''}">${v[1]}</button>`).join('')}</div></div></div>
+  <div id="pbody"></div></div>`}
+const ML={time:'Time saved',acc:'Accuracy',err:'Errors prevented',cap:'Capacity released',fin:'Financial impact'};
+function mrows(m){const k=Object.keys(ML),y=k.filter(x=>m[x]!=NM),n=k.filter(x=>m[x]==NM);return y.map(x=>`<dt>${ML[x]}</dt><dd>${m[x]}</dd>`).join('')+(n.length?`<dt>Not measured yet</dt><dd class="dim">${n.map(x=>ML[x].toLowerCase()).join(', ')} (baseline in Phase 1)</dd>`:'')}
+function matrix(){const W=320,H=230,x=e=>50+(e-1)*110,y=i=>190-(i-1)*75;let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Impact versus effort matrix"><rect x="40" y="20" width="270" height="180" rx="10" fill="rgba(255,255,255,.03)" stroke="rgba(255,255,255,.1)"/><rect x="40" y="20" width="120" height="90" rx="10" fill="rgba(61,220,151,.07)"/><text x="46" y="34" style="fill:#3ddc97">Do first</text><text x="175" y="218">Effort →</text><text x="12" y="110" transform="rotate(-90 12 110)">Impact →</text>`;
+ const used={};autos.forEach((a,i)=>{const k=a.r.eff+'-'+a.r.imp;used[k]=(used[k]||0)+1;const n=used[k]-1;const cx=x(a.r.eff)+((n%3)-1)*30,cy=y(a.r.imp)+(Math.floor(n/3))*24-8;s+=`<g><circle cx="${cx}" cy="${cy}" r="${7+a.r.fea*2}" fill="${a.st=='P'?'rgba(255,198,41,.55)':'rgba(224,177,230,.45)'}" stroke="#fff" stroke-opacity=".5"><title>${esc(a.t)}</title></circle><text x="${cx}" y="${cy+3}" text-anchor="middle" style="fill:#fff;font-weight:700">${i+1}</text></g>`});
+ return s+`</svg><div class="legend" style="margin-top:4px">${autos.map((a,i)=>`<span><b style="color:var(--yel)">${i+1}</b> ${a.t}</span>`).join('')}</div>`}
+const wrapT=(t,n)=>{const L=[];let c='';t.split(' ').forEach(x=>{if((c+' '+x).trim().length>n&&c){L.push(c);c=x}else c=(c+' '+x).trim()});if(c)L.push(c);return L};
+let svgN=0;
+function swim(m,label){const id='ar'+(svgN++),L=m.lanes.length,cols=Math.max(...m.n.map(n=>n[2]))+1,LW=96,CW=124,LH=84,TOP=26,W=LW+cols*CW+8,H=TOP+L*LH+4,bw=110,bh=60;
+ const pos={};m.n.forEach(n=>pos[n[0]]={x:LW+n[2]*CW+CW/2,y:TOP+n[1]*LH+LH/2,lane:n[1],ty:n[3]});
+ let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="${esc(label)}"><defs><marker id="${id}" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10z" fill="#d8cde0"/></marker></defs><text x="8" y="17" class="lt" style="fill:#FFC629;font-size:12px">${esc(label)}</text>`;
+ m.lanes.forEach((l,i)=>{const ls=wrapT(l,13);s+=`<rect class="lane ${i%2?'alt':''}" x="0" y="${TOP+i*LH}" width="${W}" height="${LH}"/><text class="lt">${ls.map((t,k)=>`<tspan x="8" y="${TOP+i*LH+LH/2+4+(k-(ls.length-1)/2)*13}">${esc(t)}</tspan>`).join('')}</text>`});
+ s+=`<line x1="${LW-6}" y1="${TOP}" x2="${LW-6}" y2="${H}" stroke="rgba(255,255,255,.12)"/>`;
+ m.e.forEach(e=>{const a=pos[e[0]],b=pos[e[1]];if(!a||!b)return;const ho=a.lane!=b.lane;let d,lx,ly;
+  if(b.x>a.x){const x1=a.x+bw/2,x2=b.x-bw/2-2,mx=(x1+x2)/2;d=`M${x1} ${a.y} C${mx} ${a.y},${mx} ${b.y},${x2} ${b.y}`;lx=mx;ly=(a.y+b.y)/2-4}
+  else{const y1=a.y+bh/2,y2=b.y+bh/2+2;d=`M${a.x} ${y1} C${a.x} ${y1+40},${b.x} ${y2+40},${b.x} ${y2}`;lx=(a.x+b.x)/2;ly=Math.max(y1,y2)+30}
+  s+=`<path class="ed ${ho?'ho':''}" d="${d}" marker-end="url(#${id})"/>`;if(e[2])s+=`<text class="el" x="${lx}" y="${ly}" text-anchor="middle">${esc(e[2])}</text>`});
+ m.n.forEach(n=>{const p=pos[n[0]],t=n[3],base=t.replace(/[*!]/g,''),nw=t.includes('*'),pn=t.includes('!');const ls=wrapT(n[4],17).slice(0,3);
+  s+=`<g class="nd ${base} ${nw?'new':''} ${pn?'pain':''}">`;
+  if(base=='dec')s+=`<polygon points="${p.x},${p.y-bh/2-4} ${p.x+bw/2},${p.y} ${p.x},${p.y+bh/2+4} ${p.x-bw/2},${p.y}"/>`;
+  else s+=`<rect x="${p.x-bw/2}" y="${p.y-bh/2}" width="${bw}" height="${bh}" rx="${base=='start'||base=='end'?bh/2:9}"/>`;
+  s+=`<text text-anchor="middle" style="font-size:${base=='dec'?9.5:10}px">${ls.map((l,k)=>`<tspan x="${p.x}" y="${p.y+8+(k-(ls.length-1)/2)*12}">${esc(l)}</tspan>`).join('')}</text>`;
+  if(nw)s+=`<text class="badge" x="${p.x+bw/2-4}" y="${p.y-bh/2+10}" text-anchor="end" style="fill:#FFC629">★ new</text>`;
+  if(pn)s+=`<text class="badge" x="${p.x+bw/2-4}" y="${p.y-bh/2+10}" text-anchor="end" style="fill:#ff6b85">! pain</text>`;
+  if(base=='ctrl')s+=`<text class="badge" x="${p.x-bw/2+5}" y="${p.y-bh/2+10}" style="fill:#3ddc97">✓ control</text>`;
+  s+='</g>'});return s+'</svg>'}
+function renderProc(){const p=PROC.find(x=>x.id==procSel);const b=$('#pbody');if(!b)return;svgN=0;
+ const maps=procView=='both'?`<div class="grid" style="grid-template-columns:minmax(0,1fr)"><div class="pmap">${swim(p.cur,'Today')}</div><div class="pmap">${swim(p.fut,'Future (proposed)')}</div></div>`:`<div class="pmap">${swim(p[procView],procView=='cur'?'Today':'Future (proposed)')}</div>`;
+ b.innerHTML=`${maps}<div class="legend" style="margin:10px 0"><span><i class="dot" style="background:#e0b1e6"></i>Start / end</span><span><i class="dot cA"></i>Decision</span><span><i class="dot cG"></i>Control</span><span style="color:var(--yel)">★ New step</span><span style="color:var(--r)">! Pain point</span><span style="color:var(--yel)">- - Handoff</span></div>
+ <h4>${T('SIPOC')}: the process on one line</h4><div class="sipoc">${['Suppliers','Inputs','Process','Outputs','Customers'].map((h,i)=>`<div><b>${h}</b>${p.sipoc[i]}</div>`).join('')}</div>
+ <div class="grid g2" style="margin-top:14px"><div><h4>What could go wrong, and the control</h4><div class="tw"><table class="tbl"><thead><tr><th>Failure</th><th>Effect</th><th>Control</th></tr></thead><tbody>${p.fmea.map(f=>`<tr><td>${f[0]}</td><td class="mut">${f[1]}</td><td>${f[2]}</td></tr>`).join('')}</tbody></table></div></div>
+ <div><h4>${T('PDCA')} improvement cycle</h4><div class="pdca">${['Plan','Do','Check','Act'].map((h,i)=>`<div><b>${h}</b>${p.pdca[i]}</div>`).join('')}</div>
+ <div class="grid g2" style="margin-top:10px;gap:8px"><div class="card"><h4 style="color:var(--r)">Today</h4><ul class="plist">${p.pain.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card"><h4 style="color:var(--g)">Future</h4><ul class="plist">${p.gain.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
+ <div class="chips" style="margin-top:10px">${p.g.map(gchip).join('')}<span class="chip">COPC ${p.copc}</span>${ichip(p.ini)}</div></div></div>`}
+
+// ================= 7 · DELIVERED PROJECTS =================
+function pProj(){const vt={m:['sV','Measured'],q:['sR','Qualitative'],x:['sN','Not measured']};
+ const pst=s=>/progress/i.test(s)?st('P'):`<span class="st sR">${s}</span>`;
+ const mw=[['Submission accuracy','Not measured','No accuracy % is claimed. 28 of 28 submissions were confirmed by the portal.','E'],['Errors caught before submission','3 of 28','Missing-document cases flagged before submitting, not after','V'],['Deadline compliance','Not measured','Deadlines are now visible per batch; compliance not yet tracked','E'],['Processing time','4.5 min','Per applicant (batch 2: 54 min ÷ 12)','C'],['Manual hours avoided','≈12–60 h','Over 2 batches, from team estimates','S'],['Capacity released','≈1.5–7.5 days','Person-days at 8 h per day','S'],['Risk reduced','28 of 28','CVs redacted before upload','V']];
+ return `<div class="phead"><div><div class="eyebrow">Showcase</div><h1>Delivered projects</h1><p>What changed, and the value, tagged by how sure we are: ${['V','C','S','P'].map(st).join(' ')}</p></div></div>
+ <div class="cards" style="grid-template-columns:repeat(auto-fill,minmax(min(100%,520px),1fr))">${done.map(d=>`<div class="card"><h3><span>${d.t}</span>${pst(d.status)}</h3>
+  <div class="grid g2" style="gap:8px;margin-top:8px"><div class="card" style="padding:10px"><h4 style="color:var(--r)">Before</h4><p>${d.problem}</p><div class="fl" style="margin-top:6px">${d.before.map(b=>`<span class="box m">${b}</span>`).join('')}</div></div>
+  <div class="card" style="padding:10px"><h4>What changed</h4><p>${d.did}</p></div>
+  <div class="card" style="padding:10px"><h4 style="color:var(--g)">After</h4><div class="fl">${d.after.map(a=>`<span class="box ${a[1]}">${a[0]}</span>`).join('')}</div></div>
+  <div class="card" style="padding:10px"><h4 style="color:var(--yel)">Value</h4>${d.value.map(v=>`<div style="font-size:12px;margin-bottom:4px"><span class="st ${vt[v[0]][0]}">${vt[v[0]][1]}</span> <b>${v[1]}:</b> ${v[2]}</div>`).join('')}</div></div>
+  <details style="margin-top:10px"><summary class="mut" style="cursor:pointer;font-size:12px">Figures, source and sustainability</summary><div class="tw"><table class="tbl" style="margin-top:6px"><thead><tr><th>Measure</th><th>Before</th><th>After</th><th>Status</th></tr></thead><tbody>${d.kpis.map(k=>`<tr><td>${k[0]}</td><td class="mut">${k[1]}</td><td>${k[2]}</td><td>${st(k[4])}</td></tr>`).join('')}</tbody></table></div>
+  <dl class="kv"><dt>Owner</dt><dd>${d.sus.owner}</dd><dt>Sustained</dt><dd>${d.sus.sustained}</dd><dt>Note</dt><dd>${d.sus.note}</dd><dt>Source</dt><dd class="mut">${d.src}</dd></dl></details></div>`).join('')}</div>
+ <div class="pn"><div class="ph"><div><div class="eyebrow">Deep dive</div><h2>MasterWord enrolment automation ${st('P')}</h2></div></div>
+ <div class="fl" style="margin-bottom:14px"><span class="box m">Before: errors found only <b>after</b> submission</span><span class="ar">→</span><span class="box a">Now: caught <b>before</b> submission, with deadlines visible</span></div>
+ <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:8px">${mw.map(m=>`<div class="stat"><div class="big ${m[3]=='E'?'':'g'}" style="font-size:24px">${m[1]}</div><p><b style="color:#fff">${m[0]}</b><br>${m[2]}</p>${st(m[3])}</div>`).join('')}</div>
+ <div class="grid g2" style="margin-top:16px"><div><h4>Time for two batches (28 applicants)</h4>
+  ${meter('Before, low estimate',16,64,'16 h','var(--r)')}${meter('Before, high estimate',64,64,'64 h','var(--r)')}${meter('After (elapsed, incl. setup)',3.6,64,'3.6 h','var(--g)')}</div>
+ <div><h4>How the figures were reconciled</h4><dl class="kv"><dt>Estimate A</dt><dd>24–32 h per batch (team, 25 Nov)</dd><dt>Estimate B</dt><dd>One person 1–3 days, or 3–4 people (brief, 27 Nov) → 8–24 h per batch at 8 h a day</dd><dt>Before range</dt><dd>8–32 h per batch → 16–64 h for 2 batches ${st('S')}</dd><dt>After</dt><dd>2 h 42 min (16 applicants, incl. setup) + 54 min (12) ≈ 3.6 h ${st('V')}</dd><dt>Avoided</dt><dd>≈12–60 h (16 − 3.6 to 64 − 3.6) ${st('S')}</dd></dl>
+ <div class="gapnote" style="margin-top:8px">The two team estimates do not agree, and neither was timed. Savings stay a range until one manual batch is timed. The tool currently runs from a personal account.</div></div></div></div>`}
+
+// ================= 8 · ROADMAP & BENEFITS =================
+let scnK=1;
+function gantt(){const d=scn[scnK];let s=0;const tot=d.reduce((a,b)=>a+b,0);
+ return `<div class="gantt">${phases.map((p,i)=>{const r=`<div class="grow"><span><b>${p.t}</b></span><div class="gtrack"><div class="gbar" style="left:${s/tot*100}%;width:${d[i]/tot*100}%;background:${p.col}">${d[i]} mo</div></div></div>`;s+=d[i];return r}).join('')}</div><p class="mut" style="font-size:12px;margin-top:8px">Total: <b style="color:#fff">${tot}</b> months ${st('S')} · ${scnNote[scnK]}</p>`}
+function pRoad(){const rk=[...plan].sort((a,b)=>b.score-a.score);
+ return `<div class="phead"><div><div class="eyebrow">2027 → 2028</div><h1>Roadmap & benefits</h1><p>Five phases from baseline to formal assessment. Dates are fixed only after Phase 1 and management approval.</p></div></div>
+ <div class="pn"><div class="ph"><h3>Phase timeline</h3><div class="seg" id="scn">${['Fast','Realistic','Conservative'].map((t,i)=>`<button data-k="${i}" class="${i==scnK?'on':''}">${t}</button>`).join('')}</div></div><div id="gantt">${gantt()}</div></div>
+ <div class="cards" style="margin-top:16px">${phases.map(p=>`<div class="card" style="border-top:3px solid ${p.col}"><h3><span>${p.t}</span>${p.now?'<span class="st sP">Now</span>':''}</h3><p>${p.d}</p><dl class="kv"><dt>Delivers</dt><dd>${p.del}</dd><dt>Milestone</dt><dd>${p.ms}</dd><dt>Owner</dt><dd>${p.own}</dd><dt>Depends on</dt><dd>${p.dep}</dd><dt>KPI</dt><dd>${p.kpi}</dd><dt>Exit</dt><dd>${p.exit}</dd></dl></div>`).join('')}</div>
+ <div class="grid g4">${[['COPC','Clear standards for every operation; problems found and fixed before clients see them; a credential clients recognise.'],['Great Place to Work','Trust, fair pay and development that people feel; lower attrition and easier hiring.'],['Automation & AI','Repetitive work removed; errors caught earlier; supervisors freed for coaching.'],['Growth']].map((b,i)=>i<3?`<div class="pn"><h3>${b[0]} ${st('R')}</h3><p class="mut" style="font-size:12.5px;margin-top:6px">${b[1]}</p><p class="dim" style="font-size:10.5px;margin-top:6px">Benefits stated qualitatively until measured.</p></div>`:`<div class="pn"><h3>Growth</h3><div class="big y" style="margin:6px 0">+20%</div>${st('M')}<p class="mut" style="font-size:12px;margin-top:8px">Client-acquisition %: <b>not available</b>, no evidence yet. Assumption: answered-call capacity becomes billable minutes. Measured by revenue per client per month and new clients per quarter (I1, I13).</p></div>`).join('')}</div>
+ <div class="pn"><div class="ph"><div><h3>Initiative ranking</h3><p>Score = impact + risk + urgency + certification value − effort (team judgement, proposed). Tap a row.</p></div></div><div class="tw"><table class="tbl"><thead><tr><th>#</th><th>Initiative</th><th>Type</th><th>Phase</th><th>Score</th><th>Goals</th><th>Owner</th></tr></thead><tbody>
+ ${rk.map((p,i)=>`<tr class="clk" data-p="${p.id}"><td class="id">${i+1}</td><td><b>${p.id}</b> ${p.t}</td><td><span class="tag" style="color:#fff;background:${CAT[p.cat][1]}">${CAT[p.cat][0]}</span></td><td>${p.phase}</td><td style="white-space:nowrap"><span class="sbar" style="width:${p.score*8}px"></span> ${p.score}</td><td>${p.goal.map(g=>'G'+g).join(' ')}</td><td class="mut">${p.dept}</td></tr>`).join('')}</tbody></table></div></div>
+ <div class="pn"><div class="ph"><div><h3>Team models</h3><p>Who runs the transformation. Model B is recommended.</p></div></div><div class="grid g3">${opts.map(o=>`<div class="card opt ${o.rec?'rec':''}"><h3><span>Model ${o.k} · ${o.t}</span>${o.rec?'<span class="st sP">Recommended</span>':''}</h3><p>${o.d}</p>
+  <div class="org"><span class="top">Executive Sponsor</span><div class="ln"></div><div class="lv">${roles.slice(1,8).map((r,i)=>`<span class="${o.fit[i+1]==2?'':'pt'}">${r.replace(/ Lead| Representative|&.*$/g,'').trim()}</span>`).join('')}</div><div class="ln"></div><span class="pt">Department Champions</span></div>
+  <dl class="kv"><dt>Headcount</dt><dd>${o.hc}</dd><dt>Workload</dt><dd>${o.wl}</dd></dl><p class="dim" style="font-size:10.5px;margin-top:6px">Solid = full-time · dashed = part-time</p></div>`).join('')}</div></div>
+ <div class="grid g2"><div class="pn"><h3>Decisions approved</h3>${decisions.approved.map(d=>`<div class="mrow" style="grid-template-columns:24px minmax(0,1fr)"><span style="color:var(--g);font-weight:800">✓</span><span><b>${d[0]}</b><br><small>${d[1]}</small></span></div>`).join('')}
+  <h3 style="margin-top:14px">Key risks</h3>${risks.map(r=>`<div class="mrow" style="grid-template-columns:minmax(0,1fr) auto"><span><b>${r[0]}</b><br><small>${r[1]}</small></span>${ichip(r[2])}</div>`).join('')}</div>
+ <div class="pn"><h3>Awaiting management approval</h3>${decisions.pending.map((d,i)=>`<div class="mrow" style="grid-template-columns:24px minmax(0,1fr)"><span class="qn" style="width:22px;height:22px;font-size:10px;background:rgba(255,255,255,.1);color:#fff">${i+1}</span><span>${d}</span></div>`).join('')}</div></div>`}
+
+// ================= 9 · REFERENCES =================
+function pRef(){const grp=['Official','Licensed','Internal','Interpretation'],lab={Official:'Official public source',Licensed:'Licensed, not public',Internal:'Internal evidence',Interpretation:'Internal interpretation'};
+ return `<div class="phead"><div><div class="eyebrow">Sources</div><h1>References</h1><p>Every figure on this dashboard comes from one of these. Official sources are separated from KALAM’s own interpretation.</p></div></div>
+ <div class="grid g2">${grp.map(g=>`<div class="pn"><h3>${lab[g]}</h3>${REFS.filter(r=>r[0]==g).map(r=>`<div class="ref"><span class="tag">${g}</span><div>${r[2]?`<a href="${r[2]}" target="_blank" rel="noopener">${r[1]} ↗</a>`:`<b>${r[1]}</b>`}<br><small>${r[3]}</small></div></div>`).join('')}</div>`).join('')}</div>
+ <div class="pn"><h3>Logos and badges</h3><p class="mut" style="font-size:12.5px;margin-top:6px">Official COPC and GPTW logos are not shown: they could not be obtained from an authorised source from this build environment. No badge on this dashboard implies KALAM is certified.</p></div>
+ <div class="pn"><h3 style="margin-bottom:8px">Glossary</h3><dl class="kv" style="grid-template-columns:150px minmax(0,1fr)">${Object.entries(GL).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></div>`}
+
+// ================= MODALS =================
+function modal(h){$('#box').innerHTML='<button class="x" aria-label="Close">×</button>'+h;$('#mod').classList.add('on');$('#box .x').focus()}
+function closeM(){$('#mod').classList.remove('on')}
+function openG(n){const g=G(n),x=gx[n];modal(`<div class="eyebrow">Goal ${n}</div><h3>${GF[n]}</h3><p class="mut">${g.focus}</p>
+ <div class="grid g2" style="margin-top:12px;gap:8px">${stat(x.now,'Current','' )}${stat(x.tgt,'Target','')}</div>
+ <dl class="kv"><dt>KPI</dt><dd>${g.kpi}</dd><dt>Definition</dt><dd>${g.def}</dd><dt>Evidence</dt><dd>${g.fact} ${st(g.ev)}</dd><dt>Source</dt><dd>${g.src}</dd><dt>Period</dt><dd>${g.per}</dd><dt>Target date</dt><dd>${g.date}</dd><dt>Owner</dt><dd>${g.owner}</dd><dt>Departments</dt><dd>${x.depts.join(', ')}</dd><dt>Success</dt><dd>${x.succ}</dd><dt>Benefit</dt><dd>${x.ben}</dd></dl>
+ <h4 style="margin-top:12px">Initiatives</h4><div class="chips">${plan.filter(p=>p.goal.includes(n)).map(p=>`<button class="chip cl" data-p="${p.id}">${p.id} ${p.t}</button>`).join('')}</div>`)}
+function openA(id){const a=A(id),de=v=>v=='V'?'Yes':v=='P'?'Partly':'No evidence';modal(`<div class="eyebrow">Company area</div><h3><i class="dot c${a.s}"></i> ${a.t}</h3><p>${SL[a.s]} · confidence ${({H:'high',M:'medium',L:'low'})[a.conf]}</p>
+ <div class="callout">${a.gap}</div><h4 style="margin-top:12px">Evidence</h4>${a.evid.length?`<ul class="plist">${a.evid.map(e=>`<li>${e}</li>`).join('')}</ul>`:'<div class="gapnote">No evidence yet.</div>'}
+ <dl class="kv"><dt>Source</dt><dd>${a.src}</dd><dt>Documented</dt><dd>${de(a.d)}</dd><dt>Implemented</dt><dd>${de(a.i)}</dd><dt>Experienced</dt><dd>${de(a.e)}</dd><dt>COPC</dt><dd>${a.copc.join(', ')}</dd><dt>GPTW</dt><dd>${a.gptw}</dd><dt>KALAM Way</dt><dd>${a.kw}</dd><dt>Owner</dt><dd>${a.dept}</dd><dt>Goals</dt><dd><div class="chips">${a.goal.map(gchip).join('')}</div></dd><dt>Fix</dt><dd>${ichip(a.ini)} ${P(a.ini).t}</dd></dl>`)}
+function openP(id){const p=P(id),L=LINK[id];modal(`<div class="eyebrow">${id} · ${CAT[p.cat][0]} · Phase ${p.phase}</div><h3>${p.t}</h3>
+ <div class="grid g2" style="gap:8px;margin-top:10px"><div class="card"><h4 style="color:var(--r)">Today</h4><p>${p.now}</p></div><div class="card"><h4 style="color:var(--g)">Future</h4><p>${p.fut}</p></div></div>
+ <dl class="kv"><dt>Delivers</dt><dd>${p.del.join(' · ')}</dd><dt>Steps</dt><dd>${p.steps.join(' → ')}</dd><dt>Lead</dt><dd>${p.dept}</dd><dt>Support</dt><dd>${p.support}</dd><dt>Departments</dt><dd>${L.dep.join(', ')}</dd><dt>Resources</dt><dd>${p.res}</dd><dt>KPI</dt><dd>${p.kpi} ${st('N')}</dd><dt>Benefit</dt><dd>${p.ben}</dd><dt>Standards</dt><dd>${L.std.map(s=>STD[s]).join(' · ')}</dd><dt>Area</dt><dd><button class="chip cl" data-a="${p.area}">${A(p.area).t}</button></dd><dt>Goals</dt><dd><div class="chips">${p.goal.map(gchip).join('')}</div></dd><dt>Ranking</dt><dd>Impact ${p.r.imp} · risk ${p.r.risk} · urgency ${p.r.urg} · effort ${p.r.eff} · certification ${p.r.cert} → <b>${p.score}</b> ${st('R')}</dd></dl>
+ <div class="chips" style="margin-top:12px"><button class="chip y" data-mn="p:${id}">Show on the map →</button></div>`)}
+
+// ================= CHAT GUIDE =================
+const STOP=new Set('a an the of for to in on at and or is are was be been do does did we our us kalam what which who whom where when why how can could would should will i you it its this that these those me my tell show about please give with from by as current currently much many any there their them have has had get know explain mean means list all status now today'.split(' '));
+const stem=w=>w.length>5?w.replace(/(ings?|ed|es|s)$/,''):w.length>4?w.replace(/s$/,''):w;
+const toks=t=>String(t).toLowerCase().replace(/<[^>]+>/g,' ').split(/[^a-z0-9.%+]+/).map(w=>w.replace(/^\.+|\.+$/g,'')).filter(w=>w&&!STOP.has(w)).map(stem);
+const KB=[];
+function buildKB(){const add=(title,text,page,extra)=>KB.push({title,text,page,extra,tt:new Set(toks(title)),tk:new Set(toks(title+' '+text))});
+ add('Vision',KALAM.vision,'ov');add('Mission',KALAM.mission,'ov');add('Values',KALAM.values.join(', '),'ov');
+ add('Destination 2028 and company goal','+20% growth with current resources (stated by management). COPC and GPTW certification are strategic goals, not achievements.','ov');
+ goals.forEach(g=>add(`Goal ${g.n}: ${GF[g.n]}`,`KPI: ${g.kpi}. Current: ${gx[g.n].now}. Target: ${gx[g.n].tgt}. ${g.fact}. Source: ${g.src}. Owner: ${g.owner}.`,'ov',{g:g.n}));
+ areas.forEach(a=>add(`Area: ${a.t}`,`${SL[a.s]}. ${a.gap} Evidence: ${a.evid.join('; ')||'none yet'}. Owner: ${a.dept}. COPC ${a.copc.join(', ')}.`,'ov',{a:a.id}));
+ plan.forEach(p=>add(`${p.id} ${p.t}`,`Today: ${p.now} Future: ${p.fut} Lead: ${p.dept}. KPI: ${p.kpi}. Benefit: ${p.ben}. Phase ${p.phase}.`,'road',{p:p.id}));
+ copc.forEach(c=>{const it=copcItem(c[0]);add(`COPC ${c[0]} ${c[1]}`,`Internal status: ${CST[it.st][1]}. ${it.ev} Owner: ${it.owner}.`,'copc')});
+ add('What is COPC','COPC is a world standard for running customer operations. Certification is a strategic goal. Internal view: '+Object.keys(copcSt).length+' of 32 items have evidence reviewed; 0 marked compliant; official scoring rules are not public; no score out of 100 is shown.','copc');
+ add('What is GPTW and the Trust Index','Great Place to Work certifies employers using a confidential employee survey (Trust Index). Official Trust Index: NOT YET MEASURED. Next step: internal baseline survey (I10). Egypt rules not verified.','gptw');
+ TRUST.forEach(t=>add(`GPTW ${t.d}`,`${t.plain} Current: ${t.cur}. Missing: ${t.miss}. Owner: ${t.own}.`,'gptw'));
+ EXT.forEach(e=>add(e[0],e[1],'gptw'));
+ KWE.forEach(e=>add(`KALAM Way: ${e.t}`,`Documented: ${e.d}. Source: ${e.src}. Links to ${e.c}.`,'kw'));
+ add('KALAM Way books','Three competency books: Business Development, Creative, Media Buying, 5 levels each. No operations book yet (I9).','kw');
+ done.forEach(d=>add(`Project: ${d.t}`,`Status: ${d.status}. ${d.problem} ${d.did} ${d.kpis.map(k=>k[0]+': '+k[2]).join('; ')}.`,'proj'));
+ add('MasterWord time saved','Before: two team estimates, 8–32 h per batch (16–64 h for 2 batches, estimated). After: about 3.6 h for 28 applicants, 4.5 min per applicant (calculated). Avoided ≈12–60 h (estimated). 3 of 28 missing-document cases caught before submission. No accuracy % claimed.','proj');
+ autos.forEach(a=>add(`Automation: ${a.t}`,`${a.manual} → ${a.auto}. Human control: ${a.ctrl.join('; ')}. Risk: ${a.risk}. Time saved: ${a.m.time}.`,'ops'));
+ opsAreas.forEach(a=>add(`Operations area: ${a.t}`,`${a.o}. ${a.ev}.`,'ops'));
+ PROC.forEach(p=>add(`Process: ${p.t}`,`Today: ${p.pain.join('; ')}. Future: ${p.gain.join('; ')}.`,'ops',{proc:p.id}));
+ add('Payment cycle','Report day 4–5, upload to Transparent day 7, transfer day 12, received day 15. Issues found only when interpreters complain; fixes slip to day 20 or next month. Fix: completeness check, second-level ACM check, reminders, issue log with owner and ageing (I2).','map');
+ phases.forEach(p=>add(`Phase ${p.t}`,`${p.d}. Delivers: ${p.del}. Owner: ${p.own}. Exit: ${p.exit}.`,'road'));
+ add('Timeline months scenarios','Fast '+scn[0].reduce((a,b)=>a+b)+' months, realistic '+scn[1].reduce((a,b)=>a+b)+', conservative '+scn[2].reduce((a,b)=>a+b)+' (estimated).','road');
+ opts.forEach(o=>add(`Team model ${o.k}: ${o.t}`,`${o.d} Headcount: ${o.hc}.${o.rec?' Recommended.':''}`,'road'));
+ add('Decisions awaiting management approval',decisions.pending.join('; '),'road');add('Approved decisions',decisions.approved.map(d=>d[0]).join('; '),'road');
+ Object.entries(GL).forEach(([k,v])=>add(k,v,'ref'))}
+function answer(q){const qt=[...new Set(toks(q))];if(!qt.length)return null;const N=KB.length;
+ const has=(set,t)=>{if(set.has(t))return true;if(t.length<5)return false;for(const w of set)if(w.length>=5&&(w.startsWith(t)||t.startsWith(w)))return true;return false};
+ const df=t=>KB.filter(d=>has(d.tk,t)).length;const idf={};qt.forEach(t=>idf[t]=Math.log((N+1)/(df(t)+.5)));
+ let best=null;KB.forEach(d=>{let s=0,m=0;qt.forEach(t=>{if(has(d.tk,t)){m++;s+=idf[t]*(has(d.tt,t)?1.6:1)}});const cov=m/qt.length;if(cov>=(qt.length==1?1:.6)&&(!best||s>best.s))best={d,s,cov}});
+ return best}
+function chatSay(q){const log=$('#clog');log.insertAdjacentHTML('beforeend',`<div class="msg u">${esc(q)}</div>`);const b=answer(q);
+ if(b)log.insertAdjacentHTML('beforeend',`<div class="msg b"><b>${esc(b.d.title)}</b><br>${esc(b.d.text)}<br><button data-go="${b.d.page}">Open ${PAGES.find(p=>p.id==b.d.page).t} →</button></div>`);
+ else log.insertAdjacentHTML('beforeend',`<div class="msg b na">That isn’t available in this dashboard’s data. Try asking about a goal, a COPC item, a project or a process.</div>`);
+ log.scrollTop=log.scrollHeight}
+
+// ================= SHELL =================
+const RENDER={ov:pOv,copc:pCopc,gptw:pGptw,kw:pKw,map:pMap,ops:pOps,proj:pProj,road:pRoad,ref:pRef};
+let cur='ov';
+function go(id,noScroll){if(!RENDER[id])id='ov';cur=id;const pg=PAGES.find(p=>p.id==id);
+ $$('.page').forEach(s=>s.classList.toggle('on',s.id==id));$$('#nav button').forEach(b=>{b.classList.toggle('on',b.dataset.s==id);if(b.dataset.s==id)b.setAttribute('aria-current','page');else b.removeAttribute('aria-current')});
+ document.documentElement.style.setProperty('--h',pg.h);$('#ctx').innerHTML=`<div class="orb" id="miniorb"></div><dl><dt>You are here</dt><dd>${pg.here}</dd><dt>Working on</dt><dd>${pg.work}</dd><dt>Connected</dt><dd>${pg.link}</dd><dt>Next</dt><dd>${pg.next}</dd></dl>`;
+ $$('.orb').forEach(o=>{o.classList.remove('ping');void o.offsetWidth;o.classList.add('ping')});
+ if(location.hash.slice(1)!=id)history.replaceState(null,'','#'+id);document.title=`${pg.t} · KALAM Command Center`;
+ if(!noScroll)window.scrollTo(0,0);if(id=='map')requestAnimationFrame(()=>mapSelect(mapSel));if(id=='ops')renderProc()}
+function init(){
+ $('#nav').innerHTML=PAGES.map((p,i)=>`<button data-s="${p.id}"><i>${i+1}</i>${p.n}</button>`).join('');
+ $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}">${RENDER[p.id]()}</section>`).join('');
+ buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','What is our occupancy?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
+ document.addEventListener('click',e=>{const t=e.target.closest('[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
+  if(t.id=='mod'){if(e.target.id=='mod')closeM();return}
+  if(t.classList.contains('x')){closeM();return}
+  if(t.id=='chatbtn'){$('#chat').classList.toggle('on');if($('#chat').classList.contains('on'))$('#cin').focus();return}
+  if(t.id=='chatx'){$('#chat').classList.remove('on');return}
+  if(t.classList.contains('tip')){showTip(t);return}
+  if(t.dataset.s){go(t.dataset.s);return}
+  if(t.dataset.go){closeM();go(t.dataset.go);return}
+  if(t.dataset.mn){closeM();if(cur!='map'){mapSel=t.dataset.mn;go('map')}else mapSelect(t.dataset.mn);return}
+  if(t.dataset.proc){procSel=t.dataset.proc;go('ops',true);$('#pseg').innerHTML=$('#pseg').innerHTML;$$('#pseg button').forEach(b=>b.classList.toggle('on',b.dataset.k==procSel));renderProc();$('#procs').scrollIntoView();return}
+  if(t.dataset.g){openG(+t.dataset.g);return}if(t.dataset.p){openP(t.dataset.p);return}if(t.dataset.a){openA(t.dataset.a);return}
+  if(t.classList.contains('tdim')){const c=$(`#tcards [data-dc="${t.dataset.d}"]`);c.scrollIntoView({block:'center'});c.style.borderColor='var(--yel)';setTimeout(()=>c.style.borderColor='',1600);return}
+  const par=t.parentElement;if(par&&par.classList.contains('seg'))$$('button',par).forEach(b=>b.classList.toggle('on',b==t));
+  if(par.id=='hflt'){const f=t.dataset.f;$$('#ov .cell').forEach(c=>c.classList.toggle('dimmed',f!='all'&&!c.dataset.fw.includes(f)))}
+  else if(par.id=='cflt'){const f=t.dataset.f;$$('#ctbl tr[data-st]').forEach(r=>r.style.display=f=='all'||r.dataset.st==f||(f=='crit'&&r.dataset.cr=='1')?'':'none')}
+  else if(par.id=='scn'){scnK=+t.dataset.k;$('#gantt').innerHTML=gantt()}
+  else if(par.id=='pseg'){procSel=t.dataset.k;renderProc()}else if(par.id=='vseg'){procView=t.dataset.v;renderProc()}
+  else if(par.id=='csug'){chatSay(t.textContent)}});
+ $('#cform').addEventListener('submit',e=>{e.preventDefault();const v=$('#cin').value.trim();if(v){chatSay(v);$('#cin').value=''}});
+ document.addEventListener('keydown',e=>{if(e.key=='Escape'){closeM();$('#chat').classList.remove('on');hideTip()}});
+ document.addEventListener('mouseover',e=>{const t=e.target.closest('.tip');if(t)showTip(t);else hideTip()});
+ document.addEventListener('focusin',e=>{const t=e.target.closest('.tip');if(t)showTip(t)});
+ window.addEventListener('resize',()=>{if(cur=='map')drawMap()});window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+ $('#pdf').addEventListener('click',()=>window.print());
+ go(location.hash.slice(1)||'ov',true)}
+function showTip(t){const b=$('#tipbox');b.innerHTML=`<b>${esc(t.textContent)}</b><br>${esc(t.dataset.tip)}`;b.classList.add('on');const r=t.getBoundingClientRect(),w=Math.min(280,innerWidth-24);b.style.maxWidth=w+'px';
+ const bw=b.offsetWidth,bh=b.offsetHeight;let x=Math.min(Math.max(12,r.left+r.width/2-bw/2),innerWidth-bw-12),y=r.top-bh-8;if(y<8)y=r.bottom+8;b.style.left=x+'px';b.style.top=y+'px'}
+function hideTip(){$('#tipbox').classList.remove('on')}
+init();
+</script></body></html>
