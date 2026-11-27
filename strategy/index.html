@@ -1,0 +1,401 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>KALAM CEO Dashboard</title>
+<link rel="icon" href="../ims-program/assets/mark.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--plum:#4B154A;--plum2:#79417F;--plum3:#F3E9F3;--yel:#FFC629;--ink:#1d1424;--mut:#6f6476;--line:#e9e1ec;--bg:#faf7fb;--card:#fff;
+--g:#1f9d63;--a:#e8a317;--r:#d0384d;--n:#a59dab;--gbg:#e3f5ec;--abg:#fdf1d8;--rbg:#fbe3e7;--nbg:#efedf1}
+*{box-sizing:border-box;margin:0;padding:0}
+body{font-family:Poppins,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14px;line-height:1.45}
+a{color:inherit}
+header{background:linear-gradient(120deg,#2b0a2a,var(--plum) 55%,#6a2a68);color:#fff;padding:18px 24px 0;position:relative;overflow:hidden}
+header:after{content:"";position:absolute;right:-120px;top:-120px;width:420px;height:420px;border-radius:50%;background:radial-gradient(circle,rgba(255,198,41,.28),transparent 65%)}
+.top{display:flex;align-items:center;gap:14px;flex-wrap:wrap;position:relative;z-index:1}
+.top img{height:34px;background:#fff;border-radius:8px;padding:4px}
+.top h1{font-size:19px;font-weight:700;letter-spacing:.2px}
+.top small{display:block;font-weight:400;opacity:.75;font-size:12px}
+.meta{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.pill{font-size:11px;font-weight:600;padding:4px 10px;border-radius:99px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.25);white-space:nowrap}
+.pill.y{background:var(--yel);color:var(--plum);border-color:var(--yel)}
+nav{display:flex;gap:4px;margin-top:16px;overflow-x:auto;position:relative;z-index:1;scrollbar-width:none}
+nav button{font:600 13px Poppins;color:#fff;opacity:.7;background:none;border:0;padding:10px 14px;border-radius:10px 10px 0 0;cursor:pointer;white-space:nowrap}
+nav button.on{opacity:1;background:var(--bg);color:var(--plum)}
+nav button span{display:inline-block;width:20px;height:20px;line-height:20px;border-radius:50%;background:rgba(255,255,255,.18);font-size:11px;margin-right:6px;text-align:center}
+nav button.on span{background:var(--yel);color:var(--plum)}
+main{max-width:1280px;margin:0 auto;padding:20px 24px 60px}
+.scr{display:none}.scr.on{display:block;animation:f .35s ease}
+@keyframes f{from{opacity:0;transform:translateY(6px)}to{opacity:1}}
+h2{font-size:12px;font-weight:700;letter-spacing:1.4px;text-transform:uppercase;color:var(--plum2);margin:22px 0 10px;display:flex;align-items:center;gap:8px}
+h2 b{background:var(--plum);color:var(--yel);width:22px;height:22px;border-radius:6px;display:inline-grid;place-items:center;font-size:11px;letter-spacing:0}
+.grid{display:grid;gap:12px}
+.g5{grid-template-columns:repeat(5,1fr)}.g4{grid-template-columns:repeat(4,1fr)}.g3{grid-template-columns:repeat(3,1fr)}.g2{grid-template-columns:repeat(2,1fr)}
+@media(max-width:1000px){.g5,.g4{grid-template-columns:repeat(2,1fr)}.g3{grid-template-columns:1fr 1fr}}
+@media(max-width:640px){.g5,.g4,.g3,.g2{grid-template-columns:1fr}main{padding:16px}header{padding:14px 16px 0}.meta{margin-left:0}}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:16px;box-shadow:0 1px 2px rgba(75,21,74,.04)}
+.card.dark{background:var(--plum);color:#fff;border-color:var(--plum)}
+.k{font-size:11px;font-weight:600;color:var(--mut);text-transform:uppercase;letter-spacing:.8px}
+.dark .k{color:#e6cfe6}
+.big{font-size:34px;font-weight:800;line-height:1.05;margin:6px 0 2px;color:var(--plum)}
+.dark .big{color:var(--yel)}
+.big.na{font-size:17px;font-weight:700;color:var(--n);letter-spacing:.5px;margin:12px 0 8px}
+.sub{font-size:12px;color:var(--mut)}
+.dark .sub{color:#ead8ea}
+.st{display:inline-flex;align-items:center;gap:5px;font-size:10.5px;font-weight:700;padding:3px 8px;border-radius:99px;text-transform:uppercase;letter-spacing:.5px}
+.st:before{content:"";width:7px;height:7px;border-radius:50%;background:currentColor}
+.sV{background:var(--gbg);color:var(--g)}.sP{background:var(--abg);color:#b07605}.sN{background:var(--nbg);color:#7b7381}.sE{background:var(--rbg);color:var(--r)}
+.src{font-size:10.5px;color:var(--mut);margin-top:8px;border-top:1px dashed var(--line);padding-top:6px}
+.dark .src{color:#dcc3dc;border-color:rgba(255,255,255,.2)}
+.row{display:flex;gap:10px;align-items:center;flex-wrap:wrap}
+.goal{position:relative;overflow:hidden}
+.goal .n{position:absolute;right:10px;top:4px;font-size:48px;font-weight:800;color:var(--plum3)}
+.goal h3{font-size:14px;position:relative}
+.bar{height:8px;border-radius:99px;background:var(--nbg);overflow:hidden;margin-top:6px}
+.bar i{display:block;height:100%;border-radius:99px}
+.hatch{background:repeating-linear-gradient(45deg,#e4dfe8 0 6px,#f3f0f5 6px 12px)}
+.ring{width:96px;height:96px}
+.prio{display:grid;grid-template-columns:34px 1fr auto;gap:10px;align-items:center;padding:10px 0;border-bottom:1px solid var(--line);cursor:pointer}
+.prio:last-child{border:0}
+.prio .num{width:30px;height:30px;border-radius:9px;background:var(--plum);color:var(--yel);display:grid;place-items:center;font-weight:800}
+.prio b{display:block;font-size:13.5px}
+.prio small{color:var(--mut);font-size:11.5px}
+.tag{font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--plum3);color:var(--plum);white-space:nowrap}
+.cert{display:flex;gap:14px;align-items:center}
+.seal{width:64px;height:64px;border-radius:50%;border:3px dashed var(--plum2);display:grid;place-items:center;font-weight:800;color:var(--plum);font-size:12px;text-align:center;flex:none;line-height:1.1}
+.seal.gp{border-color:#d0384d;color:#d0384d}
+.dark .seal{border-color:var(--yel);color:var(--yel)}
+/* heatmap */
+.filters{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.filters button{font:600 12px Poppins;border:1px solid var(--line);background:#fff;color:var(--plum);padding:6px 12px;border-radius:99px;cursor:pointer}
+.filters button.on{background:var(--plum);color:#fff;border-color:var(--plum)}
+.heat{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+@media(max-width:900px){.heat{grid-template-columns:repeat(2,1fr)}}
+.cell{border-radius:14px;padding:14px;cursor:pointer;border:2px solid transparent;min-height:112px;display:flex;flex-direction:column;transition:transform .15s}
+.cell:hover{transform:translateY(-2px);border-color:var(--plum2)}
+.cell.dim{opacity:.22}
+.cell h4{font-size:13px;line-height:1.25}
+.cell .dei{margin-top:auto;display:flex;gap:4px;padding-top:10px}
+.cell .dei span{flex:1;font-size:10px;font-weight:700;text-align:center;border-radius:5px;padding:3px 0;background:rgba(255,255,255,.7);color:#a59dab}.cell .dei span.lP{background:#79417F;color:#fff;opacity:.6}.cell .dei span.lV{background:#4B154A;color:#fff}
+.cR{background:var(--rbg)}.cA{background:var(--abg)}.cG{background:var(--gbg)}.cN{background:var(--nbg);color:#6f6476}
+.cR h4{color:#9b1f33}.cA h4{color:#8a5c00}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:11.5px;color:var(--mut);margin-top:10px}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:4px;vertical-align:-2px;margin-right:5px}
+/* matrix */
+.mx{width:100%;border-collapse:separate;border-spacing:6px}
+.mx th{font-size:11px;text-transform:uppercase;letter-spacing:.8px;color:var(--mut);text-align:left;padding:4px 6px}
+.mx td{background:#fff;border:1px solid var(--line);border-radius:12px;padding:10px;vertical-align:top;font-size:12px}
+.mx td.gl{background:var(--plum);color:#fff;font-weight:700;font-size:13px;width:17%}
+.mx td.gl small{display:block;color:var(--yel);font-weight:600;font-size:10.5px}
+.chip{display:inline-block;font-size:10.5px;font-weight:600;padding:2px 7px;border-radius:6px;margin:2px 2px 0 0;background:var(--plum3);color:var(--plum)}
+.chip.g{background:#fde7ea;color:#a3283b}.chip.k{background:#fff3cf;color:#7a5600}
+@media(max-width:760px){.mxw{overflow-x:auto}.mx{min-width:720px}}
+/* flow */
+.flow{display:flex;gap:6px;align-items:stretch;flex-wrap:wrap}
+.step{flex:1;min-width:92px;border-radius:10px;padding:8px;font-size:11.5px;font-weight:600;text-align:center;display:flex;flex-direction:column;justify-content:center;gap:2px}
+.step small{font-weight:400;font-size:10px;opacity:.8}
+.sm{background:#fbe3e7;color:#8e1c2e}.sa{background:#e3f5ec;color:#11683f}.sh{background:var(--plum3);color:var(--plum)}
+.arrow{align-self:center;color:var(--plum2);font-weight:800}
+/* gantt */
+.gantt{display:grid;grid-template-columns:200px 1fr;gap:8px 12px;align-items:center}
+@media(max-width:640px){.gantt{grid-template-columns:1fr}}
+.gl2 b{display:block;font-size:13px}.gl2 small{color:var(--mut);font-size:11px}
+.track{position:relative;height:34px;background:#fff;border:1px solid var(--line);border-radius:10px}
+.seg{position:absolute;top:4px;bottom:4px;border-radius:7px;display:flex;align-items:center;padding:0 10px;font-size:11px;font-weight:700;color:#fff;white-space:nowrap;overflow:hidden;transition:all .4s}
+.now{position:absolute;top:-6px;bottom:-6px;width:2px;background:var(--yel)}
+.opt{border-radius:16px;padding:16px;border:2px solid var(--line);background:#fff;position:relative}
+.opt.rec{border-color:var(--plum)}
+.opt.rec:after{content:"Recommended";position:absolute;top:-11px;right:14px;background:var(--yel);color:var(--plum);font-size:10.5px;font-weight:700;padding:3px 9px;border-radius:99px}
+.lvl{display:flex;gap:3px;margin-top:3px}.lvl i{flex:1;height:7px;border-radius:3px;background:var(--nbg)}.lvl i.on{background:var(--plum2)}
+.dec{display:flex;gap:10px;align-items:flex-start;padding:10px 0;border-bottom:1px solid var(--line)}
+.dec:last-child{border:0}
+.dec .q{flex:none;width:26px;height:26px;border-radius:50%;background:var(--yel);color:var(--plum);display:grid;place-items:center;font-weight:800;font-size:12px}
+/* modal */
+.mod{position:fixed;inset:0;background:rgba(29,20,36,.55);display:none;align-items:center;justify-content:center;padding:16px;z-index:9}
+.mod.on{display:flex}
+.box{background:#fff;border-radius:18px;max-width:620px;width:100%;max-height:88vh;overflow:auto;padding:22px}
+.box h3{font-size:18px;color:var(--plum);margin-bottom:6px}
+.kv{display:grid;grid-template-columns:130px 1fr;gap:8px 12px;margin-top:14px;font-size:13px}
+.kv dt{font-size:11px;font-weight:700;color:var(--mut);text-transform:uppercase;letter-spacing:.6px;padding-top:2px}
+.x{float:right;border:0;background:var(--plum3);color:var(--plum);width:32px;height:32px;border-radius:50%;font-size:18px;cursor:pointer}
+.foot{margin-top:28px;font-size:11px;color:var(--mut);display:flex;gap:16px;flex-wrap:wrap;justify-content:space-between}
+.btn{font:600 12px Poppins;border:0;background:var(--yel);color:var(--plum);padding:8px 14px;border-radius:99px;cursor:pointer}
+svg text{font-family:Poppins}
+@media print{nav,.btn{display:none}.scr{display:block!important;page-break-after:always}header{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header>
+  <div class="top">
+    <img src="../ims-program/assets/mark.png" alt="Kalam">
+    <h1>KALAM 2027–2028 · Company-Wide Assessment &amp; Transformation<small>CEO dashboard · Five goals · Three frameworks · One plan</small></h1>
+    <div class="meta"><span class="pill y">v0.1 · For management review</span><span class="pill">Data as of 26 Nov 2026</span><button class="btn" onclick="window.print()">Export PDF</button></div>
+  </div>
+  <nav id="nav"></nav>
+</header>
+<main id="main"></main>
+<div class="mod" id="mod"><div class="box" id="box"></div></div>
+
+<script>
+// ===== DATA (every figure carries its source; nothing estimated is shown as measured) =====
+const S={V:['sV','Verified'],P:['sP','Partially verified'],N:['sN','Not assessed'],E:['sE','Evidence required']};
+const st=k=>`<span class="st ${S[k][0]}">${S[k][1]}</span>`;
+
+const goals=[
+ {n:1,t:'Revenue growth',kpi:'Revenue, client retention, utilization',base:null,ev:'N',fact:'Company target: +20% growth with current resources',src:'Management (stated 26 Nov 2026). Revenue baseline: Finance, not yet received'},
+ {n:2,t:'Cost & efficiency',kpi:'Occupancy vs target',base:24.1,tgt:35.3,unit:'%',ev:'P',fact:'Occupancy 24.1% vs 35.3% target (W46)',src:'IMS dashboard: Incorta + Kalam call logs, week 46'},
+ {n:3,t:'People & morale',kpi:'Official GPTW Trust Index',base:null,ev:'N',fact:'Trust Index not yet measured. Coaching done: 48 of 156 required (Oct, one team)',src:'Kalam coaching log (one team only)'},
+ {n:4,t:'Client satisfaction',kpi:'Calls answered (TTG)',base:44,tgt:null,unit:'%',ev:'P',fact:'TTG: 21,162 of 38,025 offered calls abandoned (56%)',src:'Incorta abandon extract, 1 Oct – 8 Nov 2026'},
+ {n:5,t:'Quality & excellence',kpi:'COPC internal readiness',base:null,ev:'N',fact:'256 complaint-log entries; top cause: accuracy (46)',src:'QA Complaint Log, Dec 2023 – 10 Nov 2026'}
+];
+
+const done=[
+ {t:'MasterWord submission automation',s:'In progress',big:'28 / 28',l:'applications submitted & confirmed',ev:'V',src:'D:\\Masterword\\submitted-applicants.csv, 23 Nov 2026'},
+ {t:'MasterWord: time per applicant',s:'Measured',big:'4.5 min',l:'batch 2 (12 applicants in 54 min)',ev:'V',src:'File timestamps, batch 2. Before: team estimate 24–32 h per batch (not timed)'},
+ {t:'Kalam CX e-learning',s:'In progress',big:'30',l:'videos · 2 trainings · 54 questions · $0 running cost',ev:'V',src:'Kalam Learning build'},
+ {t:'IMS performance dashboard',s:'Proposal',big:'16',l:'data sources joined in one view (not yet adopted)',ev:'P',src:'Dashboard snapshot file list'}
+];
+
+// areas: s = R/A/G/N, d/i/e = documented/implemented/experienced each V/P/N/E
+const areas=[
+ {id:'wfm',t:'Workforce & capacity',s:'R',fw:['C','G'],d:'P',i:'P',e:'N',ev:'P',
+  gap:'Demand is not met while interpreters sit idle: low occupancy and high abandonment at the same time.',
+  evid:['Occupancy 24.1% vs 35.3% target (W46)','29,348 h idle vs 13,138 h talk (1 Oct – 8 Nov)','TTG 56% abandoned; TTG Italian 231 of 325 abandoned, with 9 Italian interpreters in Kalam'],
+  src:'IMS dashboard (Incorta + Kalam)',copc:'3.7 Managing Workload (160 pts)',gptw:'Fairness (scheduling, VTO)',kw:'Not covered: no operations book',own:'Decision required (WFM)',act:'Forecast and schedule by language and client, in intervals',goal:[1,2,4]},
+ {id:'pay',t:'Interpreter payment',s:'R',fw:['C','G'],d:'N',i:'P',e:'P',ev:'P',
+  gap:'Payment issues are found only when interpreters complain; there is no tracking or ageing.',
+  evid:['Cycle: report day 4–5, Transparent upload day 7, transfer day 12, received day 15','Issues pushed to day 20 or next month','Missing tasks, wrong amounts, late acceptance, small amounts need eCash','About 390 interpreters in the Oct paid-hours file'],
+  src:'Process described by IMS management (26 Nov); IMS Paid Hours validation, Oct',copc:'3.16 Client Relationships & Invoicing; 3.12 Data Integrity',gptw:'Fairness, Credibility',kw:'Not covered',own:'Decision required (WFM + Finance)',act:'Payment control log with status, ageing and a second-level check before upload',goal:[2,3]},
+ {id:'coach',t:'Performance & coaching',s:'R',fw:['C','G','K'],d:'P',i:'P',e:'N',ev:'P',
+  gap:'Required coaching is mostly not happening.',
+  evid:['Sep: 49 of 142 required sessions','Oct: 48 of 156','Nov (to 9 Nov): 10 of 166'],
+  src:'Kalam coaching log, one team (about 79 interpreters)',copc:'3.4 Monitoring & Coaching (80 pts); 3.5 Staff Performance',gptw:'Respect (support, development)',kw:'Performance management: documented in KALAM Way for other functions',own:'Decision required (Operations)',act:'Free supervisor time from admin; weekly coaching coverage target',goal:[3,5]},
+ {id:'data',t:'Data & reporting',s:'A',fw:['C'],d:'N',i:'P',e:'N',ev:'P',
+  gap:'Reports live in many separate files; some lack key statuses.',
+  evid:['16 separate source files feed the IMS view','Pre-Scheduled Tracker: 3,510 rows, no "missed" status, mixed date formats','Complaint log was 9 days stale at last build'],
+  src:'IMS dashboard snapshot; Pre-Scheduled Tracker; complaint log',copc:'3.12 Reporting & Data Integrity (40 pts)',gptw:'Credibility (trustworthy information)',kw:'Not covered',own:'Decision required (WFM / BI)',act:'One data model, one owner per report, automated refresh',goal:[2,5]},
+ {id:'qual',t:'Quality & complaints',s:'A',fw:['C'],d:'P',i:'P',e:'N',ev:'P',
+  gap:'Complaints are logged, but causes repeat.',
+  evid:['256 entries (148 complaints, 46 CAPA, 29 test calls, 24 compliments)','Top causes: accuracy 46, camera presence 40, technical 27, professionalism 23, HIPAA 22'],
+  src:'QA Complaint Log, Dec 2023 – 10 Nov 2026',copc:'3.8 Managing Quality; 3.13 Corrective Action',gptw:'Pride',kw:'Not covered',own:'Decision required (QA)',act:'Root-cause review of the top 5 causes; CAPA closure tracking',goal:[4,5]},
+ {id:'onb',t:'Recruitment & onboarding',s:'A',fw:['C','G'],d:'P',i:'P',e:'N',ev:'P',
+  gap:'Onboarding cycle time is not measured from offer to first call.',
+  evid:['Seats file (one team, 3 Nov): 79 interpreters: 66 in production, 10 inactive, 2 pending, 1 failed to onboard','MasterWord enrolment now automated (28/28)'],
+  src:'Seats file; MasterWord run report',copc:'3.1 Recruiting, 3.2 Training, 3.3 Verifying Capabilities',gptw:'Respect, Pride',kw:'Competency books exist for other functions',own:'Decision required (HR + Operations)',act:'Measure each onboarding stage; set SLAs per stage',goal:[1,3]},
+ {id:'tech',t:'Technology & automation',s:'A',fw:['C'],d:'N',i:'P',e:'N',ev:'P',
+  gap:'Working automations depend on one person and personal accounts.',
+  evid:['MasterWord automation runs from a personal account','Claude subscription paid personally, not by the company'],
+  src:'IMS management (26 Nov)',copc:'2.6 Business Continuity; 1.4 / 3.3 AI use controls',gptw:'—',kw:'Not covered',own:'Decision required (IT)',act:'Company account, documented runbook, second operator trained',goal:[2,5]},
+ {id:'kw',t:'Career development',s:'A',fw:['K','G'],d:'P',i:'N',e:'N',ev:'P',
+  gap:'KALAM Way books cover Business Development, Creative and Media Buying. There is no book for operations or interpretation.',
+  evid:['kalam.cx/kalam-way-books: 3 competency books, 5 levels each'],
+  src:'KALAM Way Books page',copc:'3.2 Training & Development',gptw:'Fairness (equal access to growth)',kw:'Gap: no operations book',own:'Decision required (HR)',act:'Write the IMS operations book in the KALAM Way format',goal:[3,5]},
+ {id:'ex',t:'Employee experience',s:'N',fw:['G','C'],d:'N',i:'P',e:'N',ev:'N',gap:'Not assessed. Wellness check-ins exist (794, 3 Jun – 9 Nov) but are not a measure of engagement.',evid:['Official GPTW Trust Index: NOT YET MEASURED'],src:'Kalam wellness log',copc:'3.6 Employee Experience & Attrition (100 pts)',gptw:'All five dimensions',kw:'Values documented',own:'Decision required (HR)',act:'Run a baseline survey; confirm Egypt GPTW requirements',goal:[3]},
+ {id:'ci',t:'Continuous improvement',s:'N',fw:['C'],d:'N',i:'P',e:'N',ev:'N',gap:'Not assessed. CAPA entries exist; no regular improvement routine is evidenced.',evid:['46 CAPA entries in the complaint log'],src:'QA Complaint Log',copc:'3.13 Corrective Action & CI (80 pts)',gptw:'—',kw:'—',own:'Decision required',act:'Monthly review of open corrective actions',goal:[5]},
+ {id:'lead',t:'Leadership & governance',s:'N',fw:['C','G','K'],d:'N',i:'N',e:'N',ev:'N',gap:'Not assessed.',evid:[],src:'Evidence required: business plan, review minutes',copc:'1.1 Setting Direction; 1.4 Reviewing Performance',gptw:'Credibility',kw:'Values & leadership',own:'CEO',act:'Collect evidence in Phase 1',goal:[1,2,3,4,5]},
+ {id:'strat',t:'Strategy & targets',s:'N',fw:['C'],d:'N',i:'N',e:'N',ev:'N',gap:'Not assessed. Only one company target is stated (+20% growth with current resources).',evid:[],src:'Evidence required: approved targets per goal',copc:'1.2 Business Planning; 1.3 Setting Targets',gptw:'Credibility',kw:'Business alignment',own:'CEO',act:'Set a baseline and target for each of the five goals',goal:[1,2,3,4,5]},
+ {id:'client',t:'Client management',s:'N',fw:['C'],d:'N',i:'N',e:'N',ev:'N',gap:'Not assessed.',evid:['18 clients in the IMS data'],src:'Evidence required: client SLAs, CSAT, reports',copc:'2.1 Customer Information; 3.17 Client Reports',gptw:'—',kw:'Service philosophy',own:'Decision required',act:'Collect client SLAs and satisfaction data',goal:[1,4]},
+ {id:'fin',t:'Finance & cost',s:'N',fw:['C'],d:'N',i:'N',e:'N',ev:'N',gap:'Not assessed.',evid:[],src:'Evidence required: cost per hour, revenue by client',copc:'4.2b Client Experience Performance',gptw:'—',kw:'Accountability',own:'Finance',act:'Share cost and revenue baselines',goal:[1,2]},
+ {id:'comm',t:'Communication',s:'N',fw:['G','K'],d:'N',i:'N',e:'N',ev:'N',gap:'Not assessed.',evid:[],src:'Evidence required',copc:'2.5 Managing Change',gptw:'Credibility, Camaraderie',kw:'Culture',own:'Decision required',act:'Include in the baseline survey',goal:[3]},
+ {id:'risk',t:'Risk & continuity',s:'N',fw:['C'],d:'N',i:'N',e:'N',ev:'N',gap:'Not assessed.',evid:[],src:'Evidence required: continuity plan',copc:'2.6 Business Continuity (40 pts)',gptw:'—',kw:'—',own:'Decision required',act:'Write a risk register',goal:[2,5]}
+];
+
+const copcCats=[{c:'1.0 Leadership & Planning',p:460},{c:'2.0 Designing & Implementing',p:440},{c:'3.0 Managing Processes',p:1100},{c:'4.0 Results',p:2000},{c:'BPO items',p:200}];
+
+const phases=[
+ {t:'1 · Baseline & governance',d:'Sponsor, scope, baselines, KPI definitions, owners',col:'#4B154A',now:true},
+ {t:'2 · Foundation & gap closure',d:'Critical gaps, SOPs, quick wins, evidence',col:'#79417F'},
+ {t:'3 · Transformation',d:'Department changes, approved automation',col:'#a3628f'},
+ {t:'4 · Validation & readiness',d:'Internal audits, mock audit, eligibility',col:'#c98ab0'},
+ {t:'5 · Formal assessment',d:'COPC audit, GPTW survey + Culture Brief',col:'#e8a317'}
+];
+
+// ===== RENDER =====
+const screens=[['overview','Overview'],['align','Alignment'],['done','Accomplishments'],['heat','Improvement areas'],['road','Roadmap'],['gov','Resources & decisions']];
+const nav=document.getElementById('nav'),main=document.getElementById('main');
+nav.innerHTML=screens.map((s,i)=>`<button data-s="${s[0]}"${i?'':' class="on"'}><span>${i+1}</span>${s[1]}</button>`).join('');
+nav.onclick=e=>{const b=e.target.closest('button');if(!b)return;go(b.dataset.s)};
+function go(id){nav.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.s==id));document.querySelectorAll('.scr').forEach(s=>s.classList.toggle('on',s.id==id));scrollTo({top:0,behavior:'smooth'})}
+
+const ring=(v,t,col,label,tc='#4B154A')=>{const r=40,c=2*Math.PI*r,p=t?v/t:0;return `<svg class="ring" viewBox="0 0 96 96"><circle cx="48" cy="48" r="${r}" fill="none" stroke="#efedf1" stroke-width="10"/>${t?`<circle cx="48" cy="48" r="${r}" fill="none" stroke="${col}" stroke-width="10" stroke-linecap="round" stroke-dasharray="${c*p} ${c}" transform="rotate(-90 48 48)"/>`:''}<text x="48" y="${label?46:53}" text-anchor="middle" font-size="${t?20:12}" font-weight="800" fill="${t?tc:'#a59dab'}">${t?v:'N/A'}</text>${label?`<text x="48" y="62" text-anchor="middle" font-size="9" fill="${tc=='#fff'?'#ead8ea':'#6f6476'}">${label}</text>`:''}</svg>`};
+
+const cnt=k=>areas.filter(a=>a.s==k).length;
+const assessed=areas.filter(a=>a.s!='N').length;
+
+// ---- Screen 1
+let h=`<section class="scr on" id="overview">
+<h2><b>A</b>What we have delivered</h2>
+<div class="grid g4">${done.map(d=>`<div class="card"><div class="row"><span class="k">${d.t}</span></div><div class="big">${d.big}</div><div class="sub">${d.l}</div><div class="row" style="margin-top:8px"><span class="tag">${d.s}</span>${st(d.ev)}</div><div class="src">${d.src}</div></div>`).join('')}</div>
+
+<h2><b>B</b>Where we stand</h2>
+<div class="grid g5">
+ <div class="card dark"><div class="k">Organizational health</div><div class="row" style="margin-top:8px">${ring(assessed,areas.length,'#FFC629','of '+areas.length,'#fff')}<div><div class="sub">areas with some evidence</div><div class="sub" style="margin-top:6px"><b style="color:#fff">0</b> fully verified</div></div></div><div class="src">Overall score: NOT ASSESSED until Phase 1 baseline</div></div>
+ <div class="card"><div class="k">COPC readiness</div><div class="big na">NOT ASSESSED</div><div class="bar hatch"></div><div class="sub" style="margin-top:8px">Certification needs 95% of 4,400 points (BPO) + 100% on approach in categories 1–3</div><div class="src">COPC CX Standard for Contact Centers R8.0, scoring section</div></div>
+ <div class="card"><div class="k">GPTW Trust Index</div><div class="big na">NOT YET MEASURED</div><div class="bar hatch"></div><div class="sub" style="margin-top:8px">Needs the official employee survey and Culture Brief</div><div class="src">Egypt eligibility and thresholds: to confirm with GPTW</div></div>
+ <div class="card"><div class="k">KALAM Way</div><div class="row" style="margin-top:8px">${ring(3,4,'#79417F','books')}<div class="sub">BD, Creative, Media Buying documented.<br><b style="color:var(--r)">No operations book</b></div></div><div class="src">kalam.cx/kalam-way-books (4th = operations, missing)</div></div>
+ <div class="card"><div class="k">Critical gaps</div><div class="big" style="color:var(--r)">${cnt('R')}</div><div class="sub">red areas, backed by data</div><div class="row" style="margin-top:8px"><span class="st sE">${cnt('R')} red</span><span class="st sP">${cnt('A')} amber</span><span class="st sN">${cnt('N')} grey</span></div><div class="src">From the improvement areas screen</div></div>
+</div>
+
+<h2><b>C</b>Five company goals</h2>
+<div class="grid g5">${goals.map(g=>`<div class="card goal"><div class="n">${g.n}</div><h3>${g.t}</h3><div class="sub">${g.kpi}</div>${g.base!=null?`<div class="big" style="font-size:28px">${g.base}${g.unit}</div>${g.tgt?`<div class="bar"><i style="width:${g.base/g.tgt*100}%;background:var(--a)"></i></div><div class="sub">Target ${g.tgt}${g.unit}</div>`:'<div class="bar hatch"></div><div class="sub">Target: management decision</div>'}`:`<div class="big na">BASELINE NEEDED</div><div class="bar hatch"></div><div class="sub">Target: management decision</div>`}<div style="margin-top:8px">${st(g.ev)}</div><div class="src">${g.fact}. ${g.src}</div></div>`).join('')}</div>
+
+<div class="grid g2" style="margin-top:4px">
+ <div>
+  <h2><b>D</b>Top 5 things to fix</h2>
+  <div class="card">${areas.filter(a=>a.s!='N').slice(0,5).map((a,i)=>`<div class="prio" data-a="${a.id}"><div class="num">${i+1}</div><div><b>${a.t}</b><small>${a.evid[0]}</small></div><span class="st ${a.s=='R'?'sE':'sP'}">${a.s=='R'?'Critical':'Improve'}</span></div>`).join('')}</div>
+ </div>
+ <div>
+  <h2><b>E</b>Where we are going</h2>
+  <div class="grid" style="grid-template-columns:1fr">
+   <div class="card dark cert"><div class="seal">COPC<br>R8.0</div><div><div class="k">Strategic certification goal</div><b style="font-size:15px">COPC CX Standard certification</b><div class="sub">R8.0 is required for all certifications from 1 Jan 2027. Timeline set after the baseline audit.</div></div></div>
+   <div class="card cert"><div class="seal gp">GPTW</div><div><div class="k">Strategic certification goal</div><b style="font-size:15px">Great Place to Work certification</b><div class="sub">Trust Model: Credibility, Respect, Fairness, Pride, Camaraderie. Survey date set after readiness.</div></div></div>
+   <div class="card"><div class="k">Now</div><div class="row" style="margin-top:6px"><b style="color:var(--plum)">Phase 1 of 5 · Baseline &amp; governance</b></div><div class="bar"><i style="width:8%;background:var(--plum)"></i></div><div class="sub" style="margin-top:6px">Owners and resources: management decision</div></div>
+  </div>
+ </div>
+</div>
+</section>`;
+
+// ---- Screen 2 alignment
+const goalMap=[
+ {g:'Revenue growth',c:['1.2 Business Planning','3.7 Workload','4.5 Achieving Results'],p:['Pride','Credibility'],k:['Business alignment'],a:['wfm','onb','client']},
+ {g:'Cost & efficiency',c:['2.4 Defining Tasks','3.9 Optimizing Journeys','3.12 Data Integrity'],p:['Fairness'],k:['Accountability'],a:['wfm','pay','data','tech']},
+ {g:'People & morale',c:['3.4 Coaching','3.5 Staff Performance','3.6 Employee Experience'],p:['Respect','Fairness','Camaraderie'],k:['Values','Career architecture'],a:['coach','pay','ex','kw']},
+ {g:'Client satisfaction',c:['2.1 Customer Information','2.2 Service Journeys','4.1 CX Performance'],p:['Pride'],k:['Service philosophy'],a:['wfm','qual','client']},
+ {g:'Quality & excellence',c:['3.8 Quality','3.13 Corrective Action','3.10 Knowledge'],p:['Credibility'],k:['Competencies'],a:['qual','ci','data']}
+];
+h+=`<section class="scr" id="align">
+<h2><b>1</b>One company · five goals · three frameworks</h2>
+<div class="grid g3" style="margin-bottom:6px">
+ <div class="card"><span class="chip">COPC R8.0</span><b style="display:block;margin-top:6px">How we operate</b><div class="sub">Operations, CX, workforce, quality, results</div></div>
+ <div class="card"><span class="chip g">Great Place to Work</span><b style="display:block;margin-top:6px">How our people experience it</b><div class="sub">Trust Model, five dimensions</div></div>
+ <div class="card"><span class="chip k">KALAM Way</span><b style="display:block;margin-top:6px">Who we are</b><div class="sub">Values, competencies, careers</div></div>
+</div>
+<div class="mxw"><table class="mx"><tr><th>Goal</th><th>COPC items</th><th>GPTW</th><th>KALAM Way</th><th>Areas affected</th></tr>
+${goalMap.map((r,i)=>`<tr><td class="gl"><small>GOAL ${i+1}</small>${r.g}</td><td>${r.c.map(x=>`<span class="chip">${x}</span>`).join('')}</td><td>${r.p.map(x=>`<span class="chip g">${x}</span>`).join('')}</td><td>${r.k.map(x=>`<span class="chip k">${x}</span>`).join('')}</td><td>${r.a.map(id=>{const a=areas.find(z=>z.id==id);return `<span class="st ${a.s=='R'?'sE':a.s=='A'?'sP':'sN'}" style="margin:2px;cursor:pointer" data-a="${id}">${a.t}</span>`}).join('')}</td></tr>`).join('')}
+</table></div>
+<h2><b>2</b>COPC CX Standard R8.0 · where the points are</h2>
+<div class="card"><svg viewBox="0 0 1000 70" width="100%" preserveAspectRatio="none" style="height:70px">${(()=>{let x=0,o='';const cols=['#4B154A','#79417F','#a3628f','#e8a317','#c9b8cc'];copcCats.forEach((c,i)=>{const w=c.p/4200*1000;o+=`<rect x="${x}" y="0" width="${w-3}" height="70" rx="8" fill="${cols[i]}"/><text x="${x+10}" y="30" font-size="15" font-weight="700" fill="#fff">${c.p}</text><text x="${x+10}" y="52" font-size="11" fill="#fff">${w>120?c.c:c.c.split(' ')[0]}</text>`;x+=w});return o})()}</svg>
+<div class="sub" style="margin-top:8px">Results (category 4.0) carry nearly half the points, so baselines and targets come first. Internal score per item: <b>not assessed yet</b>.</div><div class="src">COPC CX Standard for Contact Centers R8.0 v1.0, table of contents (4,000 pts for providers, 4,400 for BPOs)</div></div>
+</section>`;
+
+// ---- Screen 3 accomplishments
+h+=`<section class="scr" id="done">
+<h2><b>1</b>MasterWord enrolment · what changed</h2>
+<div class="grid g2">
+ <div class="card"><div class="k">Time per batch (hours)</div>
+ <svg viewBox="0 0 460 170" width="100%"><text x="0" y="38" font-size="12" font-weight="600" fill="#6f6476">Before</text><rect x="70" y="20" width="${28/32*360}" height="30" rx="7" fill="#fbe3e7"/><rect x="70" y="20" width="${24/32*360}" height="30" rx="7" fill="#d0384d"/><text x="${70+28/32*360+8}" y="40" font-size="14" font-weight="800" fill="#d0384d">24–32 h</text>
+ <text x="0" y="98" font-size="12" font-weight="600" fill="#6f6476">After</text><rect x="70" y="80" width="${0.9/32*360+4}" height="30" rx="7" fill="#1f9d63"/><text x="${70+0.9/32*360+14}" y="100" font-size="14" font-weight="800" fill="#1f9d63">0.9 h (54 min, 12 applicants)</text>
+ <text x="70" y="140" font-size="11" fill="#6f6476">Before: team estimate · After: measured</text></svg>
+ <div class="row"><span class="st sP">Before: estimate</span><span class="st sV">After: measured</span></div></div>
+ <div class="grid g2">
+  <div class="card"><div class="k">Submitted &amp; confirmed</div><div class="big">28/28</div><div class="sub">2 batches, 23 Nov</div>${st('V')}</div>
+  <div class="card"><div class="k">CVs redacted</div><div class="big">28/28</div><div class="sub">before upload</div>${st('V')}</div>
+  <div class="card"><div class="k">Complete documents</div><div class="big">25/28</div><div class="sub">3 flagged as missing</div>${st('V')}</div>
+  <div class="card"><div class="k">Accuracy & deadlines before</div><div class="big na">BASELINE N/A</div><div class="sub">no record kept</div>${st('E')}</div>
+ </div>
+</div>
+<div class="card" style="margin-top:12px"><div class="k">Process before</div>
+<div class="flow" style="margin:8px 0 14px"><div class="step sm">Read each CV<small>manual</small></div><div class="arrow">›</div><div class="step sm">Match names to files<small>manual</small></div><div class="arrow">›</div><div class="step sm">Redact CV<small>manual</small></div><div class="arrow">›</div><div class="step sm">Fill form<small>manual</small></div><div class="arrow">›</div><div class="step sm">Upload &amp; confirm<small>manual</small></div></div>
+<div class="k">Process now</div>
+<div class="flow" style="margin-top:8px"><div class="step sa">Read &amp; match<small>automated</small></div><div class="arrow">›</div><div class="step sa">Redact<small>automated</small></div><div class="arrow">›</div><div class="step sa">Fill &amp; submit<small>automated</small></div><div class="arrow">›</div><div class="step sh">Flag missing docs<small>new control</small></div><div class="arrow">›</div><div class="step sh">Run report<small>new evidence</small></div></div>
+<div class="src">Sustainability: runs from a personal account. Needs a company account and a second trained operator (see Technology &amp; automation).</div></div>
+
+<h2><b>2</b>Kalam CX e-learning</h2>
+<div class="grid g4">
+ <div class="card"><div class="k">Trainings</div><div class="big">2</div></div>
+ <div class="card"><div class="k">Videos</div><div class="big">30</div><div class="sub">about 5.3 hours</div></div>
+ <div class="card"><div class="k">Quiz questions</div><div class="big">54</div><div class="sub">plus final exam</div></div>
+ <div class="card"><div class="k">Running cost</div><div class="big">$0</div><div class="sub">completion data: not yet</div></div>
+</div>
+<h2><b>3</b>Status of all initiatives</h2>
+<div class="card"><div class="row" style="gap:18px">
+ ${[['Completed',0,'var(--g)'],['In progress',2,'var(--plum)'],['Pilot',0,'var(--plum2)'],['Proposal',2,'var(--a)'],['Awaiting approval',0,'var(--n)']].map(x=>`<div style="text-align:center;min-width:90px"><div class="big" style="color:${x[2]}">${x[1]}</div><div class="sub">${x[0]}</div></div>`).join('')}
+</div><div class="src">In progress: MasterWord automation, Kalam e-learning. Proposal: IMS performance dashboard, pre-scheduled sessions.</div></div>
+</section>`;
+
+// ---- Screen 4 heatmap
+h+=`<section class="scr" id="heat">
+<h2><b>1</b>Company health map · click any area</h2>
+<div class="filters" id="flt"><button class="on" data-f="all">All frameworks</button><button data-f="C">COPC</button><button data-f="G">GPTW</button><button data-f="K">KALAM Way</button></div>
+<div class="heat">${['R','A','N'].flatMap(s=>areas.filter(a=>a.s==s)).map(a=>`<div class="cell c${a.s}" data-a="${a.id}" data-fw="${a.fw.join('')}"><h4>${a.t}</h4>${a.s!='N'?`<div class="sub" style="margin-top:4px;color:inherit;opacity:.85">${a.evid[0]}</div>`:''}<div class="dei">${[['D',a.d],['I',a.i],['E',a.e]].map(z=>`<span class="l${z[1]}" title="${{D:'Documented',I:'Implemented',E:'Experienced'}[z[0]]}">${z[0]}</span>`).join('')}</div></div>`).join('')}</div>
+<div class="legend"><span><i style="background:var(--rbg);border:1px solid var(--r)"></i>Critical gap</span><span><i style="background:var(--abg);border:1px solid var(--a)"></i>Improvement required</span><span><i style="background:var(--gbg);border:1px solid var(--g)"></i>On track</span><span><i style="background:var(--nbg)"></i>Not assessed</span><span><b>D</b> Documented · <b>I</b> Implemented · <b>E</b> Experienced &nbsp;<i style="background:#4B154A"></i>evidenced <i style="background:#79417F;opacity:.6"></i>partly <i style="background:#fff;border:1px solid #ddd"></i>no evidence</span></div>
+<h2><b>2</b>Evidence behind the red areas</h2>
+<div class="grid g2">
+ <div class="card"><div class="k">Capacity: idle vs talk hours</div>
+ <svg viewBox="0 0 440 120" width="100%"><rect x="0" y="10" width="420" height="34" rx="8" fill="#efedf1"/><rect x="0" y="10" width="${13138/29348*420}" height="34" rx="8" fill="#4B154A"/><text x="10" y="32" font-size="12" font-weight="700" fill="#fff">13,138 h talk</text><text x="410" y="32" font-size="12" font-weight="700" fill="#4B154A" text-anchor="end">29,348 h idle</text>
+ <rect x="0" y="66" width="420" height="34" rx="8" fill="#fbe3e7"/><rect x="0" y="66" width="${(38025-21162)/38025*420}" height="34" rx="8" fill="#d0384d"/><text x="10" y="88" font-size="12" font-weight="700" fill="#fff">TTG 44% answered</text><text x="410" y="88" font-size="12" font-weight="700" fill="#d0384d" text-anchor="end">56% abandoned</text></svg>
+ <div class="src">Incorta + Kalam, 1 Oct – 8 Nov 2026</div></div>
+ <div class="card"><div class="k">Coaching done vs required (one team)</div>
+ <svg viewBox="0 0 440 120" width="100%">${[['Sep',49,142],['Oct',48,156],['Nov*',10,166]].map((m,i)=>`<text x="0" y="${24+i*36}" font-size="12" font-weight="600" fill="#6f6476">${m[0]}</text><rect x="44" y="${10+i*36}" width="${m[2]/166*320}" height="22" rx="6" fill="#efedf1"/><rect x="44" y="${10+i*36}" width="${m[1]/166*320}" height="22" rx="6" fill="#79417F"/><text x="${44+m[2]/166*320+6}" y="${26+i*36}" font-size="12" font-weight="700" fill="#4B154A">${m[1]}/${m[2]}</text>`).join('')}</svg>
+ <div class="src">Kalam coaching log · *Nov to 9 Nov</div></div>
+</div>
+</section>`;
+
+// ---- Screen 5 roadmap
+h+=`<section class="scr" id="road">
+<h2><b>1</b>One company-wide roadmap · five phases</h2>
+<div class="filters" id="scn"><button class="on" data-k="0">Fast-track</button><button data-k="1">Realistic</button><button data-k="2">Conservative</button></div>
+<div class="card"><div class="gantt" id="gantt"></div>
+<div class="src" id="scnote"></div></div>
+<h2><b>2</b>Certification gates</h2>
+<div class="grid g2">
+ <div class="card"><span class="chip">COPC</span><div class="flow" style="margin-top:10px">${['Baseline audit','Gap closure','Readiness check','Certification audit'].map((s,i)=>`${i?'<div class="arrow">›</div>':''}<div class="step sh">${s}</div>`).join('')}</div><div class="src">Pass mark: 95% of points, 100% on approach (cat. 1–3), plus the item 4.5 results rule. Duration: confirm with COPC.</div></div>
+ <div class="card"><span class="chip g">GPTW</span><div class="flow" style="margin-top:10px">${['Baseline survey','Fix top gaps','Trust Index survey','Culture Brief','Decision'].map((s,i)=>`${i?'<div class="arrow">›</div>':''}<div class="step sh">${s}</div>`).join('')}</div><div class="src">Participation rules and Egypt timeline: confirm with GPTW. Both journeys share the employee baseline in Phase 1.</div></div>
+</div>
+</section>`;
+
+// ---- Screen 6 governance
+const opts=[
+ {t:'Existing team, assigned roles',c:1,cap:1,r:4,b:2,d:'Owners added to current jobs. Lowest cost, but daily operations crowd out the work.'},
+ {t:'Small central team + champions',c:2,cap:3,r:2,b:4,d:'A lead, a quality/COPC lead and a data analyst, with one champion per department.',rec:true},
+ {t:'Dedicated transformation office',c:4,cap:4,r:2,b:4,d:'Full office with HR/GPTW, automation and finance leads. Highest cost.'}
+];
+const lv=n=>`<div class="lvl">${[1,2,3,4].map(i=>`<i class="${i<=n?'on':''}"></i>`).join('')}</div>`;
+h+=`<section class="scr" id="gov">
+<h2><b>1</b>Team options</h2>
+<div class="grid g3">${opts.map(o=>`<div class="opt${o.rec?' rec':''}"><b style="font-size:14px">${o.t}</b><div class="sub" style="margin:6px 0 10px">${o.d}</div>
+<div class="k">Cost</div>${lv(o.c)}<div class="k" style="margin-top:6px">Capacity</div>${lv(o.cap)}<div class="k" style="margin-top:6px">Delivery risk</div>${lv(o.r)}<div class="k" style="margin-top:6px">Expected benefit</div>${lv(o.b)}</div>`).join('')}</div>
+<div class="src">Relative comparison only. Headcount and cost: management decision after Phase 1. Proposed roles are not approved headcount.</div>
+<div class="grid g2" style="margin-top:6px">
+ <div><h2><b>2</b>Decisions needed from management</h2><div class="card">
+  ${['Name the executive sponsor and confirm the scope (whole company, IMS first?)','Choose a team option and name owners for the 5 goals','Approve a company account for tools now paid personally (Claude, automation)'].map((d,i)=>`<div class="dec"><div class="q">${i+1}</div><div>${d}</div></div>`).join('')}
+ </div></div>
+ <div><h2><b>3</b>Top risks</h2><div class="card">
+  ${[['Key-person dependency','Automations run on one person\'s account'],['No baselines','Targets and ROI cannot be proven without Phase 1 data'],['Interpreter attrition','Late or wrong payments; payment issues are not tracked']].map((r,i)=>`<div class="dec"><div class="q" style="background:var(--rbg);color:var(--r)">!</div><div><b>${r[0]}</b><div class="sub">${r[1]}</div></div></div>`).join('')}
+ </div></div>
+</div>
+<h2><b>4</b>Investment</h2>
+<div class="grid g3">
+ <div class="card"><div class="k">Current tool cost</div><div class="big na">NOT PROVIDED</div><div class="sub">Claude subscription, paid personally</div></div>
+ <div class="card"><div class="k">Budget requested</div><div class="big na">AFTER PHASE 1</div><div class="sub">depends on the team option</div></div>
+ <div class="card"><div class="k">Verified savings to date</div><div class="big na">NONE CLAIMED</div><div class="sub">time saved is measured; money is not</div></div>
+</div>
+</section>`;
+main.innerHTML=h+`<div class="foot"><span>Sources: IMS dashboard (Incorta, Kalam), QA complaint log, MasterWord run report, KALAM Way Books, COPC CX Standard R8.0 (Contact Centers, Customer Ops). No figure on this page is estimated unless it says so.</span><span>KALAM · Future Group</span></div>`;
+
+// gantt scenarios (proposed planning ranges, in months, not commitments)
+const scn=[[2,4,5,2,2],[3,5,6,3,3],[4,6,8,4,4]];
+const scnNote=['Planning range only. Fixed after the Phase 1 baseline.','Planning range only. COPC has historically cited about 12 months of effort; not a commitment for KALAM.','Planning range only. Allows for gaps found in the baseline audit.'];
+function gantt(k){const m=scn[k],tot=m.reduce((a,b)=>a+b,0);let x=0;
+ document.getElementById('gantt').innerHTML=phases.map((p,i)=>{const l=x/tot*100,w=m[i]/tot*100;x+=m[i];return `<div class="gl2"><b>${p.t}</b><small>${p.d}</small></div><div class="track"><div class="seg" style="left:${l}%;width:${w}%;background:${p.col}">&nbsp;${m[i]} mo${p.now?' · now':''}</div>${p.now?`<div class="now" style="left:calc(${l}% + 2px)"></div>`:''}</div>`}).join('')+`<div></div><div class="sub">Total: ${tot} months, proposed</div>`;
+ document.getElementById('scnote').textContent=scnNote[k]}
+gantt(1);document.querySelector('#scn button[data-k="1"]').classList.add('on');document.querySelector('#scn button[data-k="0"]').classList.remove('on');
+document.getElementById('scn').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#scn button').forEach(z=>z.classList.toggle('on',z==b));gantt(+b.dataset.k)};
+document.getElementById('flt').onclick=e=>{const b=e.target.closest('button');if(!b)return;document.querySelectorAll('#flt button').forEach(z=>z.classList.toggle('on',z==b));const f=b.dataset.f;document.querySelectorAll('.cell').forEach(c=>c.classList.toggle('dim',f!='all'&&!c.dataset.fw.includes(f)))};
+
+// drill-down
+const mod=document.getElementById('mod'),box=document.getElementById('box');
+document.addEventListener('click',e=>{const t=e.target.closest('[data-a]');if(t){open(t.dataset.a)}else if(e.target==mod||e.target.closest('.x'))mod.classList.remove('on')});
+document.addEventListener('keydown',e=>{if(e.key=='Escape')mod.classList.remove('on')});
+const lvl=x=>x=='N'?'No evidence':x=='P'?'Partly':'Yes';
+function open(id){const a=areas.find(z=>z.id==id);
+ box.innerHTML=`<button class="x" aria-label="Close">×</button><span class="st ${a.s=='R'?'sE':a.s=='A'?'sP':'sN'}">${a.s=='R'?'Critical gap':a.s=='A'?'Improvement required':'Not assessed'}</span><h3 style="margin-top:8px">${a.t}</h3><div>${a.gap}</div>
+ ${a.evid.length?`<ul style="margin:12px 0 0 18px;font-size:13px">${a.evid.map(x=>`<li>${x}</li>`).join('')}</ul>`:''}
+ <dl class="kv"><dt>Source</dt><dd>${a.src} ${st(a.ev)}</dd><dt>Evidence levels</dt><dd>Documented: ${lvl(a.d)} · Implemented: ${lvl(a.i)} · Experienced: ${lvl(a.e)}</dd><dt>COPC R8.0</dt><dd>${a.copc}</dd><dt>GPTW</dt><dd>${a.gptw}</dd><dt>KALAM Way</dt><dd>${a.kw}</dd><dt>Goals</dt><dd>${a.goal.map(g=>`<span class="chip">Goal ${g} · ${goals[g-1].t}</span>`).join('')}</dd><dt>Recommended</dt><dd>${a.act}</dd><dt>Owner</dt><dd>${a.own}</dd><dt>Target date</dt><dd>Set in Phase 1</dd><dt>Progress</dt><dd><div class="bar hatch" style="width:160px"></div></dd></dl>`;
+ mod.classList.add('on')}
+</script>
+</body>
+</html>
