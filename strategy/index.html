@@ -311,6 +311,49 @@ button.chip:hover,.chip.cl:hover{border-color:var(--yt);cursor:pointer}
  .mrow{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr) 56px}
  .orbit{font-size:9.5px;padding:4px 7px}
 }
+/* overview v2 */
+.orbit.on{background:#FFC629;border-color:#4B154A;color:#4B154A}
+.fwrow{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:14px}
+.fw{border:1px solid var(--ln);border-radius:14px;padding:12px;background:#fff;position:relative}
+.fw h3{margin:6px 0 4px}.fw p{font-size:12px;color:var(--mut)}
+.fw.id{background:#f3e9f3;border-color:rgba(75,21,74,.3)}
+.fw:not(.id)::before{content:'';position:absolute;left:0;right:0;top:0;height:3px;border-radius:14px 14px 0 0;background:#FFC629}
+.vals{display:grid;gap:8px}
+.vals div{border:1px solid var(--ln);border-left:4px solid #79417F;border-radius:10px;padding:9px 12px;background:#fff}
+.vals b{display:block;font-size:13.5px}.vals span{font-size:12px;color:var(--mut)}
+.sgoals{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px;margin-bottom:12px}
+.sgoals button{border:1px solid var(--ln2);border-radius:12px;padding:9px 10px;text-align:left;font-size:12px;background:#fff;line-height:1.3;transition:background .2s,border-color .2s}
+.sgoals button b{display:block;color:#79417F;font-size:11px}
+.sgoals button.on{background:#FFC629;border-color:#4B154A}.sgoals button.on b{color:#4B154A}
+#smwrap{overflow-x:auto}
+#smap{position:relative;min-width:1000px;display:grid;grid-template-columns:.7fr .9fr .9fr 1fr 1.1fr 1.3fr 1.3fr;gap:18px;padding:6px 2px 10px}
+#ssvg{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;overflow:visible}
+#ssvg path{fill:none;stroke:#d19b00;stroke-width:1.4;stroke-opacity:.85;stroke-dasharray:5 5;animation:flow 1.2s linear infinite}
+.scol{display:flex;flex-direction:column;gap:6px;justify-content:center;position:relative;z-index:1}
+.scol h4{text-align:center;font-size:10px}
+.sn{font-size:11px;padding:7px 9px;border-radius:10px;border:1px solid var(--ln2);background:#fff;text-align:left;line-height:1.3;animation:pin .4s ease both}
+.sn[data-p]:hover{border-color:#FFC629}
+.scol:nth-child(2) .sn{background:#4B154A;color:#fff;font-weight:700;text-align:center}
+.scol:nth-child(3) .sn{background:#FFC629;color:#4B154A;font-weight:700;text-align:center}
+.gd{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:12px}
+.gd>div{border:1px solid var(--ln);border-radius:12px;padding:10px 12px;background:#fff;font-size:12.5px;min-width:0}
+.acat{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;margin-top:10px}
+.acat div{border:1px solid var(--ln);border-radius:12px;padding:10px;background:#fff}
+.acat b{display:block;font-size:26px;line-height:1}.acat span{display:block;font-weight:600;font-size:12.5px;margin-top:4px}.acat small{color:var(--mut);font-size:11px}
+.rd4{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:6px;margin-top:10px}
+.rd4 div{border-radius:12px;padding:10px;border:1px solid var(--ln)}
+.rd4 b{display:block;font-size:24px;line-height:1}.rd4 span{display:block;font-weight:700;font-size:12px;margin-top:4px}.rd4 small{font-size:10.5px;color:var(--mut)}
+.rd4 .ok{background:#eef4ff}.rd4 .gp{background:#fff3e0}.rd4 .na{background:repeating-linear-gradient(45deg,#faf7fb 0 6px,#f1ecf4 6px 12px)}.rd4 .fa{background:#fff3f5}
+button.mrow.cc{border-radius:8px;padding:6px 4px}button.mrow.cc:hover{background:#faf4fa}
+.chains{display:grid;gap:10px}
+.crow{display:grid;grid-template-columns:170px minmax(0,1fr);gap:10px;align-items:center}
+.crow .cn{font-size:12.5px;color:#4B154A}
+.crow .chain>div{flex:1 0 120px}
+.card.flash{box-shadow:0 0 0 3px #FFC629}
+@media(max-width:900px){.gd{grid-template-columns:minmax(0,1fr)}.fwrow,.rd4{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}.sgoals{grid-template-columns:minmax(0,1fr)}.acat{grid-template-columns:repeat(3,minmax(0,1fr))}
+ #smap{min-width:0;grid-template-columns:minmax(0,1fr);gap:4px}#ssvg{display:none}.scol{flex-direction:row;flex-wrap:wrap;justify-content:flex-start}.scol h4{width:100%;text-align:left;margin:6px 0 0}.scol:not(:last-child)::after{content:'↓';width:100%;text-align:center;color:#b86a00;font-weight:800}
+ .crow{grid-template-columns:minmax(0,1fr)}}
+.gd .chip,.fw .tag,.sn{white-space:normal}
 /* light theme fixes */
 .one{font-size:15px;line-height:1.5;background:#fff;border:1px solid var(--ln);border-left:4px solid #FFC629;border-radius:12px;padding:12px 16px;margin-bottom:16px;color:var(--tx)}.one b{color:#79417F}
 .pn{background:#fff}
@@ -655,10 +698,10 @@ opts.find(o=>o.k=='C').hc='About 6 full-time (proposed)';
 const VERSION2='Command Center v1.0';
 
 const KALAM={
- vision:'Redefine the future of business communication and become the world’s most trusted partner in business process outsourcing, through seamless operations and cutting-edge technology.',
- mission:'Delivering innovative, scalable and people-driven solutions that foster growth, efficiency and global connectivity.',
- values:['Empowerment','Respect & Inclusion','Customer Centric','Innovation','Accountability'],
- src:'KALAM vision, mission and values as recorded in the IMS program file (ims-program/js/data/program.js)'};
+ vision:'We aspire to become a globally respected organization recognized for exceptional client experience, operational excellence, innovation, strong governance, and the development of outstanding people.',
+ mission:'We create value by combining talented people, operational excellence, technology, and strong client partnerships to deliver reliable, high-quality language and business solutions.',
+ values:[['Client Commitment','Clients are the reason KALAM exists.'],['Integrity','Integrity is the foundation of trust.'],['Collaboration','We achieve more together than we ever could individually.'],['Excellence','Excellence is the commitment to delivering our best every day.'],['Continuous Learning & Adaptability','Growth requires curiosity, learning, and the ability to adapt.']],
+ url:'https://www.kalam.cx/kalam-way/volume-one',src:'KALAM Way, Volume One (kalam.cx)'};
 
 // per-goal story: current → target → improvements → departments → benefit
 const gx={
@@ -906,6 +949,23 @@ const PAGES=[
 {const p=plan.find(p=>p.id=='I9');p.steps=['Write the daily routine with supervisors and ACMs','Put it in the KALAM Way book format','Pilot with one team, then roll out'];}
 GL['PDCA']='Plan, do, check, act: a simple KALAM improvement loop. Example: plan payment checks, run one month, count the issues, fix the top cause, repeat.';
 
+// ---- 28 Nov: no occupancy, no single-client figures; keep a figure only where it proves a gap a project fixes ----
+{const g2=goals[1];Object.assign(g2,{kpi:'Hours of manual, repetitive work per month',def:'Hours spent each month on tasks a computer could do',base:null,cur:null,unit:'',tgt:'Awaiting approval',tgtS:'A',ev:'N',fact:'Not measured yet; only MasterWord has an estimate',src:'Phase 1 measurement (I1)',per:'—'});
+ const g4=goals[3];Object.assign(g4,{kpi:'Client satisfaction and service-promise results',def:'Results against each client’s agreed service promise, plus satisfaction scores',base:null,cur:null,unit:'',ev:'N',fact:'Not measured in one place yet',src:'Client contracts and reports (not yet collected)',per:'—'});
+ gx[2].now='Not measured yet';gx[2].nowS='N';gx[2].tgt='Awaiting management approval';gx[2].tgtS='A';gx[2].succ='Less paid time is wasted, and manual admin and rework drop.';
+ gx[4].now='Not measured yet';gx[4].nowS='N';
+ const w=areas.find(a=>a.id=='wfm');w.gap='Calls go unanswered because staffing is not planned against demand by language.';w.evid=['All clients: 27,984 of 110,301 offered calls not answered (1 Oct – 8 Nov 2026). This is what forecast & scheduling (I3) fixes.'];w.src='IMS dashboard (Incorta)';
+ const c=areas.find(a=>a.id=='cx');c.s='N';c.d='N';c.i='N';c.e='N';c.gap='Not assessed. Client satisfaction is not measured in one place.';c.evid=[];c.src='Needed: client satisfaction and service-promise results';
+ const cl=areas.find(a=>a.id=='client');cl.evid=[];
+ copcSt['2.2']=['Pa','27,984 of 110,301 offered calls not answered (all clients, 1 Oct – 8 Nov).'];copcSt['3.7']=['Pa','Staffing not planned by language against demand; 27,984 of 110,301 calls not answered.'];copcSt['4.1']=['Pa','Customer results measured only for unanswered calls.'];
+ const I3=plan.find(p=>p.id=='I3');I3.now='Calls go unanswered (27,984 of 110,301 offered, all clients) while staffing is not planned by language.';I3.kpi='Answered calls ÷ offered calls';I3.ben='More calls answered with the same people (+20% goal)';
+ const ds=done.find(x=>x.id=='dash');ds.value[0]=['m','Visibility','showed unanswered calls and missed coaching across 16 sources'];
+ const o4=opsAreas.find(a=>a.t=='Workforce & utilization');o4.ev='27,984 of 110,301 calls not answered (all clients) → fixed by forecast & scheduling (I3)';
+ const o10=opsAreas.find(a=>a.t=='Client experience');o10.s='N';o10.ev='Not assessed: client satisfaction not measured in one place → I13';
+ delete GL['Occupancy'];delete GL['TTG'];GL['Abandoned']='A call that was not answered before the caller hung up.';
+ const r=REFS.find(x=>/IMS dashboard sources/.test(x[1]));if(r)r[3]='Unanswered calls and capacity, 1 Oct – 8 Nov 2026.';
+ const k=KWE.find(x=>x.t=='Vision');k.src='KALAM Way, Volume One';KWE.find(x=>x.t=='Mission').src='KALAM Way, Volume One';KWE.find(x=>x.t=='Values').src='KALAM Way, Volume One';}
+
 // ===== Command Center render =====
 const $=(s,r=document)=>r.querySelector(s),$$=(s,r=document)=>[...r.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -927,79 +987,105 @@ function donut(seg,label,sub){const tot=seg.reduce((a,s)=>a+s[0],0),R=52,C=2*Mat
  <div class="legend" style="flex-direction:column;align-items:flex-start">${seg.map(s=>`<span><i class="dot" style="background:${s[1]}"></i>${s[2]}: <b style="color:var(--tx)">${s[0]}</b></span>`).join('')}</div></div>`}
 
 // ================= 1 · OVERVIEW =================
-const AUTOST=[
- ['MasterWord enrolment','Automated','Before: 8–32 h per batch (team estimates) '+st('S')+' · now 54 min to 2 h 42 min per batch '+st('V'),'Before submission: 3 of 28 missing-document cases '+st('V'),'MasterWord automation '+st('P')],
- ['Interpreter training','Partly automated','Not assessed','Final exam checks knowledge; results not yet tracked','Kalam CX e-learning '+st('P')],
- ['Interpreter payment cycle','Manual','Not assessed','After: only when interpreters complain (described by management)','Payment controls (I2) '+st('R')],
- ['Pre-scheduled sessions','Manual','Not assessed','After: no "missed" status in 3,510 tracker rows','Session Desk <span class="st sR">Proposal</span>'],
- ['Performance reporting','Manual','Not assessed (16 files built by hand)','Not assessed','IMS dashboard <span class="st sR">Proposal (awaiting IT)</span>'],
- ['Complaint logging & CAPA','Manual','Not assessed','After: complaint has already reached the client','Complaint classification (I6) '+st('R')],
- ['Onboarding stage tracking','Manual','Not assessed','Not assessed','Stage tracker (I7) '+st('R')],
- ['Forecast & scheduling','Not assessed','Not assessed','Not assessed','Forecast support (I3) '+st('R')]];
+// ---------- Overview data ----------
+const AUTOST=[ // [process, status, manual effort, errors found, project, note]
+ ['MasterWord enrolment','Automated','Before: 8–32 h per batch (team estimates) '+st('S')+' · now 54 min to 2 h 42 min per batch '+st('V'),'Before submission: 3 of 28 missing-document cases '+st('V'),'MasterWord automation '+st('P'),'Stability and company adoption still to be validated; runs on a personal account'],
+ ['Interpreter training','Partly automated','Not assessed','Final exam checks knowledge; results not yet tracked','Kalam CX e-learning '+st('P'),'Videos, quizzes and exam run self-paced; completion not yet tracked'],
+ ['Interpreter payment cycle','Manual','Not assessed','After: only when interpreters complain (described by management)','Payment controls (I2) '+st('R'),''],
+ ['Pre-scheduled sessions','Manual','Not assessed','After: no "missed" status in 3,510 tracker rows','Session Desk <span class="st sR">Proposal</span>',''],
+ ['Performance reporting','Manual','Not assessed (16 files built by hand)','Not assessed','IMS dashboard <span class="st sR">Proposal (awaiting IT)</span>',''],
+ ['Complaint logging & CAPA','Manual','Not assessed','After: complaint has already reached the client','Complaint classification (I6) '+st('R'),''],
+ ['Onboarding stage tracking','Manual','Not assessed','Not assessed','Stage tracker (I7) '+st('R'),''],
+ ['Forecast & scheduling','Not assessed','Not assessed','Not assessed','Forecast support (I3) '+st('R'),'']];
+const ACAT=[['Automated','#11804f','sV','Runs by itself; a person checks the result'],['Partly automated','#b86a00','sP','Some steps run by themselves'],['In progress','#2a5bb8','sC','Being built, not yet in daily use'],['Manual','#c8274a','sE','Done by hand'],['Not assessed','#a59dab','sN','Not checked yet']];
 const APROJ=[
  ['MasterWord automation',2,st('P'),'28 of 28 applicants submitted; 4.5 min per applicant. Runs on a personal account.'],
  ['Kalam CX e-learning',2,st('P'),'2 trainings, 30 videos, 54 questions, final exam. Completion not yet measured.'],
  ['IMS performance dashboard',0,'<span class="st sR">Proposal</span>','Pipeline joins 16 sources on one PC; production plan waiting on IT.'],
  ['Session Desk (pre-scheduling)',0,'<span class="st sR">Proposal</span>','Prototype built; not in use.']];
 const STAND=[
- ['24.1%','Share of paid interpreter time spent on calls (target 35.3%)','V','r','IMS dashboard: Incorta + Kalam call logs, week 46 2026','Demand forecast by language and client tells WFM how many interpreters to schedule, so fewer sit idle'],
- ['56%','TTG calls '+T('abandoned','Abandoned'),'V','r','Incorta abandon extract: 21,162 of 38,025 offered calls, 1 Oct – 8 Nov 2026','Coverage alerts flag gaps by language before calls go unanswered'],
- ['31%','Required coaching done (48 of 156)','C','y','Kalam coaching log, one team (about 79 interpreters), October 2026','Automated reports free supervisors from building reports by hand, leaving time to coach'],
- ['16','Separate report files','V','','IMS dashboard build: number of data sources joined','One automated pipeline replaces 16 hand-built files (proposal, awaiting IT)']];
+ ['27,984','Calls not answered, all clients (of 110,301 offered)','V','r','IMS dashboard (Incorta), 1 Oct – 8 Nov 2026','Proves staffing does not match demand → Forecast & schedule (I3)'],
+ ['31%','Required coaching done (48 of 156)','C','y','Kalam coaching log, one team (about 79 interpreters), October 2026','Proves most coaching is missed → Coaching routine (I4)'],
+ ['16','Separate report files built by hand','V','','IMS dashboard build: number of data sources','Proves reporting is manual and scattered → One data model (I5)']];
+const GW={
+ 1:{hue:45,why:'Revenue pays for everything else. Management set +20% growth with the people KALAM already has.',miss:['Revenue starting figure from Finance','Named owner','Approved target date']},
+ 2:{hue:150,why:'Idle paid time and work done by hand cost money without serving any client.',miss:['Approved target date and owner','Hours spent on manual work each month']},
+ 3:{hue:330,why:'People who feel trusted and fairly treated stay longer and serve clients better.',miss:['Official Trust Index (survey not run)','Attrition rate','Approved target and owner']},
+ 4:{hue:205,why:'Unanswered calls and missed sessions put client contracts at risk.',miss:['Approved target','Client service promises and satisfaction scores','Named owner']},
+ 5:{hue:285,why:'Steady quality is what clients, and COPC auditors, check first.',miss:['Internal COPC assessment of all 32 items','Named owner','Approved target date']}};
+const CHAINS=[
+ ['MasterWord automation',[['Earlier error detection','V','3 of 28 caught before submission'],['Less rework'],['Better submission quality'],['Better deadline compliance'],['Less manual effort','S','≈12–60 h over 2 batches']]],
+ ['Payment process improvement',[['Better checks and controls','R'],['Fewer payment errors'],['Fewer interpreter complaints'],['More trust, better experience']]],
+ ['Scheduling improvement',[['Better planning and visibility','R'],['More calls and sessions covered'],['Fewer missed service opportunities'],['Better client experience']]],
+ ['COPC',[['Stronger processes and controls','R'],['More consistent service'],['More client confidence'],['May help win and keep clients']]],
+ ['Great Place to Work',[['Better employee experience and trust','R'],['May improve engagement and retention'],['Stronger employer reputation']]]];
+const FWN={C:'COPC',G:'Great Place to Work',K:'KALAM Way'};
+let ovG=1;
+function goalData(n){const ini=plan.filter(p=>p.goal.includes(n)).sort((a,b)=>b.score-a.score);
+ const fw={C:new Set(),G:new Set(),K:new Set()};ini.forEach(p=>LINK[p.id].std.forEach(s=>fw[s[0]].add(s)));
+ const depts=[...new Set(ini.flatMap(p=>LINK[p.id].dep))].sort((a,b)=>DEPTS.indexOf(a)-DEPTS.indexOf(b));
+ const ars=[...new Set(ini.map(p=>p.area))];return {ini,fw,depts,ars}}
+
+// ---------- Overview page ----------
 function pOv(){
- const orbits=goals.map((g,i)=>{const a=(-90+i*72)*Math.PI/180,x=50+40*Math.cos(a),y=50+42*Math.sin(a);return `<button class="orbit" data-g="${g.n}" style="left:${x}%;top:${y}%"><b>G${g.n}</b>${g.t}</button>`}).join('');
- const Q=['Where is KALAM going?','Vision, mission and goals','What does success look like?','Where do we stand on automation?','What are we missing?','What do COPC and GPTW require?','How do we compare?','What must each department improve?','How will automation and AI help?','What business value will we get?'];
+ const orbits=goals.map((g,i)=>{const a=(-90+i*72)*Math.PI/180,x=50+40*Math.cos(a),y=50+42*Math.sin(a);return `<button class="orbit" data-sg="${g.n}" style="left:${x}%;top:${y}%"><b>G${g.n}</b>${g.t}</button>`}).join('');
+ const Q=['Where is KALAM going?','Who we are: vision, mission and values','What does success look like?','Where do we stand on automation?','What are we missing?','What do the reference frameworks require?','How ready are we?','What must each department improve?','How will automation and AI help?','What business value will we get?'];
+ const items=copc.map(c=>copcItem(c[0])),nRev=items.filter(i=>i.st!='Na').length,nPa=items.filter(i=>i.st=='Pa').length,nMi=items.filter(i=>i.st=='Mi').length,nNa=items.filter(i=>i.st=='Na').length;
+ const acnt=ACAT.map(c=>AUTOST.filter(r=>r[1]==c[0]).length);
  const sumS={R:0,A:0,N:0,G:0};areas.forEach(a=>sumS[a.s]++);
- const nItems=Object.keys(copcSt).length,nPa=Object.values(copcSt).filter(x=>x[0]=='Pa').length,nMi=Object.values(copcSt).filter(x=>x[0]=='Mi').length;
- const deptRows=DEPTS.map(d=>{const inv=plan.filter(p=>LINK[p.id].dep.includes(d));return {d,inv}}).sort((a,b)=>b.inv.length-a.inv.length);
- const maxInv=Math.max(...deptRows.map(r=>r.inv.length));
+ const deptRows=DEPTS.map(d=>({d,inv:plan.filter(p=>LINK[p.id].dep.includes(d))})).sort((a,b)=>b.inv.length-a.inv.length),maxInv=Math.max(...deptRows.map(r=>r.inv.length));
  return `
 <section class="pn hero">
  <div>
   <div class="eyebrow">KALAM strategic transformation · 2027 → 2028</div>
-  <h1>One company plan: five goals, three standards, <em>measured</em> progress</h1>
+  <h1>One company plan: five goals, three reference frameworks, <em>measured</em> progress</h1>
   <p class="lead">“${KALAM.vision}”</p>
   <div class="dest">
    <div><b>+20%</b><span>Growth with current resources</span>${st('M')}</div>
-   <div><b>COPC</b><span>${T('COPC')} CX Standard certification</span><span class="st sR">Strategic goal</span></div>
+   <div><b>COPC</b><span>${T('COPC')} certification</span><span class="st sR">Strategic goal</span></div>
    <div><b>GPTW</b><span>${T('Great Place to Work','GPTW')} certification</span><span class="st sR">Strategic goal</span></div>
   </div>
   <p class="dim" style="font-size:11px;margin-top:10px">Destination: 2028. Both certifications are goals, not achievements. Data as of ${ASOF}.</p>
  </div>
- <div class="orbwrap"><div class="ring"></div><div class="ring r2"></div><div class="orb" id="bigorb"></div>${orbits}<div class="orbcap">Tap a goal</div></div>
+ <div class="orbwrap"><div class="ring"></div><div class="ring r2"></div><div class="orb" id="bigorb"></div>${orbits}<div class="orbcap" id="orbcap">Tap a goal to see its connections</div></div>
 </section>
 <nav class="qnav" aria-label="Ten questions">${Q.map((q,i)=>`<a href="#q${i+1}" data-q="${i+1}"><b>${i+1}</b>${q}</a>`).join('')}</nav>
 
 ${sec(1,Q[0],`<div class="chain">
- <div class="hl"><b>Vision</b><span>Trusted BPO partner</span></div><i></i>
+ <div class="hl"><b>Vision</b><span>Globally respected</span></div><i></i>
  <div><b>5 goals</b><span>Revenue · cost · people · clients · quality</span></div><i></i>
- <div><b>3 standards</b><span>COPC · GPTW · KALAM Way</span></div><i></i>
- <div><b>17 areas</b><span>Company improvement areas</span></div><i></i>
+ <div><b>3 reference frameworks</b><span>COPC · GPTW · KALAM Way</span></div><i></i>
  <div><b>9 departments</b><span>Each owns its part</span></div><i></i>
+ <div><b>17 areas</b><span>Where we improve</span></div><i></i>
  <div><b>14 initiatives</b><span>What we change</span></div><i></i>
- <div><b>${T('KPIs','KPI')}</b><span>How we measure</span></div><i></i>
- <div class="hl"><b>Business benefit</b><span>Growth, cost, trust</span></div></div>
- <div class="callout"><b>Operations / IMS is Phase 1 of the company plan,</b> not the strategy itself. Every department has a part. ${goChip('map','Explore the map')}</div>
- <div class="grid g2" style="margin-top:14px"><div class="card"><h3>COPC certification</h3>${stepper(0)}</div><div class="card"><h3>GPTW certification</h3>${stepper(0)}</div></div>`)}
+ <div class="hl"><b>Business benefit</b><span>Measured results</span></div></div>
+ <div class="fwrow">
+  <div class="fw id"><span class="tag">Company identity</span><h3>Vision, mission & values</h3><p>Who KALAM is and where it is going.</p></div>
+  <div class="fw"><span class="tag">External standard + certification</span><h3>COPC</h3><p>Operational excellence: how well customer operations are run.</p></div>
+  <div class="fw"><span class="tag">External assessment + certification</span><h3>Great Place to Work</h3><p>How employees experience working at KALAM.</p></div>
+  <div class="fw"><span class="tag">Internal framework</span><h3>KALAM Way</h3><p>KALAM’s own written way of working.</p></div>
+ </div>
+ <p class="dim" style="font-size:11px;margin-top:6px">The last three are the <b>three strategic reference frameworks</b>: guides we measure ourselves against, not three certificates we hold.</p>
+ <div class="callout"><b>Operations / IMS is Phase 1 of the company plan,</b> not the strategy itself. ${goChip('map','Full transformation map')}</div>
+ <div class="grid g2" style="margin-top:14px"><div class="card"><h3>COPC certification</h3>${stepper(0)}</div><div class="card"><h3>Great Place to Work certification</h3>${stepper(0)}</div></div>`)}
 
 ${sec(2,Q[1],`<div class="grid g2">
  <div><h4>Vision</h4><p class="quote">${KALAM.vision}</p><h4 style="margin-top:14px">Mission</h4><p class="quote">${KALAM.mission}</p>
-  <h4 style="margin-top:14px">Values</h4><div class="chips">${KALAM.values.map(v=>`<span class="chip">${v}</span>`).join('')}</div><p class="dim" style="font-size:10.5px;margin-top:8px">Source: ${KALAM.src}</p></div>
- <div class="grid" style="grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;align-content:start">${goals.map(g=>`<div class="gcard" data-g="${g.n}"><span class="gn">GOAL ${g.n}</span><h3>${GF[g.n]}</h3><p>${g.kpi}</p></div>`).join('')}</div></div>
- <p class="dim" style="font-size:11px;margin-top:10px">The five goals are agreed with management. Targets other than +20% are awaiting management approval.</p>`)}
+  <p class="dim" style="font-size:10.5px;margin-top:10px">Source: <a href="${KALAM.url}" target="_blank" rel="noopener">KALAM Way, Volume One ↗</a> (sections 1.3, 1.4, 2.2)</p></div>
+ <div><h4>Values</h4><div class="vals">${KALAM.values.map((v,i)=>`<div><b>${v[0]}</b><span>${v[1]}</span></div>`).join('')}</div></div></div>`)}
 
-${sec(3,Q[2],`<div class="gflow">
- <div class="hd">Goal</div><div class="hd">Current</div><div class="hd">Target 2028</div><div class="hd">Improvements</div><div class="hd">Departments</div><div class="hd">Benefit</div>
- ${goals.map(g=>{const x=gx[g.n];return `<div class="gc" data-g="${g.n}"><span>G${g.n}</span>${GF[g.n]}<div class="dim" style="font-weight:400;font-size:11px;margin-top:4px">${x.succ}</div></div>
- <div data-l="Current"><b>${x.now}</b><br>${st(x.nowS)}</div><div data-l="Target 2028"><b>${x.tgt}</b><br>${st(x.tgtS)}</div>
- <div data-l="Improvements"><div class="chips">${plan.filter(p=>p.goal.includes(g.n)).sort((a,b)=>b.score-a.score).slice(0,4).map(p=>ichip(p.id)).join('')}</div></div>
- <div data-l="Departments">${x.depts.join(' · ')}</div><div data-l="Benefit">${x.ben}</div>`}).join('')}</div>`)}
+${sec(3,Q[2],`<p class="mut" style="font-size:12.5px;margin-bottom:10px">Pick a goal. The map shows which frameworks, departments, areas and projects serve it, and the benefit expected.</p>
+ <div class="sgoals" role="tablist">${goals.map(g=>`<button data-sg="${g.n}" role="tab"><b>G${g.n}</b>${GF[g.n]}</button>`).join('')}</div>
+ <div id="smwrap"><div id="smap"></div></div>
+ <div id="sgd"></div>`)}
 
-${sec(4,'Where do we stand on automation?',`<div class="grid g4">${stat('2 of 8','Key processes automated, both still in progress','C','y')}${stat('Personal','MasterWord automation runs on a personal account; no company account yet','V','r')}${stat('1 of 8','Processes that catch errors before they reach the client or interpreter','C')}${stat('Not assessed','Manual hours per month on repetitive work (only MasterWord estimated)','N')}</div>
- <div class="tw" style="margin-top:14px"><table class="tbl"><thead><tr><th>Key process</th><th>Today</th><th>Manual effort</th><th>Errors found</th><th>Automation project</th></tr></thead><tbody>${AUTOST.map(r=>`<tr><td><b>${r[0]}</b></td><td><span class="st ${r[1]=='Automated'?'sV':r[1]=='Partly automated'?'sP':r[1]=='Manual'?'sE':'sN'}">${r[1]}</span></td><td class="mut">${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`).join('')}</tbody></table></div>
+${sec(4,Q[3],`<div class="ph"><div><h3>8 key processes, by automation status</h3><p>An initial assessment of 8 key processes, not a company-wide automation audit.</p></div></div>
+ <div class="meter" style="height:18px">${ACAT.map((c,i)=>acnt[i]?`<i style="width:${acnt[i]/8*100}%;background:${c[1]}" title="${c[0]}: ${acnt[i]}"></i>`:'').join('')}</div>
+ <div class="acat">${ACAT.map((c,i)=>`<div style="border-top:3px solid ${c[1]}"><b>${acnt[i]}</b><span>${c[0]}</span><small>${c[3]}</small></div>`).join('')}</div>
+ <div class="grid g3" style="margin-top:12px">${stat('1 of 8','Processes that catch errors before they reach a client or interpreter','C')}${stat('Personal','MasterWord automation runs on a personal account; no company account yet','V','r')}${stat('Not assessed','Manual hours per month on repetitive work (only MasterWord estimated)','N')}</div>
+ <div class="tw" style="margin-top:14px"><table class="tbl"><thead><tr><th>Key process</th><th>Today</th><th>Manual effort</th><th>Errors found</th><th>Automation project</th></tr></thead><tbody>${AUTOST.map(r=>{const c=ACAT.find(x=>x[0]==r[1]);return `<tr><td><b>${r[0]}</b>${r[5]?`<br><small class="dim">${r[5]}</small>`:''}</td><td><span class="st ${c[2]}">${r[1]}</span></td><td class="mut">${r[2]}</td><td>${r[3]}</td><td>${r[4]}</td></tr>`}).join('')}</tbody></table></div>
  <h4 style="margin-top:16px">Where each automation project stands</h4><div class="grid g2" style="gap:8px">${APROJ.map(a=>`<div class="card"><h3><span>${a[0]}</span>${a[2]}</h3><div class="stepper">${['Proposal','Approved','Building','Live'].map((x,k)=>`<span class="${k==a[1]?'on':''}">${x}</span>`).join('')}</div><p style="margin-top:6px">${a[3]}</p></div>`).join('')}</div>
- <p class="dim" style="font-size:11px;margin-top:8px">Sources: MasterWord run report (23 Nov 2026), Kalam Learning build, IMS dashboard build, Pre-Scheduled Tracker, payment cycle as described by IMS management (26 Nov 2026). Operational figures (occupancy, abandonment, coaching) are now on the Operations page as baselines.</p>`)}
-
+ <p class="dim" style="font-size:11px;margin-top:8px">Sources: MasterWord run report (23 Nov 2026), Kalam Learning build, IMS dashboard build, Pre-Scheduled Tracker, payment cycle as described by IMS management (26 Nov 2026). Operational figures are on the Operations page.</p>`)}
 
 ${sec(5,Q[4],`<div class="grid g2"><div class="bars">
  ${meter('Goals with a measured '+T('baseline','Baseline'),2,5,'2 of 5')}
@@ -1014,14 +1100,20 @@ ${sec(5,Q[4],`<div class="grid g2"><div class="bars">
  <div class="heat">${areas.map(a=>`<button class="cell ${a.s}" data-a="${a.id}" data-fw="${a.fw.join('')}"><span>${a.t}</span><small>${SL[a.s]} · ${a.dept}</small></button>`).join('')}</div>
  <div class="legend" style="margin-top:10px"><span><i class="dot cR"></i>Critical gap ${sumS.R}</span><span><i class="dot cA"></i>Needs work ${sumS.A}</span><span><i class="dot cN"></i>Not assessed ${sumS.N}</span><span><i class="dot cG"></i>On track ${sumS.G}</span></div>`)}
 
-${sec(6,Q[5],`<div class="grid g3">
- <div class="card"><h3>COPC ${st('R')}</h3><p>A world standard for running customer operations. Each requirement needs a designed way of working (${T('Approach')}) that is used everywhere (${T('Deployment')}), then months of proven results.</p><div class="chips" style="margin:10px 0">${COPCCAT.map(c=>`<span class="chip">${c.k=='BPO'?'':c.k+' '}${c.t}</span>`).join('')}</div>${goChip('copc','COPC page')}</div>
- <div class="card"><h3>Great Place to Work ${st('R')}</h3><p>Employees answer a confidential survey (${T('Trust Index')}). The company also describes its people practices. GPTW decides certification.</p><div class="chips" style="margin:10px 0">${TRUST.map(t=>`<span class="chip">${t.d}</span>`).join('')}</div>${goChip('gptw','GPTW page')}</div>
- <div class="card"><h3>KALAM Way</h3><p>KALAM’s own vision, values and competency books. It ties both standards to how KALAM works day to day.</p><div class="chips" style="margin:10px 0"><span class="chip">3 competency books</span><span class="chip">5 levels each</span><span class="chip">No operations book yet</span></div>${goChip('kw','KALAM Way page')}</div></div>`)}
 
-${sec(7,Q[6],`<div class="grid g2"><div class="card"><h3>Against COPC (32 items, internal view)</h3>${donut([[0,'#1f9d63','Compliant'],[nPa,'#e08a00','Partial'],[nMi,'#d0384d','Missing'],[32-nItems,'#c9bfd0','Not assessed']],nItems+'/32','items with evidence')}<p class="dim" style="font-size:11px;margin-top:8px">No item is marked Compliant before the formal internal assessment. Not an official COPC score.</p></div>
- <div class="card"><h3>Against GPTW (5 dimensions)</h3>${donut([[3,'#2a5bb8','Signal found'],[2,'#c9bfd0','Not measured']],'3/5','dimensions with a signal')}<p class="dim" style="font-size:11px;margin-top:8px">Official Trust Index: NOT YET MEASURED.</p></div></div>
- <div class="gapnote" style="margin-top:12px">Comparison with other companies: <b>not available</b>. This dashboard holds no benchmark data, so KALAM is compared with the standards only.</div>`)}
+${sec(6,Q[5],`<div class="grid g3">
+ <div class="card"><h3>COPC <span class="tag">External standard</span></h3><p>A world standard for running customer operations. Each requirement needs a designed way of working (${T('Approach')}) that is used everywhere (${T('Deployment')}), then months of proven results.</p><div class="chips" style="margin:10px 0">${COPCCAT.map(c=>`<span class="chip">${c.k=='BPO'?'':c.k+' '}${c.t}</span>`).join('')}</div>${goChip('copc','COPC page')}</div>
+ <div class="card"><h3>Great Place to Work <span class="tag">External assessment</span></h3><p>Employees answer a confidential survey (${T('Trust Index')}). The company also describes its people practices. GPTW decides certification.</p><div class="chips" style="margin:10px 0">${TRUST.map(t=>`<span class="chip">${t.d}</span>`).join('')}</div>${goChip('gptw','GPTW page')}</div>
+ <div class="card"><h3>KALAM Way <span class="tag">Internal framework</span></h3><p>KALAM’s own vision, values and competency books. It ties both standards to how KALAM works day to day.</p><div class="chips" style="margin:10px 0"><span class="chip">3 competency books</span><span class="chip">5 levels each</span><span class="chip">No operations book yet</span></div>${goChip('kw','KALAM Way page')}</div></div>`)}
+
+
+${sec(7,Q[6],`<div class="grid g2"><div class="card"><h3>COPC: internal readiness view (32 requirements)</h3>
+ <div class="rd4"><div class="ok"><b>${nRev}</b><span>Evidence reviewed</span><small>≠ compliant</small></div><div class="gp"><b>${nRev}</b><span>Gaps identified</span><small>${nPa} partly in place · ${nMi} missing · ≠ full assessment</small></div><div class="na"><b>${nNa}</b><span>Not assessed</span><small>≠ failed</small></div><div class="fa"><b>0</b><span>Formally assessed</span><small>internal assessment I11 not run</small></div></div>
+ <div class="gapnote" style="margin-top:10px">This is KALAM’s internal readiness view, <b>not</b> an official COPC certification assessment. No COPC score or readiness percentage is shown.</div>
+ <h4 style="margin-top:12px">By category: tap to see requirements and evidence</h4>${COPCCAT.map(c=>{const it=items.filter(i=>i.cat==c.k),r=it.filter(i=>i.st!='Na').length;return `<button class="mrow cc" data-cc="${c.k}" style="width:100%;text-align:left"><span><b>${c.k=='BPO'?'':c.k}</b> ${c.t}</span><div class="meter"><i style="width:${r/it.length*100}%;background:#b86a00"></i><i style="width:${(it.length-r)/it.length*100}%;background:#d9d2de"></i></div><b>${r}/${it.length} →</b></button>`}).join('')}
+ <div class="legend" style="margin-top:6px"><span><i class="dot" style="background:#b86a00"></i>Evidence reviewed (gap found)</span><span><i class="dot" style="background:#d9d2de"></i>Not assessed</span></div></div>
+ <div class="card"><h3>Great Place to Work (5 dimensions)</h3>${donut([[3,'#2a5bb8','Indirect signal found'],[2,'#c9bfd0','Not measured']],'3/5','dimensions with a signal')}<p class="dim" style="font-size:11px;margin-top:8px">Official Trust Index: NOT YET MEASURED.</p>
+ <div class="gapnote" style="margin-top:12px">Comparison with other companies: <b>not available</b>. This dashboard holds no benchmark data, so KALAM is compared with the frameworks only.</div></div></div>`)}
 
 ${sec(8,Q[7],`<div class="tw"><table class="tbl"><thead><tr><th>Department</th><th>Initiatives involved</th><th>Must improve (top initiatives)</th></tr></thead><tbody>
  ${deptRows.map(r=>`<tr><td><b>${r.d}</b></td><td style="min-width:120px"><span class="sbar" style="width:${r.inv.length/maxInv*90}px"></span> ${r.inv.length}</td><td><div class="chips">${r.inv.sort((a,b)=>b.score-a.score).slice(0,3).map(p=>`<button class="chip cl" data-p="${p.id}">${p.id} ${p.t}</button>`).join('')}</div></td></tr>`).join('')}</tbody></table></div>`)}
@@ -1029,9 +1121,35 @@ ${sec(8,Q[7],`<div class="tw"><table class="tbl"><thead><tr><th>Department</th><
 ${sec(9,Q[8],`<div class="grid g3">${[['MasterWord enrolment','Read, match, redact, type every applicant','Automated run + missing-document check','P','4.5 min per applicant (Calculated)'],['Interpreter payment','Checks by eye; issues by message','Completeness check, reminders, issue log','R','Benefit to measure'],['Reporting','16 files built by hand','One refreshed dashboard','R','Awaiting IT approval']].map(a=>`<div class="card"><h3>${a[0]} ${st(a[3])}</h3><div class="fl" style="margin-top:8px"><span class="box m">${a[1]}</span><span class="ar">→</span><span class="box a">${a[2]}</span></div><p style="margin-top:8px">${a[4]}</p></div>`).join('')}</div>
  <div class="chips" style="margin-top:12px"><span class="chip">${T('Human checkpoint')} on every automation</span><span class="chip">Company accounts, not personal</span><span class="chip">Measured before and after</span><span class="chip">One approval route</span>${goChip('ops','Automation & AI')}</div>`)}
 
-${sec(10,Q[9],`<div class="grid g2"><div><h4>Value proven so far</h4><div class="grid g2" style="gap:8px">${stat('28/28','MasterWord applicants submitted and confirmed','V','g')}${stat('4.5 min','Per applicant (batch 2: 54 min ÷ 12)','C','g')}${stat('$0','E-learning running cost','V','g')}${stat('3 of 28','Missing-document cases caught before submission','V','g')}</div></div>
- <div><h4>Value expected (by goal)</h4>${goals.map(g=>`<div class="mrow" style="grid-template-columns:44px minmax(0,1fr)"><span class="tag">G${g.n}</span><span>${gx[g.n].ben}</span></div>`).join('')}
- <div class="gapnote" style="margin-top:8px">Money value is not claimed until baselines exist. How it will be measured: revenue, cost per answered call and attrition, from the Phase 1 baseline (I1).</div></div></div>`)}`}
+
+${sec(10,Q[9],`<h4>Cause and effect: what each change should lead to</h4><div class="chains">${CHAINS.map(c=>`<div class="crow"><b class="cn">${c[0]}</b><div class="chain">${c[1].map((s,i)=>`${i?'<i></i>':''}<div class="${s[1]=='V'||s[1]=='S'?'hl':''}"><b>${s[0]}</b><span>${s[1]?st(s[1])+(s[2]?'<br>'+s[2]:''):'To be measured'}</span></div>`).join('')}</div></div>`).join('')}</div>
+ <h4 style="margin-top:16px">Value proven so far</h4><div class="grid g4" style="gap:8px">${stat('28/28','MasterWord applicants submitted and confirmed','V','g')}${stat('4.5 min','Per applicant (batch 2: 54 min ÷ 12)','C','g')}${stat('$0','E-learning running cost','V','g')}${stat('3 of 28','Missing-document cases caught before submission','V','g')}</div>
+ <div class="gapnote" style="margin-top:10px">No revenue growth, client numbers, attrition change, savings or return on investment is claimed. Each will be measured from the Phase 1 starting figures (I1) and shown once approved.</div>`)}`}
+
+function renderSmap(){const n=ovG,g=G(n),x=gx[n],D=goalData(n);const box=$('#smap');if(!box)return;
+ const fwN=Object.keys(D.fw).filter(k=>D.fw[k].size);
+ const cols=[['KALAM vision',[['v','Vision']]],['Goal',[['g',`G${n} ${GF[n]}`]]],['Framework',fwN.map(k=>['f:'+k,FWN[k]])],['Department',D.depts.map(d=>['d:'+d,d])],['Improvement area',D.ars.map(a=>['a:'+a,A(a).t])],['Project',D.ini.map(p=>['p:'+p.id,`${p.id} ${p.t}`])],['Benefit',D.ini.map(p=>['b:'+p.id,p.ben])]];
+ box.innerHTML='<svg id="ssvg" aria-hidden="true"></svg>'+cols.map(c=>`<div class="scol"><h4>${c[0]}</h4>${c[1].map(([id,l])=>`<button class="sn" data-sn="${esc(id)}" ${id[0]=='p'?`data-p="${id.slice(2)}"`:''}>${esc(l)}</button>`).join('')}</div>`).join('');
+ const E=[['v','g']];fwN.forEach(k=>E.push(['g','f:'+k]));
+ D.ini.forEach(p=>{const L=LINK[p.id];fwN.forEach(k=>{if(L.std.some(s=>s[0]==k))L.dep.forEach(d=>E.push(['f:'+k,'d:'+d]))});L.dep.forEach(d=>E.push(['d:'+d,'a:'+p.area]));E.push(['a:'+p.area,'p:'+p.id]);E.push(['p:'+p.id,'b:'+p.id])});
+ box._E=[...new Set(E.map(e=>e.join('>')))].map(s=>s.split('>'));
+ const ev=`${g.fact} ${st(g.ev)}`;
+ $('#sgd').innerHTML=`<div class="gd"><div><h4>What KALAM wants</h4><p>${x.succ}</p><p class="mut" style="margin-top:4px">Now: <b>${x.now}</b> ${st(x.nowS)} · Target: <b>${x.tgt}</b> ${st(x.tgtS)}</p></div>
+ <div><h4>Why it matters</h4><p>${GW[n].why}</p></div>
+ <div><h4>Departments</h4><div class="chips">${D.depts.map(d=>`<span class="chip">${d}</span>`).join('')}</div></div>
+ <div><h4>Frameworks it supports</h4><div class="chips">${fwN.map(k=>[...D.fw[k]].map(s=>`<span class="chip">${STD[s]}</span>`).join('')).join('')}</div></div>
+ <div><h4>Initiatives</h4><div class="chips">${D.ini.map(p=>`<button class="chip cl" data-p="${p.id}">${p.id} ${p.t}</button>`).join('')}</div></div>
+ <div><h4>How success is measured</h4><ul class="plist"><li><b>${g.kpi}</b></li>${D.ini.slice(0,4).map(p=>`<li>${p.kpi}</li>`).join('')}</ul></div>
+ <div><h4>Evidence available now</h4><p>${ev}</p><p class="dim" style="font-size:11px">Source: ${g.src}</p></div>
+ <div><h4 style="color:var(--r)">Still missing</h4><ul class="plist">${GW[n].miss.map(m=>`<li>${m}</li>`).join('')}</ul></div></div>`;
+ $$('.sgoals button,.orbit').forEach(b=>b.classList.toggle('on',+b.dataset.sg==n));
+ const o=$('#bigorb');if(o){o.style.setProperty('--h',GW[n].hue);o.classList.remove('ping');void o.offsetWidth;o.classList.add('ping')}
+ const cap=$('#orbcap');if(cap)cap.textContent=`G${n}: ${D.depts.length} departments · ${D.ars.length} areas · ${D.ini.length} projects`;
+ plainify(box);plainify($('#sgd'));requestAnimationFrame(drawSmap)}
+function drawSmap(){const box=$('#smap'),svg=$('#ssvg');if(!box||!svg||!box.offsetWidth||getComputedStyle(svg).display=='none')return;const r0=box.getBoundingClientRect(),pos={};
+ $$('#smap .sn').forEach(b=>{const r=b.getBoundingClientRect();pos[b.dataset.sn]={l:r.left-r0.left,r:r.right-r0.left,y:r.top-r0.top+r.height/2}});
+ svg.setAttribute('viewBox',`0 0 ${box.offsetWidth} ${box.offsetHeight}`);
+ svg.innerHTML=(box._E||[]).map(([a,b])=>{const A1=pos[a],B1=pos[b];if(!A1||!B1)return'';const mx=(A1.r+B1.l)/2;return `<path d="M${A1.r} ${A1.y} C${mx} ${A1.y},${mx} ${B1.y},${B1.l} ${B1.y}"/>`}).join('')}
 
 // ================= 2 · COPC =================
 function pCopc(){
@@ -1047,7 +1165,7 @@ function pCopc(){
   ${cats.map(c=>{const n=c.it.length,f=k=>c.it.filter(i=>i.st==k).length;return `<div class="mrow"><span><b>${c.k=='BPO'?'':c.k}</b> ${c.t}</span><div class="meter">${[['Co','var(--g)'],['Pa','var(--a)'],['Mi','var(--r)'],['Na','#c9bfd0']].map(s=>`<i style="width:${f(s[0])/n*100}%;background:${s[1]}"></i>`).join('')}</div><b>${n} items</b></div>`}).join('')}</div>
  <div class="pn"><h3>How official scoring works</h3><div class="gapnote" style="margin-top:10px">The official scoring rules are <b>not public</b>. They are in the licensed COPC standard that KALAM management holds. In plain words, every requirement is checked for a designed way of working (${T('Approach')}) and whether it is used everywhere (${T('Deployment')}), and the operation must prove results over time. COPC decides certification after its own audit. <b>This dashboard shows no score out of 100.</b></div>
   <h4 style="margin-top:14px">Certification roadmap</h4><div class="stepper">${['Internal gap assessment (I11) · Phase 1','Close critical gaps · Phase 2','Run and measure results · Phase 3','Internal mock audit · Phase 4','COPC audit · Phase 5'].map((s,i)=>`<span class="${i?'':'on'}" style="text-transform:none;font-size:10px">${s}</span>`).join('')}</div><p class="dim" style="font-size:11px;margin-top:6px">Timing: awaiting management approval.</p></div></div>
- <div class="pn"><h3 style="margin-bottom:12px">The five categories in plain words</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card"><h3><span>${c.k=='BPO'?'':c.k+' · '}${c.t}</span></h3><p>${c.plain}</p><dl class="kv"><dt>KALAM must show</dt><dd>${c.show}</dd><dt>Our status</dt><dd>${f('Pa')?cs('Pa')+' '+f('Pa'):''} ${f('Mi')?cs('Mi')+' '+f('Mi'):''} ${f('Na')?cs('Na')+' '+f('Na'):''}</dd><dt>Owner</dt><dd>${c.owner}</dd></dl></div>`}).join('')}</div></div>
+ <div class="pn"><h3 style="margin-bottom:12px">The five categories in plain words</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card" id="cc-${c.k}"><h3><span>${c.k=='BPO'?'':c.k+' · '}${c.t}</span></h3><p>${c.plain}</p><dl class="kv"><dt>KALAM must show</dt><dd>${c.show}</dd><dt>Our status</dt><dd>${f('Pa')?cs('Pa')+' '+f('Pa'):''} ${f('Mi')?cs('Mi')+' '+f('Mi'):''} ${f('Na')?cs('Na')+' '+f('Na'):''}</dd><dt>Owner</dt><dd>${c.owner}</dd></dl></div>`}).join('')}</div></div>
  <div class="pn"><div class="ph"><div><h3>All 32 requirements</h3><p>Evidence, owner and the initiatives that close each gap.</p></div><div class="seg" id="cflt">${[['all','All'],['Pa','Partial'],['Mi','Missing'],['Na','Not assessed'],['crit','Critical']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
  <div class="tw"><table class="tbl" id="ctbl"><thead><tr><th>Item</th><th>Requirement</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Initiatives</th></tr></thead><tbody>
  ${items.map(i=>`<tr data-st="${i.st}" data-cr="${critical(i.id)?1:0}"><td class="id">${i.id}${critical(i.id)?' <span class="st sE">Critical</span>':''}</td><td>${i.t}</td><td>${cs(i.st)}</td><td class="mut">${i.ev}</td><td>${i.owner}</td><td><div class="chips">${inis(i.id).map(ichip).join('')||'<span class="dim">I11</span>'}</div></td></tr>`).join('')}</tbody></table></div></div>
@@ -1128,7 +1246,7 @@ function pOps(){const cnt=OWN.map(o=>[o,opsAreas.filter(a=>a.o==o).length]);cons
  return `<div class="phead"><div><div class="eyebrow">Phase 1 of the company plan</div><h1>Operations & IMS</h1><p>Twelve improvement areas. Every one involves Operations; most need a partner department. <b>Technology is the enabler, not the goal.</b></p></div></div>
  <div class="grid g2"><div class="pn"><h3 style="margin-bottom:8px">Who owns the 12 areas</h3><div class="bars">${cnt.map(c=>meter(c[0],c[1],mx,c[1],c[0]=='Pure Ops'?'var(--yel)':'var(--pl)')).join('')}</div></div>
  <div class="pn"><h3 style="margin-bottom:8px">Status of the 12 areas</h3>${donut([['R','#d0384d','Critical gap'],['A','#e08a00','Needs work'],['N','#c9bfd0','Not assessed']].map(s=>[opsAreas.filter(a=>a.s==s[0]).length,s[1],s[2]]),'12','areas')}</div></div>
- <div class="pn"><div class="ph"><div><h3>Operational baselines</h3><p>Where operations stand today, with the source of each figure.</p></div></div><div class="grid g4">${STAND.map(x=>`<div class="stat"><div class="big ${x[3]}">${x[0]}</div><p>${x[1]}</p>${st(x[2])}<dl class="kv" style="grid-template-columns:60px minmax(0,1fr);font-size:11px"><dt>Source</dt><dd class="mut">${x[4]}</dd></dl></div>`).join('')}</div></div>
+ <div class="pn"><div class="ph"><div><h3>Operational baselines</h3><p>Only figures that prove a gap one of our projects fixes.</p></div></div><div class="grid g4">${STAND.map(x=>`<div class="stat"><div class="big ${x[3]}">${x[0]}</div><p>${x[1]}</p>${st(x[2])}<dl class="kv" style="grid-template-columns:60px minmax(0,1fr);font-size:11px"><dt>Source</dt><dd class="mut">${x[4]}</dd><dt>Why here</dt><dd>${x[5]}</dd></dl></div>`).join('')}</div></div>
  <div class="pn"><h3 style="margin-bottom:12px">Improvement areas</h3><div class="cards">${opsAreas.map(a=>`<div class="card clk" data-p="${a.ini}"><h3><span><i class="dot c${a.s}"></i> ${a.t}</span><span class="tag">${a.o}</span></h3><p>${a.ev}</p><div class="chips" style="margin-top:8px">${a.g.map(g=>`<span class="chip">G${g}</span>`).join('')}<span class="chip">COPC ${a.copc.join(', ')}</span><span class="chip y">${a.ini}</span></div></div>`).join('')}</div></div>
  <div class="pn"><div class="ph"><div><div class="eyebrow">Main 2027 focus</div><h2>Automation & AI</h2><p>Manual work → automated, with a person approving at every control point.</p></div></div>
  <div class="grid g2"><div class="mx"><h4>Priority: impact vs effort</h4>${matrix()}</div><div><h4>Ranking (team judgement, proposed)</h4><div class="tw"><table class="tbl"><thead><tr><th>#</th><th>Automation</th><th>Score</th><th>Depends on</th></tr></thead><tbody>${ranked.map((a,i)=>`<tr><td class="id">${i+1}</td><td>${a.t} ${st(a.st)}</td><td><span class="sbar" style="width:${a.score*10}px"></span> ${a.score}</td><td class="mut">${a.deps}</td></tr>`).join('')}</tbody></table></div><p class="dim" style="font-size:10.5px;margin-top:6px">Score = impact + feasibility + risk reduced − effort (each 1–3).</p></div></div>
@@ -1287,12 +1405,12 @@ function go(id,noScroll){if(!RENDER[id])id='ov';cur=id;const pg=PAGES.find(p=>p.
  document.documentElement.style.setProperty('--h',pg.h);$('#ctx').innerHTML=`<div class="orb" id="miniorb"></div><dl><dt>You are here</dt><dd>${pg.here}</dd><dt>Working on</dt><dd>${pg.work}</dd><dt>Connected</dt><dd>${pg.link}</dd><dt>Next</dt><dd>${pg.next}</dd></dl>`;
  $$('.orb').forEach(o=>{o.classList.remove('ping');void o.offsetWidth;o.classList.add('ping')});
  if(location.hash.slice(1)!=id)history.replaceState(null,'','#'+id);document.title=`${pg.t} · KALAM Command Center`;
- if(!noScroll)window.scrollTo(0,0);if(id=='map')requestAnimationFrame(()=>mapSelect(mapSel));if(id=='ops')renderProc()}
+ if(!noScroll)window.scrollTo(0,0);if(id=='map')requestAnimationFrame(()=>mapSelect(mapSel));if(id=='ops')renderProc();if(id=='ov')renderSmap()}
 function init(){
  $('#nav').innerHTML=PAGES.map((p,i)=>`<button data-s="${p.id}"><i>${i+1}</i>${p.n}</button>`).join('');
  $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}"><p class="one"><b>In one sentence:</b> ${p.one}</p>${RENDER[p.id]()}</section>`).join('');plainify($('#main'));
  buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','What is our occupancy?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
- document.addEventListener('click',e=>{const t=e.target.closest('[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
+ document.addEventListener('click',e=>{const t=e.target.closest('[data-sg],[data-cc],[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
   if(t.id=='mod'){if(e.target.id=='mod')closeM();return}
   if(t.classList.contains('x')){closeM();return}
   if(t.id=='chatbtn'){$('#chat').classList.toggle('on');if($('#chat').classList.contains('on'))$('#cin').focus();return}
@@ -1300,6 +1418,8 @@ function init(){
   if(t.classList.contains('tip')){showTip(t);return}
   if(t.dataset.s){go(t.dataset.s);return}
   if(t.dataset.go){closeM();go(t.dataset.go);return}
+  if(t.dataset.sg){ovG=+t.dataset.sg;renderSmap();if(t.classList.contains('orbit'))$('#q3').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return}
+  if(t.dataset.cc){go('copc');const el=document.getElementById('cc-'+t.dataset.cc);if(el){el.scrollIntoView({block:'center'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)}return}
   if(t.dataset.mn){closeM();if(cur!='map'){mapSel=t.dataset.mn;go('map')}else mapSelect(t.dataset.mn);return}
   if(t.dataset.proc){procSel=t.dataset.proc;go('ops',true);$('#pseg').innerHTML=$('#pseg').innerHTML;$$('#pseg button').forEach(b=>b.classList.toggle('on',b.dataset.k==procSel));renderProc();$('#procs').scrollIntoView();return}
   if(t.dataset.g){openG(+t.dataset.g);return}if(t.dataset.p){openP(t.dataset.p);return}if(t.dataset.a){openA(t.dataset.a);return}
@@ -1314,7 +1434,7 @@ function init(){
  document.addEventListener('keydown',e=>{if(e.key=='Escape'){closeM();$('#chat').classList.remove('on');hideTip()}});
  document.addEventListener('mouseover',e=>{const t=e.target.closest('.tip');if(t)showTip(t);else hideTip()});
  document.addEventListener('focusin',e=>{const t=e.target.closest('.tip');if(t)showTip(t)});
- window.addEventListener('resize',()=>{if(cur=='map')drawMap()});window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
+ window.addEventListener('resize',()=>{if(cur=='map')drawMap();if(cur=='ov')drawSmap()});window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
  $('#pdf').addEventListener('click',()=>window.print());
  go(location.hash.slice(1)||'ov',true)}
 function showTip(t){const b=$('#tipbox');b.innerHTML=`<b>${esc(t.textContent)}</b><br>${esc(t.dataset.tip)}`;b.classList.add('on');const r=t.getBoundingClientRect(),w=Math.min(280,innerWidth-24);b.style.maxWidth=w+'px';
