@@ -899,6 +899,11 @@ function donut(seg,label,sub){const tot=seg.reduce((a,s)=>a+s[0],0),R=52,C=2*Mat
  <div class="legend" style="flex-direction:column;align-items:flex-start">${seg.map(s=>`<span><i class="dot" style="background:${s[1]}"></i>${s[2]}: <b style="color:#fff">${s[0]}</b></span>`).join('')}</div></div>`}
 
 // ================= 1 · OVERVIEW =================
+const STAND=[
+ ['24.1%',T('Occupancy')+' vs 35.3% target','V','r','IMS dashboard: Incorta + Kalam call logs, week 46 2026','Demand forecast by language and client tells WFM how many interpreters to schedule, so fewer sit idle'],
+ ['56%','TTG calls '+T('abandoned','Abandoned'),'V','r','Incorta abandon extract: 21,162 of 38,025 offered calls, 1 Oct – 8 Nov 2026','Coverage alerts flag gaps by language before calls go unanswered'],
+ ['31%','Required coaching done (48 of 156)','C','y','Kalam coaching log, one team (about 79 interpreters), October 2026','Automated reports free supervisors from building reports by hand, leaving time to coach'],
+ ['16','Separate report files','V','','IMS dashboard build: number of data sources joined','One automated pipeline replaces 16 hand-built files (proposal, awaiting IT)']];
 function pOv(){
  const orbits=goals.map((g,i)=>{const a=(-90+i*72)*Math.PI/180,x=50+40*Math.cos(a),y=50+42*Math.sin(a);return `<button class="orbit" data-g="${g.n}" style="left:${x}%;top:${y}%"><b>G${g.n}</b>${g.t}</button>`}).join('');
  const Q=['Where is KALAM going?','Vision, mission and goals','What does success look like?','Where do we stand?','What are we missing?','What do COPC and GPTW require?','How do we compare?','What must each department improve?','How will automation and AI help?','What business value will we get?'];
@@ -948,7 +953,8 @@ ${sec(3,Q[2],`<div class="gflow">
  <div data-l="Improvements"><div class="chips">${plan.filter(p=>p.goal.includes(g.n)).sort((a,b)=>b.score-a.score).slice(0,4).map(p=>ichip(p.id)).join('')}</div></div>
  <div data-l="Departments">${x.depts.join(' · ')}</div><div data-l="Benefit">${x.ben}</div>`}).join('')}</div>`)}
 
-${sec(4,Q[3],`<div class="grid g4">${stat('24.1%',T('Occupancy')+' vs 35.3% target (W46)','V','r')}${stat('56%','TTG calls '+T('abandoned','Abandoned')+' (1 Oct – 8 Nov)','V','r')}${stat('31%','Required coaching done (48 of 156, Oct, one team)','C','y')}${stat('16','Separate report files, no single source','V')}</div>
+${sec(4,Q[3],`<div class="grid g4">${STAND.map(x=>`<div class="stat"><div class="big ${x[3]}">${x[0]}</div><p>${x[1]}</p>${st(x[2])}<dl class="kv" style="grid-template-columns:70px minmax(0,1fr);font-size:11px"><dt>Source</dt><dd class="mut">${x[4]}</dd><dt>Automation</dt><dd>${x[5]}</dd></dl></div>`).join('')}</div>
+ <p class="dim" style="font-size:11px;margin-top:8px">Each problem above is one that automation and AI can help fix. See Operations → Automation & AI for the plan and the human checkpoints.</p>
  <div class="ph" style="margin-top:16px"><div><h3>17 company areas</h3><p>Tap an area for evidence, owner and the fix.</p></div><div class="seg" id="hflt">${[['all','All'],['C','COPC'],['G','GPTW'],['K','KALAM Way']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
  <div class="heat">${areas.map(a=>`<button class="cell ${a.s}" data-a="${a.id}" data-fw="${a.fw.join('')}"><span>${a.t}</span><small>${SL[a.s]} · ${a.dept}</small></button>`).join('')}</div>
  <div class="legend" style="margin-top:10px"><span><i class="dot cR"></i>Critical gap ${sumS.R}</span><span><i class="dot cA"></i>Needs work ${sumS.A}</span><span><i class="dot cN"></i>Not assessed ${sumS.N}</span><span><i class="dot cG"></i>On track ${sumS.G}</span></div>`)}
