@@ -76,7 +76,7 @@ IMS.projects = [
     ["P01.14", "Personal Productivity Recommendations", "planned"],
     ["P01.15", "Management Productivity Reporting", "planned"]
   ],
-  note: "The Daily Game Plan borrows the planning concept used in Teleperformance CCMS (a structured, interval-based Supervisor day). It is designed around IMS responsibilities; it does not assume IMS uses call-listening processes."
+  note: "The Daily Game Plan is a structured, interval-based supervisor day (COPC 3.7 real-time management). It is designed around IMS responsibilities; it does not assume IMS uses call-listening processes."
 },
 /* ------------------------------------------------------------------ */
 {

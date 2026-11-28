@@ -699,15 +699,15 @@ const ASOF='27 Nov 2026';
 
 // ---------- Five company goals ----------
 const goals=[
- {n:1,t:'Revenue growth',focus:'Revenue, profitability, retention, business development, revenue leakage',
-  kpi:'Year-on-year revenue growth',def:'(Revenue this period − same period last year) ÷ same period last year',
+ {n:1,t:'Talking minutes growth',focus:'Talking minutes, answered calls, client volume, business development',
+  kpi:'Talking minutes per month (all clients)',def:'Total interpreted (talking) minutes per month, all clients',
   base:null,cur:null,tgt:'+20%',tgtS:'V',tgtNote:'Stated by management: 20% growth with current resources',date:'Awaiting approval',trend:null,
-  ev:'E',fact:'Revenue baseline not yet received',src:'Finance (not yet shared)',per:'—',
-  owner:'Awaiting approval (CEO / Finance)',dept:'Finance, Sales, Operations',ini:['I1','I3','I13']},
+  ev:'E',fact:'Starting figure not yet pulled from the IMS dashboard',src:'IMS dashboard (talk-time data)',per:'—',
+  owner:'Awaiting approval (CEO / Operations)',dept:'Operations, Scheduling, Sales',ini:['I1','I3','I13']},
  {n:2,t:'Cost & efficiency',focus:'Operating cost, productivity, cycle time, rework, utilization, admin workload',
-  kpi:'Interpreter occupancy',def:'Talk time ÷ logged-in time',
-  base:24.1,cur:24.1,unit:'%',tgt:'35.3%',tgtS:'V',tgtNote:'Existing IMS occupancy target',date:'Awaiting approval',trend:null,
-  ev:'V',fact:'Occupancy 24.1% vs 35.3% target; 29,348 h idle vs 13,138 h talk',src:'IMS dashboard: Incorta + Kalam call logs',per:'W46 2026; hours 1 Oct – 8 Nov 2026',
+  kpi:'Hours of manual, repetitive work per month',def:'Hours spent each month on tasks a computer could do',
+  base:null,cur:null,unit:'',tgt:'Awaiting approval',tgtS:'A',tgtNote:'',date:'Awaiting approval',trend:null,
+  ev:'N',fact:'Not measured yet; only MasterWord has an estimate',src:'Phase 1 measurement (I1)',per:'—',
   owner:'Awaiting approval (Operations / WFM)',dept:'WFM, Operations, Finance',ini:['I3','I5','I8']},
  {n:3,t:'People & morale',focus:'Engagement, trust, fairness, retention, development, recognition, culture',
   kpi:'Official GPTW Trust Index',def:'Official Great Place to Work employee survey result',
@@ -715,9 +715,9 @@ const goals=[
   ev:'N',fact:'Trust Index not yet measured. Supporting signal: coaching 48 of 156 required sessions done (Oct, one team)',src:'GPTW (not run); Kalam coaching log',per:'Oct 2026 (one team)',
   owner:'Awaiting approval (HR)',dept:'HR, Operations, all managers',ini:['I4','I9','I10']},
  {n:4,t:'Client satisfaction',focus:'Satisfaction, retention, responsiveness, reliability, issue resolution',
-  kpi:'Calls answered (TTG)',def:'Answered calls ÷ offered calls, by client',
-  base:44,cur:44,unit:'%',tgt:'Awaiting approval',tgtS:'R',date:'Awaiting approval',trend:null,
-  ev:'V',fact:'TTG: 21,162 of 38,025 offered calls abandoned (56%)',src:'Incorta abandon extract',per:'1 Oct – 8 Nov 2026',
+  kpi:'Client satisfaction and service-promise results',def:'Results against each client’s agreed service promise',
+  base:null,cur:null,unit:'',tgt:'Awaiting approval',tgtS:'R',date:'Awaiting approval',trend:null,
+  ev:'N',fact:'Not measured in one place yet',src:'Client contracts and reports (not yet collected)',per:'—',
   owner:'Awaiting approval (Client services)',dept:'Operations, WFM, Account management',ini:['I3','I13','I6']},
  {n:5,t:'Quality & excellence',focus:'Quality, accuracy, compliance, consistency, WFM, risk, improvement',
   kpi:'COPC internal readiness',def:'Share of COPC R8.0 items meeting Approach and Deployment, scored internally',
@@ -770,7 +770,7 @@ const done=[
   kpis:[['Sources joined','Separate files','16 in one view','—','V'],['Report-building time','Baseline not available','Not measured','—','E']],
   before:['Export each report','Copy to sheets','Build charts by hand'],
   after:[['Pipeline joins 16 sources','a'],['One dashboard','a'],['IT production plan','c']],
-  value:[['m','Visibility','gaps found: TTG 56% abandoned, 24.1% occupancy'],['q','Governance','one version of the numbers'],['x','Time saved','not measured']],
+  value:[['m','Visibility','showed abandoned calls and missed coaching across 16 sources'],['q','Governance','one version of the numbers'],['x','Time saved','not measured']],
   sus:{sustained:'No: runs on one PC',owner:'IMS',control:'—',replicable:'Yes: all departments',note:'Waiting on IT for a company database and sign-in.'},
   src:'Dashboard snapshot and production plan'},
  {id:'sd',t:'Session Desk (pre-scheduled sessions)',status:'Proposed',
@@ -792,18 +792,18 @@ const statusOrder=['Completed','Implemented','Pilot','Ongoing','Proposed','Await
 // s: R/A/G/N · d/i/e: V (evidenced) / P (partly) / N (no evidence) · conf: H/M/L
 const areas=[
  {id:'wfm',t:'Workforce management',s:'R',fw:['C','G'],d:'P',i:'P',e:'N',conf:'M',
-  gap:'Interpreters sit idle while calls go unanswered.',
-  evid:['Occupancy 24.1% vs 35.3% target (W46)','29,348 h idle vs 13,138 h talk (1 Oct – 8 Nov)','TTG Italian: 231 of 325 calls abandoned; 9 Italian interpreters in Kalam'],
+  gap:'Calls are abandoned because staffing is not planned against demand by language.',
+  evid:['All clients: 27,984 of 110,301 offered calls abandoned (1 Oct – 8 Nov 2026)'],
   src:'IMS dashboard (Incorta + Kalam)',copc:['3.7'],gptw:'Fairness',kw:'No operations book',dept:'WFM',goal:[1,2,4],ini:'I3'},
  {id:'cx',t:'Customer experience',s:'R',fw:['C'],d:'N',i:'P',e:'P',conf:'M',
-  gap:'More than half of TTG calls are abandoned.',
-  evid:['TTG: 21,162 of 38,025 offered calls abandoned (56%)','All clients: 27,984 of 110,301 abandoned'],
+  gap:'Not assessed. Client satisfaction is not measured in one place.',
+  evid:[],
   src:'Incorta abandon extract, 1 Oct – 8 Nov 2026',copc:['4.1','2.2'],gptw:'Pride',kw:'Service philosophy',dept:'Operations',goal:[4,1],ini:'I3'},
- {id:'pay',t:'Finance & payment controls',s:'R',fw:['C','G'],d:'N',i:'P',e:'P',conf:'M',
+ {id:'pay',t:'Finance & payment controls',s:'A',fw:['C','G'],d:'N',i:'P',e:'P',conf:'M',
   gap:'Interpreter payment issues are found only when interpreters complain. Nothing tracks them.',
   evid:['Report day 4–5 · upload day 7 · transfer day 12 · received day 15','Issues pushed to day 20 or next month','Missing tasks, wrong amounts, late acceptance, small amounts need eCash','About 390 interpreters in the Oct paid-hours file'],
   src:'Process described by IMS management (26 Nov); IMS Paid Hours validation, Oct',copc:['3.16','3.12'],gptw:'Fairness, Credibility',kw:'Accountability',dept:'WFM + Finance',goal:[2,3],ini:'I2'},
- {id:'perf',t:'Performance management',s:'R',fw:['C','G','K'],d:'P',i:'P',e:'N',conf:'M',
+ {id:'perf',t:'Performance management',s:'A',fw:['C','G','K'],d:'P',i:'P',e:'N',conf:'M',
   gap:'Most required coaching does not happen.',
   evid:['Sep: 49 of 142 required sessions','Oct: 48 of 156','Nov (to 9 Nov): 10 of 166'],
   src:'Kalam coaching log, one team (about 79 interpreters)',copc:['3.4','3.5'],gptw:'Respect',kw:'Performance management (other functions)',dept:'Operations',goal:[3,5],ini:'I4'},
@@ -811,7 +811,7 @@ const areas=[
   gap:'Reports live in many separate files, and some are missing key statuses.',
   evid:['16 separate source files','Pre-Scheduled Tracker: no "missed" status, mixed date formats','Complaint log 9 days stale at last build'],
   src:'IMS dashboard snapshot; trackers',copc:['3.12','3.17'],gptw:'Credibility',kw:'—',dept:'WFM / BI',goal:[2,5],ini:'I5'},
- {id:'qual',t:'Quality',s:'A',fw:['C'],d:'P',i:'P',e:'N',conf:'M',
+ {id:'qual',t:'Quality',s:'R',fw:['C'],d:'P',i:'P',e:'N',conf:'M',
   gap:'Complaints are logged, but the same causes keep coming back.',
   evid:['256 entries: 148 complaints, 46 CAPA, 29 test calls, 24 compliments','Top causes: accuracy 46, camera presence 40, technical 27, professionalism 23, HIPAA 22'],
   src:'QA Complaint Log, Dec 2023 – 10 Nov 2026',copc:['3.8','3.13'],gptw:'Pride',kw:'—',dept:'QA',goal:[4,5],ini:'I6'},
@@ -823,7 +823,7 @@ const areas=[
   gap:'Onboarding time is not measured from offer to first call.',
   evid:['Seats file (one team, 3 Nov): 79 interpreters: 66 in production, 10 inactive, 2 pending, 1 failed to onboard','MasterWord enrolment automated: 28 of 28'],
   src:'Seats file; MasterWord run report',copc:['3.1','3.2','3.3'],gptw:'Respect',kw:'Competency books (other functions)',dept:'HR + Operations',goal:[1,3],ini:'I7'},
- {id:'tech',t:'Technology & automation',s:'A',fw:['C'],d:'N',i:'P',e:'N',conf:'H',
+ {id:'tech',t:'Technology & automation',s:'R',fw:['C'],d:'N',i:'P',e:'N',conf:'H',
   gap:'Working automations depend on one person and personal accounts.',
   evid:['MasterWord automation runs from a personal account','Claude subscription paid personally','IMS dashboard runs on one PC; production plan waiting on IT'],
   src:'IMS management (26 Nov)',copc:['2.6','1.4'],gptw:'—',kw:'—',dept:'IT',goal:[2,5],ini:'I8'},
@@ -881,9 +881,9 @@ const plan=[
   dept:'WFM',support:'Finance, invoicing',res:'Existing WFM staff',kpi:'Payment issue ageing (days); issues per cycle',ben:'Fewer late or wrong payments; less interpreter churn',
   fw:'COPC 3.16, 3.12 · GPTW Fairness',goal:[2,3],r:{imp:3,risk:3,urg:3,eff:1,cert:2}},
  {id:'I3',t:'Forecast & schedule by language and client',cat:'OP',area:'wfm',phase:2,
-  now:'24.1% occupancy alongside 56% TTG abandonment.',fut:'Staffing matches demand by interval, language and client.',
+  now:'Calls are abandoned (27,984 of 110,301, all clients) while staffing is not planned by language.',fut:'Staffing matches demand by interval, language and client.',
   del:['Interval forecast','Language-level schedule','Daily coverage report'],steps:['Use Incorta history','Forecast by interval','Rebuild schedules','Review daily'],
-  dept:'WFM',support:'Operations, Account management',res:'WFM analyst; forecasting tool to decide',kpi:'Occupancy vs target; abandon rate by client',ben:'More calls answered with the same people (+20% goal)',
+  dept:'WFM',support:'Operations, Account management',res:'WFM analyst; forecasting tool to decide',kpi:'Abandoned calls ÷ offered calls, by language',ben:'More calls answered with the same people (+20% goal)',
   fw:'COPC 3.7, 4.1 · GPTW Fairness',goal:[1,2,4],r:{imp:3,risk:3,urg:3,eff:2,cert:3}},
  {id:'I4',t:'Coaching coverage routine',cat:'PC',area:'perf',phase:2,
   now:'About 31% of required coaching sessions happen.',fut:'Required coaching is done every week, with feedback within 48 h.',
@@ -996,10 +996,10 @@ const KALAM={
 
 // per-goal story: current → target → improvements → departments → benefit
 const gx={
- 1:{now:'Revenue baseline not received',nowS:'E',tgt:'+20% (management ambition, pending starting figure, feasibility and approval)',tgtS:'M',succ:'Revenue grows, with +20% as the stated ambition, without adding headcount.',ben:'More revenue from the same people and cost base',depts:['Finance','Sales / BD','Operations','WFM']},
- 2:{now:'Occupancy 24.1%',nowS:'V',tgt:'35.3% (existing IMS target)',tgtS:'V',succ:'Interpreters spend their logged-in time on calls, and manual admin and rework drop.',ben:'Lower cost per answered call; capacity for growth',depts:['WFM','Operations','Finance','Technology']},
+ 1:{now:'Starting figure not yet pulled (IMS dashboard)',nowS:'E',tgt:'+20% (management ambition, pending starting figure, feasibility and approval)',tgtS:'M',succ:'Talking minutes grow, with +20% as the stated ambition, without adding headcount.',ben:'More talking minutes from the same people',depts:['Operations','WFM','Sales / BD']},
+ 2:{now:'Not measured yet',nowS:'N',tgt:'Awaiting management approval',tgtS:'A',succ:'Interpreters spend their logged-in time on calls, and manual admin and rework drop.',ben:'Lower cost per answered call; capacity for growth',depts:['WFM','Operations','Finance','Technology']},
  3:{now:'Trust Index not yet measured',nowS:'N',tgt:'Awaiting management approval',tgtS:'A',succ:'GPTW certification (strategic goal). People feel trusted, fairly paid and developed.',ben:'Lower attrition; easier hiring',depts:['HR','Operations','All managers']},
- 4:{now:'TTG calls answered 44%',nowS:'V',tgt:'Awaiting management approval',tgtS:'A',succ:'Clients get their calls answered, agreed SLAs and a monthly report.',ben:'Client retention and growth',depts:['Operations','WFM','Account management','Quality']},
+ 4:{now:'Not measured yet',nowS:'N',tgt:'Awaiting management approval',tgtS:'A',succ:'Clients get their calls answered, agreed SLAs and a monthly report.',ben:'Client retention and growth',depts:['Operations','WFM','Account management','Quality']},
  5:{now:'COPC readiness not assessed',nowS:'N',tgt:'Certification-ready (strategic goal)',tgtS:'R',succ:'COPC CX Standard certification (strategic goal). Errors are caught before clients see them.',ben:'Consistent quality that clients can trust',depts:['Quality','Operations','WFM','Technology']}};
 
 // ---------- Glossary (plain-English tooltips) ----------
@@ -1010,8 +1010,7 @@ const GL={
  'KALAM Way':'KALAM’s own way of working: vision, values and competency books for each function.',
  'KPI':'Key performance indicator: one number that shows whether something is getting better.',
  'Baseline':'Where a number stands today, measured before any change, so improvement can be proven.',
- 'Occupancy':'Share of logged-in time an interpreter spends on calls. Low occupancy means paid time is idle.',
- 'Abandoned':'A call the client’s customer hung up on before an interpreter answered.',
+  'Abandoned':'A call the client’s customer hung up on before an interpreter answered.',
  'CAPA':'Corrective and preventive action: fix the problem, then stop it happening again.',
  'SLA':'Service-level agreement: the service promise agreed with a client, such as answer speed.',
  'WFM':'Workforce management: forecasting demand and scheduling the right people at the right time.',
@@ -1026,8 +1025,7 @@ const GL={
  'Evidence':'A document, report or record that shows something is really done, not just planned.',
  'Documented':'Written down.','Implemented':'Actually used in daily work.','Experienced':'Employees or clients say they feel it.',
  'Pre-scheduling':'Booking interpretation sessions in advance instead of on demand.',
- 'Transparent':'The platform used to send payment tasks to interpreters.',
- 'TTG':'A KALAM client account.'};
+ 'Transparent':'The platform used to send payment tasks to interpreters.',};
 
 // ---------- COPC: categories in plain words ----------
 const COPCCAT=[
@@ -1039,9 +1037,9 @@ const COPCCAT=[
 // item status: Co Compliant · Pa Partial · Mi Missing · Na Not assessed  (internal view from evidence; not an official COPC result)
 const CST={Co:['xCo','Compliant'],Pa:['xPa','Partial'],Mi:['xMi','Missing'],Na:['xNa','Not assessed']};
 const copcSt={
- '1.3':['Pa','One ambition stated by management (+20% revenue), not yet approved or baselined; no goal has an approved target or owner.'],
+ '1.3':['Pa','One ambition stated by management (+20% talking minutes), not yet approved or baselined; no goal has an approved target or owner.'],
  '1.4':['Pa','Results reviewed in management meetings; no written rules for AI and automation use evidenced (1.4 asks KALAM to verify that ethical AI use works as designed).'],
- '2.2':['Pa','TTG: 56% of offered calls abandoned (1 Oct – 8 Nov).'],
+ '2.2':['Pa','27,984 of 110,301 offered calls abandoned (all clients, 1 Oct – 8 Nov).'],
  '2.4':['Pa','No written daily operating routine; KALAM Way has no operations book.'],
  '2.6':['Mi','Automations run on one person’s personal accounts; no failover or continuity plan evidenced.'],
  '3.1':['Pa','Seats file: 2 pending and 1 failed to onboard (one team); stage times not measured.'],
@@ -1049,17 +1047,17 @@ const copcSt={
  '3.3':['Pa','Final exam exists in e-learning; annual reverification not evidenced.'],
  '3.4':['Pa','Coaching: 48 of 156 required sessions done (Oct, one team).'],
  '3.5':['Pa','Coaching coverage about 31%; absenteeism data not reviewed here. <b class="cfm">Mapping to confirm</b>'],
- '3.7':['Pa','Occupancy 24.1% vs 35.3% target; TTG Italian 231 of 325 calls abandoned.'],
- '3.8':['Pa','Complaint log in use (148 complaints); top causes repeat.'],
+ '3.7':['Pa','Staffing not planned by language against demand.'],
+ '3.8':['Pa','Complaint log in use (148 complaints, Dec 2023 – 10 Nov 2026); top causes repeat.'],
  '3.9':['Pa','No regular journey-improvement routine evidenced.'],
  '3.12':['Pa','16 separate source files; tracker missing a "missed" status.'],
  '3.13':['Pa','46 CAPA entries; closure and effectiveness not tracked.'],
  '3.16':['Pa','Interpreter payment issues not logged (internal mapping: payment controls). <b class="cfm">Mapping to confirm</b>'],
  '3.17':['Pa','Client reports built by hand from separate files.'],
- '4.1':['Pa','Customer-experience results measured for abandonment; below expectations for TTG.']};
+ '4.1':['Pa','Customer results measured only for abandoned calls.']};
 const copcOwner=id=>{const a=areas.find(x=>x.copc.includes(id));return a?a.dept:({'1':'CEO office','2':'Operations','3':'Operations','4':'All departments'}[id[0]]||'Account management')};
 const copcItem=id=>{const c=copc.find(x=>x[0]==id);const s=copcSt[id]||['Na','No evidence reviewed yet.'];return {id,t:c?c[1]:id,cat:c?c[3]:'',st:s[0],ev:s[1],owner:copcOwner(id)}};
-const redItems=['3.7','4.1','2.2','3.16','3.12','3.4','3.5'];// linked to red areas
+const redItems=['3.7','3.8'];// critical per independent IMS review 28 Nov (2.6 is Missing, so also critical)
 const critical=id=>(copcSt[id]&&copcSt[id][0]=='Mi')||redItems.includes(id);
 
 // ---------- Departments, standards and links per initiative (for the transformation map) ----------
@@ -1100,15 +1098,15 @@ const opsAreas=[
  {t:'Recruitment & onboarding',o:'Ops+HR',s:'A',ev:'Seats file: 66 of 79 in production (one team); stage times not measured',copc:['3.1','3.3'],g:[1,3],ini:'I7'},
  {t:'Activation & readiness',o:'Ops+Training',s:'N',ev:'Not assessed: time from training to first call not recorded',copc:['3.2','3.3'],g:[1,3],ini:'I7'},
  {t:'Pre-scheduling',o:'Pure Ops',s:'A',ev:'3,510 tracker rows; no "missed" status; Session Desk is a proposal',copc:['3.7','3.12'],g:[4,2],ini:'I3'},
- {t:'Workforce & utilization',o:'Pure Ops',s:'R',ev:'Occupancy 24.1% vs 35.3% target; 29,348 h idle vs 13,138 h talk',copc:['3.7'],g:[1,2],ini:'I3'},
+ {t:'Workforce & utilization',o:'Pure Ops',s:'R',ev:'Calls abandoned while staffing is not planned by language',copc:['3.7'],g:[1,2],ini:'I3'},
  {t:'Hours fulfilment',o:'Pure Ops',s:'N',ev:'Not assessed: definition of fulfilled hours to be agreed',copc:['3.5','3.7'],g:[1,4],ini:'I3'},
- {t:'Interpreter payment',o:'Ops+Finance',s:'R',ev:'Issues untracked; fixes slip to day 20 or next month',copc:['3.16','3.12'],g:[2,3],ini:'I2'},
+ {t:'Interpreter payment',o:'Ops+Finance',s:'A',ev:'Issues untracked; fixes slip to day 20 or next month',copc:['3.16','3.12'],g:[2,3],ini:'I2'},
  {t:'Interpreter complaints',o:'Ops+HR',s:'N',ev:'Not assessed: no tracking of complaints raised by interpreters',copc:['3.6'],g:[3],ini:'I10'},
- {t:'Quality & performance',o:'Ops+Quality',s:'R',ev:'Coaching 48 of 156 (Oct, one team); accuracy top complaint cause (46)',copc:['3.4','3.8'],g:[4,5],ini:'I4'},
+ {t:'Quality & performance',o:'Ops+Quality',s:'R',ev:'Coaching 48 of 156 (Oct, one team); accuracy top complaint cause (46 since Dec 2023)',copc:['3.4','3.8'],g:[4,5],ini:'I4'},
  {t:'Training & development',o:'Ops+Training',s:'A',ev:'E-learning in progress: 30 videos, 54 questions',copc:['3.2'],g:[3,5],ini:'I9'},
- {t:'Client experience',o:'Cross-functional',s:'R',ev:'TTG: 56% of offered calls abandoned',copc:['4.1','2.1'],g:[4,1],ini:'I13'},
+ {t:'Client experience',o:'Cross-functional',s:'R',ev:'Not assessed',copc:['4.1','2.1'],g:[4,1],ini:'I13'},
  {t:'Reporting & visibility',o:'Ops+Tech',s:'A',ev:'16 separate source files; IMS dashboard is a proposal awaiting IT',copc:['3.12','3.17'],g:[2,5],ini:'I5'},
- {t:'Automation & AI',o:'Ops+Tech',s:'A',ev:'Automations run on personal accounts; no approval route',copc:['2.6','1.4'],g:[2,5],ini:'I8'}];
+ {t:'Automation & AI',o:'Ops+Tech',s:'R',ev:'Automations run on personal accounts; no approval route',copc:['2.6','1.4'],g:[2,5],ini:'I8'}];
 
 // ---------- Automation & AI (main 2027 focus) ----------
 const NM='Not measured yet (baseline in Phase 1)';
@@ -1217,7 +1215,7 @@ const REFS=[
  ['Licensed','COPC CX Standard for Contact Centers, Release 8.0 v1.0','','Licensed copy held by KALAM management. Not public.'],
  ['Licensed','COPC CX Standard for Customer Operations, Release 8.0 v1.0','','Licensed copy held by KALAM management. Not public.'],
  ['Licensed','COPC Performance Improvement Criteria, Release 7.0','','Licensed copy held by KALAM management. Not public.'],
- ['Internal','IMS dashboard sources (Incorta, Kalam call logs, 16 files)','','Occupancy, abandonment, capacity, 1 Oct – 8 Nov 2026.'],
+ ['Internal','IMS dashboard sources (Incorta, Kalam call logs, 16 files)','','Abandoned calls and capacity, 1 Oct – 8 Nov 2026.'],
  ['Internal','QA Complaint Log','','Dec 2023 – 10 Nov 2026.'],['Internal','Kalam coaching log (one team)','','Sep – 9 Nov 2026.'],
  ['Internal','Seats file (one team)','','3 Nov 2026.'],['Internal','Pre-Scheduled Tracker','','3,510 rows.'],['Internal','IMS Paid Hours validation','','October 2026.'],
  ['Internal','MasterWord run report & submitted-applicants file','','23 Nov 2026.'],
@@ -1245,16 +1243,16 @@ GL['PDCA']='Plan, do, check, act: a simple KALAM improvement loop. Example: plan
  const g4=goals[3];Object.assign(g4,{kpi:'Client satisfaction and service-promise results',def:'Results against each client’s agreed service promise, plus satisfaction scores',base:null,cur:null,unit:'',ev:'N',fact:'Not measured in one place yet',src:'Client contracts and reports (not yet collected)',per:'—'});
  gx[2].now='Not measured yet';gx[2].nowS='N';gx[2].tgt='Awaiting management approval';gx[2].tgtS='A';gx[2].succ='Less paid time is wasted, and manual admin and rework drop.';
  gx[4].now='Not measured yet';gx[4].nowS='N';
- const w=areas.find(a=>a.id=='wfm');w.gap='Calls go unanswered because staffing is not planned against demand by language.';w.evid=['All clients: 27,984 of 110,301 offered calls not answered (1 Oct – 8 Nov 2026). This is what forecast & scheduling (I3) fixes.'];w.src='IMS dashboard (Incorta)';
+ const w=areas.find(a=>a.id=='wfm');w.gap='Calls are abandoned because staffing is not planned against demand by language.';w.evid=['All clients: 27,984 of 110,301 offered calls abandoned (1 Oct – 8 Nov 2026). This is what forecast & scheduling (I3) fixes.'];w.src='IMS dashboard (Incorta)';
  const c=areas.find(a=>a.id=='cx');c.s='N';c.d='N';c.i='N';c.e='N';c.gap='Not assessed. Client satisfaction is not measured in one place.';c.evid=[];c.src='Needed: client satisfaction and service-promise results';
  const cl=areas.find(a=>a.id=='client');cl.evid=[];
- copcSt['2.2']=['Pa','27,984 of 110,301 offered calls not answered (all clients, 1 Oct – 8 Nov). <b class="cfm">Mapping to confirm</b>'];copcSt['3.7']=['Pa','Staffing not planned by language against demand; 27,984 of 110,301 calls not answered.'];copcSt['4.1']=['Pa','Customer results measured only for unanswered calls.'];
- const I3=plan.find(p=>p.id=='I3');I3.now='Calls go unanswered (27,984 of 110,301 offered, all clients) while staffing is not planned by language.';I3.kpi='Answered calls ÷ offered calls';I3.ben='More calls answered with the same people (+20% goal)';
- const ds=done.find(x=>x.id=='dash');ds.value[0]=['m','Visibility','showed unanswered calls and missed coaching across 16 sources'];
- const o4=opsAreas.find(a=>a.t=='Workforce & utilization');o4.ev='27,984 of 110,301 calls not answered (all clients) → fixed by forecast & scheduling (I3)';
+ copcSt['2.2']=['Pa','27,984 of 110,301 offered calls abandoned (all clients, 1 Oct – 8 Nov). <b class="cfm">Mapping to confirm</b>'];copcSt['3.7']=['Pa','Staffing not planned by language against demand; 27,984 of 110,301 calls abandoned.'];copcSt['4.1']=['Pa','Customer results measured only for abandoned calls.'];
+ const I3=plan.find(p=>p.id=='I3');I3.now='Calls are abandoned (27,984 of 110,301 offered, all clients) while staffing is not planned by language.';I3.kpi='Answered calls ÷ offered calls';I3.ben='More calls answered with the same people (+20% goal)';
+ const ds=done.find(x=>x.id=='dash');ds.value[0]=['m','Visibility','showed abandoned calls and missed coaching across 16 sources'];
+ const o4=opsAreas.find(a=>a.t=='Workforce & utilization');o4.ev='27,984 of 110,301 calls abandoned (all clients) → fixed by forecast & scheduling (I3)';
  const o10=opsAreas.find(a=>a.t=='Client experience');o10.s='N';o10.ev='Not assessed: client satisfaction not measured in one place → I13';
  delete GL['Occupancy'];delete GL['TTG'];GL['Abandoned']='A call that was not answered before the caller hung up.';
- const r=REFS.find(x=>/IMS dashboard sources/.test(x[1]));if(r)r[3]='Unanswered calls and capacity, 1 Oct – 8 Nov 2026.';
+ const r=REFS.find(x=>/IMS dashboard sources/.test(x[1]));if(r)r[3]='Abandoned calls and capacity, 1 Oct – 8 Nov 2026.';
  const k=KWE.find(x=>x.t=='Vision');k.src='KALAM Way, Volume One';KWE.find(x=>x.t=='Mission').src='KALAM Way, Volume One';KWE.find(x=>x.t=='Values').src='KALAM Way, Volume One';}
 
 // ===== Command Center render =====
@@ -1263,7 +1261,7 @@ const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&g
 const T=(w,k)=>`<span class="tip" tabindex="0" data-tip="${esc(GL[k||w]||'')}">${w}</span>`;
 const cs=k=>`<span class="st ${CST[k][0]}">${CST[k][1]}</span>`;
 const G=n=>goals.find(g=>g.n==n),P=id=>plan.find(p=>p.id==id),A=id=>areas.find(a=>a.id==id);
-const GF={1:'Revenue Growth',2:'Cost Reduction & Operational Efficiency',3:'Employee Experience, Engagement & Retention',4:'Client Satisfaction & Customer Experience',5:'Quality & Operational Excellence'};
+const GF={1:'Talking Minutes Growth',2:'Cost Reduction & Operational Efficiency',3:'Employee Experience, Engagement & Retention',4:'Client Satisfaction & Customer Experience',5:'Quality & Operational Excellence'};
 const SL={R:'Critical gap',A:'Needs work',G:'On track',N:'Not assessed'};
 const gchip=n=>`<button class="chip cl" data-g="${n}">G${n} ${G(n).t}</button>`;
 const ichip=id=>`<button class="chip cl" data-p="${id}">${id}</button>`;
@@ -1295,14 +1293,14 @@ const APROJ=[
  ['IMS performance dashboard',0,'<span class="st sR">Proposal</span>','Pipeline joins 16 sources on one PC; production plan waiting on IT.'],
  ['Session Desk (pre-scheduling)',0,'<span class="st sR">Proposal</span>','Prototype built; not in use.']];
 const STAND=[
- ['27,984','Calls not answered, all clients (of 110,301 offered)','V','r','IMS dashboard (Incorta), 1 Oct – 8 Nov 2026','Proves staffing does not match demand → Forecast & schedule (I3)'],
+ ['27,984','Calls abandoned, all clients (of 110,301 offered)','V','r','IMS dashboard (Incorta), 1 Oct – 8 Nov 2026','Proves staffing does not match demand → Forecast & schedule (I3)'],
  ['31%','Required coaching done (48 of 156)','C','y','Kalam coaching log, one team (about 79 interpreters), October 2026','Proves most coaching is missed → Coaching routine (I4)'],
  ['16','Separate report files built by hand','V','','IMS dashboard build: number of data sources','Proves reporting is manual and scattered → One data model (I5)']];
 const GW={
- 1:{hue:300,why:'Revenue pays for everything else. Management’s ambition is +20% with the people KALAM already has; it still needs a starting figure, a feasibility check and approval.',miss:['Revenue starting figure from Finance','Named owner','Approved target date']},
+ 1:{hue:300,why:'Talking minutes pay for everything else. Management’s ambition is +20% with the people KALAM already has; it still needs a starting figure, a feasibility check and approval.',miss:['Monthly talking minutes from the IMS dashboard','Named owner','Approved target date']},
  2:{hue:285,why:'Idle paid time and work done by hand cost money without serving any client.',miss:['Approved target date and owner','Hours spent on manual work each month']},
  3:{hue:315,why:'People who feel trusted and fairly treated stay longer and serve clients better.',miss:['Official Trust Index (survey not run)','Attrition rate','Approved target and owner']},
- 4:{hue:270,why:'Unanswered calls and missed sessions put client contracts at risk.',miss:['Approved target','Client service promises and satisfaction scores','Named owner']},
+ 4:{hue:270,why:'Abandoned calls and missed sessions put client contracts at risk.',miss:['Approved target','Client service promises and satisfaction scores','Named owner']},
  5:{hue:285,why:'Steady quality is what clients, and COPC auditors, check first.',miss:['Internal COPC assessment of all 32 items','Named owner','Approved target date']}};
 const CHAINS=[
  ['MasterWord automation',[['Earlier error detection','V','3 of 28 caught before submission'],['Less rework'],['Better submission quality'],['Better deadline compliance'],['Less manual effort','S','≈12–60 h over 2 batches']]],
@@ -1321,14 +1319,14 @@ function goalData(n){const ini=plan.filter(p=>p.goal.includes(n)).sort((a,b)=>b.
 // ---------- 8-screen story at the top of the overview ----------
 const GI={1:'<path d="M4 18l6-6 4 4 6-8"/><path d="M15 8h5v5"/>',2:'<circle cx="12" cy="12" r="3"/><path d="M12 3v3M12 18v3M3 12h3M18 12h3M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>',3:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 3.5-4.5S21 17.5 21 20"/>',4:'<path d="M12 3l2.7 5.6 6.1.9-4.4 4.3 1 6.1L12 17l-5.4 2.9 1-6.1-4.4-4.3 6.1-.9z"/>',5:'<circle cx="12" cy="12" r="9"/><path d="M8 12l3 3 5-6"/>'};
 const IC={hand:'<path d="M8 13V5a1.5 1.5 0 013 0v6M11 11V4a1.5 1.5 0 013 0v7M14 11V5.5a1.5 1.5 0 013 0V14a7 7 0 01-7 7h-.5a6 6 0 01-4.6-2.2L3 16a1.6 1.6 0 012.4-2L8 16"/>',clock:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',phone:'<path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z"/><path d="M16 3l5 5M21 3l-5 5"/>',coach:'<circle cx="8" cy="7" r="3"/><path d="M2 20c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M15 8h6M15 12h4"/>',target:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><circle cx="12" cy="12" r="1"/>',user:'<circle cx="12" cy="8" r="4"/><path d="M4 21c0-4.4 3.6-8 8-8s8 3.6 8 8"/>',team:'<circle cx="9" cy="8" r="3"/><circle cx="17" cy="9" r="2.5"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M14 20c0-2.5 1.5-4.5 3.5-4.5S21 17.5 21 20"/>',coin:'<ellipse cx="12" cy="6" rx="8" ry="3"/><path d="M4 6v6c0 1.7 3.6 3 8 3s8-1.3 8-3V6M4 12v6c0 1.7 3.6 3 8 3s8-1.3 8-3v-6"/>',key:'<circle cx="8" cy="15" r="4"/><path d="M11 12l9-9M17 6l3 3M15 8l2 2"/>',book:'<path d="M4 4h6a3 3 0 013 3v13a2 2 0 00-2-2H4zM20 4h-6a3 3 0 00-3 3v13a2 2 0 012-2h7z"/>',heart:'<path d="M12 20s-7-4.4-7-10a4 4 0 017-2.6A4 4 0 0119 10c0 5.6-7 10-7 10z"/>',shield:'<path d="M12 3l8 3v6c0 4.5-3.4 8.3-8 9-4.6-.7-8-4.5-8-9V6z"/><path d="M8.5 12l2.5 2.5 4.5-5"/>'};
-const GN={1:'More revenue',2:'Lower cost',3:'Happier people',4:'Happier clients',5:'Better quality'};
+const GN={1:'More talking minutes',2:'Lower cost',3:'Happier people',4:'Happier clients',5:'Better quality'};
 const gico=(n,s=22)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GI[n]}</svg>`;
 const ico=(k,s=26)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
 const gtag=n=>`<span class="gt" title="Goal ${n}: ${GF[n]}">${gico(n,14)}${GN[n]}</span>`;
 const ring=(pct,big,lab,cls='',at='')=>{const C=2*Math.PI*44;return `<div class="rg clk ${cls}" ${at}><svg viewBox="0 0 100 100" width="128" height="128" role="img" aria-label="${esc(big+' '+lab)}"><circle cx="50" cy="50" r="44" class="rt"/><circle cx="50" cy="50" r="44" class="rv" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle">${big}</text></svg><b>${lab}</b></div>`};
-const NOW=[[1,'N','No starting figure yet'],[2,'X','Much work still done by hand'],[3,'X','Most coaching does not happen'],[4,'X','Many calls go unanswered'],[5,'X','Same complaints come back']];
+const NOW=[[1,'N','No starting figure yet'],[2,'X','Much work still done by hand'],[3,'X','Most coaching does not happen'],[4,'X','Many callers hang up before an answer'],[5,'X','Same complaints come back']];
 const GMP=['I1','I2','I3','I4','I5','I6','I8','I10','I13'];const GMPN={I1:'Goal figures & owners',I2:'Payment checks',I3:'Scheduling by language',I4:'Coaching routine',I5:'One dashboard',I6:'Complaint fixes',I8:'Automation backup',I10:'Staff survey',I13:'Client promises'};
-const MISS=[['hand','5 / 8','processes done by hand','data-open-detail="q4"'],['clock','Late','payment errors found after complaints','data-p="I2"'],['phone','1 in 4','calls not answered','data-p="I3"'],['coach','48 / 156','coaching sessions done','data-p="I4"'],['target','0 / 5','goals with a starting figure','data-p="I1"']];
+const MISS=[['hand','5 / 8','processes done by hand','data-open-detail="q4"'],['clock','Late','payment errors found after complaints','data-p="I2"'],['phone','1 in 4','calls abandoned','data-p="I3"'],['coach','48 / 156','coaching sessions done','data-p="I4"'],['target','0 / 5','goals with a starting figure','data-p="I1"']];
 const CASK=[['Written ways of working','Pa','2.4'],['Data you can trust','Pa','3.12'],['Fix root causes','Pa','3.13'],['Staff matched to demand','Pa','3.7'],['A backup when tools fail','Mi','2.6']];
 const PROJ7=[['E-learning','Trainer-led','Self-paced videos + exam',[3,5],'data-s="proj"'],['Payment cycle','Checks by eye','Automatic checks + log',[2,3],'data-proc="pay"'],['Pre-scheduling','Sheet, no “missed” status','Booking app',[4,2],'data-proc="pre"'],['Reporting','16 files by hand','One dashboard',[2,5],'data-p="I5"']];
 function goalCard(){requestAnimationFrame(drawGmap);const n=ovG,x=gx[n],g=G(n),D=goalData(n),el=$('#sgc');if(!el)return;
@@ -1347,7 +1345,7 @@ IC.chart='<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>';IC.doc='<path d="M6 3h9
 const CPROC=[
  ['key','MasterWord automation','One person’s account, no backup','Company account + backup person','2.6','Mi','data-p="I8"'],
  ['book','Daily supervisor work','No written routine','Write it in KALAM Way','2.4','Pa','data-p="I9"'],
- ['phone','Staffing vs demand','Many calls not answered','Plan staff by language','3.7','Pa','data-p="I3"'],
+ ['phone','Staffing vs demand','Many calls abandoned','Plan staff by language','3.7','Pa','data-p="I3"'],
  ['coach','Coaching','Most sessions missed','Weekly routine, tracked','3.4','Pa','data-p="I4"'],
  ['doc','Training (e-learning)','Nobody tracks who finishes','Track it, re-check yearly','3.2 · 3.3','Pa','data-p="I7"'],
  ['heart','Complaints','Same causes keep coming back','Follow each fix to the end','3.8 · 3.13','Pa','data-p="I6"'],
@@ -1382,11 +1380,11 @@ function story(){
    <div class="gmc"><h5>3 frameworks</h5>${[['C','COPC','copc','shield'],['G','Great Place to Work','gptw','heart'],['K','KALAM Way','kw','book']].map(f=>`<button class="gmn f clk" data-s="${f[2]}" data-gm="f${f[0]}">${ico(f[3],22)}<b>${f[1]}</b></button>`).join('')}</div>
    <div class="gmc"><h5>Projects</h5>${GMP.map(id=>`<button class="gmn pj clk" data-p="${id}" data-gm="p${id}"><b>${GMPN[id]}</b></button>`).join('')}</div></div>
    <div id="sgc" class="gcard" aria-live="polite"></div>
-   <div class="cert"><span class="clk" data-s="copc">${ico('shield',22)}COPC certified<small>goal for 2028</small></span><span class="clk" data-s="gptw">${ico('heart',22)}Great Place to Work<small>goal for 2028</small></span><span class="amb clk" data-sg="1">${ico('coin',22)}+20% revenue<small>management ambition · needs starting figure, feasibility check, approval</small></span></div>`,'Tap a goal: its lines light up and its plan appears below.')}
+   <div class="cert"><span class="clk" data-s="copc">${ico('shield',22)}COPC certified<small>goal for 2028</small></span><span class="clk" data-s="gptw">${ico('heart',22)}Great Place to Work<small>goal for 2028</small></span><span class="amb clk" data-sg="1">${ico('coin',22)}+20% talking minutes<small>management ambition · needs starting figure, feasibility check, approval</small></span></div>`,'Tap a goal: its lines light up and its plan appears below.')}
  ${scr(3,Q8[2],`<div class="nowb">${NOW.map(([n,s,t])=>`<button class="nr" data-sg="${n}">${gtag(n)}<div class="tri"><span class="${s=='K'?'on k':''}">On track</span><span class="${s=='X'?'on x':''}">Gap</span><span class="${s=='N'?'on n':''}">Not measured</span></div><small>${t}</small></button>`).join('')}</div>`,'Four goals show a gap. None has a measured starting figure yet.')}
  ${scr(4,Q8[3],`<div class="miss5">
    <div class="clk" data-open-detail="q4"><div class="d8w sm">${dots}</div><b>5 / 8</b><small>key processes done by hand</small></div>
-   ${ring(25.4,'1 in 4','calls not answered<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad','data-p="I3"')}
+   ${ring(25.4,'1 in 4','calls abandoned<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad','data-p="I3"')}
    ${ring(31,'31%','of coaching done<small>48 of 156 sessions · one team · Oct</small>','mid','data-p="I4"')}
    <div class="clk" data-p="I2">${ico('clock',40)}<b>Late</b><small>payment errors found only after complaints</small></div>
    <div class="clk" data-p="I1">${ico('target',40)}<b>0 / 5</b><small>goals with a starting figure</small></div></div>`,'These five gaps hold KALAM back most. Each one has a project that fixes it.')}
@@ -1401,7 +1399,7 @@ function story(){
    <div><div class="dg">${mwd}</div><p><b>28 / 28</b> submitted and confirmed ${st('V')}</p><p class="lg"><i class="okk"></i>25 complete documents <i class="mii"></i>3 missing documents caught before submission</p></div>
    <div class="bars"><div><span>Before</span><i class="bb" style="--w:100%"></i><b>8–32 h per batch</b>${st('S')}</div><div><span>Now</span><i class="ba" style="--w:8%"></i><b>1–3 h per batch</b>${st('V')}</div><p>≈ 12–60 hours saved over 2 batches ${st('S')}</p></div></div></div>
    <div class="p4">${PROJ7.map(p=>`<div class="clk" ${p[4]}><b>${p[0]}</b><span class="ba4"><s>${p[1]}</s> → ${p[2]}</span><span class="tbm">To be measured</span><span class="gs">${p[3].map(n=>`<i title="${GN[n]}">${gico(n,16)}</i>`).join('')}</span></div>`).join('')}</div>`,'Only MasterWord has a measured result so far. The others are measured before and after.')}
- ${scr(9,Q8[8],`<div class="need">${[['user','Sponsor','One executive owns the plan'],['team','Team','3 full-time + part-time champions'],['coin','Finance figures','Revenue and cost starting figures'],['key','Company account','Automation off personal accounts']].map((x,i)=>`<div class="clk" data-s="road">${ico(x[0],30)}<b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>`,'Four decisions let the work start.')}
+ ${scr(9,Q8[8],`<div class="need">${[['user','Sponsor','One executive owns the plan'],['team','Team','3 full-time + part-time champions'],['chart','Starting figures','Monthly talking minutes from the IMS dashboard'],['key','Company account','Automation off personal accounts']].map((x,i)=>`<div class="clk" data-s="road">${ico(x[0],30)}<b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>`,'Four decisions let the work start.')}
  </div>`}
 
 // ---------- Overview page ----------
@@ -1420,7 +1418,7 @@ function pOv(){
   <h1>One company plan: five goals, three reference frameworks, <em>measured</em> progress</h1>
   <p class="lead">“${KALAM.vision}”</p>
   <div class="dest">
-   <div><b>+20%</b><span>Revenue growth with current people: management ambition, needs a starting figure, feasibility check and approval</span>${st('M')}</div>
+   <div><b>+20%</b><span>Talking minutes growth with current people: management ambition, needs a starting figure, feasibility check and approval</span>${st('M')}</div>
    <div><b>COPC</b><span>${T('COPC')} certification</span><span class="st sR">Strategic goal</span></div>
    <div><b>GPTW</b><span>${T('Great Place to Work','GPTW')} certification</span><span class="st sR">Strategic goal</span></div>
   </div>
@@ -1431,7 +1429,7 @@ function pOv(){
 
 ${sec(1,Q[0],`<div class="chain">
  <div class="hl"><b>Vision</b><span>Globally respected</span></div><i></i>
- <div><b>5 goals</b><span>Revenue · cost · people · clients · quality</span></div><i></i>
+ <div><b>5 goals</b><span>Minutes · cost · people · clients · quality</span></div><i></i>
  <div><b>3 reference frameworks</b><span>COPC · GPTW · KALAM Way</span></div><i></i>
  <div><b>9 departments</b><span>Each owns its part</span></div><i></i>
  <div><b>17 areas</b><span>Where we improve</span></div><i></i>
@@ -1472,7 +1470,7 @@ ${sec(5,Q[4],`<div class="grid g2"><div class="bars">
  ${meter('Company areas assessed',17-sumS.N,17,(17-sumS.N)+' of 17')}
  ${meter('COPC items formally assessed',0,32,'0 of 32','var(--r)')}
  ${meter('Official Trust Index',0,1,'Not yet','var(--r)')}</div>
- <div><h4>Evidence still needed</h4><div class="chips">${['Revenue baseline (Finance)','Client SLAs & satisfaction','Employee survey','Continuity plan & risk register','Onboarding stage times','Attrition rate'].map(x=>`<span class="chip">${x}</span>`).join('')}</div>
+ <div><h4>Evidence still needed</h4><div class="chips">${['Monthly talking minutes (IMS dashboard)','Client SLAs & satisfaction','Employee survey','Continuity plan & risk register','Onboarding stage times','Attrition rate'].map(x=>`<span class="chip">${x}</span>`).join('')}</div>
  <div class="callout">Phase 1 measures every missing ${T('baseline','Baseline')} first (${'<button class="chip cl" data-p="I1">I1</button>'}). No figure is invented in the meantime.</div></div></div>
  <div class="ph" style="margin-top:18px"><div><h3>Gaps across the 17 company areas</h3><p>Tap an area for evidence, source, owner and the fix.</p></div><div class="seg" id="hflt">${[['all','All'],['C','COPC'],['G','GPTW'],['K','KALAM Way']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
  <div class="heat">${areas.map(a=>`<button class="cell ${a.s}" data-a="${a.id}" data-fw="${a.fw.join('')}"><span>${a.t}</span><small>${SL[a.s]} · ${a.dept}</small></button>`).join('')}</div>
@@ -1623,7 +1621,7 @@ function pOps(){const ranked=[...autos].sort((a,b)=>b.score-a.score);
  <div class="pn"><div class="ph"><h3>12 areas at a glance</h3><div class="lgd"><span><i class="at R"></i><b>${sc.R}</b> big gap</span><span><i class="at A"></i><b>${sc.A}</b> needs work</span><span><i class="at N"></i><b>${sc.N}</b> not checked</span></div></div>
   <div class="a12">${opsAreas.map(a=>`<div class="clk a12t ${a.s}" data-p="${a.ini}"><b>${a.t}</b><small>${a.o}</small><em>${a.ini}</em></div>`).join('')}</div></div>
  <div class="pn"><h3>What the numbers say</h3><p class="mut" style="margin:4px 0 12px">Only figures that prove a gap a project fixes.</p><div class="why3">
-  ${ring(25.4,'1 in 4','calls not answered<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad','data-p="I3"')}
+  ${ring(25.4,'1 in 4','calls abandoned<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad','data-p="I3"')}
   ${ring(31,'31%','of required coaching done<small>48 of 156 sessions · one team · Oct</small>','mid','data-p="I4"')}
   <div class="rg clk" data-p="I5"><div class="files16">${Array.from({length:16},()=>`<i>${ico('doc',16)}</i>`).join('')}</div><b>16 report files built by hand<small>IMS dashboard sources</small></b></div></div></div>
  <div class="pn"><div class="ph"><div><div class="eyebrow">Main 2027 focus</div><h2>Automation and AI</h2><p>Hand work becomes automatic, with a person checking at each control point.</p></div></div>
@@ -1702,7 +1700,7 @@ function pRoad(){const rk=[...plan].sort((a,b)=>b.score-a.score);
  return `<div class="phead"><div><div class="eyebrow">2027 → 2028</div><h1>Roadmap & benefits</h1><p>Five phases from baseline to formal assessment. Dates are fixed only after Phase 1 and management approval.</p></div></div>
  <div class="pn"><div class="ph"><h3>Phase timeline</h3><div class="seg" id="scn">${['Fast','Realistic','Conservative'].map((t,i)=>`<button data-k="${i}" class="${i==scnK?'on':''}">${t}</button>`).join('')}</div></div><div id="gantt">${gantt()}</div></div>
  <details class="more"><summary><span>Show what each phase delivers</span><small>Milestones, owners, dependencies and expected benefits</small></summary><div class="cards" style="margin-top:16px">${phases.map(p=>`<div class="card" style="border-top:3px solid ${p.col}"><h3><span>${p.t}</span>${p.now?'<span class="st sP">Now</span>':''}</h3><p>${p.d}</p><dl class="kv"><dt>Delivers</dt><dd>${p.del}</dd><dt>Milestone</dt><dd>${p.ms}</dd><dt>Owner</dt><dd>${p.own}</dd><dt>Depends on</dt><dd>${p.dep}</dd><dt>KPI</dt><dd>${p.kpi}</dd><dt>Exit</dt><dd>${p.exit}</dd></dl></div>`).join('')}</div>
- <div class="grid g4">${[['COPC','Clear standards for every operation; problems found and fixed before clients see them; a credential clients recognise.'],['Great Place to Work','Trust, fair pay and development that people feel; lower attrition and easier hiring.'],['Automation & AI','Repetitive work removed; errors caught earlier; supervisors freed for coaching.'],['Growth']].map((b,i)=>i<3?`<div class="pn"><h3>${b[0]} ${st('R')}</h3><p class="mut" style="font-size:12.5px;margin-top:6px">${b[1]}</p><p class="dim" style="font-size:10.5px;margin-top:6px">Benefits stated qualitatively until measured.</p></div>`:`<div class="pn"><h3>Growth</h3><div class="big y" style="margin:6px 0">+20%</div>${st('M')}<p class="mut" style="font-size:12px;margin-top:8px">Client-acquisition %: <b>not available</b>, no evidence yet. Assumption: answered-call capacity becomes billable minutes. Measured by revenue per client per month and new clients per quarter (I1, I13).</p></div>`).join('')}</div>
+ <div class="grid g4">${[['COPC','Clear standards for every operation; problems found and fixed before clients see them; a credential clients recognise.'],['Great Place to Work','Trust, fair pay and development that people feel; lower attrition and easier hiring.'],['Automation & AI','Repetitive work removed; errors caught earlier; supervisors freed for coaching.'],['Growth']].map((b,i)=>i<3?`<div class="pn"><h3>${b[0]} ${st('R')}</h3><p class="mut" style="font-size:12.5px;margin-top:6px">${b[1]}</p><p class="dim" style="font-size:10.5px;margin-top:6px">Benefits stated qualitatively until measured.</p></div>`:`<div class="pn"><h3>Growth</h3><div class="big y" style="margin:6px 0">+20%</div>${st('M')}<p class="mut" style="font-size:12px;margin-top:8px">Client-acquisition %: <b>not available</b>, no evidence yet. Assumption: answered-call capacity becomes billable minutes. Measured by talking minutes per month and new clients per quarter (I1, I13).</p></div>`).join('')}</div>
  </details>
  <div class="pn"><h3>Which project first</h3><p class="mut" style="margin:4px 0 12px">Team ranking, proposed. Tap a bar.</p><div class="rk">${rk.map((p,i)=>`<div class="rkr clk" data-p="${p.id}"><span>${i+1}</span><b>${GMPN[p.id]||p.t}</b><i style="--w:${p.score/rk[0].score*100}%" class="${i<3?'p':''}"></i><em>${p.score}</em></div>`).join('')}</div></div>
  <details class="more"><summary><span>Show the ranking table</span><small>Type, phase, goals and owner</small></summary><div class="pn"><div class="ph"><div><h3>Initiative ranking</h3><p>Score = impact + risk + urgency + certification value − effort (team judgement, proposed). Tap a row.</p></div></div><div class="tw"><table class="tbl"><thead><tr><th>#</th><th>Initiative</th><th>Type</th><th>Phase</th><th>Score</th><th>Goals</th><th>Owner</th></tr></thead><tbody>
@@ -1743,7 +1741,7 @@ const toks=t=>String(t).toLowerCase().replace(/<[^>]+>/g,' ').split(/[^a-z0-9.%+
 const KB=[];
 function buildKB(){const add=(title,text,page,extra)=>KB.push({title,text,page,extra,tt:new Set(toks(title)),tk:new Set(toks(title+' '+text))});
  add('Purpose',KALAM.purpose,'ov');add('Vision',KALAM.vision,'ov');add('Mission',KALAM.mission,'ov');add('Values',KALAM.values.join(', '),'ov');
- add('Destination 2028 and company goal','+20% revenue growth with current resources: an ambition stated by management, pending a starting figure, a feasibility check and approval. COPC and GPTW certification are strategic goals, not achievements.','ov');
+ add('Destination 2028 and company goal','+20% talking minutes with current resources: an ambition stated by management, pending a starting figure, a feasibility check and approval. COPC and GPTW certification are strategic goals, not achievements.','ov');
  goals.forEach(g=>add(`Goal ${g.n}: ${GF[g.n]}`,`KPI: ${g.kpi}. Current: ${gx[g.n].now}. Target: ${gx[g.n].tgt}. ${g.fact}. Source: ${g.src}. Owner: ${g.owner}.`,'ov',{g:g.n}));
  areas.forEach(a=>add(`Area: ${a.t}`,`${SL[a.s]}. ${a.gap} Evidence: ${a.evid.join('; ')||'none yet'}. Owner: ${a.dept}. COPC ${a.copc.join(', ')}.`,'ov',{a:a.id}));
  plan.forEach(p=>add(`${p.id} ${p.t}`,`Today: ${p.now} Future: ${p.fut} Lead: ${p.dept}. KPI: ${p.kpi}. Benefit: ${p.ben}. Phase ${p.phase}.`,'road',{p:p.id}));
@@ -1796,7 +1794,7 @@ function go(id,noScroll){if(!RENDER[id])id='ov';cur=id;const pg=PAGES.find(p=>p.
 function init(){
  $('#nav').innerHTML=PAGES.map((p,i)=>`<button data-s="${p.id}"><i>${i+1}</i>${p.n}</button>`).join('');
  $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}"><p class="one"><b>In one sentence:</b> ${p.one}</p>${RENDER[p.id]()}</section>`).join('');plainify($('#main'));
- buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','What is our occupancy?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
+ buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','Why are calls abandoned?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
  document.addEventListener('click',e=>{const t=e.target.closest('[data-open-tc],[data-ci],[data-open-detail],[data-proc],[data-sg],[data-cc],[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
   if(t.id=='mod'){if(e.target.id=='mod')closeM();return}
   if(t.classList.contains('x')){closeM();return}
