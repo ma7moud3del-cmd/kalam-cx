@@ -312,6 +312,7 @@ button.chip:hover,.chip.cl:hover{border-color:var(--yt);cursor:pointer}
  .orbit{font-size:9.5px;padding:4px 7px}
 }
 /* light theme fixes */
+.one{font-size:15px;line-height:1.5;background:#fff;border:1px solid var(--ln);border-left:4px solid #FFC629;border-radius:12px;padding:12px 16px;margin-bottom:16px;color:var(--tx)}.one b{color:#79417F}
 .pn{background:#fff}
 .card,.stat,.dest div,.chain>div,.gcard,.sipoc div,.chip,.qnav a,.fl .box{background:#fff}
 .msg.u{color:#fff}.gbar{color:#fff}.org span.top,.qn,#nav button.on i,.mn.sel,.seg button.on,#cform button{color:#4B154A}
@@ -700,7 +701,7 @@ const COPCCAT=[
  {k:'2.0',t:'Designing the service',plain:'The service and the customer journey are designed on purpose, with clear tasks, change control and a continuity plan.',show:'Customer-journey maps, key process definitions, written tasks, change log, tested continuity plan.',owner:'Operations + Quality'},
  {k:'3.0',t:'Running the operation',plain:'People are hired, trained, verified, coached and scheduled well; quality, knowledge, vendors and data are managed.',show:'Recruiting and training records, coaching coverage, forecasts and schedules, quality checks, CAPA log, data controls.',owner:'Operations, HR, WFM, QA'},
  {k:'4.0',t:'Results',plain:'The operation proves results: customer experience, client experience, key processes, and meeting targets.',show:'Months of measured results against targets for every required metric.',owner:'All departments'},
- {k:'BPO',t:'Outsourcing (BPO) items',plain:'Extra items for companies that serve clients: sales, client onboarding, relationships, invoicing and client reports.',show:'Client onboarding plan, SLA register, invoicing controls, monthly client reports.',owner:'Account management + Finance'}];
+ {k:'BPO',t:'Items for firms that serve clients',plain:'Extra items for companies that serve clients: sales, client onboarding, relationships, invoicing and client reports.',show:'Client onboarding plan, SLA register, invoicing controls, monthly client reports.',owner:'Account management + Finance'}];
 // item status: Co Compliant · Pa Partial · Mi Missing · Na Not assessed  (internal view from evidence; not an official COPC result)
 const CST={Co:['xCo','Compliant'],Pa:['xPa','Partial'],Mi:['xMi','Missing'],Na:['xNa','Not assessed']};
 const copcSt={
@@ -732,7 +733,7 @@ const DEPTS=['CEO office','Operations','WFM','Finance','HR','Quality','Training'
 const STD={
  'C:1.2':'COPC 1.2 Business planning','C:1.3':'COPC 1.3 Setting targets','C:1.4':'COPC 1.4 Reviewing performance & AI use','C:2.1':'COPC 2.1 Customer information','C:2.4':'COPC 2.4 Defining tasks','C:2.6':'COPC 2.6 Business continuity',
  'C:3.1':'COPC 3.1 Recruiting','C:3.2':'COPC 3.2 Training','C:3.3':'COPC 3.3 Verifying skills','C:3.4':'COPC 3.4 Coaching','C:3.5':'COPC 3.5 Staff performance','C:3.6':'COPC 3.6 Employee experience',
- 'C:3.7':'COPC 3.7 Workload','C:3.8':'COPC 3.8 Quality','C:3.12':'COPC 3.12 Data integrity','C:3.13':'COPC 3.13 Corrective action','C:3.16':'COPC 3.16 Client relations & invoicing','C:3.17':'COPC 3.17 Client reports','C:4.1':'COPC 4.1 CX results','C:ALL':'COPC all 32 items',
+ 'C:3.7':'COPC 3.7 Workload','C:3.8':'COPC 3.8 Quality','C:3.12':'COPC 3.12 Data integrity','C:3.13':'COPC 3.13 Corrective action','C:3.16':'COPC 3.16 Client relations & invoicing','C:3.17':'COPC 3.17 Client reports','C:4.1':'COPC 4.1 Customer results','C:ALL':'COPC all 32 items',
  'G:Credibility':'GPTW Credibility','G:Respect':'GPTW Respect','G:Fairness':'GPTW Fairness','G:Pride':'GPTW Pride','G:Camaraderie':'GPTW Camaraderie',
  'K:Alignment':'KALAM Way: vision & values','K:Competency':'KALAM Way: competency books','K:Performance':'KALAM Way: performance'};
 const LINK={
@@ -891,15 +892,15 @@ const REFS=[
 
 // ---------- Page registry & orb context ----------
 const PAGES=[
- {id:'ov',t:'Management overview',n:'Overview',h:300,here:'Management overview',work:'Five goals → 2028',link:'All departments',next:'COPC readiness'},
- {id:'copc',t:'COPC readiness',n:'COPC',h:268,here:'COPC CX Standard R8.0',work:'Internal gap view',link:'Quality, Operations, WFM',next:'Great Place to Work'},
- {id:'gptw',t:'Great Place to Work',n:'GPTW',h:330,here:'GPTW Trust Model',work:'Baseline survey (I10)',link:'HR, all managers',next:'KALAM Way'},
- {id:'kw',t:'KALAM Way',n:'KALAM Way',h:285,here:'KALAM Way',work:'Operations book (I9)',link:'HR, Operations',next:'Transformation map'},
- {id:'map',t:'Transformation map',n:'Map',h:45,here:'Transformation map',work:'Payment cycle example',link:'Ops · Finance · HR · Tech',next:'Operations & IMS'},
- {id:'ops',t:'Operations & IMS',n:'Operations',h:310,here:'Operations & IMS (Phase 1)',work:'Automation & AI 2027',link:'Operations + partners',next:'Delivered projects'},
- {id:'proj',t:'Delivered projects',n:'Delivered',h:150,here:'Delivered projects',work:'MasterWord automation',link:'IMS, Recruitment, IT',next:'Roadmap & benefits'},
- {id:'road',t:'Roadmap & benefits',n:'Roadmap',h:205,here:'Roadmap 2027–2028',work:'Phase 1: baseline',link:'Executive sponsor',next:'References'},
- {id:'ref',t:'References',n:'References',h:240,here:'Sources',work:'Official vs internal',link:'All pages',next:'Management overview'}];
+ {id:'ov',one:'Where KALAM wants to be by 2028, where it is today, and what must change to get there.',t:'Management overview',n:'Overview',h:300,here:'Management overview',work:'Five goals → 2028',link:'All departments',next:'COPC readiness'},
+ {id:'copc',one:'COPC is an international rulebook for running customer service well. This page shows which rules KALAM can already prove and which it cannot yet.',t:'COPC readiness',n:'COPC',h:268,here:'COPC CX Standard R8.0',work:'Internal gap view',link:'Quality, Operations, WFM',next:'Great Place to Work'},
+ {id:'gptw',one:'Great Place to Work asks staff, in a private survey, how it feels to work here. KALAM has not run that survey yet, so this page shows what we know and what is missing.',t:'Great Place to Work',n:'GPTW',h:330,here:'GPTW Trust Model',work:'Baseline survey (I10)',link:'HR, all managers',next:'KALAM Way'},
+ {id:'kw',one:'KALAM Way is KALAM’s own written way of working. This page shows what is written down, what is really used, and what is missing.',t:'KALAM Way',n:'KALAM Way',h:285,here:'KALAM Way',work:'Operations book (I9)',link:'HR, Operations',next:'Transformation map'},
+ {id:'map',one:'Tap any box to see how one change links a company goal to the teams doing the work and the benefit we expect.',t:'Transformation map',n:'Map',h:45,here:'Transformation map',work:'Payment cycle example',link:'Ops · Finance · HR · Tech',next:'Operations & IMS'},
+ {id:'ops',one:'Operations is where the daily interpreting work happens. This page shows its problem areas, which tasks a computer can take over, and how each process works today and after the change.',t:'Operations & IMS',n:'Operations',h:310,here:'Operations & IMS (Phase 1)',work:'Automation & AI 2027',link:'Operations + partners',next:'Delivered projects'},
+ {id:'proj',one:'Work already done, what it changed, and how sure we are about each number.',t:'Delivered projects',n:'Delivered',h:150,here:'Delivered projects',work:'MasterWord automation',link:'IMS, Recruitment, IT',next:'Roadmap & benefits'},
+ {id:'road',one:'The order of the work in 2027 and 2028, who runs it, and the decisions management still has to make.',t:'Roadmap & benefits',n:'Roadmap',h:205,here:'Roadmap 2027–2028',work:'Phase 1: baseline',link:'Executive sponsor',next:'References'},
+ {id:'ref',one:'Where every number on this site comes from.',t:'References',n:'References',h:240,here:'Sources',work:'Official vs internal',link:'All pages',next:'Management overview'}];
 
 {const o=areas.find(a=>a.id=='ops');o.gap='Supervisors and ACMs have no written daily routine: plan the day, check the numbers, fix what is off, review each week.';o.src='KALAM Way Books page; IMS management';}
 {const p=plan.find(p=>p.id=='I9');p.steps=['Write the daily routine with supervisors and ACMs','Put it in the KALAM Way book format','Pilot with one team, then roll out'];}
@@ -941,7 +942,7 @@ const APROJ=[
  ['IMS performance dashboard',0,'<span class="st sR">Proposal</span>','Pipeline joins 16 sources on one PC; production plan waiting on IT.'],
  ['Session Desk (pre-scheduling)',0,'<span class="st sR">Proposal</span>','Prototype built; not in use.']];
 const STAND=[
- ['24.1%',T('Occupancy')+' vs 35.3% target','V','r','IMS dashboard: Incorta + Kalam call logs, week 46 2026','Demand forecast by language and client tells WFM how many interpreters to schedule, so fewer sit idle'],
+ ['24.1%','Share of paid interpreter time spent on calls (target 35.3%)','V','r','IMS dashboard: Incorta + Kalam call logs, week 46 2026','Demand forecast by language and client tells WFM how many interpreters to schedule, so fewer sit idle'],
  ['56%','TTG calls '+T('abandoned','Abandoned'),'V','r','Incorta abandon extract: 21,162 of 38,025 offered calls, 1 Oct – 8 Nov 2026','Coverage alerts flag gaps by language before calls go unanswered'],
  ['31%','Required coaching done (48 of 156)','C','y','Kalam coaching log, one team (about 79 interpreters), October 2026','Automated reports free supervisors from building reports by hand, leaving time to coach'],
  ['16','Separate report files','V','','IMS dashboard build: number of data sources joined','One automated pipeline replaces 16 hand-built files (proposal, awaiting IT)']];
@@ -1014,7 +1015,7 @@ ${sec(5,Q[4],`<div class="grid g2"><div class="bars">
  <div class="legend" style="margin-top:10px"><span><i class="dot cR"></i>Critical gap ${sumS.R}</span><span><i class="dot cA"></i>Needs work ${sumS.A}</span><span><i class="dot cN"></i>Not assessed ${sumS.N}</span><span><i class="dot cG"></i>On track ${sumS.G}</span></div>`)}
 
 ${sec(6,Q[5],`<div class="grid g3">
- <div class="card"><h3>COPC ${st('R')}</h3><p>A world standard for running customer operations. Each requirement needs a designed way of working (${T('Approach')}) that is used everywhere (${T('Deployment')}), then months of proven results.</p><div class="chips" style="margin:10px 0">${COPCCAT.map(c=>`<span class="chip">${c.k} ${c.t}</span>`).join('')}</div>${goChip('copc','COPC page')}</div>
+ <div class="card"><h3>COPC ${st('R')}</h3><p>A world standard for running customer operations. Each requirement needs a designed way of working (${T('Approach')}) that is used everywhere (${T('Deployment')}), then months of proven results.</p><div class="chips" style="margin:10px 0">${COPCCAT.map(c=>`<span class="chip">${c.k=='BPO'?'':c.k+' '}${c.t}</span>`).join('')}</div>${goChip('copc','COPC page')}</div>
  <div class="card"><h3>Great Place to Work ${st('R')}</h3><p>Employees answer a confidential survey (${T('Trust Index')}). The company also describes its people practices. GPTW decides certification.</p><div class="chips" style="margin:10px 0">${TRUST.map(t=>`<span class="chip">${t.d}</span>`).join('')}</div>${goChip('gptw','GPTW page')}</div>
  <div class="card"><h3>KALAM Way</h3><p>KALAM’s own vision, values and competency books. It ties both standards to how KALAM works day to day.</p><div class="chips" style="margin:10px 0"><span class="chip">3 competency books</span><span class="chip">5 levels each</span><span class="chip">No operations book yet</span></div>${goChip('kw','KALAM Way page')}</div></div>`)}
 
@@ -1043,10 +1044,10 @@ function pCopc(){
  return `<div class="phead"><div><div class="eyebrow">Standard 1 of 3</div><h1>COPC CX Standard · Release 8.0</h1><p>${T('COPC')} is a world standard for running customer operations. Certification is a <b>strategic goal</b> for KALAM. Statuses below are an internal view from the evidence we hold, not an official COPC result.</p></div><div>${stepper(0)}</div></div>
  <div class="grid g4">${stat(mapped.size+' of 32','Requirement coverage: items our initiatives address','C','y')}${stat(items.filter(i=>i.st!='Na').length+' of 32','Evidence coverage: items with evidence reviewed','C')}${stat(crit.length,'Critical gaps (missing, or linked to a red area)','C','r')}${stat('0','Items marked Compliant (waits for the formal assessment, I11)','N')}</div>
  <div class="grid g2"><div class="pn"><div class="ph"><h3>Readiness by category</h3><div class="legend"><span><i class="dot" style="background:var(--g)"></i>Compliant</span><span><i class="dot cA"></i>Partial</span><span><i class="dot cR"></i>Missing</span><span><i class="dot cN"></i>Not assessed</span></div></div>
-  ${cats.map(c=>{const n=c.it.length,f=k=>c.it.filter(i=>i.st==k).length;return `<div class="mrow"><span><b>${c.k}</b> ${c.t}</span><div class="meter">${[['Co','var(--g)'],['Pa','var(--a)'],['Mi','var(--r)'],['Na','#c9bfd0']].map(s=>`<i style="width:${f(s[0])/n*100}%;background:${s[1]}"></i>`).join('')}</div><b>${n} items</b></div>`}).join('')}</div>
+  ${cats.map(c=>{const n=c.it.length,f=k=>c.it.filter(i=>i.st==k).length;return `<div class="mrow"><span><b>${c.k=='BPO'?'':c.k}</b> ${c.t}</span><div class="meter">${[['Co','var(--g)'],['Pa','var(--a)'],['Mi','var(--r)'],['Na','#c9bfd0']].map(s=>`<i style="width:${f(s[0])/n*100}%;background:${s[1]}"></i>`).join('')}</div><b>${n} items</b></div>`}).join('')}</div>
  <div class="pn"><h3>How official scoring works</h3><div class="gapnote" style="margin-top:10px">The official scoring rules are <b>not public</b>. They are in the licensed COPC standard that KALAM management holds. In plain words, every requirement is checked for a designed way of working (${T('Approach')}) and whether it is used everywhere (${T('Deployment')}), and the operation must prove results over time. COPC decides certification after its own audit. <b>This dashboard shows no score out of 100.</b></div>
   <h4 style="margin-top:14px">Certification roadmap</h4><div class="stepper">${['Internal gap assessment (I11) · Phase 1','Close critical gaps · Phase 2','Run and measure results · Phase 3','Internal mock audit · Phase 4','COPC audit · Phase 5'].map((s,i)=>`<span class="${i?'':'on'}" style="text-transform:none;font-size:10px">${s}</span>`).join('')}</div><p class="dim" style="font-size:11px;margin-top:6px">Timing: awaiting management approval.</p></div></div>
- <div class="pn"><h3 style="margin-bottom:12px">The five categories in plain words</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card"><h3><span>${c.k} · ${c.t}</span></h3><p>${c.plain}</p><dl class="kv"><dt>KALAM must show</dt><dd>${c.show}</dd><dt>Our status</dt><dd>${f('Pa')?cs('Pa')+' '+f('Pa'):''} ${f('Mi')?cs('Mi')+' '+f('Mi'):''} ${f('Na')?cs('Na')+' '+f('Na'):''}</dd><dt>Owner</dt><dd>${c.owner}</dd></dl></div>`}).join('')}</div></div>
+ <div class="pn"><h3 style="margin-bottom:12px">The five categories in plain words</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card"><h3><span>${c.k=='BPO'?'':c.k+' · '}${c.t}</span></h3><p>${c.plain}</p><dl class="kv"><dt>KALAM must show</dt><dd>${c.show}</dd><dt>Our status</dt><dd>${f('Pa')?cs('Pa')+' '+f('Pa'):''} ${f('Mi')?cs('Mi')+' '+f('Mi'):''} ${f('Na')?cs('Na')+' '+f('Na'):''}</dd><dt>Owner</dt><dd>${c.owner}</dd></dl></div>`}).join('')}</div></div>
  <div class="pn"><div class="ph"><div><h3>All 32 requirements</h3><p>Evidence, owner and the initiatives that close each gap.</p></div><div class="seg" id="cflt">${[['all','All'],['Pa','Partial'],['Mi','Missing'],['Na','Not assessed'],['crit','Critical']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
  <div class="tw"><table class="tbl" id="ctbl"><thead><tr><th>Item</th><th>Requirement</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Initiatives</th></tr></thead><tbody>
  ${items.map(i=>`<tr data-st="${i.st}" data-cr="${critical(i.id)?1:0}"><td class="id">${i.id}${critical(i.id)?' <span class="st sE">Critical</span>':''}</td><td>${i.t}</td><td>${cs(i.st)}</td><td class="mut">${i.ev}</td><td>${i.owner}</td><td><div class="chips">${inis(i.id).map(ichip).join('')||'<span class="dim">I11</span>'}</div></td></tr>`).join('')}</tbody></table></div></div>
@@ -1104,7 +1105,7 @@ function pMap(){const cols=mapNodes();
  <div class="pn" id="mpanel"></div>`}
 function mapSelect(id){mapSel=id;const inits=plan.filter(p=>chainOf(p).flat().includes(id));const on=new Set(inits.flatMap(p=>chainOf(p).flat()));
  $$('#tmap .mn').forEach(b=>{const k=b.dataset.mn;b.classList.toggle('sel',k==id);b.classList.toggle('hl',on.has(k)&&k!=id);b.classList.toggle('fade',!on.has(k))});
- drawMap(inits);$('#mpanel').innerHTML=mapPanel(id,inits)}
+ drawMap(inits);$('#mpanel').innerHTML=mapPanel(id,inits);plainify($('#mpanel'))}
 function drawMap(inits){const svg=$('#msvg'),box=$('#tmap');if(!svg||!box.offsetWidth)return;inits=inits||plan.filter(p=>chainOf(p).flat().includes(mapSel));
  const r0=box.getBoundingClientRect(),pos={};$$('#tmap .mn').forEach(b=>{const r=b.getBoundingClientRect();pos[b.dataset.mn]={l:r.left-r0.left,r:r.right-r0.left,y:r.top-r0.top+r.height/2}});
  const seen=new Set();let d='';inits.forEach(p=>{const ch=chainOf(p);for(let c=0;c<6;c++)ch[c].forEach(a=>ch[c+1].forEach(b=>{const k=a+'>'+b;if(seen.has(k)||!pos[a]||!pos[b])return;seen.add(k);const A1=pos[a],B1=pos[b],mx=(A1.r+B1.l)/2;d+=`<path d="M${A1.r} ${A1.y} C${mx} ${A1.y},${mx} ${B1.y},${B1.l} ${B1.y}"/>`}))});
@@ -1164,11 +1165,11 @@ function swim(m,label){const id='ar'+(svgN++),L=m.lanes.length,cols=Math.max(...
 function renderProc(){const p=PROC.find(x=>x.id==procSel);const b=$('#pbody');if(!b)return;svgN=0;
  const maps=procView=='both'?`<div class="grid" style="grid-template-columns:minmax(0,1fr)"><div class="pmap">${swim(p.cur,'Today')}</div><div class="pmap">${swim(p.fut,'Future (proposed)')}</div></div>`:`<div class="pmap">${swim(p[procView],procView=='cur'?'Today':'Future (proposed)')}</div>`;
  b.innerHTML=`${maps}<div class="legend" style="margin:10px 0"><span><i class="dot" style="background:#e0b1e6"></i>Start / end</span><span><i class="dot cA"></i>Decision</span><span><i class="dot cG"></i>Control</span><span style="color:var(--yt)">★ New step</span><span style="color:var(--r)">! Pain point</span><span style="color:var(--yt)">- - Handoff</span></div>
- <h4>${T('SIPOC')}: the process on one line</h4><div class="sipoc">${['Suppliers','Inputs','Process','Outputs','Customers'].map((h,i)=>`<div><b>${h}</b>${p.sipoc[i]}</div>`).join('')}</div>
+ <h4>Who feeds it, what happens, who gets the result</h4><div class="sipoc">${['Suppliers','Inputs','Process','Outputs','Customers'].map((h,i)=>`<div><b>${h}</b>${p.sipoc[i]}</div>`).join('')}</div>
  <div class="grid g2" style="margin-top:14px"><div><h4>What could go wrong, and the control</h4><div class="tw"><table class="tbl"><thead><tr><th>Failure</th><th>Effect</th><th>Control</th></tr></thead><tbody>${p.fmea.map(f=>`<tr><td>${f[0]}</td><td class="mut">${f[1]}</td><td>${f[2]}</td></tr>`).join('')}</tbody></table></div></div>
  <div><h4>Improvement loop for KALAM (${T("plan, do, check, act","PDCA")})</h4><div class="pdca">${['Plan','Do','Check','Act'].map((h,i)=>`<div><b>${h}</b>${p.pdca[i]}</div>`).join('')}</div>
  <div class="grid g2" style="margin-top:10px;gap:8px"><div class="card"><h4 style="color:var(--r)">Today</h4><ul class="plist">${p.pain.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card"><h4 style="color:var(--g)">Future</h4><ul class="plist">${p.gain.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
- <div class="chips" style="margin-top:10px">${p.g.map(gchip).join('')}<span class="chip">COPC ${p.copc}</span>${ichip(p.ini)}</div></div></div>`}
+ <div class="chips" style="margin-top:10px">${p.g.map(gchip).join('')}<span class="chip">COPC ${p.copc}</span>${ichip(p.ini)}</div></div></div>`;plainify(b)}
 
 // ================= 7 · DELIVERED PROJECTS =================
 function pProj(){const vt={m:['sV','Measured'],q:['sR','Qualitative'],x:['sN','Not measured']};
@@ -1216,7 +1217,7 @@ function pRef(){const grp=['Official','Licensed','Internal','Interpretation'],la
  <div class="pn"><h3 style="margin-bottom:8px">Glossary</h3><dl class="kv" style="grid-template-columns:150px minmax(0,1fr)">${Object.entries(GL).map(([k,v])=>`<dt>${k}</dt><dd>${v}</dd>`).join('')}</dl></div>`}
 
 // ================= MODALS =================
-function modal(h){$('#box').innerHTML='<button class="x" aria-label="Close">×</button>'+h;$('#mod').classList.add('on');$('#box .x').focus()}
+function modal(h){$('#box').innerHTML='<button class="x" aria-label="Close">×</button>'+h;$('#mod').classList.add('on');plainify($('#box'));$('#box .x').focus()}
 function closeM(){$('#mod').classList.remove('on')}
 function openG(n){const g=G(n),x=gx[n];modal(`<div class="eyebrow">Goal ${n}</div><h3>${GF[n]}</h3><p class="mut">${g.focus}</p>
  <div class="grid g2" style="margin-top:12px;gap:8px">${stat(x.now,'Current','' )}${stat(x.tgt,'Target','')}</div>
@@ -1269,6 +1270,15 @@ function chatSay(q){const log=$('#clog');log.insertAdjacentHTML('beforeend',`<di
  else log.insertAdjacentHTML('beforeend',`<div class="msg b na">That isn’t available in this dashboard’s data. Try asking about a goal, a COPC item, a project or a process.</div>`);
  log.scrollTop=log.scrollHeight}
 
+
+// ---- plain-English pass over visible text (farmer test) ----
+const PLAIN=[['KCRPs','key customer processes'],['Key Customer-Related Process','Key customer process'],['RFXs','tenders'],['CSSs','staff'],['CSAT','client satisfaction score'],
+ ['WFM','scheduling team'],['ACMs','account managers'],['ACM','account manager'],['CAPA','fix-and-prevent action'],['SLAs','service promises'],['SLA','service promise'],['BPO','outsourcing'],
+ ['KPIs','measures'],['KPI','measure'],['Occupancy','Time on calls'],['occupancy','time on calls'],['Baselines','Starting figures'],['baselines','starting figures'],['Baseline','Starting figure'],['baseline','starting figure'],['pipeline','automatic data link']];
+const PRX=new RegExp('\\b('+PLAIN.map(p=>p[0]).join('|')+')\\b','g'),PM=Object.fromEntries(PLAIN);
+function plainify(root){if(!root)return;const w=document.createTreeWalker(root,NodeFilter.SHOW_TEXT);const ns=[];while(w.nextNode())ns.push(w.currentNode);
+ ns.forEach(n=>{if(n.parentElement.closest('#ref dl,script,style'))return;const v=n.nodeValue;if(!PRX.test(v))return;PRX.lastIndex=0;n.nodeValue=v.replace(PRX,(m,_,off)=>{let r=PM[m];const ac=/^[A-Z]{2,}s?$/.test(m);if(ac?(off==0||/[.:!?]\s*$/.test(v.slice(0,off))):m[0]!=m[0].toLowerCase())r=r[0].toUpperCase()+r.slice(1);return r})})}
+
 // ================= SHELL =================
 const RENDER={ov:pOv,copc:pCopc,gptw:pGptw,kw:pKw,map:pMap,ops:pOps,proj:pProj,road:pRoad,ref:pRef};
 let cur='ov';
@@ -1280,7 +1290,7 @@ function go(id,noScroll){if(!RENDER[id])id='ov';cur=id;const pg=PAGES.find(p=>p.
  if(!noScroll)window.scrollTo(0,0);if(id=='map')requestAnimationFrame(()=>mapSelect(mapSel));if(id=='ops')renderProc()}
 function init(){
  $('#nav').innerHTML=PAGES.map((p,i)=>`<button data-s="${p.id}"><i>${i+1}</i>${p.n}</button>`).join('');
- $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}">${RENDER[p.id]()}</section>`).join('');
+ $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}"><p class="one"><b>In one sentence:</b> ${p.one}</p>${RENDER[p.id]()}</section>`).join('');plainify($('#main'));
  buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','What is our occupancy?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
  document.addEventListener('click',e=>{const t=e.target.closest('[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
   if(t.id=='mod'){if(e.target.id=='mod')closeM();return}
