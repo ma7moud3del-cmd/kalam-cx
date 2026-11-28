@@ -517,6 +517,54 @@ button.mrow.cc{border-radius:8px;padding:6px 4px}button.mrow.cc:hover{background
 .tl p.clk::after{top:6px;right:6px}
 .cert span.clk::after{top:6px}
 @media(prefers-reduced-motion:reduce){.clk,.clk:hover{transform:none}}
+/* COPC process cards */
+.cp10{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:10px}
+.cpc{border-radius:16px;border:1px solid var(--ln);background:linear-gradient(180deg,#fff,#faf6fc);padding:12px;display:flex;flex-direction:column;gap:6px;font-size:12.5px}
+.cpc.mi{border:1.5px solid #4B154A;background:linear-gradient(180deg,#fff,#f3ebf6);box-shadow:0 0 0 4px rgba(75,21,74,.06)}
+.cph{display:flex;justify-content:space-between;align-items:center;color:#79417F;padding-right:16px}
+.cpc>b{font-size:14px;color:#4B154A;line-height:1.25}
+.cpc p{display:flex;flex-direction:column;line-height:1.35}.cpc p small{font-size:9.5px;text-transform:uppercase;letter-spacing:1.2px;font-family:ui-monospace,Menlo,monospace;color:var(--mut)}
+.cpt{color:var(--mut)}.cpf{color:#4B154A;font-weight:700}.cpf small{color:#8f5a00!important}
+.cpc em{margin-top:auto;font-style:normal;font-size:10.5px;font-weight:700;color:#79417F;font-family:ui-monospace,Menlo,monospace}
+.cpbar{display:grid;gap:8px;margin-bottom:12px}
+.cpseg{display:flex;height:16px;border-radius:8px;overflow:hidden;gap:2px}
+.cpseg i{display:block}.cpseg .Mi{background:#4B154A}.cpseg .Pa{background:#FFC629}.cpseg .Na{background:repeating-linear-gradient(135deg,#ddd2e3 0 5px,#f1eaf4 5px 10px)}.cpseg .Co{background:#79417F}
+.lgd span{display:inline-flex;align-items:center;gap:5px;margin-right:8px}
+/* COPC 32 tiles */
+.cgrid{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px}
+.cgc h4{font-size:11.5px;margin:0 0 8px;padding:4px 18px 4px 6px;border-radius:8px;text-transform:none;letter-spacing:0;color:#4B154A}
+.cts{display:flex;flex-wrap:wrap;gap:6px}
+.ct{width:56px;height:56px;border-radius:12px;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1px;font-size:11px;transition:transform .15s,box-shadow .15s}
+.ct b{font-family:ui-monospace,Menlo,monospace;font-size:11px}.ct span{font-size:15px;font-weight:800}
+.ct.Pa{background:#FFC629;color:#4B154A}.ct.Mi{background:#4B154A;color:#fff;box-shadow:0 0 12px rgba(75,21,74,.45)}.ct.Na{background:#fff;color:#76697e;border:2px dashed #c9bfd0}.ct.Co{background:#79417F;color:#fff}
+.ct:hover{transform:translateY(-3px) scale(1.05);box-shadow:0 10px 20px -8px rgba(75,21,74,.5)}
+.cts.sm .ct{width:40px;height:40px;border-radius:9px}.cts.sm .ct span{font-size:12px}.cts.sm .ct b{font-size:9.5px}
+.road5{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:8px;counter-reset:r}
+.road5 div{position:relative;border-radius:14px;padding:14px 10px;text-align:center;background:#faf6fc;border:1px solid var(--ln)}
+.road5 div:not(:last-child)::after{content:'→';position:absolute;right:-10px;top:50%;transform:translateY(-50%);color:#79417F;font-weight:800;z-index:1}
+.road5 span{display:inline-grid;place-items:center;width:28px;height:28px;border-radius:50%;background:#fff;border:2px solid #79417F;color:#4B154A;font-weight:800;margin-bottom:6px}
+.road5 b{display:block;font-size:12.5px;color:#4B154A}
+.road5 .on{background:#FFC629;border-color:#FFC629;box-shadow:0 0 0 4px rgba(255,198,41,.3)}.road5 .on span{background:#4B154A;color:#FFC629;border-color:#4B154A}
+#ctbl tr.flash td{animation:rowfl 1.6s ease-out}@keyframes rowfl{0%,40%{background:#fff1c7}100%{background:transparent}}
+/* Ops */
+.a12{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px;margin-top:10px}
+.a12t{border-radius:14px;padding:14px 26px 14px 14px;display:flex;flex-direction:column;gap:4px;min-height:96px}
+.a12t b{font-size:14px;line-height:1.25}.a12t small{font-size:11px;opacity:.8}.a12t em{margin-top:auto;font-style:normal;font-size:11px;font-weight:700;font-family:ui-monospace,Menlo,monospace}
+.a12t.R{background:linear-gradient(160deg,#4B154A,#2B0E2C);color:#fff}.a12t.R em{color:#FFC629}.a12t.R::after{color:#FFC629}
+.a12t.A{background:#FFC629;color:#4B154A}
+.a12t.N{background:#fff;border:2px dashed #c9bfd0;color:var(--mut)}
+.at{display:inline-block;width:14px;height:14px;border-radius:4px;vertical-align:-2px}.at.R{background:#4B154A}.at.A{background:#FFC629}.at.N{background:#fff;border:2px dashed #c9bfd0}
+.files16{display:grid;grid-template-columns:repeat(4,26px);gap:6px;padding:10px 0;color:#4B154A}
+.files16 i{display:grid;place-items:center;width:26px;height:26px;border-radius:7px;background:#f3ebf6}
+.au{display:grid;gap:8px}
+.aut{border:1px solid var(--ln);border-radius:14px;padding:10px 12px;background:#fff}
+.aut>div:first-child{display:flex;justify-content:space-between;gap:8px;align-items:center;margin-bottom:6px}.aut>div:first-child b{color:#4B154A;font-size:13.5px}
+.aut .fl{font-size:12px}
+@media(max-width:1100px){.cp10{grid-template-columns:repeat(3,minmax(0,1fr))}.cgrid{grid-template-columns:repeat(3,minmax(0,1fr))}.a12{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:900px){.cp10,.a12{grid-template-columns:repeat(2,minmax(0,1fr))}.cgrid{grid-template-columns:minmax(0,1fr)}.road5{grid-template-columns:minmax(0,1fr)}.road5 div:not(:last-child)::after{content:'↓';right:50%;top:auto;bottom:-14px;transform:translateX(50%)}.ct{width:48px;height:48px}}
+.hc{display:inline-block;width:12px;height:12px;border-radius:50%;border:2px solid #8f5a00;background:linear-gradient(90deg,#8f5a00 50%,transparent 50%);vertical-align:-1px}
+.ct.Pa .hc{border-color:#4B154A;background:linear-gradient(90deg,#4B154A 50%,transparent 50%)}
+.a12t.R small{color:#e7dcec;opacity:1}
 </style></head><body>
 <aside id="side"><div class="brand"><img src="../ims-program/assets/mark.png" alt="KALAM"><div><b>KALAM</b><span>Command Center</span></div></div>
 <div id="ctx"></div><nav id="nav" aria-label="Pages"></nav>
@@ -1179,10 +1227,28 @@ function goalCard(){const n=ovG,x=gx[n],g=G(n),D=goalData(n),el=$('#sgc');if(!el
  <div><small>Measure → result</small><b>${g.kpi}</b><span class="mut">→ ${x.ben}</span></div></div>
  <button class="gcm" data-open-detail="q3">See this goal on the full map ↓</button>`;
  $$('.g5i button').forEach(b=>b.classList.toggle('on',+b.dataset.sg==n));plainify(el)}
+// ---------- How COPC sees our processes (screen 9 + COPC page) ----------
+IC.chart='<path d="M4 20V10M10 20V4M16 20v-7M22 20H2"/>';IC.doc='<path d="M6 3h9l4 4v14H6z"/><path d="M14 3v5h5M9 13h7M9 17h5"/>';
+const CPROC=[
+ ['key','MasterWord automation','One person’s account, no backup','Company account + backup person','2.6','Mi','data-p="I8"'],
+ ['book','Daily supervisor work','No written routine','Write it in KALAM Way','2.4','Pa','data-p="I9"'],
+ ['phone','Staffing vs demand','1 in 4 calls not answered','Plan staff by language','3.7','Pa','data-p="I3"'],
+ ['coach','Coaching','48 of 156 sessions done','Weekly routine, tracked','3.4','Pa','data-p="I4"'],
+ ['doc','Training (e-learning)','Nobody tracks who finishes','Track it, re-check yearly','3.2 · 3.3','Pa','data-p="I7"'],
+ ['heart','Complaints','Same causes keep coming back','Follow each fix to the end','3.8 · 3.13','Pa','data-p="I6"'],
+ ['chart','Reports','16 files built by hand','One checked data source','3.12','Pa','data-p="I5"'],
+ ['coin','Interpreter payments','Checked by eye, no issue log','Automatic checks + log','3.16 ?','Pa','data-p="I2"'],
+ ['target','Goals and targets','No approved target or owner','Figure, target, date, owner','1.3','Pa','data-p="I1"'],
+ ['shield','AI and automation rules','No written policy','Short AI policy, checked yearly','1.2 · 1.4','Pa','data-cc="1.0"']];
+const cpCards=()=>`<div class="cp10">${CPROC.map(c=>`<div class="cpc clk ${c[5]=='Mi'?'mi':''}" ${c[6]}><div class="cph">${ico(c[0],24)}<i class="mk ${c[5]=='Mi'?'mi':'pa'}">${c[5]=='Mi'?'✗':'<i class="hc"></i>'}</i></div><b>${c[1]}</b><p class="cpt"><small>Today</small>${c[2]}</p><p class="cpf"><small>Fix</small>${c[3]}</p><em>COPC ${c[4]}</em></div>`).join('')}</div>`;
+const cpSummary=()=>{const items=copc.map(c=>copcItem(c[0])),n=k=>items.filter(i=>i.st==k).length;
+ return `<div class="cpbar"><div class="cpseg">${[['Mi',n('Mi'),'missing'],['Pa',n('Pa'),'partly in place'],['Na',n('Na'),'not checked yet'],['Co',0,'fully in place']].map(s=>`<i class="${s[0]}" style="flex:${s[1]||0.0001}"></i>`).join('')}</div>
+ <div class="lgd"><span><i class="mk mi">✗</i> <b>${n('Mi')}</b> missing</span><span><i class="mk pa"><i class="hc"></i></i> <b>${n('Pa')}</b> partly in place</span><span><i class="mk na">?</i> <b>${n('Na')}</b> not checked yet</span><span><i class="mk ok">✓</i> <b>0</b> fully in place (needs the formal check)</span></div></div>`};
+
 function story(){
  const scr=(n,q,vis,l1)=>`<section class="scr" id="s${n}"><div class="sq"><span>${n}</span><h2>${q}</h2></div><div class="sv">${vis}</div>${l1?`<p class="sl">${l1}</p>`:''}</section>`;
- const mk=s=>s=='Pa'?'<i class="mk pa" title="Partly in place">◐</i>':'<i class="mk mi" title="Missing">✗</i>';
- const Q8=['Why change?','Where are we going?','Where are we now?','What is missing?','What do the frameworks ask?','Where do we start?','What value do we get?','What must management approve?'];
+ const mk=s=>s=='Pa'?'<i class="mk pa" title="Partly in place"><i class="hc"></i></i>':'<i class="mk mi" title="Missing">✗</i>';
+ const Q8=['Why change?','Where are we going?','Where are we now?','What is missing?','What do the frameworks ask?','How does COPC see our processes?','Where do we start?','What value do we get?','What must management approve?'];
  const dots=['x','x','x','x','x','a','p','n'].map(c=>`<i class="d8 ${c}"></i>`).join('');
  const mwd=Array.from({length:28},(_,i)=>`<i class="${i<25?'ok':'mi'}"></i>`).join('');
  return `<div class="story">
@@ -1199,14 +1265,15 @@ function story(){
  ${scr(5,Q8[4],`<div class="fw3">
    <div class="fwc"><h4>${ico('shield',20)}COPC <small>service standard</small></h4>${CASK.map(c=>`<button class="ck" data-cc="${c[2].split('.')[0]}.0">${mk(c[1])}<b>${c[0]}</b><em>${c[2]}</em></button>`).join('')}</div>
    <div class="fwc"><h4>${ico('heart',20)}Great Place to Work <small>workplace</small></h4><button class="ck" data-s="gptw"><i class="mk na">?</i><b>Staff trust survey</b><em>not run yet</em></button></div>
-   <div class="fwc"><h4>${ico('book',20)}KALAM Way <small>our own book</small></h4><button class="ck" data-s="kw"><i class="mk pa">◐</i><b>Operations book</b><em>not written yet</em></button></div></div>
+   <div class="fwc"><h4>${ico('book',20)}KALAM Way <small>our own book</small></h4><button class="ck" data-s="kw"><i class="mk pa"><i class="hc"></i></i><b>Operations book</b><em>not written yet</em></button></div></div>
    <p class="lgd">${mk('Pa')} partly in place ${mk('Mi')} missing <i class="mk na">?</i> not checked yet · KALAM’s own check, not an official COPC result</p>`,'')}
- ${scr(6,Q8[5],`<div class="tl"><div class="done"><h4>✓ Done</h4><p class="clk" data-s="proj"><b>MasterWord</b> automated run</p><p class="clk" data-s="proj"><b>E-learning</b> built</p></div><div class="nowc"><h4>▶ Now</h4><p class="clk" data-p="I8"><b>1 · MasterWord</b> company account + backup person</p><p class="clk" data-s="proj"><b>2 · E-learning</b> track who finishes</p></div><div class="next"><h4>Next</h4><p class="clk" data-proc="pay"><b>3 · Payment cycle</b></p><p class="clk" data-proc="pre"><b>4 · Pre-scheduling</b></p><p class="clk" data-p="I5"><b>5 · Reporting</b></p></div></div>`,'Operations first. Order proposed, awaiting management approval.')}
- ${scr(7,Q8[6],`<div class="mw clk" data-s="proj"><div class="mwh"><b>MasterWord</b>${gtag(2)}${gtag(5)}</div><div class="mwg">
+ ${scr(6,Q8[5],`${cpSummary()}${cpCards()}`,'Most processes exist but are not written down, measured or backed up. One thing is missing completely: a backup plan.')}
+ ${scr(7,Q8[6],`<div class="tl"><div class="done"><h4>✓ Done</h4><p class="clk" data-s="proj"><b>MasterWord</b> automated run</p><p class="clk" data-s="proj"><b>E-learning</b> built</p></div><div class="nowc"><h4>▶ Now</h4><p class="clk" data-p="I8"><b>1 · MasterWord</b> company account + backup person</p><p class="clk" data-s="proj"><b>2 · E-learning</b> track who finishes</p></div><div class="next"><h4>Next</h4><p class="clk" data-proc="pay"><b>3 · Payment cycle</b></p><p class="clk" data-proc="pre"><b>4 · Pre-scheduling</b></p><p class="clk" data-p="I5"><b>5 · Reporting</b></p></div></div>`,'Operations first. Order proposed, awaiting management approval.')}
+ ${scr(8,Q8[7],`<div class="mw clk" data-s="proj"><div class="mwh"><b>MasterWord</b>${gtag(2)}${gtag(5)}</div><div class="mwg">
    <div><div class="dg">${mwd}</div><p><b>28 / 28</b> submitted and confirmed ${st('V')}</p><p class="lg"><i class="okk"></i>25 complete documents <i class="mii"></i>3 missing documents caught before submission</p></div>
    <div class="bars"><div><span>Before</span><i class="bb" style="--w:100%"></i><b>8–32 h per batch</b>${st('S')}</div><div><span>Now</span><i class="ba" style="--w:8%"></i><b>1–3 h per batch</b>${st('V')}</div><p>≈ 12–60 hours saved over 2 batches ${st('S')}</p></div></div></div>
    <div class="p4">${PROJ7.map(p=>`<div class="clk" ${p[4]}><b>${p[0]}</b><span class="ba4"><s>${p[1]}</s> → ${p[2]}</span><span class="tbm">To be measured</span><span class="gs">${p[3].map(n=>`<i title="${GN[n]}">${gico(n,16)}</i>`).join('')}</span></div>`).join('')}</div>`,'Only MasterWord has a measured result so far. The others are measured before and after.')}
- ${scr(8,Q8[7],`<div class="need">${[['user','Sponsor','One executive owns the plan'],['team','Team','3 full-time + part-time champions'],['coin','Finance figures','Revenue and cost starting figures'],['key','Company account','Automation off personal accounts']].map((x,i)=>`<div class="clk" data-s="road">${ico(x[0],30)}<b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>`,'Four decisions let the work start.')}
+ ${scr(9,Q8[8],`<div class="need">${[['user','Sponsor','One executive owns the plan'],['team','Team','3 full-time + part-time champions'],['coin','Finance figures','Revenue and cost starting figures'],['key','Company account','Automation off personal accounts']].map((x,i)=>`<div class="clk" data-s="road">${ico(x[0],30)}<b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>`,'Four decisions let the work start.')}
  </div>`}
 
 // ---------- Overview page ----------
@@ -1337,23 +1404,21 @@ function drawSmap(){const box=$('#smap'),svg=$('#ssvg');if(!box||!svg||!box.offs
 // ================= 2 · COPC =================
 function pCopc(){
  const items=copc.map(c=>copcItem(c[0]));
- const cnt=k=>items.filter(i=>i.st==k).length;
- const mapped=new Set();plan.forEach(p=>LINK[p.id].std.filter(s=>s.startsWith('C:')&&s!='C:ALL').forEach(s=>mapped.add(s.slice(2))));
- const crit=items.filter(i=>critical(i.id));
  const inis=id=>plan.filter(p=>LINK[p.id].std.includes('C:'+id)).map(p=>p.id);
  const cats=COPCCAT.map(c=>{const it=items.filter(i=>i.cat==c.k);return {...c,it}});
- return `<div class="phead"><div><div class="eyebrow">Standard 1 of 3</div><h1>COPC CX Standard · Release 8.0</h1><p>${T('COPC')} is a world standard for running customer operations. Certification is a <b>strategic goal</b> for KALAM. Statuses below are an internal view from the evidence we hold, not an official COPC result.</p></div><div>${stepper(0)}</div></div>
- <div class="gapnote" style="margin-bottom:12px"><b>Checked:</b> item numbers, names and points match the licensed COPC CX Standard for Contact Centers, Release 8.0, version 1.0. <b>Not checked:</b> which KALAM evidence belongs under which item is KALAM’s own reading. Items marked <b class="cfm">Mapping to confirm</b> need a COPC-trained reviewer.</div>
- <div class="grid g4">${stat(mapped.size+' of 32','Requirement coverage: items our initiatives address','C','y')}${stat(items.filter(i=>i.st!='Na').length+' of 32','Evidence coverage: items with evidence reviewed','C')}${stat(crit.length,'Critical gaps (missing, or linked to a red area)','C','r')}${stat('0','Items marked Compliant (waits for the formal assessment, I11)','N')}</div>
- <div class="grid g2"><div class="pn"><div class="ph"><h3>Readiness by category</h3><div class="legend"><span><i class="dot" style="background:var(--g)"></i>Compliant</span><span><i class="dot cA"></i>Partial</span><span><i class="dot cR"></i>Missing</span><span><i class="dot cN"></i>Not assessed</span></div></div>
-  ${cats.map(c=>{const n=c.it.length,f=k=>c.it.filter(i=>i.st==k).length;return `<div class="mrow"><span><b>${c.k=='BPO'?'':c.k}</b> ${c.t}</span><div class="meter">${[['Co','var(--g)'],['Pa','var(--a)'],['Mi','var(--r)'],['Na','#c9bfd0']].map(s=>`<i style="width:${f(s[0])/n*100}%;background:${s[1]}"></i>`).join('')}</div><b>${n} items</b></div>`}).join('')}</div>
- <div class="pn"><h3>How official scoring works</h3><div class="gapnote" style="margin-top:10px">The official scoring rules are <b>not public</b>. They are in the licensed COPC standard that KALAM management holds. In plain words, every requirement is checked for a designed way of working (${T('Approach')}) and whether it is used everywhere (${T('Deployment')}), and the operation must prove results over time. COPC decides certification after its own audit. <b>This dashboard shows no score out of 100.</b></div>
-  <h4 style="margin-top:14px">Certification roadmap</h4><div class="stepper">${['Internal gap assessment (I11) · Phase 1','Close critical gaps · Phase 2','Run and measure results · Phase 3','Internal mock audit · Phase 4','COPC audit · Phase 5'].map((s,i)=>`<span class="${i?'':'on'}" style="text-transform:none;font-size:10px">${s}</span>`).join('')}</div><p class="dim" style="font-size:11px;margin-top:6px">Timing: awaiting management approval.</p></div></div>
- <div class="pn"><h3 style="margin-bottom:12px">The five categories in plain words</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card" id="cc-${c.k}"><h3><span>${c.k=='BPO'?'':c.k+' · '}${c.t}</span></h3><p>${c.plain}</p><dl class="kv"><dt>KALAM must show</dt><dd>${c.show}</dd><dt>Our status</dt><dd>${f('Pa')?cs('Pa')+' '+f('Pa'):''} ${f('Mi')?cs('Mi')+' '+f('Mi'):''} ${f('Na')?cs('Na')+' '+f('Na'):''}</dd><dt>Owner</dt><dd>${c.owner}</dd></dl></div>`}).join('')}</div></div>
- <div class="pn"><div class="ph"><div><h3>All 32 requirements</h3><p>Evidence, owner and the initiatives that close each gap.</p></div><div class="seg" id="cflt">${[['all','All'],['Pa','Partial'],['Mi','Missing'],['Na','Not assessed'],['crit','Critical']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
- <div class="tw"><table class="tbl" id="ctbl"><thead><tr><th>Item</th><th>Requirement</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Initiatives</th></tr></thead><tbody>
- ${items.map(i=>`<tr data-st="${i.st}" data-cr="${critical(i.id)?1:0}"><td class="id">${i.id}${critical(i.id)?' <span class="st sE">Critical</span>':''}</td><td>${i.t}</td><td>${cs(i.st)}</td><td class="mut">${i.ev}</td><td>${i.owner}</td><td><div class="chips">${inis(i.id).map(ichip).join('')||'<span class="dim">I11</span>'}</div></td></tr>`).join('')}</tbody></table></div></div>
- <div class="pn"><h3 style="margin-bottom:10px">Every initiative mapped to COPC</h3><div class="cards">${plan.map(p=>`<div class="card clk" data-p="${p.id}"><h3><span>${p.id} · ${p.t}</span></h3><div class="chips">${LINK[p.id].std.filter(s=>s.startsWith('C:')).map(s=>`<span class="chip">${STD[s]}</span>`).join('')}</div></div>`).join('')}</div></div>`}
+ const tile=i=>`<button class="ct ${i.st}" data-ci="${i.id}" title="${esc(i.id+' '+i.t+' · '+CST[i.st][1])}"><b>${i.id}</b><span>${i.st=='Mi'?'✗':i.st=='Pa'?'<i class="hc"></i>':'?'}</span></button>`;
+ return `<div class="phead"><div><div class="eyebrow">Reference framework 1 of 3</div><h1>COPC: how it sees KALAM today</h1><p>The world rulebook for running customer service. Certification is a <b>goal for 2028</b>. This is KALAM’s own check, not an official COPC result.</p></div><div>${stepper(0)}</div></div>
+ <div class="pn"><h3>All 32 COPC items at a glance</h3><p class="mut" style="margin:4px 0 12px">Tap a square to see the evidence.</p>${cpSummary()}
+  <div class="cgrid">${cats.map(c=>`<div class="cgc"><h4 class="clk" data-cc="${c.k}">${c.k=='BPO'?'Client items':c.k+' '+c.t}</h4><div class="cts">${c.it.map(tile).join('')}</div></div>`).join('')}</div>
+  <p class="lgd" style="margin-top:10px"><b>Checked:</b> item numbers and names match COPC Release 8.0 (Contact Centers). Items with <b class="cfm">?</b> or “Mapping to confirm” need a COPC-trained reviewer.</p></div>
+ <div class="pn"><h3>How COPC sees each of our processes</h3><p class="mut" style="margin:4px 0 12px">Tap a card to open the project that fixes it.</p>${cpCards()}</div>
+ <div class="pn"><h3 style="margin-bottom:12px">The road to certification</h3><div class="road5">${['Check all 32 items','Close the gaps','Measure results for months','Practice audit','COPC audit'].map((s,i)=>`<div class="${i?'':'on'}"><span>${i+1}</span><b>${s}</b></div>`).join('')}</div><p class="dim" style="font-size:11px;margin-top:8px">We are at step 1. Timing awaits management approval. No score out of 100 is shown: COPC scores only in its own audit.</p></div>
+ <div class="pn"><h3 style="margin-bottom:12px">The five parts of COPC</h3><div class="cards">${cats.map(c=>{const f=k=>c.it.filter(i=>i.st==k).length;return `<div class="card" id="cc-${c.k}"><h3><span>${c.k=='BPO'?'':c.k+' · '}${c.t}</span></h3><p>${c.plain}</p><div class="cts sm">${c.it.map(tile).join('')}</div><p class="mut" style="font-size:12px;margin-top:8px">Owner: ${c.owner}</p></div>`}).join('')}</div></div>
+ <details class="more" id="cdet"><summary><span>Show the full table of 32 items</span><small>Evidence, owner and the projects that close each gap</small></summary>
+ <div class="pn"><div class="ph"><div><h3>All 32 requirements</h3></div><div class="seg" id="cflt">${[['all','All'],['Pa','Partial'],['Mi','Missing'],['Na','Not assessed'],['crit','Critical']].map((f,i)=>`<button data-f="${f[0]}" class="${i?'':'on'}">${f[1]}</button>`).join('')}</div></div>
+ <div class="tw"><table class="tbl" id="ctbl"><thead><tr><th>Item</th><th>Requirement</th><th>Status</th><th>Evidence</th><th>Owner</th><th>Projects</th></tr></thead><tbody>
+ ${items.map(i=>`<tr id="ci-${i.id.replace('.','-')}" data-st="${i.st}" data-cr="${critical(i.id)?1:0}"><td class="id">${i.id}${critical(i.id)?' <span class="st sE">Critical</span>':''}</td><td>${i.t}</td><td>${cs(i.st)}</td><td class="mut">${i.ev}</td><td>${i.owner}</td><td><div class="chips">${inis(i.id).map(ichip).join('')||'<span class="dim">I11</span>'}</div></td></tr>`).join('')}</tbody></table></div></div>
+ <div class="pn"><h3 style="margin-bottom:10px">Every project mapped to COPC</h3><div class="cards">${plan.map(p=>`<div class="card clk" data-p="${p.id}"><h3><span>${p.id} · ${p.t}</span></h3><div class="chips">${LINK[p.id].std.filter(s=>s.startsWith('C:')).map(s=>`<span class="chip">${STD[s]}</span>`).join('')}</div></div>`).join('')}</div></div></details>`}
 
 // ================= 3 · GPTW =================
 function pGptw(){
@@ -1425,23 +1490,27 @@ function mapPanel(id,inits){
 
 // ================= 6 · OPERATIONS / IMS =================
 let procSel='pay',procView='both';
-function pOps(){const cnt=OWN.map(o=>[o,opsAreas.filter(a=>a.o==o).length]);const mx=Math.max(...cnt.map(c=>c[1]));
- const ranked=[...autos].sort((a,b)=>b.score-a.score);
- return `<div class="phead"><div><div class="eyebrow">Phase 1 of the company plan</div><h1>Operations & IMS</h1><p>Twelve improvement areas. Every one involves Operations; most need a partner department. <b>Technology is the enabler, not the goal.</b></p></div></div>
- <div class="grid g2"><div class="pn"><h3 style="margin-bottom:8px">Who owns the 12 areas</h3><div class="bars">${cnt.map(c=>meter(c[0],c[1],mx,c[1],c[0]=='Pure Ops'?'var(--yel)':'var(--pl)')).join('')}</div></div>
- <div class="pn"><h3 style="margin-bottom:8px">Status of the 12 areas</h3>${donut([['R','#a3245a','Critical gap'],['A','#8f5a00','Needs work'],['N','#c9bfd0','Not assessed']].map(s=>[opsAreas.filter(a=>a.s==s[0]).length,s[1],s[2]]),'12','areas')}</div></div>
- <div class="pn"><div class="ph"><div><h3>Operational baselines</h3><p>Only figures that prove a gap one of our projects fixes.</p></div></div><div class="grid g4">${STAND.map(x=>`<div class="stat"><div class="big ${x[3]}">${x[0]}</div><p>${x[1]}</p>${st(x[2])}<dl class="kv" style="grid-template-columns:60px minmax(0,1fr);font-size:11px"><dt>Source</dt><dd class="mut">${x[4]}</dd><dt>Why here</dt><dd>${x[5]}</dd></dl></div>`).join('')}</div></div>
- <div class="pn"><h3 style="margin-bottom:12px">Improvement areas</h3><div class="cards">${opsAreas.map(a=>`<div class="card clk" data-p="${a.ini}"><h3><span><i class="dot c${a.s}"></i> ${a.t}</span><span class="tag">${a.o}</span></h3><p>${a.ev}</p><div class="chips" style="margin-top:8px">${a.g.map(g=>`<span class="chip">G${g}</span>`).join('')}<span class="chip">COPC ${a.copc.join(', ')}</span><span class="chip y">${a.ini}</span></div></div>`).join('')}</div></div>
- <div class="pn"><div class="ph"><div><div class="eyebrow">Main 2027 focus</div><h2>Automation & AI</h2><p>Manual work → automated, with a person approving at every control point.</p></div></div>
- <div class="grid g2"><div class="mx"><h4>Priority: impact vs effort</h4>${matrix()}</div><div><h4>Ranking (team judgement, proposed)</h4><div class="tw"><table class="tbl"><thead><tr><th>#</th><th>Automation</th><th>Score</th><th>Depends on</th></tr></thead><tbody>${ranked.map((a,i)=>`<tr><td class="id">${i+1}</td><td>${a.t} ${st(a.st)}</td><td><span class="sbar" style="width:${a.score*10}px"></span> ${a.score}</td><td class="mut">${a.deps}</td></tr>`).join('')}</tbody></table></div><p class="dim" style="font-size:10.5px;margin-top:6px">Score = impact + feasibility + risk reduced − effort (each 1–3).</p></div></div>
- <div class="cards" style="margin-top:14px">${autos.map(a=>`<div class="card"><h3><span>${a.t}</span>${st(a.st)}</h3><div class="fl"><span class="box m">${a.manual}</span><span class="ar">→</span><span class="box a">${a.auto}</span></div>
-  <dl class="kv"><dt>${T('Human checkpoint')}</dt><dd>${a.ctrl.join(' · ')}</dd><dt>AI opportunity</dt><dd>${a.ai}</dd><dt>Systems</dt><dd>${a.sys}</dd><dt>Departments</dt><dd>${a.dep}</dd><dt>Risk & safeguard</dt><dd>${a.risk}</dd>${mrows(a.m)}</dl></div>`).join('')}</div></div>
- <div class="pn" id="procs"><div class="ph"><div><div class="eyebrow">How the work flows</div><h2>Process maps: today vs future</h2><p>${T('Swimlanes','Swimlane')} show who does each step; yellow dashed lines are ${T('handoffs','Handoff')}.</p></div>
+function pOps(){const ranked=[...autos].sort((a,b)=>b.score-a.score);
+ const sc={R:opsAreas.filter(a=>a.s=='R').length,A:opsAreas.filter(a=>a.s=='A').length,N:opsAreas.filter(a=>a.s=='N').length};
+ return `<div class="phead"><div><div class="eyebrow">Where the work starts</div><h1>Operations</h1><p>12 areas to improve. Automation is the tool, not the goal.</p></div></div>
+ <div class="pn"><div class="ph"><h3>12 areas at a glance</h3><div class="lgd"><span><i class="at R"></i><b>${sc.R}</b> big gap</span><span><i class="at A"></i><b>${sc.A}</b> needs work</span><span><i class="at N"></i><b>${sc.N}</b> not checked</span></div></div>
+  <div class="a12">${opsAreas.map(a=>`<div class="clk a12t ${a.s}" data-p="${a.ini}"><b>${a.t}</b><small>${a.o}</small><em>${a.ini}</em></div>`).join('')}</div></div>
+ <div class="pn"><h3>What the numbers say</h3><p class="mut" style="margin:4px 0 12px">Only figures that prove a gap a project fixes.</p><div class="why3">
+  ${ring(25.4,'1 in 4','calls not answered<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad','data-p="I3"')}
+  ${ring(31,'31%','of required coaching done<small>48 of 156 sessions · one team · Oct</small>','mid','data-p="I4"')}
+  <div class="rg clk" data-p="I5"><div class="files16">${Array.from({length:16},()=>`<i>${ico('doc',16)}</i>`).join('')}</div><b>16 report files built by hand<small>IMS dashboard sources</small></b></div></div></div>
+ <div class="pn"><div class="ph"><div><div class="eyebrow">Main 2027 focus</div><h2>Automation and AI</h2><p>Hand work becomes automatic, with a person checking at each control point.</p></div></div>
+ <div class="grid g2"><div class="mx"><h4>What to do first: value vs effort</h4>${matrix()}</div>
+  <div class="au">${autos.map(a=>`<div class="aut"><div><b>${a.t}</b>${st(a.st)}</div><div class="fl"><span class="box m">${a.manual}</span><span class="ar">→</span><span class="box a">${a.auto}</span></div></div>`).join('')}</div></div>
+ <details class="more" style="margin-top:14px"><summary><span>Show automation detail</span><small>Checkpoints, AI use, systems, risks and ranking</small></summary>
+ <div class="tw" style="margin-bottom:12px"><table class="tbl"><thead><tr><th>#</th><th>Automation</th><th>Score</th><th>Depends on</th></tr></thead><tbody>${ranked.map((a,i)=>`<tr><td class="id">${i+1}</td><td>${a.t} ${st(a.st)}</td><td><span class="sbar" style="width:${a.score*10}px"></span> ${a.score}</td><td class="mut">${a.deps}</td></tr>`).join('')}</tbody></table></div><p class="dim" style="font-size:10.5px;margin-bottom:12px">Score = impact + feasibility + risk reduced − effort (each 1–3). Team judgement, proposed.</p>
+ <div class="cards">${autos.map(a=>`<div class="card"><h3><span>${a.t}</span>${st(a.st)}</h3><dl class="kv"><dt>${T('Human checkpoint')}</dt><dd>${a.ctrl.join(' · ')}</dd><dt>AI opportunity</dt><dd>${a.ai}</dd><dt>Systems</dt><dd>${a.sys}</dd><dt>Departments</dt><dd>${a.dep}</dd><dt>Risk & safeguard</dt><dd>${a.risk}</dd>${mrows(a.m)}</dl></div>`).join('')}</div></details></div>
+ <div class="pn" id="procs"><div class="ph"><div><div class="eyebrow">How the work flows</div><h2>Process maps: today vs future</h2><p>Each lane is a person or team. Yellow dashed lines are ${T('handoffs','Handoff')}.</p></div>
   <div style="display:flex;gap:8px;flex-wrap:wrap"><div class="seg" id="pseg">${PROC.map(p=>`<button data-k="${p.id}" class="${p.id==procSel?'on':''}">${p.t}</button>`).join('')}</div><div class="seg" id="vseg">${[['cur','Today'],['fut','Future'],['both','Side by side']].map(v=>`<button data-v="${v[0]}" class="${v[0]==procView?'on':''}">${v[1]}</button>`).join('')}</div></div></div>
   <div id="pbody"></div></div>`}
 const ML={time:'Time saved',acc:'Accuracy',err:'Errors prevented',cap:'Capacity released',fin:'Financial impact'};
 function mrows(m){const k=Object.keys(ML),y=k.filter(x=>m[x]!=NM),n=k.filter(x=>m[x]==NM);return y.map(x=>`<dt>${ML[x]}</dt><dd>${m[x]}</dd>`).join('')+(n.length?`<dt>Not measured yet</dt><dd class="dim">${n.map(x=>ML[x].toLowerCase()).join(', ')} (baseline in Phase 1)</dd>`:'')}
-function matrix(){const W=320,H=230,x=e=>50+(e-1)*110,y=i=>190-(i-1)*75;let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Impact versus effort matrix"><rect x="40" y="20" width="270" height="180" rx="10" fill="rgba(75,21,74,.03)" stroke="rgba(75,21,74,.1)"/><rect x="40" y="20" width="120" height="90" rx="10" fill="rgba(75,21,74,.07)"/><text x="46" y="34" style="fill:#4B154A">Do first</text><text x="175" y="218">Effort →</text><text x="12" y="110" transform="rotate(-90 12 110)">Impact →</text>`;
+function matrix(){const W=320,H=230,x=e=>50+(e-1)*110,y=i=>190-(i-1)*75;let s=`<svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Impact versus effort matrix"><rect x="40" y="20" width="270" height="180" rx="10" fill="rgba(75,21,74,.03)" stroke="rgba(75,21,74,.1)"/><rect x="40" y="20" width="120" height="90" rx="10" fill="rgba(75,21,74,.07)"/><text x="46" y="104" style="fill:#4B154A;font-weight:700">Do first</text><text x="175" y="218">Effort →</text><text x="12" y="110" transform="rotate(-90 12 110)">Impact →</text>`;
  const used={};autos.forEach((a,i)=>{const k=a.r.eff+'-'+a.r.imp;used[k]=(used[k]||0)+1;const n=used[k]-1;const cx=x(a.r.eff)+((n%3)-1)*30,cy=y(a.r.imp)+(Math.floor(n/3))*24-8;s+=`<g><circle cx="${cx}" cy="${cy}" r="${7+a.r.fea*2}" fill="${a.st=='P'?'rgba(255,198,41,.85)':'rgba(121,65,127,.35)'}" stroke="#4B154A" stroke-opacity=".5"><title>${esc(a.t)}</title></circle><text x="${cx}" y="${cy+3}" text-anchor="middle" style="fill:#1e1024;font-weight:700">${i+1}</text></g>`});
  return s+`</svg><div class="legend" style="margin-top:4px">${autos.map((a,i)=>`<span><b style="color:var(--yt)">${i+1}</b> ${a.t}</span>`).join('')}</div>`}
 const wrapT=(t,n)=>{const L=[];let c='';t.split(' ').forEach(x=>{if((c+' '+x).trim().length>n&&c){L.push(c);c=x}else c=(c+' '+x).trim()});if(c)L.push(c);return L};
@@ -1467,11 +1536,11 @@ function swim(m,label){const id='ar'+(svgN++),L=m.lanes.length,cols=Math.max(...
 function renderProc(){const p=PROC.find(x=>x.id==procSel);const b=$('#pbody');if(!b)return;svgN=0;
  const maps=procView=='both'?`<div class="grid" style="grid-template-columns:minmax(0,1fr)"><div class="pmap">${swim(p.cur,'Today')}</div><div class="pmap">${swim(p.fut,'Future (proposed)')}</div></div>`:`<div class="pmap">${swim(p[procView],procView=='cur'?'Today':'Future (proposed)')}</div>`;
  b.innerHTML=`${maps}<div class="legend" style="margin:10px 0"><span><i class="dot" style="background:#e0b1e6"></i>Start / end</span><span><i class="dot cA"></i>Decision</span><span><i class="dot cG"></i>Control</span><span style="color:var(--yt)">★ New step</span><span style="color:var(--r)">! Pain point</span><span style="color:var(--yt)">- - Handoff</span></div>
- <h4>Who feeds it, what happens, who gets the result</h4><div class="sipoc">${['Suppliers','Inputs','Process','Outputs','Customers'].map((h,i)=>`<div><b>${h}</b>${p.sipoc[i]}</div>`).join('')}</div>
+ <details class="more"><summary><span>Show process detail</span><small>Who feeds it, what can go wrong, improvement loop</small></summary><h4>Who feeds it, what happens, who gets the result</h4><div class="sipoc">${['Suppliers','Inputs','Process','Outputs','Customers'].map((h,i)=>`<div><b>${h}</b>${p.sipoc[i]}</div>`).join('')}</div>
  <div class="grid g2" style="margin-top:14px"><div><h4>What could go wrong, and the control</h4><div class="tw"><table class="tbl"><thead><tr><th>Failure</th><th>Effect</th><th>Control</th></tr></thead><tbody>${p.fmea.map(f=>`<tr><td>${f[0]}</td><td class="mut">${f[1]}</td><td>${f[2]}</td></tr>`).join('')}</tbody></table></div></div>
  <div><h4>Improvement loop for KALAM (${T("plan, do, check, act","PDCA")})</h4><div class="pdca">${['Plan','Do','Check','Act'].map((h,i)=>`<div><b>${h}</b>${p.pdca[i]}</div>`).join('')}</div>
  <div class="grid g2" style="margin-top:10px;gap:8px"><div class="card"><h4 style="color:var(--r)">Today</h4><ul class="plist">${p.pain.map(x=>`<li>${x}</li>`).join('')}</ul></div><div class="card"><h4 style="color:var(--g)">Future</h4><ul class="plist">${p.gain.map(x=>`<li>${x}</li>`).join('')}</ul></div></div>
- <div class="chips" style="margin-top:10px">${p.g.map(gchip).join('')}<span class="chip">COPC ${p.copc}</span>${ichip(p.ini)}</div></div></div>`;plainify(b)}
+ <div class="chips" style="margin-top:10px">${p.g.map(gchip).join('')}<span class="chip">COPC ${p.copc}</span>${ichip(p.ini)}</div></div></div></details>`;plainify(b)}
 
 // ================= 7 · DELIVERED PROJECTS =================
 function pProj(){const vt={m:['sV','Measured'],q:['sR','Qualitative'],x:['sN','Not measured']};
@@ -1594,7 +1663,7 @@ function init(){
  $('#nav').innerHTML=PAGES.map((p,i)=>`<button data-s="${p.id}"><i>${i+1}</i>${p.n}</button>`).join('');
  $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}"><p class="one"><b>In one sentence:</b> ${p.one}</p>${RENDER[p.id]()}</section>`).join('');plainify($('#main'));
  buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','What is our occupancy?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
- document.addEventListener('click',e=>{const t=e.target.closest('[data-open-detail],[data-proc],[data-sg],[data-cc],[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
+ document.addEventListener('click',e=>{const t=e.target.closest('[data-ci],[data-open-detail],[data-proc],[data-sg],[data-cc],[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
   if(t.id=='mod'){if(e.target.id=='mod')closeM();return}
   if(t.classList.contains('x')){closeM();return}
   if(t.id=='chatbtn'){$('#chat').classList.toggle('on');if($('#chat').classList.contains('on'))$('#cin').focus();return}
@@ -1603,6 +1672,7 @@ function init(){
   if(t.dataset.s){go(t.dataset.s);return}
   if(t.dataset.go){closeM();go(t.dataset.go);return}
   if(t.dataset.sg){ovG=+t.dataset.sg;renderSmap();if(t.closest('#s3'))$('#s2').scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});return}
+  if(t.dataset.ci){const d=$('#cdet');d.open=true;const r=$('#ci-'+t.dataset.ci.replace('.','-'));if(r){r.scrollIntoView({block:'center'});r.classList.remove('flash');void r.offsetWidth;r.classList.add('flash')}return}
   if(t.dataset.openDetail){const d=$('#ovmore');d.open=true;renderSmap();requestAnimationFrame(()=>$('#'+t.dataset.openDetail).scrollIntoView({behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'}));return}
   if(t.dataset.cc){go('copc');const el=document.getElementById('cc-'+t.dataset.cc);if(el){el.scrollIntoView({block:'center'});el.classList.add('flash');setTimeout(()=>el.classList.remove('flash'),1800)}return}
   if(t.dataset.mn){closeM();if(cur!='map'){mapSel=t.dataset.mn;go('map')}else mapSelect(t.dataset.mn);return}
