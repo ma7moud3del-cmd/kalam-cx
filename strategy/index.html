@@ -507,6 +507,16 @@ button.mrow.cc{border-radius:8px;padding:6px 4px}button.mrow.cc:hover{background
 .st.sA{color:#4F4352;background:#fff;border-color:#79417F;border-style:dashed}
 .st.sM{color:#6b4300;background:#fffaf0;border-color:#FFC629;border-style:dashed}
 .bars .st{justify-self:start}
+/* clickable story items */
+.clk{cursor:pointer;position:relative;transition:transform .18s,box-shadow .18s,border-color .18s,background .18s}
+.clk:hover,.clk:focus-visible{transform:translateY(-3px);box-shadow:0 12px 26px -12px rgba(75,21,74,.45);border-color:#FFC629;outline:none}
+.clk::after{content:'↗';position:absolute;top:8px;right:10px;font-size:13px;font-weight:800;color:#79417F;opacity:.55}
+.clk:hover::after{opacity:1;color:#4B154A}
+.need .clk::after{color:#FFC629}
+.tl p.clk{padding:6px 24px 6px 8px;border-radius:10px;margin-left:-8px}.tl p.clk:hover{background:rgba(255,255,255,.6)}
+.tl p.clk::after{top:6px;right:6px}
+.cert span.clk::after{top:6px}
+@media(prefers-reduced-motion:reduce){.clk,.clk:hover{transform:none}}
 </style></head><body>
 <aside id="side"><div class="brand"><img src="../ims-program/assets/mark.png" alt="KALAM"><div><b>KALAM</b><span>Command Center</span></div></div>
 <div id="ctx"></div><nav id="nav" aria-label="Pages"></nav>
@@ -868,7 +878,7 @@ const COPCCAT=[
 const CST={Co:['xCo','Compliant'],Pa:['xPa','Partial'],Mi:['xMi','Missing'],Na:['xNa','Not assessed']};
 const copcSt={
  '1.3':['Pa','One ambition stated by management (+20% revenue), not yet approved or baselined; no goal has an approved target or owner.'],
- '1.4':['Pa','Results reviewed in management meetings; no written rules for AI and automation use evidenced. <b class="cfm">Mapping to confirm</b>'],
+ '1.4':['Pa','Results reviewed in management meetings; no written rules for AI and automation use evidenced (1.4 asks KALAM to verify that ethical AI use works as designed).'],
  '2.2':['Pa','TTG: 56% of offered calls abandoned (1 Oct – 8 Nov).'],
  '2.4':['Pa','No written daily operating routine; KALAM Way has no operations book.'],
  '2.6':['Mi','Automations run on one person’s personal accounts; no failover or continuity plan evidenced.'],
@@ -1153,11 +1163,11 @@ const GN={1:'More revenue',2:'Lower cost',3:'Happier people',4:'Happier clients'
 const gico=(n,s=22)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${GI[n]}</svg>`;
 const ico=(k,s=26)=>`<svg viewBox="0 0 24 24" width="${s}" height="${s}" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${IC[k]}</svg>`;
 const gtag=n=>`<span class="gt" title="Goal ${n}: ${GF[n]}">${gico(n,14)}${GN[n]}</span>`;
-const ring=(pct,big,lab,cls='')=>{const C=2*Math.PI*44;return `<div class="rg ${cls}"><svg viewBox="0 0 100 100" width="128" height="128" role="img" aria-label="${esc(big+' '+lab)}"><circle cx="50" cy="50" r="44" class="rt"/><circle cx="50" cy="50" r="44" class="rv" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle">${big}</text></svg><b>${lab}</b></div>`};
+const ring=(pct,big,lab,cls='',at='')=>{const C=2*Math.PI*44;return `<div class="rg clk ${cls}" ${at}><svg viewBox="0 0 100 100" width="128" height="128" role="img" aria-label="${esc(big+' '+lab)}"><circle cx="50" cy="50" r="44" class="rt"/><circle cx="50" cy="50" r="44" class="rv" stroke-dasharray="${C*pct/100} ${C}" transform="rotate(-90 50 50)"/><text x="50" y="57" text-anchor="middle">${big}</text></svg><b>${lab}</b></div>`};
 const NOW=[[1,'N','No starting figure'],[2,'X','5 of 8 processes by hand'],[3,'X','31% of coaching done'],[4,'X','1 in 4 calls not answered'],[5,'X','Same complaints come back']];
-const MISS=[['hand','5 / 8','processes done by hand'],['clock','Late','payment errors found after complaints'],['phone','1 in 4','calls not answered'],['coach','48 / 156','coaching sessions done'],['target','0 / 5','goals with a starting figure']];
+const MISS=[['hand','5 / 8','processes done by hand','data-open-detail="q4"'],['clock','Late','payment errors found after complaints','data-p="I2"'],['phone','1 in 4','calls not answered','data-p="I3"'],['coach','48 / 156','coaching sessions done','data-p="I4"'],['target','0 / 5','goals with a starting figure','data-p="I1"']];
 const CASK=[['Written ways of working','Pa','2.4'],['Data you can trust','Pa','3.12'],['Fix root causes','Pa','3.13'],['Staff matched to demand','Pa','3.7'],['A backup when tools fail','Mi','2.6']];
-const PROJ7=[['E-learning','Trainer-led','Self-paced videos + exam',[3,5]],['Payment cycle','Checks by eye','Automatic checks + log',[2,3]],['Pre-scheduling','Sheet, no “missed” status','Booking app',[4,2]],['Reporting','16 files by hand','One dashboard',[2,5]]];
+const PROJ7=[['E-learning','Trainer-led','Self-paced videos + exam',[3,5],'data-s="proj"'],['Payment cycle','Checks by eye','Automatic checks + log',[2,3],'data-proc="pay"'],['Pre-scheduling','Sheet, no “missed” status','Booking app',[4,2],'data-proc="pre"'],['Reporting','16 files by hand','One dashboard',[2,5],'data-p="I5"']];
 function goalCard(){const n=ovG,x=gx[n],g=G(n),D=goalData(n),el=$('#sgc');if(!el)return;
  const nw=NOW.find(r=>r[0]==n);
  el.innerHTML=`<div class="gch">${gico(n,26)}<b>Goal ${n}: ${GF[n]}</b></div><div class="gcg">
@@ -1178,25 +1188,25 @@ function story(){
  return `<div class="story">
  <div class="sidx">${Q8.map((q,i)=>`<a href="#s${i+1}"><b>${i+1}</b>${q}</a>`).join('')}</div>
  ${scr(1,Q8[0],`<div class="why3">
-   <div class="rg"><div class="d8w">${dots}</div><b>5 of 8 key processes done by hand</b><span class="lg"><i class="d8 x"></i>by hand <i class="d8 a"></i>automated <i class="d8 p"></i>partly <i class="d8 n"></i>not checked</span></div>
-   ${ring(25.4,'1 in 4','calls not answered<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad')}
-   ${ring(31,'31%','of required coaching done<small>48 of 156 sessions · one team · Oct</small>','mid')}</div>`,'Too much is done by hand, so problems show up late. The fix: automation and AI, starting in Operations.')}
+   <div class="rg clk" data-open-detail="q4"><div class="d8w">${dots}</div><b>5 of 8 key processes done by hand</b><span class="lg"><i class="d8 x"></i>by hand <i class="d8 a"></i>automated <i class="d8 p"></i>partly <i class="d8 n"></i>not checked</span></div>
+   ${ring(25.4,'1 in 4','calls not answered<small>all clients · 27,984 of 110,301 · 1 Oct – 8 Nov</small>','bad','data-p="I3"')}
+   ${ring(31,'31%','of required coaching done<small>48 of 156 sessions · one team · Oct</small>','mid','data-p="I4"')}</div>`,'Too much is done by hand, so problems show up late. The fix: automation and AI, starting in Operations.')}
  ${scr(2,Q8[1],`<div class="g5i">${goals.map(g=>`<button data-sg="${g.n}">${gico(g.n,30)}<b>${GN[g.n]}</b><small>Goal ${g.n}</small></button>`).join('')}</div>
    <div id="sgc" class="gcard" aria-live="polite"></div>
-   <div class="cert"><span>${ico('shield',22)}COPC certified<small>goal for 2028</small></span><span>${ico('heart',22)}Great Place to Work<small>goal for 2028</small></span><span class="amb">${ico('coin',22)}+20% revenue<small>management ambition · needs starting figure, feasibility check, approval</small></span></div>`,'Tap a goal to see its aim, gap, owner and projects.')}
+   <div class="cert"><span class="clk" data-s="copc">${ico('shield',22)}COPC certified<small>goal for 2028</small></span><span class="clk" data-s="gptw">${ico('heart',22)}Great Place to Work<small>goal for 2028</small></span><span class="amb clk" data-sg="1">${ico('coin',22)}+20% revenue<small>management ambition · needs starting figure, feasibility check, approval</small></span></div>`,'Tap a goal to see its aim, gap, owner and projects.')}
  ${scr(3,Q8[2],`<div class="nowb">${NOW.map(([n,s,t])=>`<button class="nr" data-sg="${n}">${gtag(n)}<div class="tri"><span class="${s=='K'?'on k':''}">On track</span><span class="${s=='X'?'on x':''}">Gap</span><span class="${s=='N'?'on n':''}">Not measured</span></div><small>${t}</small></button>`).join('')}</div>`,'Four goals show a gap. None has a measured starting figure yet.')}
- ${scr(4,Q8[3],`<div class="miss5">${MISS.map(m=>`<div>${ico(m[0],28)}<b>${m[1]}</b><small>${m[2]}</small></div>`).join('')}</div>`,'These five gaps hold KALAM back most. Each one has a project that fixes it.')}
+ ${scr(4,Q8[3],`<div class="miss5">${MISS.map(m=>`<div class="clk" ${m[3]}>${ico(m[0],28)}<b>${m[1]}</b><small>${m[2]}</small></div>`).join('')}</div>`,'These five gaps hold KALAM back most. Each one has a project that fixes it.')}
  ${scr(5,Q8[4],`<div class="fw3">
    <div class="fwc"><h4>${ico('shield',20)}COPC <small>service standard</small></h4>${CASK.map(c=>`<button class="ck" data-cc="${c[2].split('.')[0]}.0">${mk(c[1])}<b>${c[0]}</b><em>${c[2]}</em></button>`).join('')}</div>
    <div class="fwc"><h4>${ico('heart',20)}Great Place to Work <small>workplace</small></h4><button class="ck" data-s="gptw"><i class="mk na">?</i><b>Staff trust survey</b><em>not run yet</em></button></div>
    <div class="fwc"><h4>${ico('book',20)}KALAM Way <small>our own book</small></h4><button class="ck" data-s="kw"><i class="mk pa">◐</i><b>Operations book</b><em>not written yet</em></button></div></div>
    <p class="lgd">${mk('Pa')} partly in place ${mk('Mi')} missing <i class="mk na">?</i> not checked yet · KALAM’s own check, not an official COPC result</p>`,'')}
- ${scr(6,Q8[5],`<div class="tl"><div class="done"><h4>✓ Done</h4><p><b>MasterWord</b> automated run</p><p><b>E-learning</b> built</p></div><div class="nowc"><h4>▶ Now</h4><p><b>1 · MasterWord</b> company account + backup person</p><p><b>2 · E-learning</b> track who finishes</p></div><div class="next"><h4>Next</h4><p><b>3 · Payment cycle</b></p><p><b>4 · Pre-scheduling</b></p><p><b>5 · Reporting</b></p></div></div>`,'Operations first. Order proposed, awaiting management approval.')}
- ${scr(7,Q8[6],`<div class="mw"><div class="mwh"><b>MasterWord</b>${gtag(2)}${gtag(5)}</div><div class="mwg">
+ ${scr(6,Q8[5],`<div class="tl"><div class="done"><h4>✓ Done</h4><p class="clk" data-s="proj"><b>MasterWord</b> automated run</p><p class="clk" data-s="proj"><b>E-learning</b> built</p></div><div class="nowc"><h4>▶ Now</h4><p class="clk" data-p="I8"><b>1 · MasterWord</b> company account + backup person</p><p class="clk" data-s="proj"><b>2 · E-learning</b> track who finishes</p></div><div class="next"><h4>Next</h4><p class="clk" data-proc="pay"><b>3 · Payment cycle</b></p><p class="clk" data-proc="pre"><b>4 · Pre-scheduling</b></p><p class="clk" data-p="I5"><b>5 · Reporting</b></p></div></div>`,'Operations first. Order proposed, awaiting management approval.')}
+ ${scr(7,Q8[6],`<div class="mw clk" data-s="proj"><div class="mwh"><b>MasterWord</b>${gtag(2)}${gtag(5)}</div><div class="mwg">
    <div><div class="dg">${mwd}</div><p><b>28 / 28</b> submitted and confirmed ${st('V')}</p><p class="lg"><i class="okk"></i>25 complete documents <i class="mii"></i>3 missing documents caught before submission</p></div>
    <div class="bars"><div><span>Before</span><i class="bb" style="--w:100%"></i><b>8–32 h per batch</b>${st('S')}</div><div><span>Now</span><i class="ba" style="--w:8%"></i><b>1–3 h per batch</b>${st('V')}</div><p>≈ 12–60 hours saved over 2 batches ${st('S')}</p></div></div></div>
-   <div class="p4">${PROJ7.map(p=>`<div><b>${p[0]}</b><span class="ba4"><s>${p[1]}</s> → ${p[2]}</span><span class="tbm">To be measured</span><span class="gs">${p[3].map(n=>`<i title="${GN[n]}">${gico(n,16)}</i>`).join('')}</span></div>`).join('')}</div>`,'Only MasterWord has a measured result so far. The others are measured before and after.')}
- ${scr(8,Q8[7],`<div class="need">${[['user','Sponsor','One executive owns the plan'],['team','Team','3 full-time + part-time champions'],['coin','Finance figures','Revenue and cost starting figures'],['key','Company account','Automation off personal accounts']].map((x,i)=>`<div>${ico(x[0],30)}<b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>`,'Four decisions let the work start.')}
+   <div class="p4">${PROJ7.map(p=>`<div class="clk" ${p[4]}><b>${p[0]}</b><span class="ba4"><s>${p[1]}</s> → ${p[2]}</span><span class="tbm">To be measured</span><span class="gs">${p[3].map(n=>`<i title="${GN[n]}">${gico(n,16)}</i>`).join('')}</span></div>`).join('')}</div>`,'Only MasterWord has a measured result so far. The others are measured before and after.')}
+ ${scr(8,Q8[7],`<div class="need">${[['user','Sponsor','One executive owns the plan'],['team','Team','3 full-time + part-time champions'],['coin','Finance figures','Revenue and cost starting figures'],['key','Company account','Automation off personal accounts']].map((x,i)=>`<div class="clk" data-s="road">${ico(x[0],30)}<b>${x[1]}</b><small>${x[2]}</small></div>`).join('')}</div>`,'Four decisions let the work start.')}
  </div>`}
 
 // ---------- Overview page ----------
@@ -1299,7 +1309,7 @@ ${sec(10,Q[9],`<h4>Cause and effect: what each change should lead to</h4><div cl
  <h4 style="margin-top:16px">Value proven so far</h4><div class="grid g4" style="gap:8px">${stat('28/28','MasterWord applicants submitted and confirmed','V','g')}${stat('25/28','Submitted with complete documents','V','g')}${stat('3/28','Missing-document cases caught before submission','V','g')}${stat('4.5 min','Per applicant (batch 2: 54 min ÷ 12)','C','g')}</div>
  <div class="gapnote" style="margin-top:10px">No revenue growth, client numbers, attrition change, savings or return on investment is claimed. Each will be measured from the Phase 1 starting figures (I1) and shown once approved.</div>`)}</details>`}
 
-function renderSmap(){goalCard();const n=ovG,g=G(n),x=gx[n],D=goalData(n);const box=$('#smap');if(!box)return;
+function renderSmap(){goalCard();document.querySelectorAll('.clk:not([tabindex])').forEach(el=>{el.tabIndex=0;el.setAttribute('role','button')});const n=ovG,g=G(n),x=gx[n],D=goalData(n);const box=$('#smap');if(!box)return;
  const fwN=Object.keys(D.fw).filter(k=>D.fw[k].size);
  const cols=[['KALAM vision',[['v','Vision']]],['Goal',[['g',`G${n} ${GF[n]}`]]],['Framework',fwN.map(k=>['f:'+k,FWN[k]])],['Department',D.depts.map(d=>['d:'+d,d])],['Improvement area',D.ars.map(a=>['a:'+a,A(a).t])],['Project',D.ini.map(p=>['p:'+p.id,`${p.id} ${p.t}`])],['Benefit',D.ini.map(p=>['b:'+p.id,p.ben])]];
  box.innerHTML='<svg id="ssvg" aria-hidden="true"></svg>'+cols.map(c=>`<div class="scol"><h4>${c[0]}</h4>${c[1].map(([id,l])=>`<button class="sn" data-sn="${esc(id)}" ${id[0]=='p'?`data-p="${id.slice(2)}"`:''}>${esc(l)}</button>`).join('')}</div>`).join('');
@@ -1584,7 +1594,7 @@ function init(){
  $('#nav').innerHTML=PAGES.map((p,i)=>`<button data-s="${p.id}"><i>${i+1}</i>${p.n}</button>`).join('');
  $('#main').innerHTML=PAGES.map(p=>`<section class="page" id="${p.id}"><p class="one"><b>In one sentence:</b> ${p.one}</p>${RENDER[p.id]()}</section>`).join('');plainify($('#main'));
  buildKB();$('#csug').innerHTML=['Where do we stand on COPC?','What is our occupancy?','How much time did MasterWord save?','What is wrong with the payment cycle?','Which team model is recommended?'].map(s=>`<button>${s}</button>`).join('');
- document.addEventListener('click',e=>{const t=e.target.closest('[data-open-detail],[data-sg],[data-cc],[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
+ document.addEventListener('click',e=>{const t=e.target.closest('[data-open-detail],[data-proc],[data-sg],[data-cc],[data-s],[data-g],[data-p],[data-a],[data-go],[data-mn],[data-proc],#hflt button,#cflt button,#scn button,#pseg button,#vseg button,.tdim,#csug button,.x,#mod,#chatbtn,#chatx,.tip');if(!t)return;
   if(t.id=='mod'){if(e.target.id=='mod')closeM();return}
   if(t.classList.contains('x')){closeM();return}
   if(t.id=='chatbtn'){$('#chat').classList.toggle('on');if($('#chat').classList.contains('on'))$('#cin').focus();return}
@@ -1606,7 +1616,7 @@ function init(){
   else if(par.id=='pseg'){procSel=t.dataset.k;renderProc()}else if(par.id=='vseg'){procView=t.dataset.v;renderProc()}
   else if(par.id=='csug'){chatSay(t.textContent)}});
  $('#cform').addEventListener('submit',e=>{e.preventDefault();const v=$('#cin').value.trim();if(v){chatSay(v);$('#cin').value=''}});
- document.addEventListener('keydown',e=>{if(e.key=='Escape'){closeM();$('#chat').classList.remove('on');hideTip()}});
+ document.addEventListener('keydown',e=>{if((e.key=='Enter'||e.key==' ')&&e.target.classList&&e.target.classList.contains('clk')){e.preventDefault();e.target.click();return}if(e.key=='Escape'){closeM();$('#chat').classList.remove('on');hideTip()}});
  document.addEventListener('mouseover',e=>{const t=e.target.closest('.tip');if(t)showTip(t);else hideTip()});
  document.addEventListener('focusin',e=>{const t=e.target.closest('.tip');if(t)showTip(t)});
  document.addEventListener('toggle',e=>{if(e.target.id=='ovmore'&&e.target.open){renderSmap()}},true);window.addEventListener('resize',()=>{if(cur=='map')drawMap();if(cur=='ov')drawSmap()});window.addEventListener('hashchange',()=>go(location.hash.slice(1)));
