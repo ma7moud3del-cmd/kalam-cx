@@ -16,7 +16,7 @@ IMS.capacity = {
   principles: [
     ["Unassigned", "≠ available"],
     ["No report", "≠ zero demand"],
-    ["High occupancy", "≠ best use"],
+    ["Busy", "≠ best use"],
     ["Not a", "headcount dashboard"]
   ],
   filters: ["Period", "Client", "Language", "Service line", "Interpreter status", "Assignment"],
@@ -25,12 +25,7 @@ IMS.capacity = {
   real: {
     period: "1 Oct – 8 Nov 2026",
     total: [110301, 82317, 27984],
-    clients: [["Boostlingo", 42547, 42491, 56], ["TTG", 38025, 16863, 21162], ["Cloudbreak-OPI", 14421, 11995, 2426], ["Masterworld", 4306, 4306, 0], ["TBW", 3858, 1665, 2193], ["LLK", 3508, 1414, 2094], ["Lion Bridge", 2372, 2372, 0], ["Other 11 clients", 1264, 1211, 53]],
-    ttgLangs: [["Spanish", 31225, 14656, 16569], ["Mandarin", 1338, 337, 1001], ["Portuguese", 759, 470, 289], ["Korean", 445, 33, 412], ["German", 424, 22, 402], ["Italian", 325, 94, 231], ["Russian", 320, 142, 178], ["Other 47 languages", 3189, 1109, 2080]],
-    italian: [["Boostlingo", 420, 420, 0], ["TTG", 325, 94, 231], ["Cloudbreak-OPI", 118, 69, 49], ["LLK", 35, 20, 15], ["TBW", 10, 3, 7], ["Masterworld", 7, 7, 0], ["TW Languages", 1, 1, 0]],
-    italianInterp: [9, 3, 6],
-    hours: { idle: 29348, talk: 13138 },
-    weekOcc: ["24.1%", "W46 · 9–15 Nov", "target 35.3%"]
+    hours: { idle: 29348, talk: 13138 }
   },
 
   /* Director's two-minute dashboard. kpi: [label, status, source, definition, period, value] */
@@ -57,21 +52,11 @@ IMS.capacity = {
       ["Added delivery", "nm", "Module F (measured stage)", "Extra hours delivered from existing capacity", "Monthly"] ] }
   ],
   attention: [
-    ["TTG: 21,162 of 38,025 calls abandoned (56%)", "OP-02"],
-    ["TTG Italian: 231 of 325 calls abandoned", "OP-01"],
+    ["27,984 of 110,301 calls abandoned, all clients (25%)", "OP-02"],
+    ["14 languages with over 30% of calls abandoned", "OP-01"],
     ["29,348 h ready-idle while 27,984 calls abandoned: language mismatch?", "OP-04"],
     ["Clients missing in the account database", "OP-03"],
     ["No owner named for Project 9 or its data sources", "R-09"]
-  ],
-
-  /* Worked example. Each step: [what, status, value] (m = measured, desc = as described) */
-  ttg: [
-    ["TTG Italian calls offered", "m", "325"],
-    ["Answered", "m", "94"],
-    ["Abandoned", "m", "231"],
-    ["Italian interpreters in Kalam", "m", "9"],
-    ["Eligibility, contract, schedule", "vr"],
-    ["Decision", "human"]
   ],
 
   modules: [
@@ -125,8 +110,8 @@ IMS.capacity = {
   /* Opportunity tracker (Module F). 15 fields; TBC where not known. */
   oppStages: ["Identified", "Validated", "Approved", "Implemented", "Measured"],
   opportunities: [
-    { id: "OP-01", title: "Assign qualified Italian interpreters to TTG", client: "TTG", language: "Italian", line: "TBC", cls: "Unused qualified capacity", evidence: "325 Italian calls offered on TTG, 231 abandoned (1 Oct – 8 Nov); 9 Italian-speaking interpreters in Kalam", source: "IMS dashboard (Incorta, Kalam)", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Confirm TTG Italian demand and interpreter eligibility", due: "TBC", result: "Not measured" },
-    { id: "OP-02", title: "Cut TTG abandoned calls", client: "TTG", language: "All (Spanish 16,569)", line: "TBC", cls: "Unmet demand", evidence: "38,025 offered, 16,863 answered, 21,162 abandoned (1 Oct – 8 Nov)", source: "IMS dashboard (Incorta queues)", confidence: "High", impact: "Not measured", owner: "To be assigned", stage: "Validated", action: "Check TTG staffing by language and hour against idle capacity", due: "TBC", result: "Not measured" },
+    { id: "OP-01", title: "Check language assignments where calls are lost", client: "All", language: "14 languages over 30% abandoned", line: "TBC", cls: "Unused qualified capacity", evidence: "14 languages with at least 100 calls and over 30% abandoned (1 Oct – 8 Nov)", source: "IMS dashboard (Incorta, Kalam)", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "List qualified interpreters per language and check eligibility, contract and schedule before any change", due: "TBC" },
+    { id: "OP-02", title: "Cut abandoned calls", client: "All", language: "All", line: "TBC", cls: "Unmet demand", evidence: "110,301 offered, 82,317 answered, 27,984 abandoned (1 Oct – 8 Nov)", source: "IMS dashboard (Incorta queues)", confidence: "High", impact: "Not measured", owner: "To be assigned", stage: "Validated", action: "Check staffing by language and hour against abandoned calls", due: "TBC" },
     { id: "OP-04", title: "Use idle hours where calls are lost", client: "All", language: "Spanish, Mandarin, Korean first", line: "TBC", cls: "Unused qualified capacity", evidence: "29,348 h ready-idle and 27,984 calls abandoned in the same period", source: "IMS dashboard (Kalam, Incorta)", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Match idle hours by language and hour to abandoned calls", due: "TBC", result: "Not measured" },
     { id: "OP-03", title: "Add missing clients to the account database", client: "Several (TBC)", language: "TBC", line: "TBC", cls: "Data correction", evidence: "Client check report found clients missing in the database", source: "Client check report", confidence: "Medium", impact: "Not measured", owner: "To be assigned", stage: "Identified", action: "Re-run the check and list the clients", due: "TBC", result: "Not measured" }
   ],

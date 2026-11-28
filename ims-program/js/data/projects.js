@@ -343,7 +343,7 @@ IMS.projects = [
   requirements: [
     "Real-time operations monitor per client and language",
     "Capacity vs demand with gap, over-staffing and under-staffing detection",
-    "Occupancy, attendance, adherence, login and logout tracking",
+    "Attendance, adherence, login and logout tracking",
     "Shift analysis and VTO planning",
     "Client-specific KPI targets and rules (no single universal definition)",
     "Pre-scheduled session management: load, accept, assign and prove sessions (Session Desk)",
@@ -377,7 +377,7 @@ IMS.projects = [
     ["P06.4", "Coverage Gap Detection", "planned"],
     ["P06.5", "Overstaffing Detection", "planned"],
     ["P06.6", "Understaffing Detection", "planned"],
-    ["P06.7", "Occupancy Monitoring", "planned"],
+    ["P06.7", "Logged-in time monitoring", "planned"],
     ["P06.8", "Attendance Monitoring", "planned"],
     ["P06.9", "Schedule Adherence", "planned"],
     ["P06.10", "Login and Logout Tracking", "planned"],
@@ -518,8 +518,8 @@ IMS.projects = [
   owner: "To be assigned", ownerStatus: "to-name",
   pillars: ["Revenue", "Performance", "Cost"],
   stage: "Proposed · Stage 1 Data Discovery not started",
-  problem: "IMS cannot see in one place which clients have demand, in which languages, and whether qualified interpreters are assigned to them. Some clients are missing in the database, some qualified interpreters are not assigned to clients that need their language (TTG Italian example), and demand for some clients is not visible at all.",
-  current: ["Client demand seen per client report, if any", "Assignments kept in the account database", "One-off client check report", "Gaps found by chance (TTG Italian)", "No view of unused capacity"],
+  problem: "IMS cannot see in one place which clients have demand, in which languages, and whether qualified interpreters are assigned to them. Some clients are missing in the database, some qualified interpreters are not assigned to clients that need their language, and demand for some clients is not visible at all.",
+  current: ["Client demand seen per client report, if any", "Assignments kept in the account database", "One-off client check report", "Gaps found by chance", "No view of unused capacity"],
   future: ["Six sources reconciled per client", "Demand by client, language and hour", "Interpreter-to-client alignment matrix", "Demand vs capacity gap per language", "Director dashboard in two minutes", "Opportunities tracked to measured result"],
   flow: "workforce",
   requirements: [
@@ -645,7 +645,7 @@ IMS.projectDetail = {
   },
   P09: {
     scopeIn: ["Client list reconciliation across 6 sources", "Demand visibility per client and language", "Interpreter-to-client alignment", "Capacity utilization and gap analysis", "Director dashboard and opportunity tracker"],
-    scopeOut: ["Moving interpreters (an operational decision after checks)", "New utilization or occupancy targets (management only)", "Headcount or occupancy dashboards", "Client billing"],
+    scopeOut: ["Moving interpreters (an operational decision after checks)", "New utilization targets (management only)", "Headcount dashboards", "Client billing"],
     data: ["Client list: account database, Kalam, Zoho, Incorta, client reports, finance list (to confirm)", "Demand: offered, answered, missed, abandoned per client (source per client TBC)", "Interpreter languages, qualifications and eligibility (Zoho / onboarding)", "Assignments (account database)", "Schedules and logged hours (WFM, Time Doctor)"],
     stakeholders: ["Operations Director (dashboard user)", "Workforce Management", "ACMs (client demand)", "Onboarding (assignments)", "IT and data owners"],
     kpiSrc: ["Reconciliation of 6 client lists (Stage 1)", "Demand source inventory per client", "Alignment matrix: Zoho languages vs account database", "Opportunity tracker"]

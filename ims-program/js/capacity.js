@@ -33,12 +33,12 @@
     arc(K.views, 305, -54, 48).forEach((p, i) => add("v-" + (i + 1), K.views[i][0], "view", p, "View " + (i + 1)));
     arc(K.reports, 325, 58, 134).forEach((p, i) => add("r-" + i, K.reports[i][0], "rep", p, K.reports[i][1] + " report"));
     arc(K.roles, 330, 228, 296).forEach((p, i) => add("p-" + K.roles[i].id, K.roles[i].name, "role", p, "Custom view"));
-    add("x-ttg", "TTG", "gap", at(235, 198), "Client · 21,162 of 38,025 calls abandoned");
-    add("x-ita", "Italian", "gap", at(225, 165), "Language · 231 of 325 TTG Italian calls abandoned");
+    add("x-ab", "Abandoned", "gap", at(235, 198), "All clients · 27,984 of 110,301 calls abandoned");
+    add("x-lang", "14 languages", "gap", at(225, 165), "Languages with over 30% of calls abandoned");
     SRC.forEach(s => E.push(["s-" + s, "db", LIVE.includes(s) ? "on" : "off"]));
     mods.forEach(m => { E.push(["db", "m-" + m, "on"]); MOD_VIEWS[m].forEach(v => E.push(["m-" + m, "v-" + v, "on"])); MOD_REPS[m].forEach(r => E.push(["m-" + m, "r-" + r, "on"])); });
     K.roles.forEach(r => r.views.forEach(v => E.push(["v-" + v, "p-" + r.id, "on"])));
-    E.push(["x-ttg", "x-ita", "gap"], ["x-ttg", "m-B", "gap"], ["x-ita", "m-C", "gap"]);
+    E.push(["x-ab", "x-lang", "gap"], ["x-ab", "m-B", "gap"], ["x-lang", "m-C", "gap"]);
     return { N, E };
   }
   function graph() {
@@ -91,12 +91,6 @@
         </div>
       </div>
       <p class="cx-note">Tap any figure for its source, definition, period and last update. Measured values come from the IMS dashboard prototype; the rest wait for their source.</p>
-    </div></section>`;
-
-    const ttg = `<section class="sec up-sec" id="ttg"><div class="wrap">
-      <div class="up-head"><span>Worked example</span><h2>TTG · Italian</h2></div>
-      <div class="cp-chain">${K.ttg.map((s, i) => `<div><span>${i + 1}</span>${s[2] ? `<strong>${esc(s[2])}</strong>` : ""}<b>${esc(s[0])}</b>${st(s[1])}</div>`).join("")}</div>
-      <p class="up-note">Unassigned does not mean available: no move before eligibility, contract, schedule and commitments are checked.</p>
     </div></section>`;
 
     const mods = `<section class="sec up-sec" id="modules"><div class="wrap">
@@ -167,19 +161,14 @@
     </div></section>`;
 
 
-    const RD = K.real, mx = Math.max(...RD.clients.map(c => c[1])), mt = Math.max(...RD.ttgLangs.map(c => c[1]));
-    const bars = (rows, m) => rows.map(r => `<div class="rb"><span>${esc(r[0])}</span><div class="rb-t"><i class="a" style="width:${(r[2] / m * 100).toFixed(1)}%"></i><i class="x" style="width:${(r[3] / m * 100).toFixed(1)}%"></i></div><b>${r[1].toLocaleString("en-US")}</b><em>${r[1] ? Math.round(r[3] / r[1] * 100) : 0}% lost</em></div>`).join("");
+    const RD = K.real;
     const real = `<section class="sec up-sec" id="demand"><div class="wrap">
       <div class="up-head"><span>Real data · ${esc(RD.period)}</span><h2>Where demand is lost</h2></div>
-      <div class="rd-kpis"><div><b>${RD.total[0].toLocaleString("en-US")}</b><span>calls offered</span></div><div><b>${RD.total[1].toLocaleString("en-US")}</b><span>answered</span></div><div class="bad"><b>${RD.total[2].toLocaleString("en-US")}</b><span>abandoned</span></div><div class="idle"><b>${RD.hours.idle.toLocaleString("en-US")} h</b><span>ready but idle</span></div><div><b>${RD.weekOcc[0]}</b><span>occupancy ${esc(RD.weekOcc[1])} · ${esc(RD.weekOcc[2])}</span></div></div>
-      <div class="rd-cols">
-        <div class="rd-card"><h4>By client</h4><div class="rd-key"><i class="a"></i>answered <i class="x"></i>abandoned</div>${bars(RD.clients, mx)}</div>
-        <div class="rd-card"><h4>TTG by language</h4><div class="rd-key"><i class="a"></i>answered <i class="x"></i>abandoned</div>${bars(RD.ttgLangs, mt)}</div>
-      </div>
+      <div class="rd-kpis"><div><b>${RD.total[0].toLocaleString("en-US")}</b><span>calls offered</span></div><div><b>${RD.total[1].toLocaleString("en-US")}</b><span>answered</span></div><div class="bad"><b>${RD.total[2].toLocaleString("en-US")}</b><span>abandoned</span></div><div class="idle"><b>${RD.hours.idle.toLocaleString("en-US")} h</b><span>ready but idle</span></div><div><b>${RD.hours.talk.toLocaleString("en-US")} h</b><span>talk time</span></div></div>
       <p class="up-note">Source: ${esc(K.source)}, data built ${esc(K.asof)}. Abandoned = offered calls not answered, as the queue records them (includes very short calls). Idle hours and abandoned calls can be in different languages and hours: matching them is Module E.</p>
     </div></section>`;
 
-    return hero + dash + real + builder + ttg + platform + mods + views + data + plan + track;
+    return hero + dash + real + builder + platform + mods + views + data + plan + track;
   }
 
   function wireGraph() {
@@ -226,5 +215,5 @@
     paint();
   }
 
-  window.CHAPTERS.push({ id: "capacity", no: "09", title: "Demand vs Resources", nav: "Capacity", hero: true, render, wire, sections: [["dash", "Dashboard"], ["demand", "Real demand"], ["myview", "My view"], ["ttg", "TTG example"], ["platform", "Database & reports"], ["modules", "Modules"], ["views", "Views"], ["data", "Data"], ["stages", "Stages"], ["tracker", "Tracker"]] });
+  window.CHAPTERS.push({ id: "capacity", no: "09", title: "Demand vs Resources", nav: "Capacity", hero: true, render, wire, sections: [["dash", "Dashboard"], ["demand", "Real demand"], ["myview", "My view"], ["platform", "Database & reports"], ["modules", "Modules"], ["views", "Views"], ["data", "Data"], ["stages", "Stages"], ["tracker", "Tracker"]] });
 })();
